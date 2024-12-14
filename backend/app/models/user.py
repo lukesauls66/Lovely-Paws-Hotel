@@ -13,6 +13,14 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    fname = db.Column(db.String(40), nullable=False)
+    lname = db.Column(db.String(40), nullable=False)
+    address = db.Column(db.String(255), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(40), nullable=False)
+    zip = db.Column(db.Integer, nullable=False)
+    staff = db.Column(db.Boolean, nullable=False, default=False)
+    position = db.Column(db.String(40), nullable=True, default=None)
 
     @property
     def password(self):
