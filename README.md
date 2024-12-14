@@ -52,7 +52,7 @@ Returns the information about the current Staff or Client that is logged in.
 - Request:
 
   - Method: GET
-  - Route path: (/api/session)
+  - Route path: /api/auth/session
   - Body: none
 
 - Successful Response when there is a logged in Staff
@@ -127,7 +127,7 @@ information.
 - Request
 
   - Method: POST
-  - Route path: /api/session/login
+  - Route path: /api/auth/login
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -154,7 +154,8 @@ information.
         "lname": "Smith",
         "email": "john.smith@gmail.com",
         "username": "JohnSmith",
-        "staff": true // for client will be false
+        "staff": true, // for client will be false
+        "position": "Manager"
       }
     }
     ```
@@ -198,7 +199,7 @@ Client's information.
 - Request
 
   - Method: POST
-  - Route path: /api/user/signup
+  - Route path: /api/auth/signup
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -216,9 +217,6 @@ Client's information.
       "zip": 92323
     }
     ```
-
-     <!-- "staff": false,
-      "position": null -->
 
 - Successful Response
 
@@ -239,7 +237,7 @@ Client's information.
         "city": "redlands",
         "state": "CA",
         "zip": 92323,
-        "staff": true,
+        "staff": true, //"staff": false, "position": null if client
         "position": "manager"
       }
     }
@@ -400,6 +398,7 @@ Returns the details of a pet by its id
         "behavior": "calm",
         "medicationNote": "Needs sleep medicine because crazy",
         "dietaryNote": "Cannot eat rocks",
+        "previewImage": "image url",
         "PetImages": [
             {
                 "id": 1,
@@ -456,7 +455,17 @@ Creates and returns a new Pet
         "behavior": "calm",
         "medicationNote": "Needs sleep medicine because crazy",
         "dietaryNote": "Cannot eat rocks",
-        "previewImage": "image url"
+        "previewImage": "image url",
+        "petImages": [
+          {
+              "id": 1,
+              "url": "image url",
+          },
+          {
+              "id": 2,
+              "url": "image url",
+          }
+        ]
     }
     ```
 
@@ -482,6 +491,16 @@ Creates and returns a new Pet
         "medicationNote": "Needs sleep medicine because crazy",
         "dietaryNote": "Cannot eat rocks",
         "previewImage": "image url",
+        "petImages": [
+          {
+              "id": 1,
+              "url": "image url",
+          },
+          {
+              "id": 2,
+              "url": "image url",
+          }
+        ],
         "createdAt": "2021-11-19 20:39:36",
         "updatedAt": "2021-11-19 20:39:36"
     }
@@ -587,7 +606,6 @@ Updates and returns an existing Pet.
         "behavior": "calm",
         "medicationNote": "Needs sleep medicine because crazy",
         "dietaryNote": "Cannot eat rocks",
-        "previewImage": "image url"
     }
     ```
 
@@ -613,6 +631,16 @@ Updates and returns an existing Pet.
         "medicationNote": "Needs sleep medicine because crazy",
         "dietaryNote": "Cannot eat rocks",
         "previewImage": "image url",
+        "petImages": [
+          {
+              "id": 1,
+              "url": "image url",
+          },
+          {
+              "id": 2,
+              "url": "image url",
+          }
+        ],
         "createdAt": "2021-11-19 20:39:36",
         "updatedAt": "2021-11-19 20:39:36"
     }
@@ -638,8 +666,7 @@ Updates and returns an existing Pet.
         "weight": "Weight is required",
         "behavior": "Behavior is required",
         "medicationNote": "MedicationNote is required",
-        "dietaryNote": "DietaryNote is required",
-        "previewImage": "Preview image is required"
+        "dietaryNote": "DietaryNote is required"
       }
     }
     ```
@@ -767,7 +794,7 @@ Returns a service based on id.
 
 Creates and returns a new service,
 
-- Require Authentication: Staff only
+- Require Authentication: Owner or manager only
 - Request
 
   - Method: Post
@@ -776,8 +803,8 @@ Creates and returns a new service,
 
   ```json
   {
-    "staffId": 1,
-    "typeOfService": "neuterings",
+    "staff": [1, 5, 8],
+    "typeOfService": "massage",
     "price": 100
   }
   ```
@@ -791,7 +818,8 @@ Creates and returns a new service,
 
   ```json
   {
-    "typeOfService": "neuterings",
+    "staff": [1, 5, 8],
+    "typeOfService": "massage",
     "price": 100
   }
   ```
@@ -807,6 +835,7 @@ Creates and returns a new service,
   {
     "message": "Bad Request",
     "errors": {
+      "staff": "Staff must be a list of staff who can preform this service",
       "typeOfService": "TypeOfService is required",
       "price": "Price must be a positive integer"
     }
@@ -818,7 +847,7 @@ Creates and returns a new service,
 Updates and returns an existing service.
 
 - Require Authentication: true
-- Require proper authorization: Staff must be signed in to edit
+- Require proper authorization: Owner or manager must be signed in to edit
 - Request
 
   - Method: Put
@@ -886,7 +915,7 @@ Updates and returns an existing service.
 Deletes an existing service.
 
 - Require Authentication: true
-- Require proper authorization: Staff must be signed in
+- Require proper authorization: Owner or manager must be signed in
 - Request
 
   - Method: DELETE
@@ -929,7 +958,7 @@ Returns all the reviews written by the current user.
 - Request
 
   - Method: GET
-  - Route path: /api/session/reviews
+  - Route path: /api/reviews
   - Body: none
 
 - Successful Response
@@ -945,157 +974,25 @@ Returns all the reviews written by the current user.
         {
           "id": 1,
           "userId": 1,
-          "serviceId": 1,
+          "petId": 1,
           "review": "This was an awesome service!",
           "paws": 5,
           "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "User": {
-            "id": 1,
-            "firstName": "John",
-            "lastName": "Smith"
-          },
-          "Service": {
-            "typeOfServices": "hair-trim",
-            "staff": [1, 3, 5, 8, 13],
-            "price": 60
-          },
-          "ReviewImages": [
-            {
-              "id": 1,
-              "url": "image url"
-            }
-          ]
+          "updatedAt": "2021-11-19 20:39:36"
         }
       ]
     }
     ```
 
-### Get all reviews by Service Id
+### Create a review
 
-Returns all the reviews that belong to a service specified by id.
-
-- Require Authentication: false
-- Request
-
-  - Method: GET
-  - Route path: /services/:serviceId/reviews
-  - Body: none
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "Reviews": [
-        {
-          "id": 1,
-          "userId": 1,
-          "serviceId": 1,
-          "review": "This was an awesome service!",
-          "paws": 5,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "User": {
-            "id": 1,
-            "firstName": "John",
-            "lastName": "Smith"
-          },
-          "ReviewImages": [
-            {
-              "id": 1,
-              "url": "image url"
-            }
-          ]
-        }
-      ]
-    }
-    ```
-
-- Error response: Couldn't find a Service with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Service couldn't be found"
-    }
-    ```
-
-### Get all reviews by Booking Id
-
-Returns all the reviews that belong to a booking specified by id.
-
-- Require Authentication: false
-- Request
-
-  - Method: GET
-  - Route path: /bookings/:bookingId/reviews
-  - Body: none
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "Reviews": [
-        {
-          "id": 1,
-          "userId": 1,
-          "bookingId": 1,
-          "review": "This was an awesome booking!",
-          "paws": 5,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "User": {
-            "id": 1,
-            "firstName": "John",
-            "lastName": "Smith"
-          },
-          "ReviewImages": [
-            {
-              "id": 1,
-              "url": "image url"
-            }
-          ]
-        }
-      ]
-    }
-    ```
-
-- Error response: Couldn't find a Booking with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Booking couldn't be found"
-    }
-    ```
-
-### Create a review based on service id
-
-Create and return a new review for a service specified by id.
+Create and return a new review.
 
 - Require Authentication: true
 - Request
 
   - Method: POST
-  - Route path: /reviews/:serviceId/
+  - Route path: /api/reviews/
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1118,7 +1015,7 @@ Create and return a new review for a service specified by id.
     {
       "id": 1,
       "userId": 1,
-      "spotId": 1,
+      "petIdId": 1,
       "review": "This was an awesome service!",
       "paws": 5,
       "createdAt": "2021-11-19 20:39:36",
@@ -1143,20 +1040,7 @@ Create and return a new review for a service specified by id.
     }
     ```
 
-- Error response: Couldn't find a Service with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Service couldn't be found"
-    }
-    ```
-
-- Error response: Review from the current user already exists for the Service
+- Error response: Review from the current user already exists
 
   - Status Code: 500
   - Headers:
@@ -1165,89 +1049,7 @@ Create and return a new review for a service specified by id.
 
     ```json
     {
-      "message": "User already has a review for this service"
-    }
-    ```
-
-### Create a review based on booking id
-
-Create and return a new review for a booking specified by id.
-
-- Require Authentication: true
-- Request
-
-  - Method: POST
-  - Route path: /reviews/:bookingId/
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "review": "This was an awesome booking!",
-      "paws": 5
-    }
-    ```
-
-- Successful Response
-
-  - Status Code: 201
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "id": 1,
-      "userId": 1,
-      "spotId": 1,
-      "review": "This was an awesome booking!",
-      "paws": 5,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36"
-    }
-    ```
-
-- Error Response: Body validation errors
-
-  - Status Code: 400
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Bad Request",
-      "errors": {
-        "review": "Review text is required",
-        "paws": "Paws must be an integer from 1 to 5"
-      }
-    }
-    ```
-
-- Error response: Couldn't find a Booking with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Booking couldn't be found"
-    }
-    ```
-
-- Error response: Review from the current user already exists for the Booking
-
-  - Status Code: 500
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "User already has a review for this booking"
+      "message": "User already has a review"
     }
     ```
 
@@ -1260,7 +1062,7 @@ Update and return an existing review.
 - Request
 
 - Method: PUT
-- Route path: /reviews/:reviewId
+- Route path: /api/reviews/:reviewId
 - Headers:
   - Content-Type: application/json
 - Body:
@@ -1283,7 +1085,7 @@ Update and return an existing review.
   {
     "id": 1,
     "userId": 1,
-    "serviceId": 1,
+    "petId": 1,
     "review": "This was an awesome service!",
     "paws": 5,
     "createdAt": "2021-11-19 20:39:36",
@@ -1330,7 +1132,7 @@ Delete an existing review.
 - Request
 
 - Method: DELETE
-- Route path: /reviews/:reviewId
+- Route path: /api/reviews/:reviewId
 - Body: none
 
 - Successful Response
@@ -1381,6 +1183,8 @@ Delete an existing review.
   {
     "Today's Bookings": [
       {
+        "dropOffDatetime": "2024-12-10 08:00:00",
+        "pickUpDateTime": "2021-12-10 18:00:00",
         "Pet Information": {
           "id": 1,
           "ownerId": 2,
@@ -1395,22 +1199,8 @@ Delete an existing review.
           "medicationNotes": "please give the medication once a day",
           "dietaryNotes": "none",
           "previewImage": "https://sample.image.png",
-          "petImages": [
-            {
-              "id": 1,
-              "petId": 1,
-              "url": "https://sample.image1.png"
-            }
-                        {
-              "id": 2,
-              "petId": 1,
-              "url": "https://sample.image2.png"
-            }
-          ]
-        }
-      }
-      {
-        "Services": {
+        },
+        "Services": [{
           "id": 1,
           "typeOfService": "hair-trim",    // Day-Care or Boarding-Care
           "price": 75.00,             // calculated on the last day of boarding or on the day-care
@@ -1443,45 +1233,13 @@ Delete an existing review.
             "lname": "Smith"
             },
           ],
-          "dropOffDatetime": "2024-12-10 08:00:00",
-          "pickUpDateTime": "2021-12-10 18:00:00",
-        }
+        }]
       }
     ]
   }
   ```
 
   <!--
-
-### Get all Bookings based on service id
-
-Return all bookings based on id
-
-- Require Authentication: Staff only
-- Request
-
-  - Method: GET
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    ["TBD"]
-    ```
-
-- Error response: No bookings with this service id today
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ````json
-    {
-      "message": "No bookings with this service"
-    }
-    ``` -->
-    ````
 
 ### Create a Booking based on a Pets id
 
@@ -1492,7 +1250,7 @@ Create and return a new booking for a pet based on their id.
 - Request
 
   - Method: POST
-  - Route path: /bookings/:petId
+  - Route path: /api/bookings/:petId
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1542,22 +1300,8 @@ Create and return a new booking for a pet based on their id.
           "medicationNotes": "please give the medication once a day",
           "dietaryNotes": "none",
           "previewImage": "https://sample.image.png",
-          "petImages": [
-            {
-              "id": 1,
-              "petId": 1,
-              "url": "https://sample.image1.png"
-            }
-                        {
-              "id": 2,
-              "petId": 1,
-              "url": "https://sample.image2.png"
-            }
-          ]
-        }
-      }
-      {
-        "Services": {
+        },
+        "Services": [{
           "id": 1,
           "typeOfService": "hair-trim",    // Day-Care or Boarding-Care
           "price": 75.00,             // calculated on the last day of boarding or on the day-care
@@ -1590,7 +1334,7 @@ Create and return a new booking for a pet based on their id.
             "lname": "Smith"
             },
           ],
-        },
+        }],
         "bookingType": "Dary care",
         "dropOffDatetime": "2024-12-10 08:00:00",
         "pickUpDateTime": "2021-12-10 18:00:00",
@@ -1650,11 +1394,11 @@ Create and return a new booking for a pet based on their id.
 Update and return an existing booking.
 
 - Require Authentication: true
-- Require proper authorization: Booking must belong to the current user
+- Require proper authorization: Booking must belong to the current user or a staff
 - Request
 
   - Method: PUT
-  - Route path: /bookings/:bookingId
+  - Route path: /api/bookings/:bookingId
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1716,10 +1460,8 @@ Update and return an existing booking.
               "url": "https://sample.image2.png"
             }
           ]
-        }
-      }
-      {
-        "Services": {
+        },
+        "Services": [{
           "id": 1,
           "typeOfService": "hair-trim",    // Day-Care or Boarding-Care
           "price": 75.00,             // calculated on the last day of boarding or on the day-care
@@ -1752,7 +1494,7 @@ Update and return an existing booking.
             "lname": "Smith"
             },
           ],
-        },
+        }],
         "bookingType": "Dary care",
         "dropOffDatetime": "2024-12-10 08:00:00",
         "pickUpDateTime": "2021-12-10 18:00:00",
@@ -1926,7 +1668,7 @@ Add an image to a pet
 - Request
 
 - Method: Post
-- Route path: /pets/:petId/images/
+- Route path: /api/pets/:petId/images/
 - Body:
 
   ```json
@@ -1985,7 +1727,7 @@ Delete an existing image for a Pet.
 - Request
 
 - Method: DELETE
-- Route path: /pets/:petId/images/:imageId
+- Route path: /api/pets/:petId/images/:imageId
 - Body: none
 
 - Successful Response
@@ -2023,7 +1765,7 @@ Add an image to a Service
 - Request
 
 - Method: Post
-- Route path: /services/:serviceId/images/
+- Route path: /api/services/:serviceId/images/
 - Body:
 
   ```json
