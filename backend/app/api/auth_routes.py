@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
@@ -54,7 +54,15 @@ def sign_up():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            fname=form.data['fname'],
+            lname=form.data['lname'],
+            address=form.data['address'],
+            city=form.data['city'],
+            state=form.data['state'],
+            zip=form.data['zip'],
+            staff=form.data.get('staff', False),
+            position=form.data.get('position', 'Client')
         )
         db.session.add(user)
         db.session.commit()
