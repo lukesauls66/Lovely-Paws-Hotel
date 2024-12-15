@@ -1,6 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+# from .service import Service
+from .service_staff import service_staff
 
 
 class User(db.Model, UserMixin):
@@ -21,6 +23,13 @@ class User(db.Model, UserMixin):
     zip = db.Column(db.Integer, nullable=False)
     staff = db.Column(db.Boolean, nullable=False, default=False)
     position = db.Column(db.String(40), nullable=True, default=None)
+
+    services = db.relationship(
+        'Service',
+        secondary=service_staff,
+        back_populates='staff',
+        lazy='joined'
+    )
 
     @property
     def password(self):
