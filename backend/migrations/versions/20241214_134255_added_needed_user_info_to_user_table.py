@@ -25,6 +25,7 @@ def upgrade():
         with op.batch_alter_table('users', schema=SCHEMA) as batch_op:
             batch_op.add_column(sa.Column('fname', sa.String(length=40), nullable=False))
             batch_op.add_column(sa.Column('lname', sa.String(length=40), nullable=False))
+            batch_op.add_column(sa.Column('phone_num', sa.String(13), nullable=False))
             batch_op.add_column(sa.Column('address', sa.String(length=255), nullable=False))
             batch_op.add_column(sa.Column('city', sa.String(length=100), nullable=False))
             batch_op.add_column(sa.Column('state', sa.String(length=40), nullable=False))
@@ -36,6 +37,7 @@ def upgrade():
         with op.batch_alter_table('users') as batch_op:
             batch_op.add_column(sa.Column('fname', sa.String(length=40), nullable=False))
             batch_op.add_column(sa.Column('lname', sa.String(length=40), nullable=False))
+            batch_op.add_column(sa.Column('phone_num', sa.String(13), nullable=False))
             batch_op.add_column(sa.Column('address', sa.String(length=255), nullable=False))
             batch_op.add_column(sa.Column('city', sa.String(length=100), nullable=False))
             batch_op.add_column(sa.Column('state', sa.String(length=40), nullable=False))
@@ -55,6 +57,7 @@ def downgrade():
             batch_op.drop_column('state')
             batch_op.drop_column('city')
             batch_op.drop_column('address')
+            batch_op.drop_column('phone_num')
             batch_op.drop_column('lname')
             batch_op.drop_column('fname')
     else:
@@ -66,6 +69,7 @@ def downgrade():
             batch_op.drop_column('state')
             batch_op.drop_column('city')
             batch_op.drop_column('address')
+            batch_op.drop_column('phone_num')
             batch_op.drop_column('lname')
             batch_op.drop_column('fname')
 
