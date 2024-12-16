@@ -24,5 +24,5 @@ class Service(db.Model):
             'id': self.id,
             'service': self.service,
             'price': self.price,
-            'staff': [user.to_dict() for user in self.staff]
+            'staff': [{'id': user.id, 'fname': user.fname, 'lname': user.lname, 'email': user.email} for user in self.staff]
         }
