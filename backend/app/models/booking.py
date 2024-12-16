@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA
 from .booking_service import booking_service
 
 class Booking(db.Model):
-  __tablename__ = 'booking'
+  __tablename__ = 'bookings'
 
   if environment == 'production':
     __table_args__ = {'schema': SCHEMA}
