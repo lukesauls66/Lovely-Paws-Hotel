@@ -17,11 +17,12 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     fname = db.Column(db.String(40), nullable=False)
     lname = db.Column(db.String(40), nullable=False)
+    phone_num = db.Column(db.String(13), nullable=False)
     address = db.Column(db.String(255), nullable=False)
     city = db.Column(db.String(100), nullable=False)
     state = db.Column(db.String(40), nullable=False)
     zip = db.Column(db.Integer, nullable=False)
-    staff = db.Column(db.Boolean, nullable=False, default=False)
+    staff = db.Column(db.Boolean, nullable=True, default=False)
     position = db.Column(db.String(40), nullable=True, default=None)
 
     services = db.relationship(
@@ -49,6 +50,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'fname': self.fname,
             'lname': self.lname,
+            'phone_num': self.phone_num,
             'address': self.address,
             'city': self.city,
             'state': self.state,

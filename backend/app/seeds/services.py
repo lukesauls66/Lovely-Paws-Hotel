@@ -3,31 +3,34 @@ from sqlalchemy.sql import text
 from .users import User
 
 def seed_services():
-    staff_5 = User.query.get(5)
-    staff_6 = User.query.get(6)
-    staff_7 = User.query.get(7)
-    
-    staff_8 = User.query.get(8)
     staff_9 = User.query.get(9)
     staff_10 = User.query.get(10)
-    
     staff_11 = User.query.get(11)
     staff_12 = User.query.get(12)
     staff_13 = User.query.get(13)
+    staff_14 = User.query.get(14)
+    staff_15 = User.query.get(15)
+    staff_16 = User.query.get(16)
+    staff_17 = User.query.get(17)
+    staff_18 = User.query.get(18)
 
     hair_cut = Service(
-        service="hair cut", price=57.99, staff=[staff_5, staff_6, staff_7]
+        service="hair cut", price=57.99, staff=[staff_18, staff_17, staff_16]
     )
     nail_trim = Service(
-        service="nail trim", price=34.99, staff=[staff_8, staff_9, staff_10]
+        service="nail trim", price=24.99, staff=[staff_15, staff_9, staff_10]
     )
-    bath = Service(
-        service="bath", price=48.99, staff=[staff_11, staff_12, staff_13]
+    simple_bath = Service(
+        service="simple bath", price=39.99, staff=[staff_15, staff_14, staff_10]
+    )
+    luxury_bath = Service(
+        service="luxury bath", price=59.99, staff=[staff_11, staff_12, staff_13]
     )
 
     db.session.add(hair_cut)
     db.session.add(nail_trim)
-    db.session.add(bath)
+    db.session.add(simple_bath)
+    db.session.add(luxury_bath)
     db.session.commit()
 
 def undo_services():
