@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA
 # from .user import User
 from .service_staff import service_staff
+from .booking_service import booking_service
 
 class Service(db.Model):
     __tablename__ = 'services'
@@ -16,6 +17,13 @@ class Service(db.Model):
         'User',
         secondary=service_staff,
         back_populates='services',
+        lazy='joined'
+    )
+
+    booking = db.relationship(
+        'Booking',
+        secondary=booking_service,
+        back_populates='service',
         lazy='joined'
     )
 
