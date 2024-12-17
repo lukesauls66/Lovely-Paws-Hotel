@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify, request
+from flask_wtf.csrf import validate_csrf
+from flask_login import current_user
 from ..models import db, Booking, Service
 from ..forms import BookingForm
 
@@ -8,6 +10,15 @@ booking_routes = Blueprint('bookings', __name__)
 def get_booking():
   bookings = Booking.query.all()
   return {'bookings': [booking.to_dict() for booking in bookings]}
+
+
+@booking_routes.route('/user', methods=['GET'])
+def get_booking_user():
+  if not current_user.is_authenticated:
+    return jsonify({"message": "User is not authenticated"}), 401
+  
+  bookings = Booking.query.filter(Booking.client_id == current_user.id).all()
+  return jsonify({"bookings": [booking.to_dict() for booking in bookings]})
 
 
 @booking_routes.route('/<int:id>', methods=['GET'])
@@ -90,6 +101,13 @@ def update_booking(id):
 
 @booking_routes.route('/<int:id>', methods=['DELETE'])
 def delete_booking(id):
+
+  csrf_token = request.cookies.get('csrf_token')  # Get CSRF token from cookies
+  try:
+      validate_csrf(csrf_token)  # Validate the CSRF token
+  except Exception as e:
+      return jsonify({"error": "CSRF token is invalid or missing"}), 400
+  
   booking = Booking.query.get(id)
 
   if not booking:
