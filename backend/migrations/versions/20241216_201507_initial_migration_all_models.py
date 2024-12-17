@@ -84,7 +84,7 @@ def upgrade():
     sa.Column('booking_type', sa.String(length=50), nullable=False),
     sa.Column('drop_off_date', sa.DateTime(), nullable=False),
     sa.Column('pick_up_date', sa.DateTime(), nullable=False),
-    sa.Column('cost', sa.Numeric(precision=6, scale=2), nullable=True),
+    sa.Column('daily_price', sa.Numeric(precision=6, scale=2), nullable=True),
     sa.Column('daily_pic', sa.String(), nullable=True),
     sa.ForeignKeyConstraint(['client_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['pet_id'], ['pets.id'], ),
