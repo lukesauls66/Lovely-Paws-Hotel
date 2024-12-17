@@ -42,11 +42,11 @@ def get_review_by_id(review_id):
     else:
         return {'error': f'Review with ID {review_id} not found'}, 404
     
-@review_routes.route('/<int:client_id>')
-def curr_user_reviews(client_id):
-    reviews = Review.query.filter_by(client_id=client_id).all()
+@review_routes.route('/current-user')
+def current_user_reviews():
+    reviews = Review.query.filter(Review.client_id == current_user.id).all()
 
     if reviews:
-        return jsonify([review.to.dict() for review in reviews]), 200
+        return jsonify([review.to_dict() for review in reviews]), 200
     else:
-        return {'error': f'No reviews found for Client ID {client_id}'}, 404
+        return {'error': f'No reviews found for User {current_user.id}.'}, 404
