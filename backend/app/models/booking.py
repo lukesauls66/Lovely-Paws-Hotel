@@ -14,6 +14,7 @@ class Booking(db.Model):
   drop_off_date = db.Column(db.DateTime, nullable=False)
   pick_up_date = db.Column(db.DateTime, nullable=False)
   cost = db.Column(db.Numeric(precision=6, scale=2), nullable=True, default=100.00)
+  daily_pic = db.Column(db.String, nullable=True)
 
   services = db.relationship(
     'Service',
@@ -25,12 +26,13 @@ class Booking(db.Model):
   def to_dict(self):
     return {
       'id': self.id,
-      'client_id': self.clientId,
-      'pet_id': self.petId,
-      'booking_type': self.bookingType,
-      'drop_off_date': self.dropOffDate,
-      'pick_up_date': self.pickUpDate,
+      'client_id': self.client_id,
+      'pet_id': self.pet_id,
+      'booking_type': self.booking_type,
+      'drop_off_date': self.drop_off_date,
+      'pick_up_date': self.pick_up_date,
       'cost': self.cost,
+      'daily_pic': self.daily_pic,
       'services': [{
         'id': service.id,
         'type_of_service': service.type_of_service,
