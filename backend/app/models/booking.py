@@ -35,7 +35,7 @@ class Booking(db.Model):
       'daily_pic': self.daily_pic,
       'services': [{
         'id': service.id,
-        'type_of_service': service.type_of_service,
+        'service': service.service,
         'price': service.price
       } for service in self.services]
     }
