@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from ..models import Review, db
 from ..forms import ReviewForm
+from flask_login import current_user
 
 
 review_routes = Blueprint('reviews', __name__)
@@ -15,13 +16,12 @@ def reviews():
 @review_routes.route('/', methods=['POST'])
 def post_review():
     form = ReviewForm()
-    form_data = request.get_json()
 
-    form['csrf_token'].data = request.cookies.get('csrf_token')
-    form.process(data=form_data)
+    form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
         new_review = Review(
+            client_id=current_user.id,
             review=form.review.data,
             stars=form.stars.data
         )
@@ -33,7 +33,7 @@ def post_review():
     return {'errors': form.errors}, 400
 
 
-@review_routes.route('/<int:review_id>', methods=['GET'])
+@review_routes.route('/<int:review_id>')
 def get_review_by_id(review_id):
     review = Review.query.get(review_id)
 
@@ -42,3 +42,11 @@ def get_review_by_id(review_id):
     else:
         return {'error': f'Review with ID {review_id} not found'}, 404
     
+@review_routes.route('/<int:client_id>')
+def curr_user_reviews(client_id):
+    reviews = Review.query.filter_by(client_id=client_id).all()
+
+    if reviews:
+        return jsonify([review.to.dict() for review in reviews]), 200
+    else:
+        return {'error': f'No reviews found for Client ID {client_id}'}, 404
