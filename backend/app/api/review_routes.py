@@ -51,7 +51,7 @@ def update_review(review_id):
         return {'error': f'Review with ID {review_id} not found'}, 404
 
     if review.client_id != current_user.id:
-        return {'error': 'You can only update your own reviews'}, 403
+        return {'error': 'You can only update your own review'}, 403
     
     form = ReviewForm()
 
@@ -68,6 +68,22 @@ def update_review(review_id):
     return {'errors': form.errors}, 400
 
 
+@review_routes.route('/<int:review_id>', methods=['DELETE'])
+def remove_review(review_id):
+    review = Review.query.get(review_id)
+
+    if not review:
+        return {'error': f'Review with ID {review_id} not found'}, 404
+
+    if review.client_id != current_user.id:
+        return {'error': 'You can only delete your own review'}, 403
+
+    db.session.delete(review)
+    db.session.commit()
+
+    return {'message': 'Review deleted successfully'}, 200
+
+
 @review_routes.route('/user')
 def current_user_reviews():
     reviews = Review.query.filter(Review.client_id == current_user.id).all()
@@ -76,4 +92,5 @@ def current_user_reviews():
         return jsonify([review.to_dict() for review in reviews]), 200
     else:
         return {'error': f'No reviews found for User {current_user.id}.'}, 404
+    
     
