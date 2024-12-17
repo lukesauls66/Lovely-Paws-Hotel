@@ -35,7 +35,12 @@ class PetForm(FlaskForm):
         ('megachonker', 'Megachonker (56-65% Body Fat)'),
         ('oh lawd he comin', 'Oh lawd he comin (65% Body Fat)')
     ], validators=[DataRequired()])
-    behavior = SelectField('behavior', validators=[DataRequired()])
+    behavior = SelectField('behavior', choices=[
+    ('calm', 'Calm'),
+    ('playful', 'Playful'),
+    ('aggressive', 'Aggressive'),
+    ('shy', 'Shy')
+], validators=[DataRequired()])
     medication_note = StringField('medication_note')
     dietary_note = StringField('dietary_note')
     preview_image_url = StringField('preview_image_url')
