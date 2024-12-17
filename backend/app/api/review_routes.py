@@ -44,7 +44,7 @@ def get_review_by_id(review_id):
         return {'error': f'Review with ID {review_id} not found'}, 404
     
 
-@review_routes.route('/<int:review_id>', methods=['PUT'])
+@review_routes.route('/<int:review_id>', methods=['POST'])
 def update_review(review_id):
     review = Review.query.get(review_id)
 
