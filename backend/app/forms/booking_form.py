@@ -9,7 +9,7 @@ class BookingForm(FlaskForm):
   booking_type = StringField('booking type', validators=[DataRequired()])
   drop_off_date = DateTimeField('drop off date and time', validators=[DataRequired()])
   pick_up_date = DateTimeField('pick up date and time', validators=[DataRequired()])
-  cost = IntegerField('cost')
+  daily_price = IntegerField('daily_price')
 
   services = SelectMultipleField('Service', choices=[], coerce=int, validators=[DataRequired()])
 
