@@ -9,6 +9,7 @@ from .api.auth_routes import auth_routes
 from .api.user_routes import user_routes
 from .api.service_routes import service_routes
 from .api.review_routes import review_routes
+from .api.booking_routes import booking_routes
 from .seeds import seed_commands
 from .config import Config
 
