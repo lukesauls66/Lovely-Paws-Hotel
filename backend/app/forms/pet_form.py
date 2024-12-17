@@ -1,7 +1,7 @@
 # forms/pet_form.py
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, FloatField, DateField, SelectField, RadioField, FileField, FieldList
+from wtforms import StringField, IntegerField, FloatField, DateField, SelectField, RadioField, FileField, FieldList, SelectMultipleField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Pet
 
@@ -44,5 +44,6 @@ class PetForm(FlaskForm):
     medication_note = StringField('medication_note')
     dietary_note = StringField('dietary_note')
     preview_image_url = StringField('preview_image_url')
+    # image_urls = SelectMultipleField('image url', choices=[], coerce=str)
     image_urls = FieldList(StringField('image_url'), min_entries=0, max_entries=4)
     owner_id = IntegerField('owner_id', validators=[DataRequired()])
