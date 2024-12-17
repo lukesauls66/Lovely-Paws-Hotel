@@ -18,7 +18,7 @@ class Booking(db.Model):
 
   services = db.relationship(
     'Service',
-    secondary=booking_service,
+    secondary='booking_service',
     back_populates='booking',
     lazy='joined'
   )
