@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from flask_wtf.csrf import validate_csrf
 from ..models import Service, User, db
 from app.forms import ServiceForm
 
@@ -68,4 +69,20 @@ def update_service(id):
     return jsonify({"errors": form.errors})
 
 
+@service_routes.route('/<int:id>', methods=['DELETE'])
+def delete_service(id):
+    csrf_token = request.cookies.get('csrf_token')  # Get CSRF token from cookies
 
+    try:
+        validate_csrf(csrf_token)  # Validate the CSRF token
+    except Exception as e:
+        return jsonify({"error": "CSRF token is invalid or missing"}), 400
+    
+    service = Service.query.get(id)
+
+    if not service:
+        return jsonify({"error": "Service not found"})
+    
+    db.session.delete(service)
+    db.session.commit()
+    return jsonify({"message": "Service was deleted"})
