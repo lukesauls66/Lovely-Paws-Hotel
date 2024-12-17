@@ -1,5 +1,6 @@
 from datetime import date
 from app.models import db, Pet, environment, SCHEMA
+from sqlalchemy.sql import text
 
 
 def seed_pets():

@@ -3,6 +3,7 @@
 from .db import db
 
 
+
 class Pet(db.Model):
     __tablename__ = 'pets'
 

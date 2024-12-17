@@ -13,7 +13,7 @@ class Booking(db.Model):
   booking_type = db.Column(db.String(50), nullable=False)
   drop_off_date = db.Column(db.DateTime, nullable=False)
   pick_up_date = db.Column(db.DateTime, nullable=False)
-  cost = db.Column(db.Numeric(precision=6, scale=2), nullable=False)
+  cost = db.Column(db.Numeric(precision=6, scale=2), nullable=True, default=100.00)
 
   services = db.relationship(
     'Service',
