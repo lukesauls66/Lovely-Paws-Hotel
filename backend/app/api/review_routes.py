@@ -42,7 +42,33 @@ def get_review_by_id(review_id):
     else:
         return {'error': f'Review with ID {review_id} not found'}, 404
     
-@review_routes.route('/current-user')
+
+@review_routes.route('/<int:review_id>', methods=['PUT'])
+def update_review(review_id):
+    review = Review.query.get(review_id)
+
+    if not review:
+        return {'error': f'Review with ID {review_id} not found'}, 404
+
+    if review.client_id != current_user.id:
+        return {'error': 'You can only update your own reviews'}, 403
+    
+    form = ReviewForm()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        review.review = form.review.data
+        review.stars = form.stars.data
+
+        db.session.commit()
+
+        return jsonify(review.to_dict()), 200
+    
+    return {'errors': form.errors}, 400
+
+
+@review_routes.route('/user')
 def current_user_reviews():
     reviews = Review.query.filter(Review.client_id == current_user.id).all()
 
@@ -50,3 +76,4 @@ def current_user_reviews():
         return jsonify([review.to_dict() for review in reviews]), 200
     else:
         return {'error': f'No reviews found for User {current_user.id}.'}, 404
+    
