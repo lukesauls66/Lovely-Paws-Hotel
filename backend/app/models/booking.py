@@ -31,7 +31,7 @@ class Booking(db.Model):
       'booking_type': self.booking_type,
       'drop_off_date': self.drop_off_date,
       'pick_up_date': self.pick_up_date,
-      'cost': self.cost,
+      'daily_price': self.daily_price,
       'daily_pic': self.daily_pic,
       'services': [{
         'id': service.id,
