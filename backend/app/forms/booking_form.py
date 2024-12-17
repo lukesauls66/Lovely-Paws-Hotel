@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, StringField, DateTimeField, FieldList
+from wtforms import IntegerField, StringField, DateTimeField, SelectMultipleField
 from wtforms.validators import DataRequired
 from app.models import Service
 
@@ -11,4 +11,5 @@ class BookingForm(FlaskForm):
   pick_up_date = DateTimeField('pick up date and time', validators=[DataRequired()])
   cost = IntegerField('cost')
 
-  services = FieldList(IntegerField('Service ID', validators=[DataRequired()], min_entries=1))
+  services = SelectMultipleField('Service', choices=[], coerce=int, validators=[DataRequired()])
+

@@ -20,7 +20,7 @@ class Booking(db.Model):
     'Service',
     secondary='booking_service',
     back_populates='booking',
-    lazy='joined'
+    lazy='dynamic'
   )
 
   def to_dict(self):
