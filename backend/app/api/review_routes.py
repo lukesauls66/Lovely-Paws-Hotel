@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from flask_wtf.csrf import validate_csrf
 from ..models import Review, db
 from ..forms import ReviewForm
 from flask_login import current_user
@@ -23,7 +24,7 @@ def post_review():
         new_review = Review(
             client_id=current_user.id,
             review=form.review.data,
-            stars=form.stars.data
+            paws=form.paws.data
         )
 
         db.session.add(new_review)
@@ -59,7 +60,7 @@ def update_review(review_id):
 
     if form.validate_on_submit():
         review.review = form.review.data
-        review.stars = form.stars.data
+        review.paws = form.paws.data
 
         db.session.commit()
 
@@ -70,6 +71,12 @@ def update_review(review_id):
 
 @review_routes.route('/<int:review_id>', methods=['DELETE'])
 def remove_review(review_id):
+    csrf_token = request.cookies.get('csrf_token')  # Get CSRF token from cookies
+
+    try:
+        validate_csrf(csrf_token)  # Validate the CSRF token
+    except Exception as e:
+        return jsonify({"error": "CSRF token is invalid or missing"}), 400
     review = Review.query.get(review_id)
 
     if not review:
