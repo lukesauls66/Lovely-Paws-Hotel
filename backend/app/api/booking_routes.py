@@ -2,16 +2,15 @@ from flask import Blueprint, jsonify
 from ..models import db, Booking, Service
 from ..forms import BookingForm
 
-
 booking_routes = Blueprint('bookings', __name__)
 
-@booking_routes('/', methods=['GET'])
+@booking_routes.route('/')
 def get_booking():
-  booking = BookingForm()
-  return booking
+  bookings = Booking.query.all()
+  return {'bookings': [booking.to_dict() for booking in bookings]}
 
 
-@booking_routes('/', methods=['POST'])
+@booking_routes.route('/', methods=['POST'])
 def create_booking():
   form = BookingForm()
   if form.validate_on_submit():
