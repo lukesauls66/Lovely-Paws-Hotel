@@ -10,7 +10,7 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     client_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     review = db.Column(db.String(2000), nullable=False)
-    stars = db.Column(db.Integer, nullable=False)
+    paws = db.Column(db.Integer, nullable=False)
     # relationships:
     # client = db.relationship('User', back_populates='reviews')
 
@@ -19,5 +19,5 @@ class Review(db.Model):
             'id': self.id,
             'client_id': self.client_id,
             'review': self.review,
-            'stars': self.stars
+            'paws': self.paws
         }
