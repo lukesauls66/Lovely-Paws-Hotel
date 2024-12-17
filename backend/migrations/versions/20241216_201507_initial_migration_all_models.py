@@ -66,7 +66,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('client_id', sa.Integer(), nullable=False),
     sa.Column('review', sa.String(length=2000), nullable=False),
-    sa.Column('stars', sa.Integer(), nullable=False),
+    sa.Column('paws', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['client_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
