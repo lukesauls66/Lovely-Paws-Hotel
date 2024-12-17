@@ -63,7 +63,7 @@ def sign_up():
             state=form.data['state'],
             zip=form.data['zip'],
             staff=form.data.get('staff', False),
-            position=form.data.get('position', 'Client')
+            position=form.data.get('position', None)
         )
         db.session.add(user)
         db.session.commit()
