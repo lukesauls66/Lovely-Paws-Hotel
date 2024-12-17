@@ -57,6 +57,7 @@ def sign_up():
             password=form.data['password'],
             fname=form.data['fname'],
             lname=form.data['lname'],
+            phone_num=form.data['phone_num'],
             address=form.data['address'],
             city=form.data['city'],
             state=form.data['state'],

@@ -26,11 +26,15 @@ def seed_services():
     luxury_bath = Service(
         service="luxury bath", price=59.99, staff=[staff_11, staff_12, staff_13]
     )
+    all_inclusive = Service(
+        service="all inclusive", price=109.99, staff=[staff_9, staff_11, staff_12, staff_15, staff_18]
+    )
 
     db.session.add(hair_cut)
     db.session.add(nail_trim)
     db.session.add(simple_bath)
     db.session.add(luxury_bath)
+    db.session.add(all_inclusive)
     db.session.commit()
 
 def undo_services():
