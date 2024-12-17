@@ -1,5 +1,6 @@
-from flask import Blueprint, jsonify
-from ..models import Service
+from flask import Blueprint, jsonify, request
+from ..models import Service, User, db
+from app.forms import ServiceForm
 
 service_routes = Blueprint('services', __name__)
 
@@ -8,7 +9,63 @@ def services():
     services = Service.query.all()
     return {'services': [service.to_dict() for service in services]}
 
+@service_routes.route('/', methods=['POST'])
+def create_service():
+    form = ServiceForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    form.staff.choices = [(user.id) for user in User.query.all()]
+
+    if form.validate_on_submit():
+        staff_ids = form.staff.data
+        if staff_ids:
+            staff = User.query.filter(User.id.in_(staff_ids)).all()
+
+        new_service = Service(
+            service=form.data['service'],
+            price=form.data['price'],
+        )
+
+        new_service.staff.extend(staff)
+
+        db.session.add(new_service)
+        db.session.commit()
+        return jsonify({"Service": new_service.to_dict()}), 201
+    return jsonify({"errors": form.errors}), 400
+
 @service_routes.route('/<int:id>')
 def service(id):
     service = Service.query.get(id)
     return service.to_dict()
+
+@service_routes.route('/<int:id>', methods=['PUT'])
+def update_service(id):
+    form = ServiceForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    form.staff.choices = [(user.id) for user in User.query.all()]
+
+    if form.validate_on_submit():
+        staff_ids = form.staff.data
+
+        if staff_ids:
+            staffs = User.query.filter(User.id.in_(staff_ids)).all()
+
+        service = Service.query.get(id)
+        if not service:
+            return jsonify({"error": "Service not found"})
+        
+        service.service = form.service.data
+        service.price = form.price.data
+
+        for staff in service.staff:
+            service.staff.remove(staff)
+
+        service.staff.extend(staffs)
+
+        db.session.commit()
+        return jsonify({"service": service.to_dict()})
+    return jsonify({"errors": form.errors})
+
+
+
