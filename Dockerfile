@@ -12,14 +12,12 @@ ARG SECRET_KEY
 
 WORKDIR /var/www
 
-COPY ./backend/requirements.txt .
-
-RUN pip install -r requirements.txt
-RUN pip install psycopg2
-
 COPY . .
 
 RUN cd /backend
+
+RUN pip install -r requirements.txt
+RUN pip install psycopg2
 
 RUN flask db upgrade
 RUN flask seed all
