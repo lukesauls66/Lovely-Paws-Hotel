@@ -1,6 +1,6 @@
 # models/pet.py
 
-from .db import db
+from .db import db, environment, SCHEMA
 
 
 
@@ -22,7 +22,7 @@ class Pet(db.Model):
     medication_note = db.Column(db.String(255), nullable=True)
     dietary_note = db.Column(db.String(255), nullable=True)
     preview_image = db.Column(db.String(255), nullable=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id' if environment == "production" else 'users.id'), nullable=False)
 
 # relationships
     pet_images = db.relationship('PetImage', back_populates='pet', cascade="all, delete-orphan")

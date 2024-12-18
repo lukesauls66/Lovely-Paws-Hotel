@@ -8,7 +8,7 @@ class Review(db.Model):
 
     # reviews table columns
     id = db.Column(db.Integer, primary_key=True)
-    client_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    client_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id' if environment == "production" else 'users.id'), nullable=False)
     review = db.Column(db.String(2000), nullable=False)
     paws = db.Column(db.Integer, nullable=False)
     # relationships:

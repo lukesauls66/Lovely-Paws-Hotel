@@ -8,7 +8,7 @@ class PetImage(db.Model):
 
 #image table columns
     id = db.Column(db.Integer, primary_key=True)
-    pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'), nullable=False)
+    pet_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.pets.id' if environment == "production" else 'pets.id'), nullable=False)
     url = db.Column(db.String(300), nullable=False) #url of image
 
     pet = db.relationship('Pet', back_populates='pet_images')

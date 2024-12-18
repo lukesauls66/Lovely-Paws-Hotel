@@ -1,5 +1,4 @@
 from .db import db, environment, SCHEMA
-from .booking_service import booking_service
 
 class Booking(db.Model):
   __tablename__ = 'bookings'
@@ -8,8 +7,8 @@ class Booking(db.Model):
     __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
-  client_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-  pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'), nullable=False)
+  client_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id' if environment == "production" else 'users.id'), nullable=False)
+  pet_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.pets.id' if environment == "production" else 'pets.id'), nullable=False)
   booking_type = db.Column(db.String(50), nullable=False)
   drop_off_date = db.Column(db.DateTime, nullable=False)
   pick_up_date = db.Column(db.DateTime, nullable=False)
