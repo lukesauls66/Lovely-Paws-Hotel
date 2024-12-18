@@ -36,7 +36,8 @@ def create_pet():
 
     form = PetForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    
+
+
     if form.validate_on_submit():
         new_pet = Pet(
             name=form.name.data,
@@ -57,12 +58,15 @@ def create_pet():
         # preview image
         if form.preview_image_url.data:
             new_pet.preview_image = form.preview_image_url.data
-        
+
+        data = request.get_json()
+        image_urls = data.get('image_urls', [])
         # additional images
-        for image_url in form.image_urls.entries:
-            if image_url.data:
-                pet_image = PetImage(url=image_url.data, pet=new_pet)
+        for url in image_urls:
+            if url:
+                pet_image = PetImage(url=url, pet=new_pet)
                 db.session.add(pet_image)
+
         
         db.session.add(new_pet)
         db.session.commit()
@@ -133,17 +137,17 @@ def delete_pet(id):
     return jsonify({'message': 'Successfully deleted'})
 
 # Delete pet image
-@pet_routes.route('/images/<int:image_id>', methods=['DELETE'])
-def delete_pet_image(image_id):
-    if not current_user.is_authenticated:
-        return jsonify({'message': 'User not authenticated'}), 401
-
+@pet_routes.route('/<int:id>/images/<int:image_id>', methods=['DELETE'])
+def delete_pet_image(id, image_id):
     pet_image = PetImage.query.get(image_id)
     if not pet_image:
         return jsonify({'message': "Image couldn't be found"}), 404
 
-    pet = Pet.query.get(pet_image.pet_id)
-    if pet.owner_id != current_user.id:
+    if pet_image.pet_id != id:
+        return jsonify({'message': 'Invalid image for the specified pet'}), 400
+
+    pet = Pet.query.get(id)
+    if not pet or pet.owner_id != current_user.id:
         return jsonify({'message': 'Unauthorized'}), 403
     
     db.session.delete(pet_image)
