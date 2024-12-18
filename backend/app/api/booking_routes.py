@@ -85,7 +85,6 @@ def update_booking(id):
     booking.booking_type = form.booking_type.data
     booking.drop_off_date = form.drop_off_date.data
     booking.pick_up_date = form.pick_up_date.data
-    booking.daily_price = form.daily_price.data
 
     for service in booking.services:
       booking.services.remove(service)
