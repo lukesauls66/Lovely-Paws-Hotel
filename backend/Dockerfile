@@ -12,7 +12,7 @@ ARG SECRET_KEY
 
 WORKDIR /var/www
 
-COPY requirements.txt ./
+COPY ./backend/requirements.txt .
 
 RUN pip install -r requirements.txt
 RUN pip install psycopg2
