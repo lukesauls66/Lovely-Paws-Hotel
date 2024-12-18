@@ -25,10 +25,10 @@ def seed():
         undo_pet_images()
         undo_pets()
         undo_reviews()
-        undo_services()
         undo_users()
-    seed_users()
+        undo_services()
     seed_services()
+    seed_users()
     seed_reviews()
     seed_pets()
     seed_pet_images()
@@ -39,8 +39,8 @@ def seed():
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
-    undo_users()
     undo_services()
+    undo_users()
     undo_reviews()
     undo_pets()
     undo_pet_images()
