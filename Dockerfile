@@ -1,15 +1,4 @@
-FROM node:18 AS frontend
-
-WORKDIR /app
-
-COPY frontend/package.json frontend/package-lock.json ./
-RUN npm install
-
-COPY frontend/ ./frontend/
-
-RUN npm run build
-
-FROM python:3.9.18-alpine3.18 AS backend
+FROM python:3.9.18-alpine3.18
 
 RUN apk add build-base
 
@@ -23,13 +12,12 @@ ARG SECRET_KEY
 
 WORKDIR /var/www
 
-COPY . .
-
-WORKDIR /var/www/backend
-# RUN cd backend
+COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 RUN pip install psycopg2
+
+COPY . .
 
 RUN flask db upgrade
 RUN flask seed all
