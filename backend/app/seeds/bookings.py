@@ -104,7 +104,7 @@ def seed_bookings():
         # Booking 11 (boarding_care)
         Booking(
             client_id=7,
-            pet_id=11,
+            pet_id=6,
             booking_type='boarding_care',
             drop_off_date=datetime.now() - timedelta(days=7),
             pick_up_date=datetime.now() + timedelta(days=5),
@@ -113,7 +113,7 @@ def seed_bookings():
         # Booking 12 (day_care)
         Booking(
             client_id=8,
-            pet_id=12,
+            pet_id=7,
             booking_type='day_care',
             drop_off_date=datetime.now() - timedelta(days=1),
             pick_up_date=datetime.now() - timedelta(days=1),
