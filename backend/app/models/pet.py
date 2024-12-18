@@ -25,7 +25,7 @@ class Pet(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id' if environment == "production" else 'users.id'), nullable=False)
 
 # relationships
-    pet_images = db.relationship('PetImage', back_populates='pet', cascade="all, delete-orphan")
+    pet_images = db.relationship('PetImage', back_populates='pet', cascade="all, delete-orphan", primaryjoin="Pet.id == PetImage.pet_id")
 
 
     def to_dict(self):
