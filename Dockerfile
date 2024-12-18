@@ -17,8 +17,8 @@ COPY ./backend/requirements.txt .
 RUN pip install -r requirements.txt
 RUN pip install psycopg2
 
-COPY . .
+COPY ./backend .
 
-RUN flask --app app db upgrade
-RUN flask --app app seed all
+RUN flask db upgrade
+RUN flask seed all
 CMD gunicorn app:app
