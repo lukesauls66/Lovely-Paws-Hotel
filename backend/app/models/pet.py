@@ -7,6 +7,9 @@ from .db import db, environment, SCHEMA
 class Pet(db.Model):
     __tablename__ = 'pets'
 
+    if environment == 'production':
+        table_args = {'schema': SCHEMA}
+
 #pets table columns 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
