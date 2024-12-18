@@ -8,7 +8,7 @@ class Pet(db.Model):
     __tablename__ = 'pets'
 
     if environment == 'production':
-        table_args = {'schema': SCHEMA}
+        __table_args__ = {'schema': SCHEMA}
 
 #pets table columns 
     id = db.Column(db.Integer, primary_key=True)

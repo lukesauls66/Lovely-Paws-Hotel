@@ -4,7 +4,7 @@ class PetImage(db.Model):
     __tablename__ = 'pet_images'
 
     if environment == 'production':
-        table_args = {'schema': SCHEMA}
+        __table_args__ = {'schema': SCHEMA}
 
 #image table columns
     id = db.Column(db.Integer, primary_key=True)
