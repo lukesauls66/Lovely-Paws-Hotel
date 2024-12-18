@@ -17,9 +17,9 @@ COPY ./backend/requirements.txt .
 RUN pip install -r requirements.txt
 RUN pip install psycopg2
 
-COPY . .
+COPY ./backend ./
 
-WORKDIR /backend
+# WORKDIR /backend
 
 RUN flask db upgrade
 RUN flask seed all
