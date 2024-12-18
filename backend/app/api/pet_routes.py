@@ -108,10 +108,12 @@ def update_pet(id):
         if form.preview_image_url.data:
             pet.preview_image = form.preview_image_url.data
         
-        # Handle additional images
-        for image_url in form.image_urls.entries:
-            if image_url.data:
-                pet_image = PetImage(url=image_url.data, pet=pet)
+        data = request.get_json()
+        image_urls = data.get('image_urls', [])
+        # additional images
+        for url in image_urls:
+            if url:
+                pet_image = PetImage(url=url, pet=pet)
                 db.session.add(pet_image)
         
         db.session.commit()
