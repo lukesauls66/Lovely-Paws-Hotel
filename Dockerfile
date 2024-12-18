@@ -1,4 +1,15 @@
-FROM python:3.9.18-alpine3.18
+FROM node:18 AS frontend
+
+WORKDIR /app
+
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm install
+
+COPY frontend/ ./frontend/
+
+RUN npm run build
+
+FROM python:3.9.18-alpine3.18 AS backend
 
 RUN apk add build-base
 
