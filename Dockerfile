@@ -14,7 +14,8 @@ WORKDIR /var/www
 
 COPY . .
 
-RUN cd /backend
+WORKDIR /var/www/backend
+# RUN cd backend
 
 RUN pip install -r requirements.txt
 RUN pip install psycopg2
