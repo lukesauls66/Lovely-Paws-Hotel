@@ -10,7 +10,7 @@ export const restoreUser = createAsyncThunk(
   "session/restoreUser",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await fetch("/api/auth/");
+      const res = await fetch("/api/auth");
       const data = await res.json();
       return data;
     } catch (error) {
