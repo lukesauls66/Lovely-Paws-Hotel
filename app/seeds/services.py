@@ -15,19 +15,19 @@ def seed_services():
     staff_18 = User.query.get(18)
 
     hair_cut = Service(
-        service="hair cut", price=57.99, staff=[staff_18, staff_17, staff_16]
+        service="Hair Cut", price=57.99, staff=[staff_18, staff_17, staff_16]
     )
     nail_trim = Service(
-        service="nail trim", price=24.99, staff=[staff_15, staff_9, staff_10]
+        service="Nail Trim", price=24.99, staff=[staff_15, staff_9, staff_10]
     )
     simple_bath = Service(
-        service="simple bath", price=39.99, staff=[staff_15, staff_14, staff_10]
+        service="Simple Bath", price=39.99, staff=[staff_15, staff_14, staff_10]
     )
     luxury_bath = Service(
-        service="luxury bath", price=59.99, staff=[staff_11, staff_12, staff_13]
+        service="Luxury Bath", price=59.99, staff=[staff_11, staff_12, staff_13]
     )
     all_inclusive = Service(
-        service="all inclusive", price=109.99, staff=[staff_9, staff_11, staff_12, staff_15, staff_18]
+        service="All Inclusive", price=109.99, staff=[staff_9, staff_11, staff_12, staff_15, staff_18]
     )
 
     db.session.add(hair_cut)
