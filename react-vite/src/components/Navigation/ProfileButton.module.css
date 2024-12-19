@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap');
+
 button {
   all: unset;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .profileButton {
@@ -24,16 +26,18 @@ button {
 
 .profileDropdown {
   position: absolute;
-  top: 15%;
-  right: 2%;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
+  top: 120%;
+  right: 3%;
+  background-color:  #a1d6d2;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   list-style: none;
-  padding: 10px;
+  padding: 20px;
   z-index: 1000;
   min-width: 150px;
+  font-family: 'Gaegu', cursive;
+  font-size: 30px;
+  text-align: center;
 }
 
 .modalButtonContainer {
@@ -42,24 +46,31 @@ button {
   justify-content: space-evenly;
   align-items: center;
   gap: 10px;
+  width: 190px;
+  height: 200px;
+  background-color: #a1d6d2;
 }
 
 .modalButton {
   all: unset;
-  background-color: #f99d92;
+  background-color: #efaca6;
   color: white;
   padding: 10px 20px;
+  border: 3px solid #f7f0e5;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  width: 100px;
+  height: 40px;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .modalButton:hover {
-  background-color: #ff6b3d;
+  background-color: #d89993;
+  transform: scale(1.05);
 }
 
 .modalButton:focus {
   outline: none;
 }
-
-
