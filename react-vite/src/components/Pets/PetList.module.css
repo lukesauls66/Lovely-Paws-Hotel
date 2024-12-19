@@ -1,0 +1,46 @@
+.petListContainer {
+    background-color: #dfbdb0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 30px;
+  }
+  
+  .petCard {
+    background-color: #f6ead8;
+    border: 3px solid #333;
+    border-radius: 12px;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+  }
+  
+  .petImage {
+    width: 100%;
+    border-radius: 12px;
+  }
+  
+  .petName {
+    font-family: 'Gaegu', cursive;
+    color: #1c323a;
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
+  
+  .managePetButton {
+    background-color: #a1d6d2;
+    color: #333;
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    text-decoration: none;
+  }
+  
+  .managePetButton:hover {
+    background-color: #88c0b3;
+  }
