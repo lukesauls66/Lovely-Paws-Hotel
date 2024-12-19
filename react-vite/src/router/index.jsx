@@ -1,6 +1,7 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Layout from './Layout';
-import LandingPage from '../components/LandingPage';
+import { createBrowserRouter } from "react-router-dom";
+import Layout from "./Layout";
+import LandingPage from "../components/LandingPage";
+import ServicesPage from "../components/ServicesPage";
 
 export const router = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
-    ]
-  }  
+      {
+        path: "services",
+        element: <ServicesPage />,
+      },
+    ],
+  },
 ]);
