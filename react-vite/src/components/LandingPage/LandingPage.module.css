@@ -14,6 +14,7 @@ body {
     top: 10px;
     right: 10px;
     z-index: 1000; 
+    margin-right: 30px;
 }
 
 .landingBodyContainer {
@@ -57,26 +58,6 @@ body {
     padding: 10px 20px 10px 20px;
 }
 
-/* .infoContainer {
-    background-color: #dfbdb0;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin: 30px;
-    width: 90%;
-    gap: 50px;
-}
-
-.aboutBox, .featuresBox {
-    flex: 1;
-    text-align: center;
-    border-radius: 10px;
-    font-family: 'Parkinsans';
-    color: #1c323a;
-} */
-
 .infoContainer {
     background-color: #dfbdb0;
     display: flex;
@@ -109,13 +90,34 @@ body {
     font-size: 25px;
 }
 
+.petOfMonthBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    font-family: 'Gaegu', cursive;
+    font-size: 2.5rem;
+    background-color: #a1d6d2;
+    padding-bottom: 50px;
+    border: 8px solid #f7f0e5;
+    border-radius: 12px;
+}
+        
+.petOfMonthImage {
+    position: relative;
+    border-radius: 12px; 
+    overflow: hidden;
+    width: 620px;
+    border-radius: 15px;
+}
+
 .featuresBox {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-.servicesBtn, .bookingsBtn {
+.servicesBtn, .bookingsBtn, .reviewsBtn {
     padding: 20px;
     border: 3px solid #f7f0e5;
     border-radius: 12px;
@@ -130,7 +132,9 @@ body {
     color: #333333;
 }
 
-.servicesBtn:hover {
+.servicesBtn:hover,
+.bookingsBtn:hover,
+.reviewsBtn:hover {
     box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
     transform: scale(1.05);
 }
@@ -141,11 +145,6 @@ body {
     margin-bottom: 50px;
 }
 
-.bookingsBtn:hover {
-    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
-    transform: scale(1.05);
-}
-
-.profileButton {
-    margin-right: 30px;
+.reviewsBtn {
+    background-color: #efaca6;
 }
