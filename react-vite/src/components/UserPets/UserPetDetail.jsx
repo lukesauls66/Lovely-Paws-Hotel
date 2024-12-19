@@ -1,19 +1,18 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { deletePet } from '../../redux/pets';
 import styles from './UserPetDetail.module.css';
 
 const UserPetDetail = () => {
   const { petId } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const pet = useSelector((state) => state.pets.pets.find((p) => p.id === parseInt(petId)));
 
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to delete this pet?')) {
       dispatch(deletePet(pet.id));
-      history.push('/pets');
+      navigate('/pets');
     }
   };
 
