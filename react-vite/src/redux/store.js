@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { default as logger } from "redux-logger";
 import sessionReducer from "./session";
 import petsReducer from "./pets";
+import bookingReducer from "./booking";
 
 const store = configureStore({
   reducer: {
     session: sessionReducer,
     pets: petsReducer,
+    booking: bookingReducer
   },
   middleware: (getDefaultMiddleware) => {
     const middlewares = getDefaultMiddleware();
