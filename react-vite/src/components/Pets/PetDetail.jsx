@@ -1,28 +1,33 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { deletePet } from '../../redux/pets';
-import styles from './UserPetDetail.module.css';
+import styles from './PetDetail.module.css';
 
-const UserPetDetail = () => {
+const PetDetail = () => {
   const { petId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const pet = useSelector((state) => state.pets.pets.find((p) => p.id === parseInt(petId)));
+  const sessionUser = useSelector((state) => state.session.user);
 
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to delete this pet?')) {
       dispatch(deletePet(pet.id));
-      navigate('/pets');
+      navigate(sessionUser.staff ? '/staff/pets' : '/pets');
     }
   };
 
   return (
     <div className={styles.petDetailContainer}>
       <h1>{pet.name}</h1>
-      <button className={styles.updateButton}>Update</button>
-      <button className={styles.deleteButton} onClick={handleDelete}>
-        Delete
-      </button>
+      {sessionUser && sessionUser.staff && (
+        <>
+          <button className={styles.updateButton}>Update</button>
+          <button className={styles.deleteButton} onClick={handleDelete}>
+            Delete
+          </button>
+        </>
+      )}
       <button className={styles.bookServiceButton}>Book a Service</button>
       <div className={styles.petImagesContainer}>
         <img src={pet.preview_image} alt={pet.name} className={styles.previewImage} />
@@ -49,4 +54,4 @@ const UserPetDetail = () => {
   );
 };
 
-export default UserPetDetail;
+export default PetDetail;
