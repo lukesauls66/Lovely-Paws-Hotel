@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPets } from '../../redux/pets';
+import { fetchAllPets, fetchUserPets } from '../../redux/pets';
 import { Link } from 'react-router-dom';
 import styles from './PetList.module.css';
 
@@ -13,9 +13,13 @@ const PetList = () => {
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchPets());
+      if (sessionUser.staff) {
+        dispatch(fetchAllPets());
+      } else {
+        dispatch(fetchUserPets());
+      }
     }
-  }, [status, dispatch]);
+  }, [status, dispatch, sessionUser]);
 
   return (
     <div className={styles.petListContainer}>

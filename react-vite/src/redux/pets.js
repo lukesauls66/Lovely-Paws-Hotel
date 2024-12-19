@@ -1,7 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchPets = createAsyncThunk(
-  'pets/fetchPets',
+export const fetchAllPets = createAsyncThunk(
+  'pets/fetchAllPets',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch('/api/pets');
+      const responseText = await response.text();
+      console.log('Response:', responseText);
+      if (!response.ok) {
+        throw new Error(`Error fetching pets: ${responseText}`);
+      }
+      return JSON.parse(responseText);
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchUserPets = createAsyncThunk(
+  'pets/fetchUserPets',
   async (_, { getState, rejectWithValue }) => {
     try {
       const state = getState();
@@ -9,8 +26,7 @@ export const fetchPets = createAsyncThunk(
       if (!user) {
         throw new Error('You must be logged in to view your pets!');
       }
-      const url = user.staff ? '/api/pets' : '/api/pets/user';
-      const response = await fetch(url);
+      const response = await fetch('/api/pets/user');
       const responseText = await response.text();
       console.log('Response:', responseText);
       if (!response.ok) {
@@ -86,14 +102,25 @@ const petsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPets.pending, (state) => {
+      .addCase(fetchAllPets.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchPets.fulfilled, (state, action) => {
+      .addCase(fetchAllPets.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.pets = action.payload;
+        state.pets = action.payload.Pets;
       })
-      .addCase(fetchPets.rejected, (state, action) => {
+      .addCase(fetchAllPets.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(fetchUserPets.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchUserPets.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.pets = action.payload.Pets;
+      })
+      .addCase(fetchUserPets.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       })
