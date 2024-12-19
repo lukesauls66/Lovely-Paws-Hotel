@@ -1,6 +1,6 @@
 import { useRef, useState, useContext, createContext } from 'react';
 import ReactDOM from 'react-dom';
-import './Modal.css';
+import modal from './Modal.module.css';
 
 const ModalContext = createContext();
 
@@ -46,9 +46,9 @@ export function Modal() {
 
   // Render the following component to the div referenced by the modalRef
   return ReactDOM.createPortal(
-    <div id="modal">
-      <div id="modal-background" onClick={closeModal} />
-      <div id="modal-content">
+    <div className={modal.modal}>
+      <div className={modal.modalBackground} onClick={closeModal} />
+      <div className={modal.modalContent}>
         {modalContent}
       </div>
     </div>,

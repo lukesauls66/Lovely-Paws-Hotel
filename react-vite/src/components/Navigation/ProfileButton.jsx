@@ -1,4 +1,4 @@
-import "./ProfileButton.css";
+import profile from "./ProfileButton.module.css";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoPawOutline } from "react-icons/io5";
@@ -40,38 +40,42 @@ function ProfileButton() {
     closeMenu();
   };
 
-  const pawIcon = <IoPawOutline className="profile-icon" />;
+  const pawIcon = <IoPawOutline className={profile.profileIcon} />;
 
   return (
-    <>
+    <div className={profile.profileButton}>
       <button onClick={toggleMenu}>{pawIcon}</button>
       {showMenu && (
-        <ul className="profile-dropdown" ref={ulRef}>
+        <ul className={profile.profileDropdown} ref={ulRef}>
           {user ? (
             <>
               <li>{user.username}</li>
               <li>{user.email}</li>
               <li>
-                <button onClick={logout}>Log Out</button>
+                <button onClick={logout} className={profile.logoutButton}>Log Out</button>
               </li>
             </>
           ) : (
-            <>
+            <div className={profile.modalButtonContainer}>
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}
                 modalComponent={<LoginFormModal />}
+                className={profile.loginBtn}
               />
               <OpenModalMenuItem
                 itemText="Sign Up"
                 onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
+                modalComponent={<SignupFormModal className={profile.signupBtn}/>}
+                className={profile.signupBtn}
               />
-            </>
+            </div>
           )}
         </ul>
       )}
-    </>
+    </div>
+
+
   );
 }
 
