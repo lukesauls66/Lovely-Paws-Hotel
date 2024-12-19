@@ -24,14 +24,10 @@ body {
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
-    margin: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
     border-radius: 15px;
-}
-
-.messageContainer {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
 }
 
 .pawLeft {
@@ -45,6 +41,7 @@ body {
 .messageContainer {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
     width: 100%;
 }
 
@@ -60,23 +57,86 @@ body {
     padding: 10px 20px 10px 20px;
 }
 
-.infoContainer {
+/* .infoContainer {
     background-color: #dfbdb0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
     margin: 30px;
     width: 90%;
-    gap: 40px;
+    gap: 50px;
 }
 
 .aboutBox, .featuresBox {
     flex: 1;
     text-align: center;
-    border: 2px solid #efe8db;
     border-radius: 10px;
     font-family: 'Parkinsans';
     color: #1c323a;
+} */
+
+.infoContainer {
+    background-color: #dfbdb0;
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start;
+    padding: 20px;
+    margin: 30px;
+    width: 90%;
+    gap: 20px;
 }
+
+.aboutContainer, .featuresBox {
+    flex: 1;
+    max-width: 50%;
+    text-align: center;
+    border-radius: 10px;
+    font-family: 'Parkinsans';
+    color: #1c323a;
+    box-sizing: border-box;
+}
+
+
+.featuresBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.servicesBtn, .bookingsBtn {
+    padding: 20px;
+    border: 3px solid #f7f0e5;
+    border-radius: 12px;
+    font-size: 2rem;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.servicesBtn {
+    background-color: #a1d6d2;
+    color: #333333;
+}
+
+.servicesBtn:hover {
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+.bookingsBtn {
+    background-color: #ffc383;
+    color: #333333;
+    margin-bottom: 50px;
+}
+
+.bookingsBtn:hover {
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+/* .aboutBox, .petOfMonthBox, .reviewsContainer {
+    border: 1px solid hotpink;
+    border-radius: 12px;
+} */

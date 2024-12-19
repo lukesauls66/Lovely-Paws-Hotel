@@ -19,11 +19,22 @@ function LandingPage() {
             </div>
 
             <div className={lan.infoContainer}>
-                <div className={lan.aboutBox}>
-                    <h1>Welcome / About Us</h1>
+                <div className={lan.aboutContainer}>
+                    <div className={lan.aboutBox}>
+                        <h1>Welcome / About Us</h1>
+                    </div>
+                    <div className={lan.petOfMonthBox}>
+                        <h1>Pet of the Month</h1>
+                    </div>
                 </div>
                 <div className={lan.featuresBox}>
-                    <h1>Features Buttons</h1>
+                    <button className={lan.servicesBtn}>Browse Our Services</button>
+                    <img className={lan.catPic} src="/images/cat.png" alt="cat" />
+                    <img className={lan.dogPic} src="/images/dog.png" alt="dog" />
+                    <button className={lan.bookingsBtn}>Book a Reservation</button>
+                    <div className={lan.reviewsContainer}>
+                        <h1>Top Reviews</h1>
+                    </div>
                 </div>
             </div>
         </div>
