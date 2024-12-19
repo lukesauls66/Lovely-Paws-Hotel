@@ -1,12 +1,11 @@
-import './ProfileButton.css'
+import "./ProfileButton.css";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoPawOutline } from "react-icons/io5";
-import { thunkLogout } from "../../redux/session";
+import * as sessionActions from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -37,17 +36,15 @@ function ProfileButton() {
 
   const logout = (e) => {
     e.preventDefault();
-    dispatch(thunkLogout());
+    dispatch(sessionActions.logout());
     closeMenu();
   };
 
-  const pawIcon = <IoPawOutline className="profile-icon" />
+  const pawIcon = <IoPawOutline className="profile-icon" />;
 
   return (
     <>
-      <button onClick={toggleMenu}>
-        {pawIcon}
-      </button>
+      <button onClick={toggleMenu}>{pawIcon}</button>
       {showMenu && (
         <ul className="profile-dropdown" ref={ulRef}>
           {user ? (
