@@ -1,18 +1,20 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
-import "./Navigation.css";
+import nav from "./Navigation.module.css";
 
 function Navigation() {
   return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-
-      <li>
+    <div className={nav.navbarContainer}>
+      <div>
+        <NavLink to="/">
+          <img src="/images/hotel.png" alt="Home" className={nav.homeBtn} />
+        </NavLink>
+      </div>
+      <div>
         <ProfileButton />
-      </li>
-    </ul>
+      </div>
+
+    </div>
   );
 }
 
