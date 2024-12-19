@@ -41,8 +41,8 @@ body {
 .messageContainer {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    width: 100%;
+    justify-content: space-around;
+    width: 95%;
 }
 
 .messageBox {
@@ -146,7 +146,6 @@ body {
     transform: scale(1.05);
 }
 
-/* .aboutBox, .petOfMonthBox, .reviewsContainer {
-    border: 1px solid hotpink;
-    border-radius: 12px;
-} */
+.profileButton {
+    margin-right: 30px;
+}
