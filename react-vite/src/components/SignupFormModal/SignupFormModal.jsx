@@ -30,7 +30,7 @@ function SignupFormModal() {
       });
     }
 
-    const serverResponse = await dispatch(
+    const res = await dispatch(
       sessionActions.signup({
         username,
         email,
@@ -45,9 +45,11 @@ function SignupFormModal() {
       })
     );
 
-    if (serverResponse) {
-      setErrors(serverResponse);
-    } else {
+    if (sessionActions.signup.rejected.match(res)) {
+      setErrors(res.payload);
+    }
+
+    if (sessionActions.signup.fulfilled) {
       closeModal();
     }
   };
