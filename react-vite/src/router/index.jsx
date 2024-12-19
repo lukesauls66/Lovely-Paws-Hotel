@@ -3,8 +3,7 @@ import Layout from "./Layout";
 import LandingPage from "../components/LandingPage";
 import ServicesPage from "../components/ServicesPage";
 import ReviewsPage from "../components/ReviewsPage";
-import { UserPetList, UserPetDetail } from "../components/UserPets";
-import { StaffPetList, StaffPetDetail } from "../components/StaffPets";
+import { PetList, PetDetail } from "../components/Pets";
 
 export const router = createBrowserRouter([
   {
@@ -24,21 +23,21 @@ export const router = createBrowserRouter([
       },
       {
         path: "pets",
-        element: <UserPetList />,
+        element: <PetList />,
         children: [
           {
             path: ":petId",
-            element: <UserPetDetail />,
+            element: <PetDetail />,
           },
         ],
       },
       {
         path: "staff/pets",
-        element: <StaffPetList />,
+        element: <PetList />,
         children: [
           {
             path: ":petId",
-            element: <StaffPetDetail />,
+            element: <PetDetail />,
           },
         ],
       },

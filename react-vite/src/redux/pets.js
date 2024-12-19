@@ -2,9 +2,12 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchPets = createAsyncThunk(
   'pets/fetchPets',
-  async (_, { rejectWithValue }) => {
+  async (_, { getState, rejectWithValue }) => {
     try {
-      const response = await fetch('/api/pets');
+      const state = getState();
+      const user = state.session.user;
+      const url = user.staff ? '/api/pets' : `/api/pets/user/${user.id}`;
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Error fetching pets');
       }
