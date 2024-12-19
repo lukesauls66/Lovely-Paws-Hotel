@@ -102,4 +102,4 @@ const BookingPage = (petId) => {
   );
 };
 
-export default BookingComponent;
+export default BookingPage;
