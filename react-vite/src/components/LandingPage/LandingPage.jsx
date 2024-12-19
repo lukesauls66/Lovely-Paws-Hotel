@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import * as sessionActions from "../../redux/session";
 import ProfileButton from "../Navigation/ProfileButton";
 import lan from "./LandingPage.module.css";
@@ -7,6 +8,7 @@ import lan from "./LandingPage.module.css";
 function LandingPage() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -55,17 +57,33 @@ function LandingPage() {
                 everything we do!
               </p>
             </div>
+
+
             <div className={lan.petOfMonthBox}>
-              <h1>Pet of the Month</h1>
+              <h1 className={lan.petOfMonthHeader}>Pet of the Month</h1>
+              <img className={lan.petOfMonthImage} src='/images/king.jpg' alt='king' />
             </div>
+
+
           </div>
           <div className={lan.featuresBox}>
-            <button className={lan.servicesBtn}>Browse Our Services</button>
+            <button
+              className={lan.servicesBtn}
+              onClick={() => navigate('/services')}
+            >
+              Browse Our Services
+            </button>
             <img className={lan.catPic} src="/images/cat.png" alt="cat" />
             <img className={lan.dogPic} src="/images/dog.png" alt="dog" />
             <button className={lan.bookingsBtn}>Book a Reservation</button>
             <div className={lan.reviewsContainer}>
               <h1>Top Reviews</h1>
+              <button
+                className={lan.reviewsBtn}
+                onClick={() => navigate('/reviews')}
+              >
+                See All Reviews
+              </button>
             </div>
           </div>
         </div>
