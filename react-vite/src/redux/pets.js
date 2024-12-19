@@ -6,12 +6,17 @@ export const fetchPets = createAsyncThunk(
     try {
       const state = getState();
       const user = state.session.user;
-      const url = user.staff ? '/api/pets' : `/api/pets/user/${user.id}`;
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error('Error fetching pets');
+      if (!user) {
+        throw new Error('You must be logged in to view your pets!');
       }
-      return await response.json();
+      const url = user.staff ? '/api/pets' : '/api/pets/user';
+      const response = await fetch(url);
+      const responseText = await response.text();
+      console.log('Response:', responseText);
+      if (!response.ok) {
+        throw new Error(`Error fetching pets: ${responseText}`);
+      }
+      return JSON.parse(responseText);
     } catch (error) {
       return rejectWithValue(error.message);
     }
