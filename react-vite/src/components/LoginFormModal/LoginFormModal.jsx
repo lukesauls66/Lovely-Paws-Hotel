@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import * as sessionActions from "../../redux/session";
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -15,10 +15,7 @@ function LoginFormModal() {
     e.preventDefault();
 
     const serverResponse = await dispatch(
-      thunkLogin({
-        email,
-        password,
-      })
+      sessionActions.login({ email, password })
     );
 
     if (serverResponse) {
