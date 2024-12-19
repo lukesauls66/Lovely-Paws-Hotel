@@ -1,0 +1,21 @@
+button {
+    all: unset;
+    cursor: pointer; 
+  }
+  
+  .profile-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .profile-icon {
+    font-size: 80px;
+    color: #fa9388; 
+    transition: transform 0.2s ease;
+  }
+  
+  .profile-icon:hover {
+    transform: scale(1.2); 
+    color: #f99d92;
+  }
