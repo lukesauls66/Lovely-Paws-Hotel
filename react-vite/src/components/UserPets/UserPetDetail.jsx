@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import { deletePet } from '../../features/pets/petsSlice';
+import { deletePet } from '../../redux/pets/pets';
 import styles from '../../styles/UserPetDetail.module.css';
 
 const UserPetDetail = () => {

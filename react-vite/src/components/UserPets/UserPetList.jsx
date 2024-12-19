@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPets } from '../../features/pets/petsSlice';
+import { fetchPets } from '../../redux/pets/pets';
 import { Link } from 'react-router-dom';
 import styles from '../../styles/UserPetList.module.css';
 
