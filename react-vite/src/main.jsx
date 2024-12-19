@@ -6,8 +6,6 @@ import store from "./redux/store";
 import { router } from "./router";
 import { ModalProvider, Modal } from "./context/Modal";
 import * as sessionActions from "./redux/session";
-import { UserPetList, UserPetDetail } from "./components/UserPets";
-import { StaffPetList, StaffPetDetail } from "./components/StaffPets";
 import "./index.css";
 
 if (import.meta.env.MODE !== "production") {
