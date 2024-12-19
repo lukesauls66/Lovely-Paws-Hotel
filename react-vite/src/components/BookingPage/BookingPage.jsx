@@ -60,19 +60,19 @@ const BookingPage = (petId) => {
           <button className={bkp.currBookBtnDelete} onClick={() => dispatch(deleteBooking(currentBooking.id))}>Delete</button>
         </div>
       ) : (
-        <div>
-          <button onClick={() => handleBookingTypeSelection('day-care')}>Day Care</button>
-          <button onClick={() => handleBookingTypeSelection('boarding-care')}>Boarding Care</button>
+        <div className={bkp.bookTypeBtnContainer}>
+          <button className={bkp.bookDayCareBtn} onClick={() => handleBookingTypeSelection('day-care')}>Day Care</button>
+          <button className={bkp.bookBrdCareBtn} onClick={() => handleBookingTypeSelection('boarding-care')}>Boarding Care</button>
         </div>
       )}
 
       {bookingType && (
-        <div>
-          <h3>Select Dates</h3>
-          <div className="calendar">
+        <div className={bkp.CalenderContainer}>
+          <h3 className={bkp.CalenderMainTitle}>Select Dates</h3>
+          <div className={bkp.calendar}>
             {/* Implement calendars for current and next month */}
-            <p>Selected Date: {selectedDate || `${dropOffDate} to ${pickUpDate}`}</p>
-            <button onClick={() => handleDateSelection(new Date().toDateString())}>Select a Date</button>
+            <p className={bkp.selectDate}>Selected Date: {selectedDate || `${dropOffDate} to ${pickUpDate}`}</p>
+            <button className={bkp.selectedDates} onClick={() => handleDateSelection(new Date().toDateString())}>Select a Date</button>
           </div>
         </div>
       )}
