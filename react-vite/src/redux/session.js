@@ -12,7 +12,7 @@ export const restoreUser = createAsyncThunk(
     try {
       const res = await fetch("/api/auth/");
       const data = await res.json();
-      return data.user;
+      return data;
     } catch (error) {
       return rejectWithValue(error.message || "Trouble getting current user");
     }
@@ -28,8 +28,10 @@ export const login = createAsyncThunk(
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+      console.log("res:", res);
       const data = await res.json();
-      return data.user;
+      console.log("data:", data);
+      return data;
     } catch (error) {
       return rejectWithValue(error.message || "Login failed");
     }
@@ -37,7 +39,7 @@ export const login = createAsyncThunk(
 );
 
 export const signup = createAsyncThunk(
-  "session/singup",
+  "session/signup",
   async (
     {
       username,
@@ -70,8 +72,15 @@ export const signup = createAsyncThunk(
           zip,
         }),
       });
+      console.log("res:", res);
       const data = await res.json();
-      return data.user;
+
+      if (!res.ok) {
+        return rejectWithValue(data);
+      }
+
+      console.log("data:", data);
+      return data;
     } catch (error) {
       return rejectWithValue(error.message || "Signup failed");
     }
