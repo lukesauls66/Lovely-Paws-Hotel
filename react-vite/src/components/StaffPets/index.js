@@ -1,2 +1,4 @@
-export { default as StaffPetList } from './StaffPetList';
-export { default as StaffPetDetail } from './StaffPetDetail';
+import StaffPetList from './StaffPetList';
+import StaffPetDetail from './StaffPetDetail';
+
+export { StaffPetList, StaffPetDetail };
