@@ -6,7 +6,7 @@ export const fetchPets = createAsyncThunk(
     try {
       const response = await fetch('/api/pets');
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Error fetching pets');
       }
       return await response.json();
     } catch (error) {
@@ -25,7 +25,7 @@ export const addPet = createAsyncThunk(
         body: JSON.stringify(pet),
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Error adding pet');
       }
       return await response.json();
     } catch (error) {
@@ -44,7 +44,7 @@ export const updatePet = createAsyncThunk(
         body: JSON.stringify(pet),
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Error updating pet');
       }
       return await response.json();
     } catch (error) {
@@ -59,7 +59,7 @@ export const deletePet = createAsyncThunk(
     try {
       const response = await fetch(`/api/pets/${id}`, { method: 'DELETE' });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Error deleting pet');
       }
       return id;
     } catch (error) {

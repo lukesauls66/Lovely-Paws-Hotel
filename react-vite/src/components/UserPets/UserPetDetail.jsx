@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import { deletePet } from '../../redux/pets/pets';
-import styles from '../../styles/UserPetDetail.module.css';
+import { deletePet } from '../../redux/pets';
+import styles from './UserPetDetail.module.css';
 
 const UserPetDetail = () => {
   const { petId } = useParams();
