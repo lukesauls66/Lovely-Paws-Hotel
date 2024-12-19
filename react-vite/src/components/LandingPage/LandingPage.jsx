@@ -21,7 +21,13 @@ function LandingPage() {
             <div className={lan.infoContainer}>
                 <div className={lan.aboutContainer}>
                     <div className={lan.aboutBox}>
-                        <h1>Welcome / About Us</h1>
+                        <h1>Welcome to Paradise!</h1>
+                        <p className={lan.aboutParagraph}>
+                            At Lovely Paws Hotel, we&apos;re dedicated to making every stay a paws-itively delightful experience for your furry family members. Our cozy, pet-friendly haven is designed to feel like a home away from home, filled with love, comfort, and plenty of tail-wagging fun. From pampering spa treatments to playtime galore, we go the extra mile to ensure your pets enjoy the ultimate care and relaxation.
+                        </p>
+                        <p className={lan.aboutParagraph}>
+                            Our team of passionate animal lovers is committed to treating each guest like family. We understand how much your pets mean to you, and we&apos;re here to provide them with a safe, nurturing environment where they can thrive while you&apos;re away. At Lovely Paws Hotel, love and happiness are always at the heart of everything we do!
+                        </p>
                     </div>
                     <div className={lan.petOfMonthBox}>
                         <h1>Pet of the Month</h1>
