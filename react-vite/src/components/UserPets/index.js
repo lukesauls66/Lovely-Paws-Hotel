@@ -1,2 +1,4 @@
-export { default as UserPetList } from './UserPetList';
-export { default as UserPetDetail } from './UserPetDetail';
+import UserPetList from './UserPetList';
+import UserPetDetail from './UserPetDetail';
+
+export { UserPetList, UserPetDetail };
