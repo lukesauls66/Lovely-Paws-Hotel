@@ -24,7 +24,7 @@
     width: 100%;
 }
 
-.addReviewBtn {
+.addReviewBtn, .submitBtn {
     font-family: 'Gaegu', cursive;
     font-size: 2rem;
     padding: 10px 20px;
@@ -37,8 +37,9 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.addReviewBtn:hover {
-    background-color: #86bbb6;
+.addReviewBtn:hover, .submitBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
 }
 
 .allReviewsContainer {
@@ -64,6 +65,49 @@
     font-size: 18px;
 }
 
+.reviewForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+.reviewForm textarea {
+    border-radius: 8px;
+    width: 400px;
+    font-size: 20px;
+    background-color: #f6ead8;
+    border: 3px solid #efaca6;
+    padding: 10px;
+    margin: 30px;
+}
+
+.rating label {
+    font-size: 24px;
+    color: #333;
+}
+
 .paws {
     display: flex;
+}
+
+.pawIcons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.submitBtn {
+    background-color: #ffc383;
+    margin: 30px;
+}
+  
+.pawIcons svg {
+    transition: color 0.3s, transform 0.2s;
+}
+
+.pawIcons svg:hover {
+    transform: scale(1.2);
 }

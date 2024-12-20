@@ -46,28 +46,41 @@ export const createNewReview = createAsyncThunk(
     }
 );
 
-// export const getUserReviews = createAsyncThunk(
-//     "review/getUserReviews",
-//     async (_, { getState, rejectWithValue }) => {
-//         try{
-//             const state = getState();
-//             const user = state.session.user;
-//             if (!user) {
-//                 throw new Error("You must be logged in to view your reviews");
-//             }
-//             const response = await fetch('/api/reviews/user');
-//             const data = await response.json();
-//             console.log("RESPONSE DATA:", data)
-//             if (!response.ok) {
-//                 throw new Error(`Error getting reviews: ${data.message}`)
-//             }
-//             return data;
-//         } catch (error) {
-//             return rejectWithValue(error.message || "Error fetching user reviews");
-//         }
-//     }
-// );
+export const updateReview = createAsyncThunk(
+    "review/updateReview",
+    async ({ id, review }, { rejectWithValue }) => {
+      try {
+        const response = await fetch(`/api/reviews/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(review),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || "Error updating review.");
+        }
+        return data;
+      } catch (error) {
+        return rejectWithValue(error.message || "Error updating review.");
+      }
+    }
+);
 
+export const deleteReview = createAsyncThunk(
+    "review/deleteReview",
+    async (id, { rejectWithValue }) => {
+        try {
+            const response = await fetch(`/api/reviews/${id}`, { method: 'DELETE' });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(`Error deleting review: ${data.message}`);
+            }
+            return id;
+        } catch (error) {
+            return rejectWithValue(error.message || "Error deleting user review");
+        }
+    }
+);
 
 const reviewSlice = createSlice({
     name: "review",
@@ -75,7 +88,6 @@ const reviewSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            // Fetch all reviews
             .addCase(getAllReviews.pending, (state) => {
                 state.loading = true;
                 state.errors = null;
@@ -99,20 +111,25 @@ const reviewSlice = createSlice({
             .addCase(createNewReview.fulfilled, (state, action) => {
                 state.loading = false;
                 state.reviews.push(action.payload);
-            });
-            // .addCase(getUserReviews.pending, (state) => {
-            //     state.loading = true;
-            //     state.errors = null;
-            // })       
-            // .addCase(getUserReviews.rejected, (state, action) => {
-            //     state.loading = false;
-            //     state.errors = action.payload;
-            // })
-            // .addCase(getUserReviews.fulfilled, (state, action) => {
-            //     state.loading = false;
-            //     state.reviews = action.payload.reviews;
-            // })
-
+            })
+            .addCase(updateReview.pending, (state) => {
+                state.loading = true;
+                state.errors = null;
+            })
+            .addCase(updateReview.fulfilled, (state, action) => {
+                state.loading = false;
+                const index = state.reviews.findIndex((r) => r.id === action.payload.id);
+                if (index !== -1) {
+                    state.reviews[index] = action.payload;
+                }
+            })
+            .addCase(updateReview.rejected, (state, action) => {
+                state.loading = false;
+                state.errors = action.payload;
+            })
+            .addCase(deleteReview.fulfilled, (state, action) => {
+                state.reviews = state.reviews.filter((review) => review.id !== action.payload);
+            })
     },
 });
 
