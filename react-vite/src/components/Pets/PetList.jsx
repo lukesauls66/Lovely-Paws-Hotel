@@ -24,10 +24,9 @@ const PetList = () => {
     }
   }, [status, dispatch, sessionUser]);
 
-  const handlePetClick = (petId) => {
-    dispatch(fetchPetDetail(petId)).then(() => {
-      navigate(`/${sessionUser.staff ? 'staff/pets' : 'pets'}/${petId}`);
-    });
+  const handlePetClick = async(petId) => {
+    await dispatch(fetchPetDetail(petId));
+    navigate(`/pets/${petId}`);
   };
 
   return (
