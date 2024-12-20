@@ -11,7 +11,7 @@ export const getAllServices = createAsyncThunk(
   "service/getAllServices",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await fetch("/api/services");
+      const res = await fetch("/api/services/");
       console.log("res:", res);
       const data = await res.json();
       console.log("data:", data);
