@@ -23,3 +23,9 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/staff')
+@login_required
+def staff():
+    staff = User.query.filter(User.position == "Employee", User.username != "demo-employee").all()
+    return {'staff': [staff_member.to_dict() for staff_member in staff]}
