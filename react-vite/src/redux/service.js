@@ -13,6 +13,7 @@ export const getAllServices = createAsyncThunk(
     try {
       const res = await fetch("/api/services/");
       const data = await res.json();
+      console.log("Data: ", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Issue getting all services");
@@ -44,6 +45,20 @@ export const createNewService = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Could not create new spot");
+    }
+  }
+);
+
+export const deleteService = createAsyncThunk(
+  "service/deleteService",
+  async (serviceId, { rejectWithValue }) => {
+    try {
+      await fetch(`/api/services/${serviceId}`, {
+        method: "DELETE",
+      });
+      return;
+    } catch (error) {
+      return rejectWithValue(error.message || "Service was not deleted");
     }
   }
 );
