@@ -1,21 +1,35 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { deletePet } from '../../redux/pets';
+import { fetchPetDetail, deletePet } from '../../redux/pets';
 import styles from './PetDetail.module.css';
 
 const PetDetail = () => {
   const { petId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const pet = useSelector((state) => state.pets.pets.find((p) => p.id === parseInt(petId)));
+  const pet = useSelector((state) => state.pets.selectedPet);
+  const status = useSelector((state) => state.pets.status);
   const sessionUser = useSelector((state) => state.session.user);
+
+  useEffect(() => {
+    dispatch(fetchPetDetail(petId));
+  }, [dispatch, petId]);
 
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to delete this pet?')) {
       dispatch(deletePet(pet.id));
-      navigate(sessionUser.staff ? '/staff/pets' : '/pets');
+      navigate('/pets');
     }
   };
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (!pet) {
+    return <div>Pet not found</div>;
+  }
 
   return (
     <div className={styles.petDetailContainer}>

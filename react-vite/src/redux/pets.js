@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
   pets: [],
+  selectedPet: null,
   status: 'idle',
   error: null,
 };
@@ -25,22 +26,32 @@ export const fetchAllPets = createAsyncThunk(
 
 export const fetchUserPets = createAsyncThunk(
   'pets/fetchUserPets',
-  async (_, { getState, rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const state = getState();
-      const user = state.session.user;
-      if (!user) {
-        throw new Error('You must be logged in to view your pets!');
-      }
       const response = await fetch('/api/pets/user/');
       const data = await response.json();
-      console.log('data:', data);
       if (!response.ok) {
         throw new Error(`Error fetching pets: ${data.message}`);
       }
       return data;
     } catch (error) {
       return rejectWithValue(error.message || 'Issue fetching user pets');
+    }
+  }
+);
+
+export const fetchPetDetail = createAsyncThunk(
+  'pets/fetchPetDetail',
+  async (petId, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`/api/pets/${petId}`);
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`Error fetching pet detail: ${data.message}`);
+      }
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message || 'Issue fetching pet detail');
     }
   }
 );
@@ -131,8 +142,9 @@ const petsSlice = createSlice({
         state.status = 'failed';
         state.error = action.payload;
       })
-      .addCase(addPet.fulfilled, (state, action) => {
-        state.pets.push(action.payload);
+      .addCase(addPet.fulfilled, (state) => {
+        state.status = 'succeeded';
+        fetchAllPets();
       })
       .addCase(updatePet.fulfilled, (state, action) => {
         const index = state.pets.findIndex((pet) => pet.id === action.payload.id);
@@ -140,6 +152,18 @@ const petsSlice = createSlice({
       })
       .addCase(deletePet.fulfilled, (state, action) => {
         state.pets = state.pets.filter((pet) => pet.id !== action.payload);
+      })
+      .addCase(fetchPetDetail.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(fetchPetDetail.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.selectedPet = action.payload;
+      })
+      .addCase(fetchPetDetail.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
       });
   },
 });
