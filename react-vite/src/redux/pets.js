@@ -4,7 +4,7 @@ export const fetchAllPets = createAsyncThunk(
   'pets/fetchAllPets',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/pets');
+      const response = await fetch('/api/pets/');
       const responseText = await response.text();
       console.log('Response:', responseText);
       if (!response.ok) {
@@ -26,7 +26,7 @@ export const fetchUserPets = createAsyncThunk(
       if (!user) {
         throw new Error('You must be logged in to view your pets!');
       }
-      const response = await fetch('/api/pets/user');
+      const response = await fetch('/api/pets/user/');
       const responseText = await response.text();
       console.log('Response:', responseText);
       if (!response.ok) {
@@ -43,7 +43,7 @@ export const addPet = createAsyncThunk(
   'pets/addPet',
   async (pet, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/pets', {
+      const response = await fetch('/api/pets/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(pet),
@@ -62,7 +62,7 @@ export const updatePet = createAsyncThunk(
   'pets/updatePet',
   async ({ id, pet }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`/api/pets/${id}`, {
+      const response = await fetch(`/api/pets/${id}/`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(pet),
@@ -81,7 +81,7 @@ export const deletePet = createAsyncThunk(
   'pets/deletePet',
   async (id, { rejectWithValue }) => {
     try {
-      const response = await fetch(`/api/pets/${id}`, { method: 'DELETE' });
+      const response = await fetch(`/api/pets/${id}/`, { method: 'DELETE' });
       if (!response.ok) {
         throw new Error('Error deleting pet');
       }
