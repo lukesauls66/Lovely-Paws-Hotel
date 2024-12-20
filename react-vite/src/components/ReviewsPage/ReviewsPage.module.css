@@ -1,3 +1,69 @@
-/* .h1 {
-    background-color: white;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap');
+
+.reviewsMainContainer {
+    font-family: "Parkinsans";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.h1 {
+    font-family: 'Gaegu', cursive;
+    font-size: 4rem;
+}
+
+.h1, .h3 {
+    text-align: center;
+}
+
+.reviewsHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.addReviewBtn {
+    font-family: 'Gaegu', cursive;
+    font-size: 2rem;
+    padding: 10px 20px;
+    background-color: #a1d6d2;
+    color: #333;
+    border: 3px solid #f7f0e5;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.addReviewBtn:hover {
+    background-color: #86bbb6;
+}
+
+.allReviewsContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: #f6ead8;
+    border: 3px solid #333;
+    border-radius: 12px;
+    padding: 20px 20px 0 20px;
+    margin: 20px;
+}
+
+.reviewContainer {
+    background-color: #efaca6;
+    border: 3px solid #333;
+    border-radius: 12px;
+    padding: 20px 40px 20px 40px;
+    margin-bottom: 15px;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.paws {
+    display: flex;
+}
