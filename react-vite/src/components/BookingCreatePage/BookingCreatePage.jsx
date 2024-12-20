@@ -22,8 +22,11 @@ const BookingCreatePage = () => {
   const [pickUpDate, setPickUpDate] = useState(null);
   const [dropOffTime, setDropOffTime] = useState(null);
   const [pickUpTime, setPickUpTime] = useState(null);
-  const [selectedServices, setSelectedServices] = useState([])
-  const [isReservationStarted, setIsReservationStarted] = useState(false)
+  const [selectedServices, setSelectedServices] = useState([]);
+  const [isReservationStarted, setIsReservationStarted] = useState(false);
+  const [totalCost, setTotalCost] = useState(null);
+  const [totalDays, setTotalDays] = useState(null);
+  let days;
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -31,12 +34,25 @@ const BookingCreatePage = () => {
   useEffect(() => {
     dispatch(bookingActions.getBookingByPetId(petId));
     if (currentBooking && currentBooking.booking) {
-      const dropOffDate = new Date(currentBooking.booking.drop_off_date)
+      const dropOffDate = new Date(currentBooking.booking.drop_off_date);
+      const pickUpDate = new Date(currentBooking.booking.pick_up_date);
+      const differenceInMs = pickUpDate - dropOffDate;
+      if (currentBooking.booking.booking_type === 'day_care') {
+        days = 1;
+      } else {
+        days = 1 + Math.ceil(differenceInMs / (1000 * 60 * 60 *24));
+      }
+      setTotalDays(days);
+
       if (dropOffDate <= today) {
         setIsReservationStarted(true)
       } else {
         setIsReservationStarted(false)
       }
+      const sum = currentBooking.booking.services.reduce((acc, el) => acc + Number(el.price), 0)
+      const cost = parseFloat((Number(sum) + (days * Number(currentBooking.booking.daily_price))).toFixed(2));
+      setTotalCost(cost);
+      console.log('total cost > ', sum, cost, totalCost );
     }
     if (!currentBooking || !currentBooking.booking) {
       dispatch(getAllServices())
@@ -187,12 +203,15 @@ const BookingCreatePage = () => {
             {currentBooking.booking.date_off_date ||
               `${formatDateTime(currentBooking.booking.drop_off_date)} - ${formatDateTime(currentBooking.booking.pick_up_date)}`}
           </p>
+          <p className={bcp.currBookDates}>Number of Days: {totalDays}</p>
           <div className={bcp.currServicesContainer}>
+            <p className={bcp.currServicesDetail}>Daily Cost: ${currentBooking.booking.daily_price}</p>
             {currentBooking.booking.services.map((service) => (
               <div key={service.id}>
-                <p className={bcp.currServicesDetail}>{service.service}</p>
+                <p className={bcp.currServicesDetail}>{service.service}: ${service.price}</p>
               </div> 
               ))}
+            <h3 className={bcp.currServiceDetail}>Total Cost: ${totalCost}</h3>
           </div>
           {isReservationStarted && (
             <h3 className={bcp.reserveStartedMsg}>Reservation has started, cannot Update & Delete</h3>
