@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_wtf.csrf import validate_csrf
 from flask_login import current_user
 from datetime import datetime
+from sqlalchemy import func
 from ..models import db, Booking, Service
 from ..forms import BookingForm
 
@@ -12,6 +13,41 @@ def get_booking():
   try:
     bookings = Booking.query.all()
     return {'bookings': [booking.to_dict() for booking in bookings]}
+  except Exception as e:
+    return jsonify({'error': str(e)}), 500
+
+
+@booking_routes.route('/<int:id>', methods=['GET'])
+def get_booking_by_id(id):
+  try:
+    booking = Booking.query.filter(
+      Booking.id == id,
+    ).first()
+    
+    if booking is None:
+      return jsonify({'message': 'Booking not found or has passed'}), 400
+  
+    return jsonify({'booking': booking.to_dict()})
+  except Exception as e:
+    return jsonify({'error': str(e)}), 500
+
+
+@booking_routes.route('/pet/<int:id>', methods=['GET'])
+def get_booking_by_pet_id(id):
+  try:
+    today_datetime = datetime.utcnow()
+    today = today_datetime.date()
+
+    booking = Booking.query.filter(
+      Booking.pet_id == id,
+      func.date(Booking.pick_up_date) >= today
+      
+    ).first()
+    
+    if booking is None:
+      return jsonify({'message': 'Booking not found or has passed'}), 400
+  
+    return jsonify({'booking': booking.to_dict()})
   except Exception as e:
     return jsonify({'error': str(e)}), 500
 
@@ -28,7 +64,7 @@ def get_booking_user():
     return jsonify({'error': str(e)}), 500
 
 
-@booking_routes.route('/<date>', methods=['GET'])
+@booking_routes.route('/date/<date>', methods=['GET'])
 def get_booking_by_date(date):
   try:
     # Parse the input date string into a datetime object
@@ -46,18 +82,6 @@ def get_booking_by_date(date):
     return jsonify(booking_list), 200
   except ValueError:
     return jsonify({'error': 'Invalid date format. Use YYYY-MM-DD.'}), 400
-  except Exception as e:
-    return jsonify({'error': str(e)}), 500
-
-
-@booking_routes.route('/<int:id>', methods=['GET'])
-def get_booking_one(id):
-  try:
-    booking = Booking.query.get(id)
-    if booking is None:
-      return jsonify({'message': 'Booking not found'}), 400
-    
-    return jsonify({'booking': booking.to_dict()})
   except Exception as e:
     return jsonify({'error': str(e)}), 500
 

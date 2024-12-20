@@ -52,73 +52,73 @@ def seed_bookings():
             client_id=5,
             pet_id=5,
             booking_type='boarding_care',
-            drop_off_date=datetime.now() - timedelta(days=12),
-            pick_up_date=datetime.now() + timedelta(days=1),
+            drop_off_date=datetime.now() + timedelta(days=10),
+            pick_up_date=datetime.now() + timedelta(days=15),
             services=[hair_cut, nail_trim, simple_bath]
         ),
-        # Booking 6 (day_care)
-        Booking(
-            client_id=6,
-            pet_id=6,
-            booking_type='day_care',
-            drop_off_date=datetime.now() - timedelta(days=6),
-            pick_up_date=datetime.now() - timedelta(days=6),
-            services=[simple_bath]
-        ),
-        # Booking 7 (boarding_care)
-        Booking(
-            client_id=7,
-            pet_id=7,
-            booking_type='boarding_care',
-            drop_off_date=datetime.now() - timedelta(days=15),
-            pick_up_date=datetime.now() + timedelta(days=3),
-            services=[hair_cut, nail_trim, luxury_bath]
-        ),
-        # Booking 8 (day_care)
-        Booking(
-            client_id=8,
-            pet_id=8,
-            booking_type='day_care',
-            drop_off_date=datetime.now() - timedelta(days=2),
-            pick_up_date=datetime.now() - timedelta(days=2),
-            services=[nail_trim, simple_bath]
-        ),
-        # Booking 9 (boarding_care)
-        Booking(
-            client_id=5,
-            pet_id=9,
-            booking_type='boarding_care',
-            drop_off_date=datetime.now() - timedelta(days=9),
-            pick_up_date=datetime.now() + timedelta(days=2),
-            services=[hair_cut, nail_trim, luxury_bath]
-        ),
-        # Booking 10 (day_care)
-        Booking(
-            client_id=6,
-            pet_id=10,
-            booking_type='day_care',
-            drop_off_date=datetime.now() - timedelta(days=4),
-            pick_up_date=datetime.now() - timedelta(days=4),
-            services=[nail_trim, simple_bath]
-        ),
-        # Booking 11 (boarding_care)
-        Booking(
-            client_id=7,
-            pet_id=6,
-            booking_type='boarding_care',
-            drop_off_date=datetime.now() - timedelta(days=7),
-            pick_up_date=datetime.now() + timedelta(days=5),
-            services=[hair_cut, nail_trim, luxury_bath]
-        ),
-        # Booking 12 (day_care)
-        Booking(
-            client_id=8,
-            pet_id=7,
-            booking_type='day_care',
-            drop_off_date=datetime.now() - timedelta(days=1),
-            pick_up_date=datetime.now() - timedelta(days=1),
-            services=[luxury_bath]
-        ),
+        # # Booking 6 (day_care)
+        # Booking(
+        #     client_id=6,
+        #     pet_id=6,
+        #     booking_type='day_care',
+        #     drop_off_date=datetime.now() - timedelta(days=6),
+        #     pick_up_date=datetime.now() - timedelta(days=6),
+        #     services=[simple_bath]
+        # ),
+        # # Booking 7 (boarding_care)
+        # Booking(
+        #     client_id=7,
+        #     pet_id=7,
+        #     booking_type='boarding_care',
+        #     drop_off_date=datetime.now() - timedelta(days=15),
+        #     pick_up_date=datetime.now() + timedelta(days=3),
+        #     services=[hair_cut, nail_trim, luxury_bath]
+        # ),
+        # # Booking 8 (day_care)
+        # Booking(
+        #     client_id=8,
+        #     pet_id=8,
+        #     booking_type='day_care',
+        #     drop_off_date=datetime.now() - timedelta(days=2),
+        #     pick_up_date=datetime.now() - timedelta(days=2),
+        #     services=[nail_trim, simple_bath]
+        # ),
+        # # Booking 9 (boarding_care)
+        # Booking(
+        #     client_id=5,
+        #     pet_id=9,
+        #     booking_type='boarding_care',
+        #     drop_off_date=datetime.now() - timedelta(days=9),
+        #     pick_up_date=datetime.now() + timedelta(days=2),
+        #     services=[hair_cut, nail_trim, luxury_bath]
+        # ),
+        # # Booking 10 (day_care)
+        # Booking(
+        #     client_id=6,
+        #     pet_id=10,
+        #     booking_type='day_care',
+        #     drop_off_date=datetime.now() - timedelta(days=4),
+        #     pick_up_date=datetime.now() - timedelta(days=4),
+        #     services=[nail_trim, simple_bath]
+        # ),
+        # # Booking 11 (boarding_care)
+        # Booking(
+        #     client_id=7,
+        #     pet_id=6,
+        #     booking_type='boarding_care',
+        #     drop_off_date=datetime.now() - timedelta(days=7),
+        #     pick_up_date=datetime.now() + timedelta(days=5),
+        #     services=[hair_cut, nail_trim, luxury_bath]
+        # ),
+        # # Booking 12 (day_care)
+        # Booking(
+        #     client_id=8,
+        #     pet_id=7,
+        #     booking_type='day_care',
+        #     drop_off_date=datetime.now() - timedelta(days=1),
+        #     pick_up_date=datetime.now() - timedelta(days=1),
+        #     services=[luxury_bath]
+        # ),
     ]
 
     # Add all bookings to the session and commit
