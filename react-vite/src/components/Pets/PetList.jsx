@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllPets, fetchUserPets, fetchPetDetail } from '../../redux/pets';
 import { useNavigate } from 'react-router-dom';
+import AddPetModal from '../PetModals/AddPetModal';
 import styles from './PetList.module.css';
 
 const PetList = () => {
@@ -11,6 +12,7 @@ const PetList = () => {
   const status = useSelector((state) => state.pets.status);
   const error = useSelector((state) => state.pets.error);
   const sessionUser = useSelector((state) => state.session.user);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
     if (status === 'idle') {
@@ -23,12 +25,18 @@ const PetList = () => {
   }, [status, dispatch, sessionUser]);
 
   const handlePetClick = (petId) => {
-    dispatch(fetchPetDetail(petId));
-    navigate(`/${sessionUser.staff ? 'staff/pets' : 'pets'}/${petId}`);
+    dispatch(fetchPetDetail(petId)).then(() => {
+      navigate(`/${sessionUser.staff ? 'staff/pets' : 'pets'}/${petId}`);
+    });
   };
 
   return (
     <div className={styles.petListContainer}>
+      {sessionUser.staff && (
+        <button onClick={() => setShowAddModal(true)} className={styles.addButton}>
+          Add Pet
+        </button>
+      )}
       {status === 'loading' && <div>Loading...</div>}
       {status === 'failed' && <div>{error}</div>}
       {status === 'succeeded' &&
@@ -42,6 +50,7 @@ const PetList = () => {
             <div className={styles.petName}>{pet.name}</div>
           </div>
         ))}
+      {showAddModal && <AddPetModal onClose={() => setShowAddModal(false)} />}
     </div>
   );
 };
