@@ -56,38 +56,71 @@ function ServicesPage() {
 
   return (
     <div>
-      <div>
-        {services?.length > 0 ? (
-          <div className={serv.allServicesContainer}>
-            {services.map((service) => {
-              return (
-                <div key={service.id} className={serv.serviceContainer}>
-                  <div>
-                    {service.service}, {service.price}
-                  </div>
-                  <div>
-                    {service.staff.map((member) => {
-                      return (
-                        <div key={member.id}>
-                          {member.fname} {member.lname}
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <button onClick={() => handleUpdate(service)}>Update</button>
-                  <button onClick={() => handleDeleteService(service.id)}>
-                    Delete
-                  </button>
-                </div>
-              );
-            })}
+      {isOwnerorManager ? (
+        <div>
+          <div>
+            {services?.length > 0 ? (
+              <div className={serv.allServicesContainer}>
+                {services.map((service) => {
+                  return (
+                    <div key={service.id} className={serv.serviceContainer}>
+                      <div>
+                        {service.service}, {service.price}
+                      </div>
+                      <div>
+                        {service.staff.map((member) => {
+                          return (
+                            <div key={member.id}>
+                              {member.fname} {member.lname}
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <button onClick={() => handleUpdate(service)}>
+                        Update
+                      </button>
+                      <button onClick={() => handleDeleteService(service.id)}>
+                        Delete
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div>No services available</div>
+            )}
           </div>
-        ) : (
-          <div>No services available</div>
-        )}
-      </div>
-      {isOwnerorManager && (
-        <button onClick={() => setIsFormOpen(true)}>Create a Service</button>
+          <button onClick={() => setIsFormOpen(true)}>Create a Service</button>
+        </div>
+      ) : (
+        <div>
+          <div>
+            {services?.length > 0 ? (
+              <div className={serv.allServicesContainer}>
+                {services.map((service) => {
+                  return (
+                    <div key={service.id} className={serv.serviceContainer}>
+                      <div>
+                        {service.service}, {service.price}
+                      </div>
+                      <div>
+                        {service.staff.map((member) => {
+                          return (
+                            <div key={member.id}>
+                              {member.fname} {member.lname}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div>No services available</div>
+            )}
+          </div>
+        </div>
       )}
       <CreateServiceForm
         isOpen={isFormOpen}
