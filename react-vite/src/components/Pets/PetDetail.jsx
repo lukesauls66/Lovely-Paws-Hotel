@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchPetDetail, deletePet } from '../../redux/pets';
+import EditPetModal from '../PetModals/EditPetModal';
 import styles from './PetDetail.module.css';
 
 const PetDetail = () => {
@@ -11,6 +12,7 @@ const PetDetail = () => {
   const pet = useSelector((state) => state.pets.selectedPet);
   const status = useSelector((state) => state.pets.status);
   const sessionUser = useSelector((state) => state.session.user);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   useEffect(() => {
     dispatch(fetchPetDetail(petId));
@@ -36,7 +38,7 @@ const PetDetail = () => {
       <h1>{pet.name}</h1>
       {sessionUser && sessionUser.staff && (
         <>
-          <button className={styles.updateButton}>Update</button>
+          <button className={styles.updateButton} onClick={() => setShowEditModal(true)}>Update</button>
           <button className={styles.deleteButton} onClick={handleDelete}>
             Delete
           </button>
@@ -64,6 +66,7 @@ const PetDetail = () => {
         <p>Medication Note: {pet.medication_note}</p>
         <p>Dietary Note: {pet.dietary_note}</p>
       </div>
+      {showEditModal && <EditPetModal petId={pet.id} onClose={() => setShowEditModal(false)} />}
     </div>
   );
 };
