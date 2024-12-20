@@ -10,7 +10,7 @@ export const restoreUser = createAsyncThunk(
   "session/restoreUser",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await fetch("/api/auth/");
+      const res = await fetch("/api/auth");
       console.log("RES: ", res);
       const data = await res.json();
       console.log("DATA: ", data);
@@ -93,9 +93,7 @@ export const logout = createAsyncThunk(
   "session/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await fetch("/api/auth/logout", {
-        method: "DELETE",
-      });
+      await fetch("/api/auth/logout");
       return;
     } catch (error) {
       return rejectWithValue(error.message || "Logout failed");
@@ -155,7 +153,7 @@ const sessionSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.user = null;
       });
   },
 });

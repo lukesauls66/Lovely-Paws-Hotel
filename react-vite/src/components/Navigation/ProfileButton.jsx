@@ -47,7 +47,7 @@ function ProfileButton() {
       <button onClick={toggleMenu}>{pawIcon}</button>
       {showMenu && (
         <ul className={profile.profileDropdown} ref={ulRef}>
-          {user ? (
+          {user?.username ? (
             <>
               <li>{user.username}</li>
               <li>{user.email}</li>
