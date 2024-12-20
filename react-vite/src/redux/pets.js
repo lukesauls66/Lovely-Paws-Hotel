@@ -1,18 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+const initialState = {
+  pets: [],
+  status: 'idle',
+  error: null,
+};
+
 export const fetchAllPets = createAsyncThunk(
   'pets/fetchAllPets',
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch('/api/pets/');
-      const responseText = await response.text();
-      console.log('Response:', responseText);
+      const data = await response.json();
+      console.log('data:', data);
       if (!response.ok) {
-        throw new Error(`Error fetching pets: ${responseText}`);
+        throw new Error(`Error fetching pets: ${data.message}`);
       }
-      return JSON.parse(responseText);
+      return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.message || 'Issue fetching all pets');
     }
   }
 );
@@ -27,14 +33,14 @@ export const fetchUserPets = createAsyncThunk(
         throw new Error('You must be logged in to view your pets!');
       }
       const response = await fetch('/api/pets/user/');
-      const responseText = await response.text();
-      console.log('Response:', responseText);
+      const data = await response.json();
+      console.log('data:', data);
       if (!response.ok) {
-        throw new Error(`Error fetching pets: ${responseText}`);
+        throw new Error(`Error fetching pets: ${data.message}`);
       }
-      return JSON.parse(responseText);
+      return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.message || 'Issue fetching user pets');
     }
   }
 );
@@ -48,12 +54,13 @@ export const addPet = createAsyncThunk(
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(pet),
       });
+      const data = await response.json();
       if (!response.ok) {
-        throw new Error('Error adding pet');
+        throw new Error(`Error adding pet: ${data.message}`);
       }
-      return await response.json();
+      return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.message || 'Issue adding pet');
     }
   }
 );
@@ -67,12 +74,13 @@ export const updatePet = createAsyncThunk(
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(pet),
       });
+      const data = await response.json();
       if (!response.ok) {
-        throw new Error('Error updating pet');
+        throw new Error(`Error updating pet: ${data.message}`);
       }
-      return await response.json();
+      return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.message || 'Issue updating pet');
     }
   }
 );
@@ -82,28 +90,26 @@ export const deletePet = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await fetch(`/api/pets/${id}/`, { method: 'DELETE' });
+      const data = await response.json();
       if (!response.ok) {
-        throw new Error('Error deleting pet');
+        throw new Error(`Error deleting pet: ${data.message}`);
       }
       return id;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.message || 'Issue deleting pet');
     }
   }
 );
 
 const petsSlice = createSlice({
   name: 'pets',
-  initialState: {
-    pets: [],
-    status: 'idle',
-    error: null,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllPets.pending, (state) => {
         state.status = 'loading';
+        state.error = null;
       })
       .addCase(fetchAllPets.fulfilled, (state, action) => {
         state.status = 'succeeded';
@@ -115,6 +121,7 @@ const petsSlice = createSlice({
       })
       .addCase(fetchUserPets.pending, (state) => {
         state.status = 'loading';
+        state.error = null;
       })
       .addCase(fetchUserPets.fulfilled, (state, action) => {
         state.status = 'succeeded';
