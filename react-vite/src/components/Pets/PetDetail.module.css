@@ -1,0 +1,59 @@
+.petDetailContainer {
+    background-color: #dfbdb0;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 30px;
+  }
+  
+  .updateButton, .deleteButton, .bookServiceButton {
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 5px;
+    color: white;
+  }
+  
+  .updateButton {
+    background-color: #4CAF50;
+  }
+  
+  .deleteButton {
+    background-color: #f44336;
+  }
+  
+  .bookServiceButton {
+    background-color: #008CBA;
+  }
+  
+  .petImagesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  .previewImage {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 12px;
+  }
+  
+  .additionalImages {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  
+  .petImage {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    border-radius: 12px;
+  }
+  
+  .petDetails {
+    margin-top: 20px;
+    font-family: 'Gaegu', cursive;
+    color: #1c323a;
+    font-size: 1.2rem;
+  }

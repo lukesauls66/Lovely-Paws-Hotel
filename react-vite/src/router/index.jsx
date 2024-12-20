@@ -3,9 +3,10 @@ import Layout from "./Layout";
 import LandingPage from "../components/LandingPage";
 import ServicesPage from "../components/ServicesPage";
 import ReviewsPage from "../components/ReviewsPage";
-import { PetList, PetDetail } from "../components/Pets";
+import PetList from "../components/Pets/PetList";
+import PetDetail from "../components/Pets/PetDetail";
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingPage />,
@@ -31,16 +32,8 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: "staff/pets",
-        element: <PetList />,
-        children: [
-          {
-            path: ":petId",
-            element: <PetDetail />,
-          },
-        ],
-      },
     ],
   },
 ]);
+
+export { router };

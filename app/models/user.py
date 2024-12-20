@@ -32,6 +32,11 @@ class User(db.Model, UserMixin):
         lazy='joined'
     )
 
+    reviews = db.relationship(
+        'Review',
+        back_populates='client'
+    )
+
     @property
     def password(self):
         return self.hashed_password

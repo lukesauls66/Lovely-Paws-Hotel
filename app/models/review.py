@@ -12,12 +12,13 @@ class Review(db.Model):
     review = db.Column(db.String(2000), nullable=False)
     paws = db.Column(db.Integer, nullable=False)
     # relationships:
-    # client = db.relationship('User', back_populates='reviews')
+    client = db.relationship('User', back_populates='reviews')
 
     def to_dict(self):
         return {
             'id': self.id,
             'client_id': self.client_id,
+            'client_username': self.client.username if self.client else None,
             'review': self.review,
             'paws': self.paws
         }
