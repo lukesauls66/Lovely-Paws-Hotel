@@ -9,11 +9,61 @@ body {
     border-radius: 25px;
 }
 
+.adminButtonContainer {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    margin-left: 30px;
+}
+  
+.adminButton {
+    background-color: #ffc383;
+    font-family: 'Gaegu', cursive;
+    font-size: 2rem;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border: 3px solid #efe8db; 
+    border-radius: 5px;
+    margin-top: 20px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+  
+.adminMenu {
+    background-color: white;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+  
+.adminMenu button {
+    padding: 10px 20px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+}
+  
+.adminMenu button:hover {
+    background-color: #f1f1f1;
+}
+  
+
 .profileButton {
     position: fixed;
     top: 10px;
     right: 10px;
     z-index: 1000; 
+    margin-right: 30px;
 }
 
 .landingBodyContainer {
@@ -41,8 +91,8 @@ body {
 .messageContainer {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    width: 100%;
+    justify-content: space-around;
+    width: 95%;
 }
 
 .messageBox {
@@ -56,26 +106,6 @@ body {
     font-size: 60px;
     padding: 10px 20px 10px 20px;
 }
-
-/* .infoContainer {
-    background-color: #dfbdb0;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin: 30px;
-    width: 90%;
-    gap: 50px;
-}
-
-.aboutBox, .featuresBox {
-    flex: 1;
-    text-align: center;
-    border-radius: 10px;
-    font-family: 'Parkinsans';
-    color: #1c323a;
-} */
 
 .infoContainer {
     background-color: #dfbdb0;
@@ -109,13 +139,34 @@ body {
     font-size: 25px;
 }
 
+.petOfMonthBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    font-family: 'Gaegu', cursive;
+    font-size: 2.5rem;
+    background-color: #a1d6d2;
+    padding-bottom: 50px;
+    border: 8px solid #f7f0e5;
+    border-radius: 12px;
+}
+        
+.petOfMonthImage {
+    position: relative;
+    border-radius: 12px; 
+    overflow: hidden;
+    width: 620px;
+    border-radius: 15px;
+}
+
 .featuresBox {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-.servicesBtn, .bookingsBtn {
+.servicesBtn, .bookingsBtn, .reviewsBtn {
     padding: 20px;
     border: 3px solid #f7f0e5;
     border-radius: 12px;
@@ -130,7 +181,10 @@ body {
     color: #333333;
 }
 
-.servicesBtn:hover {
+.servicesBtn:hover,
+.bookingsBtn:hover,
+.reviewsBtn:hover,
+.adminButton:hover {
     box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
     transform: scale(1.05);
 }
@@ -141,12 +195,6 @@ body {
     margin-bottom: 50px;
 }
 
-.bookingsBtn:hover {
-    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
-    transform: scale(1.05);
+.reviewsBtn {
+    background-color: #efaca6;
 }
-
-/* .aboutBox, .petOfMonthBox, .reviewsContainer {
-    border: 1px solid hotpink;
-    border-radius: 12px;
-} */
