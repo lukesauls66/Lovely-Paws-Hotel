@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const getAllBookings = createAsyncThunk(
-  "bookings/",
+  "booking/getAllBookings",
   async (_, { rejectWithValue }) => {
     try {
       const res = await fetch("/api/bookings/");
@@ -20,8 +20,34 @@ export const getAllBookings = createAsyncThunk(
   }
 );
 
+export const getBookingById = createAsyncThunk(
+  "booking/getBookingById",
+  async (bookingId, { rejectWithValue }) => {
+    try {
+      const res = await fetch(`/api/bookings/${bookingId}`);
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message || "Trouble getting Booking by Id")
+    }
+  }
+)
+
+export const getBookingByPetId = createAsyncThunk(
+  "booking/getBookingByPetId",
+  async (petId, { rejectWithValue }) => {
+    try {
+      const res = await fetch(`/api/bookings/pet/${petId}`);
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message || "Trouble getting Booking by Pet Id");
+    }
+  }
+);
+
 export const getBookingsByUser = createAsyncThunk(
-  "bookings/user",
+  "booking/getBookingsByUser",
   async (_, { rejectWithValue }) => {
     try {
       const res = await fetch("/api/bookings/user");
@@ -36,10 +62,10 @@ export const getBookingsByUser = createAsyncThunk(
 );
 
 export const getBookingsByDate = createAsyncThunk(
-  "bookings/date",
+  "booking/getBookingsByDate",
   async ({ date }, { rejectWithValue }) => {
     try {
-      const res = await fetch(`/api/bookings/${date}`);
+      const res = await fetch(`/api/bookings/date/${date}`);
       const data = await res.json();
       return data.bookings;
     } catch (error) {
@@ -50,21 +76,8 @@ export const getBookingsByDate = createAsyncThunk(
   }
 );
 
-export const getBookingById = createAsyncThunk(
-  "bookings/id",
-  async ({ id }, { rejectWithValue }) => {
-    try {
-      const res = await fetch(`/api/bookings/${id}`);
-      const data = await res.json();
-      return data.booking;
-    } catch (error) {
-      return rejectWithValue(error.message || "Trouble getting Booking by Id");
-    }
-  }
-);
-
 export const createBooking = createAsyncThunk(
-  "bookings/",
+  "booking/createBooking",
   async (
     {
       client_id,
@@ -72,13 +85,12 @@ export const createBooking = createAsyncThunk(
       booking_type,
       drop_off_date,
       pick_up_date,
-      daily_price,
       services,
     },
     { rejectWithValue }
   ) => {
     try {
-      const res = await fetch("api/bookings", {
+      const res = await fetch("/api/bookings/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -87,12 +99,13 @@ export const createBooking = createAsyncThunk(
           booking_type,
           drop_off_date,
           pick_up_date,
-          daily_price,
           services,
         }),
       });
+      console.log('res > ', res)
       const data = await res.json();
-      return data.booking;
+      console.log('data > ', data)
+      return data;
     } catch (error) {
       return rejectWithValue(error.message || "Create Booking Failed");
     }
@@ -100,7 +113,7 @@ export const createBooking = createAsyncThunk(
 );
 
 export const updateBooking = createAsyncThunk(
-  "bookings/id",
+  "booking/updateBooking",
   async (
     {
       booking_id,
@@ -109,7 +122,6 @@ export const updateBooking = createAsyncThunk(
       booking_type,
       drop_off_date,
       pick_up_date,
-      daily_price,
       services,
     },
     { rejectWithValue }
@@ -124,7 +136,6 @@ export const updateBooking = createAsyncThunk(
           booking_type,
           drop_off_date,
           pick_up_date,
-          daily_price,
           services,
         }),
       });
@@ -137,7 +148,7 @@ export const updateBooking = createAsyncThunk(
 );
 
 export const deleteBooking = createAsyncThunk(
-  "bookings/id",
+  "booking/deleteBooking",
   async ({ booking_id }, { rejectWithValue }) => {
     try {
       const res = await fetch(`api/bookings/${booking_id}`, {
@@ -153,96 +164,108 @@ export const deleteBooking = createAsyncThunk(
 );
 
 const bookingSlice = createSlice({
-  name: "bookings",
+  name: "booking",
   initialState,
   reducers: {},
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(getAllBookings.pending, (state) => {
-  //       state.loading = true;
-  //       state.errors = null;
-  //     })
-  //     .addCase(getAllBookings.rejected, (state, action) => {
-  //       state.loading = false;
-  //       state.errors = action.payload;
-  //     })
-  //     .addCase(getAllBookings.fulfilled, (state, action) => {
-  //       state.loading = false;
-  //       state.bookings = action.payload;
-  //     })
-  //     .addCase(getBookingsByUser.pending, (state) => {
-  //       state.loading = true;
-  //       state.errors = null;
-  //     })
-  //     .addCase(getBookingsByUser.rejected, (state, action) => {
-  //       state.loading = false;
-  //       state.errors = action.payload;
-  //     })
-  //     .addCase(getBookingsByUser.fulfilled, (state, action) => {
-  //       state.loading = false;
-  //       state.bookings = action.payload;
-  //     })
-  //     .addCase(getBookingsByDate.pending, (state) => {
-  //       state.loading = true;
-  //       state.errors = null;
-  //     })
-  //     .addCase(getBookingsByDate.rejected, (state, action) => {
-  //       state.loading = false;
-  //       state.errors = action.payload;
-  //     })
-  //     .addCase(getBookingsByDate.fulfilled, (state, action) => {
-  //       state.loading = false;
-  //       state.bookings = action.payload;
-  //     })
-  //     .addCase(getBookingById.pending, (state) => {
-  //       state.loading = true;
-  //       state.errors = null;
-  //     })
-  //     .addCase(getBookingById.rejected, (state, action) => {
-  //       state.loading = false;
-  //       state.errors = action.payload;
-  //     })
-  //     .addCase(getBookingById.fulfilled, (state, action) => {
-  //       state.loading = false;
-  //       state.booking = action.payload;
-  //     })
-  //     .addCase(createBooking.pending, (state) => {
-  //       state.loading = true;
-  //       state.errors = null;
-  //     })
-  //     .addCase(createBooking.rejected, (state, action) => {
-  //       state.loading = false;
-  //       state.errors = action.payload;
-  //     })
-  //     .addCase(createBooking.fulfilled, (state, action) => {
-  //       state.loading = false;
-  //       state.booking = action.payload;
-  //     })
-  //     .addCase(updateBooking.pending, (state) => {
-  //       state.loading = true;
-  //       state.errors = null;
-  //     })
-  //     .addCase(updateBooking.rejected, (state, action) => {
-  //       state.loading = false;
-  //       state.errors = action.payload;
-  //     })
-  //     .addCase(updateBooking.fulfilled, (state, action) => {
-  //       state.loading = false;
-  //       state.booking = action.payload;
-  //     })
-  //     .addCase(deleteBooking.pending, (state) => {
-  //       state.loading = true;
-  //       state.errors = null;
-  //     })
-  //     .addCase(deleteBooking.rejected, (state, action) => {
-  //       state.loading = false;
-  //       state.errors = action.payload;
-  //     })
-  //     .addCase(deleteBooking.fulfilled, (state) => {
-  //       state.loading = false;
-  //       state.booking = null;
-  //     });
-  // },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAllBookings.pending, (state) => {
+        state.loading = true;
+        state.errors = null;
+      })
+      .addCase(getAllBookings.rejected, (state, action) => {
+        state.loading = false;
+        state.errors = action.payload;
+      })
+      .addCase(getAllBookings.fulfilled, (state, action) => {
+        state.loading = false;
+        state.bookings = action.payload;
+      })
+      .addCase(getBookingById.pending, (state) => {
+        state.loading = true;
+        state.errors = null;
+      })
+      .addCase(getBookingById.rejected, (state, action) => {
+        state.loading = false;
+        state.errors = action.payload;
+      })
+      .addCase(getBookingById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.booking = action.payload;
+      })
+      .addCase(getBookingByPetId.pending, (state) => {
+        state.loading = true;
+        state.errors = null;
+      })
+      .addCase(getBookingByPetId.rejected, (state, action) => {
+        state.loading = false;
+        state.errors = action.payload;
+      })
+      .addCase(getBookingByPetId.fulfilled, (state, action) => {
+        state.loading = false;
+        state.booking = action.payload;
+      })
+      .addCase(getBookingsByUser.pending, (state) => {
+        state.loading = true;
+        state.errors = null;
+      })
+      .addCase(getBookingsByUser.rejected, (state, action) => {
+        state.loading = false;
+        state.errors = action.payload;
+      })
+      .addCase(getBookingsByUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.bookings = action.payload;
+      })
+      .addCase(getBookingsByDate.pending, (state) => {
+        state.loading = true;
+        state.errors = null;
+      })
+      .addCase(getBookingsByDate.rejected, (state, action) => {
+        state.loading = false;
+        state.errors = action.payload;
+      })
+      .addCase(getBookingsByDate.fulfilled, (state, action) => {
+        state.loading = false;
+        state.bookings = action.payload;
+      })
+      .addCase(createBooking.pending, (state) => {
+        state.loading = true;
+        state.errors = null;
+      })
+      .addCase(createBooking.rejected, (state, action) => {
+        state.loading = false;
+        state.errors = action.payload;
+      })
+      .addCase(createBooking.fulfilled, (state, action) => {
+        state.loading = false;
+        state.booking = action.payload;
+      })
+      .addCase(updateBooking.pending, (state) => {
+        state.loading = true;
+        state.errors = null;
+      })
+      .addCase(updateBooking.rejected, (state, action) => {
+        state.loading = false;
+        state.errors = action.payload;
+      })
+      .addCase(updateBooking.fulfilled, (state, action) => {
+        state.loading = false;
+        state.booking = action.payload;
+      })
+      .addCase(deleteBooking.pending, (state) => {
+        state.loading = true;
+        state.errors = null;
+      })
+      .addCase(deleteBooking.rejected, (state, action) => {
+        state.loading = false;
+        state.errors = action.payload;
+      })
+      .addCase(deleteBooking.fulfilled, (state) => {
+        state.loading = false;
+        state.booking = null;
+      });
+  },
 });
 
 export default bookingSlice.reducer;
