@@ -26,27 +26,15 @@ const router = createBrowserRouter([
       {
         path: "pets",
         element: <PetList />,
-        children: [
-          {
-            path: ":petId",
-            element: <PetDetail />,
-          },
-        ],
       },
-      // {
-      //   path: "staff/pets",
-      //   element: <PetList />,
-      //   children: [
-      //     {
-      //       path: ":petId",
-      //       element: <PetDetail />,
-      //     },
-      //   ],
-      // },
+      {
+        path: "pets/:petId",
+        element: <PetDetail />,
+      },
       {
         path: "bookings/pet/:petId",
-        element: <BookingCreatePage />
-      }
+        element: <BookingCreatePage />,
+      },
     ],
   },
 ]);
