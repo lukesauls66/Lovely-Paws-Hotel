@@ -25,7 +25,7 @@ export const createNewService = createAsyncThunk(
   "service/createNewService",
   async ({ service, price, staff }, { rejectWithValue }) => {
     try {
-      const res = await fetch("api/services/", {
+      const res = await fetch("/api/services/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -44,7 +44,36 @@ export const createNewService = createAsyncThunk(
       console.log("data:", data);
       return data;
     } catch (error) {
-      return rejectWithValue(error.message || "Could not create new spot");
+      return rejectWithValue(error.message || "Could not create new service");
+    }
+  }
+);
+
+export const updateService = createAsyncThunk(
+  "service/updateService",
+  async ({ id, service, price, staff }, { rejectWithValue }) => {
+    try {
+      const res = await fetch(`/api/services/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id,
+          service,
+          price,
+          staff,
+        }),
+      });
+      console.log("Res: ");
+      const data = await res.json();
+      console.log("");
+
+      if (!res.ok) {
+        return rejectWithValue(data);
+      }
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message || "Could not update service");
     }
   }
 );
@@ -92,6 +121,30 @@ const serviceSlice = createSlice({
       .addCase(createNewService.fulfilled, (state, action) => {
         state.loading = false;
         state.service = action.payload;
+      })
+      .addCase(updateService.pending, (state) => {
+        state.loading = true;
+        state.errors = null;
+      })
+      .addCase(updateService.rejected, (state, action) => {
+        state.loading = false;
+        state.errors = action.payload;
+      })
+      .addCase(updateService.fulfilled, (state, action) => {
+        state.loading = false;
+        state.service = action.payload;
+      })
+      .addCase(deleteService.pending, (state) => {
+        state.loading = true;
+        state.errors = null;
+      })
+      .addCase(deleteService.rejected, (state, action) => {
+        state.loading = false;
+        state.errors = action.payload;
+      })
+      .addCase(deleteService.fulfilled, (state) => {
+        state.loading = false;
+        state.service = null;
       });
   },
 });

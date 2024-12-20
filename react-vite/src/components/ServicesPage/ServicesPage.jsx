@@ -8,6 +8,7 @@ function ServicesPage() {
   const dispatch = useDispatch();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [staffList, setStaffList] = useState([]);
+  const [selectedService, setSelectedService] = useState(null);
   const { services, loading, errors } = useSelector(
     (state) => state.service.services
   );
@@ -28,6 +29,18 @@ function ServicesPage() {
   const handleCreateService = async (newService) => {
     await dispatch(serviceActions.createNewService(newService));
     dispatch(serviceActions.getAllServices());
+  };
+
+  const handleUpdateService = async (updatedService) => {
+    await dispatch(serviceActions.updateService(updatedService));
+    dispatch(serviceActions.getAllServices());
+    setIsFormOpen(false);
+    setSelectedService(null);
+  };
+
+  const handleUpdate = (service) => {
+    setSelectedService(service);
+    setIsFormOpen(true);
   };
 
   const handleDeleteService = async (serviceId) => {
@@ -61,8 +74,9 @@ function ServicesPage() {
                       );
                     })}
                   </div>
+                  <button onClick={() => handleUpdate(service)}>Update</button>
                   <button onClick={() => handleDeleteService(service.id)}>
-                    Delete Service
+                    Delete
                   </button>
                 </div>
               );
@@ -77,9 +91,13 @@ function ServicesPage() {
       )}
       <CreateServiceForm
         isOpen={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
-        onSubmit={handleCreateService}
+        onClose={() => {
+          setIsFormOpen(false);
+          setSelectedService(null);
+        }}
+        onSubmit={selectedService ? handleUpdateService : handleCreateService}
         staffList={staffList}
+        service={selectedService}
       />
     </div>
   );
