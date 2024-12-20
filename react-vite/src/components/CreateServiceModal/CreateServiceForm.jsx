@@ -1,10 +1,30 @@
 import { useState, useEffect } from "react";
 import servform from "./CreateServiceForm.module.css";
 
-function CreateServiceForm({ isOpen, onClose, onSubmit, staffList }) {
+function CreateServiceForm({ isOpen, onClose, onSubmit, staffList, service }) {
   const [serviceName, setServiceName] = useState("");
   const [price, setPrice] = useState("");
   const [selectedStaff, setSelectedStaff] = useState([]);
+
+  useEffect(() => {
+    if (service) {
+      setServiceName(service.service);
+      setPrice(service.price);
+      setSelectedStaff(service.staff?.map((staff) => staff.id));
+    } else {
+      setServiceName("");
+      setPrice("");
+      setSelectedStaff([]);
+    }
+  }, [service]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setServiceName("");
+      setPrice("");
+      setSelectedStaff([]);
+    }
+  }, [isOpen]);
 
   const handleCheckbox = (staffId) => {
     setSelectedStaff((prev) =>
@@ -16,26 +36,19 @@ function CreateServiceForm({ isOpen, onClose, onSubmit, staffList }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newService = {
+    const submittedService = {
+      id: service?.id || null,
       service: serviceName,
       price: parseFloat(price),
       staff: selectedStaff,
     };
-    onSubmit(newService);
+    onSubmit(submittedService);
 
     setServiceName("");
     setPrice("");
     setSelectedStaff([]);
     onClose();
   };
-
-  useEffect(() => {
-    if (!isOpen) {
-      setServiceName("");
-      setPrice("");
-      setSelectedStaff([]);
-    }
-  }, [isOpen]);
 
   if (!isOpen) {
     return null;
@@ -47,7 +60,7 @@ function CreateServiceForm({ isOpen, onClose, onSubmit, staffList }) {
         <button className={servform.closeButton} onClick={onClose}>
           &times;
         </button>
-        <h1>Create New Service</h1>
+        <h1>{service ? "Update Service" : "Create New Service"}</h1>
         <form onSubmit={handleSubmit}>
           <div className={servform.formLabelContainer}>
             <label htmlFor="serviceName">Service Name</label>
@@ -90,7 +103,7 @@ function CreateServiceForm({ isOpen, onClose, onSubmit, staffList }) {
             </div>
           </div>
           <button className={servform.createServiceButton} type="submit">
-            Create Service
+            {service ? "Update Service" : "Create Service"}
           </button>
         </form>
       </div>

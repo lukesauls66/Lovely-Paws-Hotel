@@ -58,9 +58,7 @@ def update_service(id):
         
         service.service = form.service.data
         service.price = form.price.data
-
-        for staff in service.staff:
-            service.staff.remove(staff)
+        service.staff = []
 
         service.staff.extend(staffs)
 
