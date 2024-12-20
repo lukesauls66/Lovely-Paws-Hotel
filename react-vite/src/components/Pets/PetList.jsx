@@ -27,13 +27,14 @@ const PetList = () => {
       {status === 'failed' && <div>{error}</div>}
       {status === 'succeeded' &&
         pets.map((pet) => (
-          <div key={pet.id} className={styles.petCard}>
+          <Link
+            key={pet.id}
+            to={`/${sessionUser.staff ? 'staff/pets' : 'pets'}/${pet.id}`}
+            className={styles.petCard}
+          >
             <img src={pet.preview_image} alt={pet.name} className={styles.petImage} />
             <div className={styles.petName}>{pet.name}</div>
-            <Link to={`/${sessionUser.staff ? 'staff/pets' : 'pets'}/${pet.id}`} className={styles.managePetButton}>
-              Manage Pet
-            </Link>
-          </div>
+          </Link>
         ))}
     </div>
   );
