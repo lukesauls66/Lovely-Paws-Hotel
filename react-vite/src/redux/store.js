@@ -4,6 +4,7 @@ import sessionReducer from "./session";
 import petsReducer from "./pets";
 import bookingReducer from "./booking";
 import serviceReducer from "./service";
+import reviewReducer from "./review";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     pets: petsReducer,
     booking: bookingReducer,
     service: serviceReducer,
+    review: reviewReducer,
   },
   middleware: (getDefaultMiddleware) => {
     const middlewares = getDefaultMiddleware();
