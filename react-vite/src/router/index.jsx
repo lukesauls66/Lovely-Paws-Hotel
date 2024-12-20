@@ -33,16 +33,16 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: "staff/pets",
-        element: <PetList />,
-        children: [
-          {
-            path: ":petId",
-            element: <PetDetail />,
-          },
-        ],
-      },
+      // {
+      //   path: "staff/pets",
+      //   element: <PetList />,
+      //   children: [
+      //     {
+      //       path: ":petId",
+      //       element: <PetDetail />,
+      //     },
+      //   ],
+      // },
       {
         path: "bookings/pet/:petId",
         element: <BookingCreatePage />

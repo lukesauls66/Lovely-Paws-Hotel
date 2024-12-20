@@ -45,7 +45,9 @@ export const fetchPetDetail = createAsyncThunk(
   async (petId, { rejectWithValue }) => {
     try {
       const response = await fetch(`/api/pets/${petId}`);
+      console.log('res', response)
       const data = await response.json();
+      console.log('data', data)
       if (!response.ok) {
         throw new Error(`Error fetching pet detail: ${data.message}`);
       }
@@ -142,17 +144,6 @@ const petsSlice = createSlice({
         state.status = 'failed';
         state.error = action.payload;
       })
-      .addCase(addPet.fulfilled, (state) => {
-        state.status = 'succeeded';
-        fetchAllPets();
-      })
-      .addCase(updatePet.fulfilled, (state, action) => {
-        const index = state.pets.findIndex((pet) => pet.id === action.payload.id);
-        state.pets[index] = action.payload;
-      })
-      .addCase(deletePet.fulfilled, (state, action) => {
-        state.pets = state.pets.filter((pet) => pet.id !== action.payload);
-      })
       .addCase(fetchPetDetail.pending, (state) => {
         state.status = 'loading';
         state.error = null;
@@ -164,7 +155,18 @@ const petsSlice = createSlice({
       .addCase(fetchPetDetail.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
-      });
+      })
+      .addCase(addPet.fulfilled, (state) => {
+        state.status = 'succeeded';
+        fetchAllPets();
+      })
+      .addCase(updatePet.fulfilled, (state, action) => {
+        const index = state.pets.findIndex((pet) => pet.id === action.payload.id);
+        state.pets[index] = action.payload;
+      })
+      .addCase(deletePet.fulfilled, (state, action) => {
+        state.pets = state.pets.filter((pet) => pet.id !== action.payload);
+      })
   },
 });
 
