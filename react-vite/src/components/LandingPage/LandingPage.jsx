@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as sessionActions from "../../redux/session";
 import ProfileButton from "../Navigation/ProfileButton";
@@ -8,11 +8,19 @@ import lan from "./LandingPage.module.css";
 function LandingPage() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prevState) => !prevState);
+  }
+
+  // const isOwnerOrManager = currentUser?.position === 'Manager' || currentUser?.position === 'Owner';
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -22,10 +30,30 @@ function LandingPage() {
     <div className={lan.landingPageContainer}>
       <div className={lan.bannerContainer}>
         <img className={lan.logo} src="/images/logo-banner.jpg" alt="logo" />
+        {currentUser && (currentUser.position === "Owner" || currentUser.position === "Manager") && (
+          <div className={lan.adminButtonContainer}>
+            <button className={lan.adminButton} onClick={toggleDropdown}>
+              Admin
+            </button>
+            {isDropdownOpen && (
+              <div className={lan.adminMenu}>
+                <button onClick={() => navigate("/services")}>
+                  Manage Services
+                </button>
+                <button onClick={() => navigate("/users")}>
+                  Manage Users
+                </button>
+                <button onClick={() => navigate("/bookings")}>
+                  Manage Bookings
+                </button>
+              </div>
+            )}
+          </div>
+        )}
         <div className={lan.profileButton}>
           <ProfileButton />
         </div>
-      </div>
+      </div>      
       <div className={lan.landingBodyContainer}>
         <div className={lan.messageContainer}>
           <img className={lan.pawLeft} src="/images/paw-left.png" alt="paw" />
@@ -34,7 +62,6 @@ function LandingPage() {
           </h1>
           <img className={lan.pawRight} src="/images/paw-right.png" alt="paw" />
         </div>
-
         <div className={lan.infoContainer}>
           <div className={lan.aboutContainer}>
             <div className={lan.aboutBox}>
