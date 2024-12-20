@@ -30,7 +30,7 @@ form {
   flex-direction: column;
 }
 
-input {
+.petInput {
   margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -38,7 +38,7 @@ input {
   font-family: 'Gaegu', cursive;
 }
 
-button {
+.petButton {
   padding: 10px;
   border: 3px solid #efe8db;
   border-radius: 4px;
@@ -48,21 +48,21 @@ button {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-button[type="submit"] {
+.petButton[type="submit"] {
   background-color: #4CAF50;
   color: white;
 }
 
-button[type="button"] {
+.petButton[type="button"] {
   background-color: #f44336;
   color: white;
 }
 
-button + button {
+.petButton + .petButton {
   margin-left: 10px;
 }
 
-button:hover {
+.petButton:hover {
   box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
   transform: scale(1.05);
 }

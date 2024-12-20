@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePet } from '../../redux/pets';
-import styles from './EditPetModal.module.css'; 
+import petStyles from './EditPetModal.module.css'; 
 
 const EditPetModal = ({ petId, onClose }) => {
   const dispatch = useDispatch();
@@ -37,34 +37,35 @@ const EditPetModal = ({ petId, onClose }) => {
   };
 
   return (
-    <div className={styles.modal}>
-      <div className={styles.modalContent}>
+    <div className={petStyles.modal}>
+      <div className={petStyles.modalContent}>
         <h2>Edit Pet</h2>
         <form onSubmit={handleSubmit}>
-          <input name="name" value={updatedPet.name} onChange={handleChange} placeholder="Name" required />
-          <input name="type" value={updatedPet.type} onChange={handleChange} placeholder="Type" required />
-          <input name="breed" value={updatedPet.breed} onChange={handleChange} placeholder="Breed" required />
-          <input name="age" value={updatedPet.age} onChange={handleChange} placeholder="Age" required />
-          <input name="gender" value={updatedPet.gender} onChange={handleChange} placeholder="Gender" required />
-          <input name="color" value={updatedPet.color} onChange={handleChange} placeholder="Color" required />
-          <input name="weight" value={updatedPet.weight} onChange={handleChange} placeholder="Weight" required />
-          <input name="dob" value={updatedPet.dob} onChange={handleChange} placeholder="Date of Birth" required />
-          <input name="size" value={updatedPet.size} onChange={handleChange} placeholder="Size" required />
-          <input name="behavior" value={updatedPet.behavior} onChange={handleChange} placeholder="Behavior" required />
-          <input name="medication_note" value={updatedPet.medication_note} onChange={handleChange} placeholder="Medication Note" required />
-          <input name="dietary_note" value={updatedPet.dietary_note} onChange={handleChange} placeholder="Dietary Note" required />
-          <input name="preview_image" value={updatedPet.preview_image} onChange={handleChange} placeholder="Preview Image URL" required />
+          <input className={petStyles.petInput} name="name" value={updatedPet.name} onChange={handleChange} placeholder="Name" required />
+          <input className={petStyles.petInput} name="type" value={updatedPet.type} onChange={handleChange} placeholder="Type" required />
+          <input className={petStyles.petInput} name="breed" value={updatedPet.breed} onChange={handleChange} placeholder="Breed" required />
+          <input className={petStyles.petInput} name="age" value={updatedPet.age} onChange={handleChange} placeholder="Age" required />
+          <input className={petStyles.petInput} name="gender" value={updatedPet.gender} onChange={handleChange} placeholder="Gender" required />
+          <input className={petStyles.petInput} name="color" value={updatedPet.color} onChange={handleChange} placeholder="Color" required />
+          <input className={petStyles.petInput} name="weight" value={updatedPet.weight} onChange={handleChange} placeholder="Weight" required />
+          <input className={petStyles.petInput} name="dob" value={updatedPet.dob} onChange={handleChange} placeholder="Date of Birth" required />
+          <input className={petStyles.petInput} name="size" value={updatedPet.size} onChange={handleChange} placeholder="Size" required />
+          <input className={petStyles.petInput} name="behavior" value={updatedPet.behavior} onChange={handleChange} placeholder="Behavior" required />
+          <input className={petStyles.petInput} name="medication_note" value={updatedPet.medication_note} onChange={handleChange} placeholder="Medication Note" required />
+          <input className={petStyles.petInput} name="dietary_note" value={updatedPet.dietary_note} onChange={handleChange} placeholder="Dietary Note" required />
+          <input className={petStyles.petInput} name="preview_image" value={updatedPet.preview_image} onChange={handleChange} placeholder="Preview Image URL" required />
           {imageUrls.map((url, index) => (
             <input
               key={index}
+              className={petStyles.petInput}
               value={url}
               onChange={(e) => handleImageChange(index, e.target.value)}
               placeholder="Additional Image URL"
             />
           ))}
-          <button type="button" onClick={handleAddImageField}>Add Image</button>
-          <button type="submit">Update Pet</button>
-          <button type="button" onClick={onClose}>Cancel</button>
+          <button className={petStyles.petButton} type="button" onClick={handleAddImageField}>Add Image</button>
+          <button className={petStyles.petButton} type="submit">Update Pet</button>
+          <button className={petStyles.petButton} type="button" onClick={onClose}>Cancel</button>
         </form>
       </div>
     </div>
