@@ -82,7 +82,7 @@ export const updatePet = createAsyncThunk(
   'pets/updatePet',
   async ({ id, pet }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`/api/pets/${id}/`, {
+      const response = await fetch(`/api/pets/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(pet),
@@ -102,7 +102,7 @@ export const deletePet = createAsyncThunk(
   'pets/deletePet',
   async (id, { rejectWithValue }) => {
     try {
-      const response = await fetch(`/api/pets/${id}/`, { method: 'DELETE' });
+      const response = await fetch(`/api/pets/${id}`, { method: 'DELETE' });
       const data = await response.json();
       if (!response.ok) {
         throw new Error(`Error deleting pet: ${data.message}`);

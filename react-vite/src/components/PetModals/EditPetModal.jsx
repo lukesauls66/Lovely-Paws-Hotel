@@ -1,18 +1,46 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePet } from '../../redux/pets';
+import { updatePet, fetchPetDetail } from '../../redux/pets';
 import petStyles from './EditPetModal.module.css'; 
 
 const EditPetModal = ({ petId, onClose }) => {
   const dispatch = useDispatch();
   const pet = useSelector((state) => state.pets.pets.find((p) => p.id === petId));
 
-  const [updatedPet, setUpdatedPet] = useState(pet);
-  const [imageUrls, setImageUrls] = useState(pet.pet_images.map((img) => img.url));
+  const [updatedPet, setUpdatedPet] = useState({
+    name: pet.name || '',
+    type: pet.type || '',
+    breed: pet.breed || '',
+    age: pet.age || '',
+    gender: pet.gender || '',
+    color: pet.color || '',
+    weight: pet.weight || '',
+    dob: pet.dob || '',
+    size: pet.size || '',
+    behavior: pet.behavior || '',
+    medication_note: pet.medication_note || '',
+    dietary_note: pet.dietary_note || '',
+    preview_image: pet.preview_image || '',
+  });
+  const [imageUrls, setImageUrls] = useState(pet.pet_images.map((img) => img.url) || []);
 
   useEffect(() => {
-    setUpdatedPet(pet);
-    setImageUrls(pet.pet_images.map((img) => img.url));
+    setUpdatedPet({
+      name: pet.name || '',
+      type: pet.type || '',
+      breed: pet.breed || '',
+      age: pet.age || '',
+      gender: pet.gender || '',
+      color: pet.color || '',
+      weight: pet.weight || '',
+      dob: pet.dob || '',
+      size: pet.size || '',
+      behavior: pet.behavior || '',
+      medication_note: pet.medication_note || '',
+      dietary_note: pet.dietary_note || '',
+      preview_image: pet.preview_image || '',
+    });
+    setImageUrls(pet.pet_images.map((img) => img.url) || []);
   }, [pet]);
 
   const handleChange = (e) => {
@@ -30,9 +58,10 @@ const EditPetModal = ({ petId, onClose }) => {
     setImageUrls([...imageUrls, '']);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(updatePet({ id: petId, pet: { ...updatedPet, image_urls: imageUrls } }));
+    await dispatch(updatePet({ id: petId, pet: { ...updatedPet, image_urls: imageUrls } }));
+    await dispatch(fetchPetDetail(petId));
     onClose();
   };
 
