@@ -1,0 +1,23 @@
+.mainContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.individualBookingContainer {
+  background-color: white;
+  width: 20rem;
+  /* display: flex;
+  flex-direction: column;
+  gap: 2rem; */
+}
+
+.infoContainer {
+  display: flex;
+  justify-content: space-between;
+}
