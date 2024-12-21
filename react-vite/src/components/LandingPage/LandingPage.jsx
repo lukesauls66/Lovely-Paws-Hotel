@@ -20,8 +20,6 @@ function LandingPage() {
     setIsDropdownOpen((prevState) => !prevState);
   }
 
-  // const isOwnerOrManager = currentUser?.position === 'Manager' || currentUser?.position === 'Owner';
-
   if (!isLoaded) {
     return <div>Loading...</div>;
   }
@@ -37,13 +35,22 @@ function LandingPage() {
             </button>
             {isDropdownOpen && (
               <div className={lan.adminMenu}>
-                <button onClick={() => navigate("/services")}>
+                <button
+                  onClick={() => navigate("/services")}
+                  className={lan.manageServicesBtn}
+                >
                   Manage Services
                 </button>
-                <button onClick={() => navigate("/users")}>
+                <button 
+                  onClick={() => navigate("/users")}
+                  className={lan.manageUsersBtn}
+                >
                   Manage Users
                 </button>
-                <button onClick={() => navigate("/bookings")}>
+                <button 
+                  onClick={() => navigate("/bookings")}
+                  className={lan.manageBookingsBtn}
+                >
                   Manage Bookings
                 </button>
               </div>
