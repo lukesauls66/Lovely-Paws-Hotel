@@ -20,6 +20,7 @@ function LoginFormModal() {
 
     if (serverResponse) {
       setErrors(serverResponse);
+      closeModal();
     } else {
       closeModal();
     }
