@@ -2,20 +2,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import * as bookingActions from "../../redux/booking";
 import * as sessionActions from "../../redux/session";
+import * as petActions from "../../redux/pets";
+import book from "./AllBookingsPage.module.css";
 
 function AllBookingsPage() {
   const dispatch = useDispatch();
   const [clients, setClients] = useState({});
+  const [pets, setPets] = useState({});
   const { bookings, loading, errors } = useSelector((state) => state.booking);
-  console.log("clients:", clients);
+  console.log("pets:", pets);
 
   useEffect(() => {
     dispatch(bookingActions.getAllBookings());
   }, [dispatch]);
 
   useEffect(() => {
-    const fetchClients = async () => {
+    const fetchClientsAndPets = async () => {
       const clientsMap = {};
+      const petsMap = {};
       for (const booking of bookings) {
         const user = await dispatch(
           sessionActions.getUserById(booking.client_id)
@@ -24,11 +28,18 @@ function AllBookingsPage() {
           clientsMap[booking.client_id] = user.payload;
         }
       }
+      for (const booking of bookings) {
+        const pet = await dispatch(petActions.fetchPetDetail(booking.pet_id));
+        if (pet.payload) {
+          petsMap[booking.pet_id] = pet.payload;
+        }
+      }
       setClients(clientsMap);
+      setPets(petsMap);
     };
 
     if (bookings?.length) {
-      fetchClients();
+      fetchClientsAndPets();
     }
   }, [bookings, dispatch]);
 
@@ -36,22 +47,21 @@ function AllBookingsPage() {
   if (errors) return <div>Error: {errors}</div>;
 
   return (
-    <div>
+    <div className={book.mainContainer}>
       {bookings?.length > 0 ? (
-        <div>
+        <div className={book.innerContainer}>
           {bookings.map((booking) => {
             const client = clients[booking.client_id];
+            const pet = pets[booking.pet_id];
 
             return (
-              <div key={booking.id}>
-                <div>
+              <div className={book.individualBookingContainer} key={booking.id}>
+                <div className={book.infoContainer}>
                   <p>Daycare or Boarding Care:</p>
-                  <br />
                   <p>{booking.booking_type}</p>
                 </div>
-                <div>
-                  <p>Client:</p>
-                  <br />
+                <div className={book.infoContainer}>
+                  <p>Owner:</p>
                   {client ? (
                     <p>
                       {client.fname} {client.lname}
@@ -60,29 +70,48 @@ function AllBookingsPage() {
                     <p>Loading Client...</p>
                   )}
                 </div>
-                <div>
-                  <p>Daycare or Boarding Care:</p>
-                  <br />
-                  <p>{booking.booking_type}</p>
+                {pet ? (
+                  <div>
+                    <div className={book.infoContainer}>
+                      <p>Pet Name:</p>
+                      <p>{pet.name}</p>
+                    </div>
+                    {pet.dietary_note ? (
+                      <div className={book.infoContainer}>
+                        <p>Dietary Notes:</p>
+                        <p>{pet.dietary_note}</p>
+                      </div>
+                    ) : (
+                      <div className={book.infoContainer}>
+                        <p>Dietary Notes:</p>
+                        <p>N/A</p>
+                      </div>
+                    )}
+                    {pet.medication_note ? (
+                      <div className={book.infoContainer}>
+                        <p>Medication Notes:</p>
+                        <p>{pet.medication_note}</p>
+                      </div>
+                    ) : (
+                      <div className={book.infoContainer}>
+                        <p>Medication Notes:</p>
+                        <p>N/A</p>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <p>Loading Pet...</p>
+                )}
+                <div className={book.infoContainer}>
+                  <p>Drop Off:</p>
+                  <p>{booking.drop_off_date}</p>
                 </div>
-                <div>
-                  <p>Daycare or Boarding Care:</p>
-                  <br />
-                  <p>{booking.booking_type}</p>
+                <div className={book.infoContainer}>
+                  <p>Pick Up:</p>
+                  <p>{booking.pick_up_date}</p>
                 </div>
-                <div>
-                  <p>Daycare or Boarding Care:</p>
-                  <br />
-                  <p>{booking.booking_type}</p>
-                </div>
-                <div>
-                  <p>Daycare or Boarding Care:</p>
-                  <br />
-                  <p>{booking.booking_type}</p>
-                </div>
-                <div>
+                <div className={book.infoContainer}>
                   <p>Daily Pic:</p>
-                  <br />
                   <p>{booking.daily_pic}</p>
                 </div>
               </div>

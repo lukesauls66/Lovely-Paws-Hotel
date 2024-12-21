@@ -24,6 +24,7 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
+
 @user_routes.route('/staff')
 @login_required
 def staff():
