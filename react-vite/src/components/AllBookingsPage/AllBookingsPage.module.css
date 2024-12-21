@@ -12,9 +12,9 @@
 .individualBookingContainer {
   background-color: white;
   width: 20rem;
-  /* display: flex;
+  display: flex;
   flex-direction: column;
-  gap: 2rem; */
+  gap: 0rem;
 }
 
 .infoContainer {

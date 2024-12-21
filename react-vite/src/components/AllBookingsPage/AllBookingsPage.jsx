@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as bookingActions from "../../redux/booking";
 import * as sessionActions from "../../redux/session";
 import * as petActions from "../../redux/pets";
@@ -7,10 +8,10 @@ import book from "./AllBookingsPage.module.css";
 
 function AllBookingsPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [clients, setClients] = useState({});
   const [pets, setPets] = useState({});
   const { bookings, loading, errors } = useSelector((state) => state.booking);
-  console.log("pets:", pets);
 
   useEffect(() => {
     dispatch(bookingActions.getAllBookings());
@@ -38,10 +39,16 @@ function AllBookingsPage() {
       setPets(petsMap);
     };
 
+    console.log("updated bookings:", bookings);
     if (bookings?.length) {
       fetchClientsAndPets();
     }
   }, [bookings, dispatch]);
+
+  const handleDeleteBooking = async (id) => {
+    await dispatch(bookingActions.deleteBooking(id));
+    dispatch(bookingActions.getAllBookings());
+  };
 
   if (loading) return <div>Loading...</div>;
   if (errors) return <div>Error: {errors}</div>;
@@ -113,6 +120,14 @@ function AllBookingsPage() {
                 <div className={book.infoContainer}>
                   <p>Daily Pic:</p>
                   <p>{booking.daily_pic}</p>
+                </div>
+                <div className={book.infoContainer}>
+                  <button onClick={() => navigate("/bookings/pet/:petId")}>
+                    Update Booking
+                  </button>
+                  <button onClick={() => handleDeleteBooking(booking.id)}>
+                    Cancel Booking
+                  </button>
                 </div>
               </div>
             );

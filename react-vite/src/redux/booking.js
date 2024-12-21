@@ -13,7 +13,7 @@ export const getAllBookings = createAsyncThunk(
     try {
       const res = await fetch("/api/bookings/");
       const data = await res.json();
-      console.log("bookings data:", data.bookings);
+      console.log("bookings after delete:", data.bookings);
       return data.bookings;
     } catch (error) {
       return rejectWithValue(error.message || "Trouble getting All Bookings");
@@ -148,12 +148,15 @@ export const deleteBooking = createAsyncThunk(
   "booking/deleteBooking",
   async (booking_id, { rejectWithValue }) => {
     try {
-      const res = await fetch(`/api/bookings/${booking_id}`, {
+      await fetch(`/api/bookings/${booking_id}`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
       });
-      const data = await res.json();
-      return data.booking;
+
+      if (!res.ok) {
+        throw new Error("Failed to delete booking");
+      }
+
+      return;
     } catch (error) {
       return rejectWithValue(error.message || "Delete booking Failed");
     }
@@ -258,7 +261,7 @@ const bookingSlice = createSlice({
         state.loading = false;
         state.errors = action.payload;
       })
-      .addCase(deleteBooking.fulfilled, (state) => {
+      .addCase(deleteBooking.fulfilled, (state, action) => {
         state.loading = false;
         state.booking = null;
       });
