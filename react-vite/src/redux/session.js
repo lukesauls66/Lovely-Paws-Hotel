@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
+  queryUser: null,
   loading: false,
   errors: null,
 };
@@ -17,6 +18,20 @@ export const restoreUser = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Trouble getting current user");
+    }
+  }
+);
+
+export const getUserById = createAsyncThunk(
+  "session/getUserById",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await fetch(`/api/users/${id}`);
+      const data = await res.json();
+      console.log("user data:", data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message || "User couldn't be found");
     }
   }
 );
@@ -119,6 +134,18 @@ const sessionSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
       })
+      .addCase(getUserById.pending, (state) => {
+        state.loading = true;
+        state.errors = null;
+      })
+      .addCase(getUserById.rejected, (state, action) => {
+        state.loading = false;
+        state.errors = action.payload;
+      })
+      .addCase(getUserById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.queryUser = action.payload;
+      })
       .addCase(login.pending, (state) => {
         state.loading = true;
         state.errors = null;
@@ -151,7 +178,7 @@ const sessionSlice = createSlice({
         state.loading = false;
         state.errors = action.payload;
       })
-      .addCase(logout.fulfilled, (state, action) => {
+      .addCase(logout.fulfilled, (state) => {
         state.loading = false;
         state.user = null;
       });

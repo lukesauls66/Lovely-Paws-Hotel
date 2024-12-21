@@ -6,6 +6,7 @@ import ReviewsPage from "../components/ReviewsPage";
 import PetList from "../components/Pets/PetList";
 import PetDetail from "../components/Pets/PetDetail";
 import BookingCreatePage from "../components/BookingCreatePage";
+import AllBookingsPage from "../components/AllBookingsPage";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "pets/:petId",
         element: <PetDetail />,
+      },
+      {
+        path: "bookings",
+        element: <AllBookingsPage />,
       },
       {
         path: "bookings/pet/:petId",

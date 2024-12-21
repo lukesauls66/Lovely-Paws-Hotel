@@ -13,6 +13,7 @@ export const getAllBookings = createAsyncThunk(
     try {
       const res = await fetch("/api/bookings/");
       const data = await res.json();
+      console.log("bookings data:", data.bookings);
       return data.bookings;
     } catch (error) {
       return rejectWithValue(error.message || "Trouble getting All Bookings");
@@ -28,10 +29,10 @@ export const getBookingById = createAsyncThunk(
       const data = await res.json();
       return data;
     } catch (error) {
-      return rejectWithValue(error.message || "Trouble getting Booking by Id")
+      return rejectWithValue(error.message || "Trouble getting Booking by Id");
     }
   }
-)
+);
 
 export const getBookingByPetId = createAsyncThunk(
   "booking/getBookingByPetId",
@@ -41,7 +42,9 @@ export const getBookingByPetId = createAsyncThunk(
       const data = await res.json();
       return data;
     } catch (error) {
-      return rejectWithValue(error.message || "Trouble getting Booking by Pet Id");
+      return rejectWithValue(
+        error.message || "Trouble getting Booking by Pet Id"
+      );
     }
   }
 );
@@ -79,14 +82,7 @@ export const getBookingsByDate = createAsyncThunk(
 export const createBooking = createAsyncThunk(
   "booking/createBooking",
   async (
-    {
-      client_id,
-      pet_id,
-      booking_type,
-      drop_off_date,
-      pick_up_date,
-      services,
-    },
+    { client_id, pet_id, booking_type, drop_off_date, pick_up_date, services },
     { rejectWithValue }
   ) => {
     try {
@@ -102,9 +98,9 @@ export const createBooking = createAsyncThunk(
           services,
         }),
       });
-      console.log('res > ', res)
+      console.log("res > ", res);
       const data = await res.json();
-      console.log('data > ', data)
+      console.log("data > ", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Create Booking Failed");
