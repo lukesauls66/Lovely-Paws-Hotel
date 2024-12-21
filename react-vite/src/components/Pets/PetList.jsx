@@ -15,29 +15,44 @@ const PetList = () => {
   const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
-    if (status === 'idle') {
+    console.log('useEffect triggered with status:', status);
+    if (status === 'idle' && sessionUser) {
       if (sessionUser.staff) {
+        console.log('Fetching all pets for staff');
         dispatch(fetchAllPets());
       } else {
+        console.log('Fetching user pets');
         dispatch(fetchUserPets());
       }
     }
   }, [status, dispatch, sessionUser]);
 
+  useEffect(() => {
+    if (status === 'succeeded') {
+      console.log('Pets fetched successfully');
+    }
+  }, [status]);
+
   const handlePetClick = async(petId) => {
-    await dispatch(fetchPetDetail(petId));
-    navigate(`/pets/${petId}`);
+    try {
+      console.log('Fetching pet details for petId:', petId);
+      await dispatch(fetchPetDetail(petId));
+      navigate(`/pets/${petId}`);
+    } catch (error) {
+      console.error('Failed to fetch pet details:', error);
+    }
   };
 
   return (
     <div className={styles.petListContainer}>
-      {sessionUser.staff && (
+      {sessionUser && sessionUser.staff && (
         <button onClick={() => setShowAddModal(true)} className={styles.addButton}>
           Add Pet
         </button>
       )}
       {status === 'loading' && <div>Loading...</div>}
       {status === 'failed' && <div>{error}</div>}
+      {status === 'succeeded' && pets.length === 0 && <div>No pets!</div>}
       {status === 'succeeded' &&
         pets.map((pet) => (
           <div
