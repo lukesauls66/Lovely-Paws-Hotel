@@ -26,7 +26,7 @@ const BookingCreatePage = () => {
   const [isReservationStarted, setIsReservationStarted] = useState(false);
   const [totalCost, setTotalCost] = useState(null);
   const [totalDays, setTotalDays] = useState(null);
-  let days;
+  const [isUpdateClicked, setIsUpdateClicked] = useState(false);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -37,6 +37,7 @@ const BookingCreatePage = () => {
       const dropOffDate = new Date(currentBooking.booking.drop_off_date);
       const pickUpDate = new Date(currentBooking.booking.pick_up_date);
       const differenceInMs = pickUpDate - dropOffDate;
+      let days;
       if (currentBooking.booking.booking_type === 'day_care') {
         days = 1;
       } else {
@@ -58,6 +59,93 @@ const BookingCreatePage = () => {
       dispatch(getAllServices())
     }
   }, [petId, currentBooking?.booking?.drop_off_date, dispatch]);
+
+  useEffect(() => {
+    if (isUpdateClicked && currentBooking && currentBooking.booking) {
+      const { booking_type, drop_off_date, pick_up_date, services } = currentBooking.booking;
+      
+      const dropOffDateUtc = new Date(drop_off_date);  // This should already be in UTC (ISO string with "Z" at the end)
+      const pickUpDateUtc = new Date(pick_up_date);    // Similarly for pick-up date
+    
+      // Format the date
+      // const formattedDropOffDate = dropOffDateUtc.toLocaleDateString('en-GB', {
+      //   weekday: 'short',
+      //   day: '2-digit',
+      //   month: 'short',
+      //   year: 'numeric',
+      //   timeZone: 'UTC'  // Ensure formatting in UTC
+      // });
+    
+      // Format the time
+      const formattedDropOffTime = dropOffDateUtc.toLocaleTimeString('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true, // Use 12-hour time format
+        timeZone: 'UTC'  // Ensure time is formatted in UTC
+      });
+    
+      // Format the timezone (GMT offset) and full timezone name
+      // const timeZoneOffset = dropOffDateUtc.getTimezoneOffset();  // Offset in minutes
+      // const timezoneOffsetHours = Math.abs(timeZoneOffset / 60);
+      // const timezoneOffsetMinutes = Math.abs(timeZoneOffset % 60);
+      // const timezonePrefix = timeZoneOffset > 0 ? '-' : '+';
+      // const formattedTimeZone = `GMT${timezonePrefix}${String(timezoneOffsetHours).padStart(2, '0')}${String(timezoneOffsetMinutes).padStart(2, '0')}`;
+    
+      // Format pick-up date and time similarly
+      // const formattedPickUpDate = pickUpDateUtc.toLocaleDateString('en-GB', {
+      //   weekday: 'short',
+      //   day: '2-digit',
+      //   month: 'short',
+      //   year: 'numeric',
+      //   timeZone: 'UTC'
+      // });
+    
+      const formattedPickUpTime = pickUpDateUtc.toLocaleTimeString('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+        timeZone: 'UTC'
+      });
+    
+      // Now, combine everything into a final display string (for drop-off)
+      // const finalFormattedDropOff = `${formattedDropOffDate} ${formattedDropOffTime} ${formattedTimeZone} ${formattedDropOffTime.split(' ')[1]}`;
+    
+      // Set both the Date objects and formatted strings in state
+      setBookingType(booking_type);
+      setDropOffDate(dropOffDateUtc);  // Store the Date object (raw date) for later use
+      setPickUpDate(pickUpDateUtc);     // Store the Date object
+      setSelectedDate(dropOffDateUtc);  // Store the Date object
+      setDropOffTime(formattedDropOffTime);   // Store the formatted drop-off time
+      setPickUpTime(formattedPickUpTime);     // Store the formatted pick-up time
+  
+      // Store formatted date strings as well for display
+      // setFormattedDropOffDate(formattedDropOffDate);
+      // setFormattedPickUpDate(formattedPickUpDate);
+      // setFormattedSelectedDate(formattedDropOffDate);
+
+      const serviceIds = services.map(service => service.id);
+      setSelectedServices(serviceIds);
+    }
+  }, [isUpdateClicked, currentBooking])
+
+  const handleDeleteBooking = async() => {
+    await dispatch(bookingActions.deleteBooking(currentBooking.booking.id));
+    setBookingType(null);
+    setSelectedDate(null);
+    setDropOffDate(null);
+    setPickUpDate(null);
+    setIsFirstDate(false);
+    setDropOffTime(null);
+    setPickUpTime(null);
+    setSelectedServices([]);
+    navigate(`/bookings/pet/${petId}`)
+  }
+
+  const handleUpdateBooking = () => {
+    setIsUpdateClicked(true);
+  }
 
   const formatDateTime = (dateStr) => {
     const date = new Date(dateStr);
@@ -175,16 +263,31 @@ const BookingCreatePage = () => {
         return
       }
 
-      const bookingData = {
-        client_id: Number(pet.owner_id),
-        pet_id: Number(petId),
-        booking_type: bookingType,
-        drop_off_date: combineDateAndTime(dropOffDate, dropOffTime),
-        pick_up_date: combineDateAndTime(pickUpDate, pickUpTime),
-        services: selectedServices
+
+      if (isUpdateClicked) {
+        const updateBookingData = {
+          id: currentBooking.booking.id,
+          client_id: Number(pet.owner_id),
+          pet_id: Number(petId),
+          booking_type: bookingType,
+          drop_off_date: combineDateAndTime(dropOffDate, dropOffTime),
+          pick_up_date: combineDateAndTime(pickUpDate, pickUpTime),
+          services: selectedServices
+        }
+        console.log('update data > ', updateBookingData);
+        await dispatch(bookingActions.updateBooking(updateBookingData));
+      } else {
+        const bookingData = {
+          client_id: Number(pet.owner_id),
+          pet_id: Number(petId),
+          booking_type: bookingType,
+          drop_off_date: combineDateAndTime(dropOffDate, dropOffTime),
+          pick_up_date: combineDateAndTime(pickUpDate, pickUpTime),
+          services: selectedServices
+        }
+        await dispatch(bookingActions.createBooking(bookingData));
       }
-      console.log('bookingData > ', bookingData)
-      await dispatch(bookingActions.createBooking(bookingData));
+      setIsUpdateClicked(false);
       navigate(`/bookings/pet/${petId}`)
     } catch (error) {
       console.error('Error during booking submission:', error);
@@ -194,7 +297,7 @@ const BookingCreatePage = () => {
   return (
     <div className={bcp.mainContainer}>
       <h1 className={bcp.h1}>Book Reservation</h1>
-      {currentBooking && currentBooking.booking ? (
+      {!isUpdateClicked && currentBooking && currentBooking.booking ? (
         <div className={bcp.currBookContainer}>
           <h2 className={bcp.currBookTitle}>Current Reservation Information</h2>
           <p className={bcp.currBookType}>Type: {currentBooking.booking.booking_type}</p>
@@ -218,14 +321,14 @@ const BookingCreatePage = () => {
           )}
           <button
             className={bcp.currBookBtnUpdate}
-            // onClick={() => dispatch(updateBooking(currentBooking.id))}
+            onClick={handleUpdateBooking}
             disabled={isReservationStarted}
           >
             Update
           </button>
           <button
             className={bcp.currBookBtnDelete}
-            // onClick={() => dispatch(deleteBooking(currentBooking.id))}
+            onClick={handleDeleteBooking}
             disabled={isReservationStarted}
           >
             Delete

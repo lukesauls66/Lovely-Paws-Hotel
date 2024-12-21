@@ -116,7 +116,7 @@ export const updateBooking = createAsyncThunk(
   "booking/updateBooking",
   async (
     {
-      booking_id,
+      id,
       client_id,
       pet_id,
       booking_type,
@@ -127,10 +127,11 @@ export const updateBooking = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const res = await fetch(`api/bookings/${booking_id}`, {
+      const res = await fetch(`/api/bookings/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          id,
           client_id,
           pet_id,
           booking_type,
@@ -149,9 +150,9 @@ export const updateBooking = createAsyncThunk(
 
 export const deleteBooking = createAsyncThunk(
   "booking/deleteBooking",
-  async ({ booking_id }, { rejectWithValue }) => {
+  async (booking_id, { rejectWithValue }) => {
     try {
-      const res = await fetch(`api/bookings/${booking_id}`, {
+      const res = await fetch(`/api/bookings/${booking_id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
