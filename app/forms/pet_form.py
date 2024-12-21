@@ -1,22 +1,6 @@
-# forms/pet_form.py
-
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, FloatField, DateField, SelectField, RadioField, FileField, FieldList, SelectMultipleField
-from wtforms.validators import DataRequired, ValidationError
-from app.models import Pet
-
-# def pet_name_exists(form, field):
-#     name = field.data
-#     owner_id = form.data['owner_id']
-#     pet = Pet.query.filter(Pet.name == name, Pet.owner_id == owner_id).first()
-#     if pet:
-#         raise ValidationError('Pet with this name already exists for the owner.')
-
-# def validate_images(form, field):
-#     if not form.preview_image.data and not any(form.images):
-#         raise ValidationError('At least one image is required.')
-#     if len(form.images) > 4:
-#         raise ValidationError('No more than four additional images are allowed.')
+from wtforms import StringField, IntegerField, FloatField, DateField, SelectField, RadioField, FieldList
+from wtforms.validators import DataRequired
 
 class PetForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
@@ -36,14 +20,13 @@ class PetForm(FlaskForm):
         ('oh lawd he comin', 'Oh lawd he comin (65% Body Fat)')
     ], validators=[DataRequired()])
     behavior = SelectField('behavior', choices=[
-    ('calm', 'Calm'),
-    ('playful', 'Playful'),
-    ('aggressive', 'Aggressive'),
-    ('shy', 'Shy')
-], validators=[DataRequired()])
+        ('calm', 'Calm'),
+        ('playful', 'Playful'),
+        ('aggressive', 'Aggressive'),
+        ('shy', 'Shy')
+    ], validators=[DataRequired()])
     medication_note = StringField('medication_note')
     dietary_note = StringField('dietary_note')
     preview_image_url = StringField('preview_image_url')
-    # image_urls = SelectMultipleField('image url', choices=[], coerce=str)
     image_urls = FieldList(StringField('image_url'), min_entries=0, max_entries=4)
     owner_id = IntegerField('owner_id', validators=[DataRequired()])
