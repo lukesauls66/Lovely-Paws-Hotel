@@ -33,10 +33,8 @@ def get_pet(id):
 # Create pet
 @pet_routes.route('/', methods=['POST'])
 def create_pet():
-
     form = PetForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
 
     if form.validate_on_submit():
         new_pet = Pet(
@@ -67,7 +65,6 @@ def create_pet():
                 pet_image = PetImage(url=url, pet=new_pet)
                 db.session.add(pet_image)
 
-        
         db.session.add(new_pet)
         db.session.commit()
         return jsonify(new_pet.to_dict()), 201
@@ -84,7 +81,7 @@ def update_pet(id):
     if not pet:
         return jsonify({'message': "Pet couldn't be found"}), 404
 
-    if pet.owner_id != current_user.id:
+    if pet.owner_id != current_user.id and not current_user.staff:
         return jsonify({'message': 'Unauthorized'}), 403
     
     form = PetForm()
@@ -131,7 +128,7 @@ def delete_pet(id):
     if not pet:
         return jsonify({'message': "Pet couldn't be found"}), 404
 
-    if pet.owner_id != current_user.id:
+    if pet.owner_id != current_user.id and not current_user.staff:
         return jsonify({'message': 'Unauthorized'}), 403
     
     db.session.delete(pet)
@@ -149,7 +146,7 @@ def delete_pet_image(id, image_id):
         return jsonify({'message': 'Invalid image for the specified pet'}), 400
 
     pet = Pet.query.get(id)
-    if not pet or pet.owner_id != current_user.id:
+    if not pet or (pet.owner_id != current_user.id and not current_user.staff):
         return jsonify({'message': 'Unauthorized'}), 403
     
     db.session.delete(pet_image)

@@ -18,6 +18,12 @@ const PetDetail = () => {
     dispatch(fetchPetDetail(petId));
   }, [dispatch, petId]);
 
+  useEffect(() => {
+    if (!showEditModal) {
+      dispatch(fetchPetDetail(petId));
+    }
+  }, [showEditModal, dispatch, petId]);
+
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to delete this pet?')) {
       dispatch(deletePet(pet.id));
