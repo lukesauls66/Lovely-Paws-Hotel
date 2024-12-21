@@ -13,12 +13,13 @@ export const fetchAllPets = createAsyncThunk(
     try {
       const response = await fetch('/api/pets/');
       const data = await response.json();
-      console.log('data:', data);
+      console.log('fetchAllPets data:', data);
       if (!response.ok) {
         throw new Error(`Error fetching pets: ${data.message}`);
       }
       return data;
     } catch (error) {
+      console.error('fetchAllPets error:', error);
       return rejectWithValue(error.message || 'Issue fetching all pets');
     }
   }
@@ -28,13 +29,18 @@ export const fetchUserPets = createAsyncThunk(
   'pets/fetchUserPets',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/pets/user/');
-      const data = await response.json();
+      console.log('fetchUserPets action triggered');
+      const response = await fetch('/api/pets/user');
+      console.log('fetchUserPets response:', response);
       if (!response.ok) {
-        throw new Error(`Error fetching pets: ${data.message}`);
+        const errorData = await response.json();
+        throw new Error(`Error fetching pets: ${errorData.message}`);
       }
+      const data = await response.json();
+      console.log('fetchUserPets data:', data);
       return data;
     } catch (error) {
+      console.error('fetchUserPets error:', error);
       return rejectWithValue(error.message || 'Issue fetching user pets');
     }
   }
@@ -45,27 +51,30 @@ export const fetchPetDetail = createAsyncThunk(
   async (petId, { rejectWithValue }) => {
     try {
       const response = await fetch(`/api/pets/${petId}`);
-      console.log('res', response)
+      console.log('fetchPetDetail response:', response);
       const data = await response.json();
-      console.log('data', data)
+      console.log('fetchPetDetail data:', data);
       if (!response.ok) {
-        throw new Error(`Error fetching pet detail: ${data.message}`);
+        throw new Error(`Error fetching pet details: ${data.message}`);
       }
       return data;
     } catch (error) {
-      return rejectWithValue(error.message || 'Issue fetching pet detail');
+      console.error('fetchPetDetail error:', error);
+      return rejectWithValue(error.message || 'Issue fetching pet details');
     }
   }
 );
 
 export const addPet = createAsyncThunk(
   'pets/addPet',
-  async (pet, { rejectWithValue }) => {
+  async (petData, { rejectWithValue }) => {
     try {
       const response = await fetch('/api/pets/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(pet),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(petData),
       });
       const data = await response.json();
       if (!response.ok) {
@@ -80,12 +89,14 @@ export const addPet = createAsyncThunk(
 
 export const updatePet = createAsyncThunk(
   'pets/updatePet',
-  async ({ id, pet }, { rejectWithValue }) => {
+  async ({ petId, petData }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`/api/pets/${id}`, {
+      const response = await fetch(`/api/pets/${petId}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(pet),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(petData),
       });
       const data = await response.json();
       if (!response.ok) {
@@ -131,18 +142,22 @@ const petsSlice = createSlice({
       .addCase(fetchAllPets.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
+        console.error('fetchAllPets rejected with error:', action.payload);
       })
       .addCase(fetchUserPets.pending, (state) => {
+        console.log('fetchUserPets pending');
         state.status = 'loading';
         state.error = null;
       })
       .addCase(fetchUserPets.fulfilled, (state, action) => {
+        console.log('fetchUserPets fulfilled with payload:', action.payload);
         state.status = 'succeeded';
         state.pets = action.payload.Pets;
       })
       .addCase(fetchUserPets.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
+        console.error('fetchUserPets rejected with error:', action.payload);
       })
       .addCase(fetchPetDetail.pending, (state) => {
         state.status = 'loading';
@@ -155,6 +170,7 @@ const petsSlice = createSlice({
       .addCase(fetchPetDetail.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
+        console.error('fetchPetDetail rejected with error:', action.payload);
       })
       .addCase(addPet.fulfilled, (state) => {
         state.status = 'succeeded';
@@ -166,7 +182,7 @@ const petsSlice = createSlice({
       })
       .addCase(deletePet.fulfilled, (state, action) => {
         state.pets = state.pets.filter((pet) => pet.id !== action.payload);
-      })
+      });
   },
 });
 

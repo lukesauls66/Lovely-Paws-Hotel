@@ -6,9 +6,11 @@ import * as sessionActions from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { useNavigate } from "react-router-dom";
 
 function ProfileButton() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
@@ -42,6 +44,11 @@ function ProfileButton() {
 
   const pawIcon = <IoPawOutline className={profile.profileIcon} />;
 
+  const handleManagePets = () => {
+    navigate("/pets");
+    closeMenu();
+  };
+
   return (
     <div className={profile.profileButton}>
       <button onClick={toggleMenu}>{pawIcon}</button>
@@ -52,6 +59,9 @@ function ProfileButton() {
               <li>{user.username}</li>
               <li>{user.email}</li>
               <br />
+              <li>
+                <button onClick={handleManagePets} className={profile.modalButton}>Manage Pets</button>
+              </li>
               <li>
                 <button onClick={logout} className={profile.modalButton}>Log Out</button>
               </li>
