@@ -31,6 +31,10 @@ const PetDetail = () => {
     }
   };
 
+  const bookReservation = () => {
+    navigate(`/bookings/pet/${pet.id}`)
+  }
+
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
@@ -50,7 +54,11 @@ const PetDetail = () => {
           </button>
         </>
       )}
-      <button className={styles.bookServiceButton}>Book a Service</button>
+      <button 
+        className={styles.bookServiceButton}
+          onClick={bookReservation}>
+          Book a Reservation
+        </button>
       <div className={styles.petImagesContainer}>
         <img src={pet.preview_image} alt={pet.name} className={styles.previewImage} />
         <div className={styles.additionalImages}>
