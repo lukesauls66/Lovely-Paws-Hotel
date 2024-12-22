@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
@@ -8,7 +8,7 @@ import { fetchPetDetail } from "../../redux/pets";
 import bcp from "./BookingCreatePage.module.css";
 import "react-calendar/dist/Calendar.css";
 
-const BookingCreatePage = () => {
+const BookingsCreatePage = () => {
   const { petId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,9 +29,16 @@ const BookingCreatePage = () => {
   const [totalDays, setTotalDays] = useState(null);
   const [isUpdateClicked, setIsUpdateClicked] = useState(false);
   const [loadingPetDetails, setLoadingPetDetails] = useState(true);
+  // const [today, setToday] = useState(new Date());
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  // const today = new Date();
+  // today.setHours(0, 0, 0, 0);
+
+  const today = useMemo(() => {
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+    return date;
+  }, []);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -61,7 +68,7 @@ const BookingCreatePage = () => {
       }
       setTotalDays(days);
 
-      if (dropOffDate <= today) {
+      if (dropOffDate <= new Date()) {
         setIsReservationStarted(true);
       } else {
         setIsReservationStarted(false);
@@ -77,12 +84,11 @@ const BookingCreatePage = () => {
         ).toFixed(2)
       );
       setTotalCost(cost);
-      console.log("total cost > ", sum, cost, totalCost);
     }
     if (!currentBooking || !currentBooking.booking) {
       dispatch(getAllServices());
     }
-  }, [petId, currentBooking?.booking?.drop_off_date, dispatch, reload]);
+  }, [petId, currentBooking, dispatch, reload]);
 
   useEffect(() => {
     if (isUpdateClicked && currentBooking && currentBooking.booking) {
@@ -165,7 +171,11 @@ const BookingCreatePage = () => {
     setDropOffTime(null);
     setPickUpTime(null);
     setSelectedServices([]);
-    setReload((prev) => !prev);
+
+    if (reload !== true) {
+      setReload(true);
+    }
+
     navigate(`/bookings/pet/${petId}`);
   };
 
@@ -325,7 +335,9 @@ const BookingCreatePage = () => {
         await dispatch(bookingActions.createBooking(bookingData));
       }
       setIsUpdateClicked(false);
-      setReload((prev) => !prev);
+      if (reload !== true) {
+        setReload(true);
+      }
       // navigate(`/bookings/pet/${petId}`);
     } catch (error) {
       console.error("Error during booking submission:", error);
@@ -544,4 +556,4 @@ const BookingCreatePage = () => {
   );
 };
 
-export default BookingCreatePage;
+export default BookingsCreatePage;
