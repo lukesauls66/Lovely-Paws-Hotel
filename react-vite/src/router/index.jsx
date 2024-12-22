@@ -7,6 +7,7 @@ import PetList from "../components/Pets/PetList";
 import PetDetail from "../components/Pets/PetDetail";
 import BookingCreatePage from "../components/BookingCreatePage";
 import AllBookingsPage from "../components/AllBookingsPage";
+import BookingByDatePage from "../components/BookingByDatePage";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         path: "bookings/pet/:petId",
         element: <BookingCreatePage />,
       },
+      {
+        path: "bookingsByDate",
+        element: <BookingByDatePage />
+      }
     ],
   },
 ]);

@@ -66,11 +66,11 @@ export const getBookingsByUser = createAsyncThunk(
 
 export const getBookingsByDate = createAsyncThunk(
   "booking/getBookingsByDate",
-  async ({ date }, { rejectWithValue }) => {
+  async (date, { rejectWithValue }) => {
     try {
       const res = await fetch(`/api/bookings/date/${date}`);
       const data = await res.json();
-      return data.bookings;
+      return data;
     } catch (error) {
       return rejectWithValue(
         error.message || "Trouble getting Booking by Date"
@@ -152,9 +152,9 @@ export const deleteBooking = createAsyncThunk(
         method: "DELETE",
       });
 
-      if (!res.ok) {
-        throw new Error("Failed to delete booking");
-      }
+      // if (!res.ok) {
+      //   throw new Error("Failed to delete booking");
+      // }
 
       return;
     } catch (error) {
@@ -261,7 +261,7 @@ const bookingSlice = createSlice({
         state.loading = false;
         state.errors = action.payload;
       })
-      .addCase(deleteBooking.fulfilled, (state, action) => {
+      .addCase(deleteBooking.fulfilled, (state) => {
         state.loading = false;
         state.booking = null;
       });

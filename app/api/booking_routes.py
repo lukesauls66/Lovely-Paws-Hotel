@@ -72,8 +72,8 @@ def get_booking_by_date(date):
 
     # Query bookings where the target date falls between drop_off_date and pick_up_date
     bookings = Booking.query.filter(
-        Booking.drop_off_date <= target_date,
-        Booking.pick_up_date >= target_date
+      func.date(Booking.drop_off_date) <= target_date,
+      func.date(Booking.pick_up_date) >= target_date
     ).all()
 
     # Convert the result to a list of dictionaries
