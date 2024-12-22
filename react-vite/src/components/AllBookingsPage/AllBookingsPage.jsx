@@ -122,7 +122,9 @@ function AllBookingsPage() {
                   <p>{booking.daily_pic}</p>
                 </div>
                 <div className={book.infoContainer}>
-                  <button onClick={() => navigate("/bookings/pet/:petId")}>
+                  <button
+                    onClick={() => navigate(`/bookings/pet/${booking.pet_id}`)}
+                  >
                     Update Booking
                   </button>
                   <button onClick={() => handleDeleteBooking(booking.id)}>
