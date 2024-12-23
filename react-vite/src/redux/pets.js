@@ -172,9 +172,9 @@ const petsSlice = createSlice({
         state.error = action.payload;
         console.error('fetchPetDetail rejected with error:', action.payload);
       })
-      .addCase(addPet.fulfilled, (state) => {
+      .addCase(addPet.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        fetchAllPets();
+        state.pets.push(action.payload);
       })
       .addCase(updatePet.fulfilled, (state, action) => {
         const index = state.pets.findIndex((pet) => pet.id === action.payload.id);
