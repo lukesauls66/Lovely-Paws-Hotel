@@ -23,55 +23,58 @@ function SignupFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({});
+    const validationErrors = {};
 
     if (fname[0] !== fname[0].toUpperCase()) {
-      return setErrors({
-        fname: "First name must be capitalized",
-      });
+      validationErrors.fname = "First name must be capitalized";
     }
 
     if (lname[0] !== lname[0].toUpperCase()) {
-      return setErrors({
-        lname: "Last name must be capitalized",
-      });
+      validationErrors.lname = "Last name must be capitalized";
     }
 
     if (isNaN(phone_num)) {
-      return setErrors({
-        phone_num: "Phone number must be a number",
-      });
-    }
-
-    if (phone_num.length !== 10) {
-      return setErrors({
-        phone_num: "Phone number must be 10 digits long",
-      });
+      validationErrors.phone_num = "Phone number must be a number";
+    } else if (phone_num.length !== 10) {
+      validationErrors.phone_num = "Phone number must be 10 digits long";
     }
 
     if (isNaN(address.split(" ")[0])) {
-      return setErrors({
-        address: "Address must start with a number",
-      });
-    }
-
-    if (
+      validationErrors.address = "Address must start with a number";
+    } else if (
       address
         .split(" ")
         .slice(1)
-        .forEach((word) => {
-          word[0] !== word[0].toUpperCase();
+        .some((word) => {
+          return word[0] !== word[0]?.toUpperCase();
         })
     ) {
-      return setErrors({
-        address: "All first letters must be capitalized",
-      });
+      validationErrors.address = "All first letters must be capitalized";
+    }
+
+    if (city[0] !== city[0].toUpperCase()) {
+      validationErrors.city = "City must be capitalized";
+    }
+
+    if (state[0] !== state[0].toUpperCase()) {
+      validationErrors.state = "State must be capitalized";
+    }
+
+    if (isNaN(zip)) {
+      validationErrors.zip = "Zip code must be a number";
+    } else if (zip.length !== 5) {
+      validationErrors.zip = "Zip code must be 5 digits long";
     }
 
     if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
+      validationErrors.confirmPassword =
+        "Confirm Password field must be the same as the Password field";
+    }
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
     }
 
     const serverResponse = await dispatch(
