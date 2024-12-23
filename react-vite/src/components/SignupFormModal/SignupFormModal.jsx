@@ -4,7 +4,7 @@ import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../redux/session";
 import signup from "./SignupForm.module.css";
 
-function SignupFormModal() {
+function SignupFormModal({ navigate }) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -96,6 +96,7 @@ function SignupFormModal() {
     if (serverResponse.type === "session/signup/rejected") {
       setErrors(serverResponse);
     } else {
+      navigate("/");
       closeModal();
     }
   };
