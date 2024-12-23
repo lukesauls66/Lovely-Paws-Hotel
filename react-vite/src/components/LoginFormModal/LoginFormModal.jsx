@@ -5,7 +5,7 @@ import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../redux/session";
 import login from "./LoginForm.module.css";
 
-function LoginFormModal() {
+function LoginFormModal({ navigate }) {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -23,6 +23,7 @@ function LoginFormModal() {
     if (serverResponse.type === "session/login/rejected") {
       setErrors(serverResponse);
     } else {
+      navigate("/");
       closeModal();
     }
   };

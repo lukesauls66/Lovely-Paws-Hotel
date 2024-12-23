@@ -14,6 +14,11 @@ export const restoreUser = createAsyncThunk(
       const res = await fetch("/api/auth/");
       console.log("RES: ", res);
       const data = await res.json();
+
+      if (!res.ok) {
+        return rejectWithValue(data);
+      }
+
       console.log("DATA: ", data);
       return data;
     } catch (error) {
