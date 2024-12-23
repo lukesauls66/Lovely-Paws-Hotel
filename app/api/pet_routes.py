@@ -1,6 +1,4 @@
-# api/pet_routes.py
-
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify 
 from app.models import Pet, PetImage, db
 from app.forms import PetForm
 from flask_login import current_user
@@ -20,7 +18,8 @@ def get_user_pets():
         return jsonify({'message': 'User not authenticated'}), 401
 
     pets = Pet.query.filter(Pet.owner_id == current_user.id).all()
-    return jsonify({"Pets": [pet.to_dict() for pet in pets]})
+    pets_dict = [pet.to_dict() for pet in pets]
+    return jsonify({"Pets": pets_dict})
 
 # Return pet by id
 @pet_routes.route('/<int:id>', methods=['GET'])
@@ -28,7 +27,7 @@ def get_pet(id):
     pet = Pet.query.get(id)
     if pet:
         return jsonify(pet.to_dict())
-    return jsonify({'message': "Pet couldn't be found"}), 404
+    return jsonify({'message': 'Pet not found'}), 404
 
 # Create pet
 @pet_routes.route('/', methods=['POST'])
@@ -50,7 +49,7 @@ def create_pet():
             behavior=form.behavior.data,
             medication_note=form.medication_note.data,
             dietary_note=form.dietary_note.data,
-            owner_id=current_user.id
+            owner_id=current_user.id 
         )
         
         # preview image
@@ -59,6 +58,7 @@ def create_pet():
 
         data = request.get_json()
         image_urls = data.get('image_urls', [])
+        
         # additional images
         for url in image_urls:
             if url:
@@ -69,19 +69,17 @@ def create_pet():
         db.session.commit()
         return jsonify(new_pet.to_dict()), 201
     
+    print(form.errors)  
     return jsonify(form.errors), 400
 
 # Update pet
 @pet_routes.route('/<int:id>', methods=['PUT'])
 def update_pet(id):
-    if not current_user.is_authenticated:
-        return jsonify({'message': 'User not authenticated'}), 401
-
     pet = Pet.query.get(id)
     if not pet:
         return jsonify({'message': "Pet couldn't be found"}), 404
 
-    if pet.owner_id != current_user.id and not current_user.staff:
+    if not current_user.is_authenticated or (pet.owner_id != current_user.id and not current_user.staff):
         return jsonify({'message': 'Unauthorized'}), 403
     
     form = PetForm()
@@ -112,10 +110,10 @@ def update_pet(id):
             if url:
                 pet_image = PetImage(url=url, pet=pet)
                 db.session.add(pet_image)
-        
+
         db.session.commit()
         return jsonify(pet.to_dict())
-    
+
     return jsonify(form.errors), 400
 
 # Delete pet
@@ -152,17 +150,3 @@ def delete_pet_image(id, image_id):
     db.session.delete(pet_image)
     db.session.commit()
     return jsonify({'message': 'Successfully deleted'})
-
-
-"""
-
-Testing in Postman:
-Get all pets: GET http://localhost:5000/api/pets/
-Get all pets owned by current user: GET http://localhost:5000/api/pets/user
-Get pet by ID: GET http://localhost:5000/api/pets/<int:id>
-Create pet: POST http://localhost:5000/api/pets/
-Update pet: PUT http://localhost:5000/api/pets/<int:id>
-Delete pet: DELETE http://localhost:5000/api/pets/<int:id>
-Delete pet image: DELETE http://localhost:5000/api/pets/images/<int:image_id>
-
-"""
