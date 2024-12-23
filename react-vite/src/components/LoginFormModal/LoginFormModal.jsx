@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../redux/session";
 import login from "./LoginForm.module.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -18,9 +20,8 @@ function LoginFormModal() {
       sessionActions.login({ email, password })
     );
 
-    if (serverResponse) {
+    if (serverResponse.type === "session/login/rejected") {
       setErrors(serverResponse);
-      closeModal();
     } else {
       closeModal();
     }
@@ -39,7 +40,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.payload?.email && <p>{errors.payload?.email}</p>}
         <label>
           Password
           <input
@@ -49,8 +50,10 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit" className={login.loginSubmit}>Submit</button>
+        {errors.payload?.password && <p>{errors.payload?.password}</p>}
+        <button type="submit" className={login.loginSubmit}>
+          Submit
+        </button>
       </form>
     </div>
   );
