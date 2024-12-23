@@ -86,6 +86,7 @@ const PetDetail = () => {
             </div>
           </div>
           <div className={styles.petDetails}>
+            <p>Owner: {pet.owner.fname} {pet.owner.lname}</p>
             <p>Type: {pet.type}</p>
             <p>Breed: {pet.breed}</p>
             <p>Age: {pet.age}</p>
