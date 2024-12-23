@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; 
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchPetDetail, deletePet } from "../../redux/pets";
@@ -13,10 +13,27 @@ const PetDetail = () => {
   const status = useSelector((state) => state.pets.status);
   const sessionUser = useSelector((state) => state.session.user);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [owner, setOwner] = useState(null); 
 
   useEffect(() => {
     dispatch(fetchPetDetail(petId));
   }, [dispatch, petId]);
+
+  useEffect(() => {
+    if (pet) {
+      fetchOwner(pet.owner_id); 
+    }
+  }, [pet]);
+
+  const fetchOwner = async (ownerId) => {
+    try {
+      const response = await fetch(`/api/users/${ownerId}`);
+      const data = await response.json();
+      setOwner(data);
+    } catch (error) {
+      console.error("Failed to fetch owner details:", error);
+    }
+  };
 
   useEffect(() => {
     if (!showEditModal) {
@@ -86,7 +103,7 @@ const PetDetail = () => {
             </div>
           </div>
           <div className={styles.petDetails}>
-            <p>Owner: {pet.owner.fname} {pet.owner.lname}</p>
+            {owner && <p>Owner: {owner.fname} {owner.lname}</p>}
             <p>Type: {pet.type}</p>
             <p>Breed: {pet.breed}</p>
             <p>Age: {pet.age}</p>
