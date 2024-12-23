@@ -19,9 +19,53 @@ function SignupFormModal() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+  console.log("Errors: ", errors);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (fname[0] !== fname[0].toUpperCase()) {
+      return setErrors({
+        fname: "First name must be capitalized",
+      });
+    }
+
+    if (lname[0] !== lname[0].toUpperCase()) {
+      return setErrors({
+        lname: "Last name must be capitalized",
+      });
+    }
+
+    if (isNaN(phone_num)) {
+      return setErrors({
+        phone_num: "Phone number must be a number",
+      });
+    }
+
+    if (phone_num.length !== 10) {
+      return setErrors({
+        phone_num: "Phone number must be 10 digits long",
+      });
+    }
+
+    if (isNaN(address.split(" ")[0])) {
+      return setErrors({
+        address: "Address must start with a number",
+      });
+    }
+
+    if (
+      address
+        .split(" ")
+        .slice(1)
+        .forEach((word) => {
+          word[0] !== word[0].toUpperCase();
+        })
+    ) {
+      return setErrors({
+        address: "All first letters must be capitalized",
+      });
+    }
 
     if (password !== confirmPassword) {
       return setErrors({
@@ -30,7 +74,7 @@ function SignupFormModal() {
       });
     }
 
-    const res = await dispatch(
+    const serverResponse = await dispatch(
       sessionActions.signup({
         username,
         email,
@@ -44,12 +88,11 @@ function SignupFormModal() {
         zip,
       })
     );
+    console.log("Server res: ", serverResponse);
 
-    if (sessionActions.signup.rejected.match(res)) {
-      setErrors(res.payload);
-    }
-
-    if (sessionActions.signup.fulfilled) {
+    if (serverResponse.type === "session/signup/rejected") {
+      setErrors(serverResponse);
+    } else {
       closeModal();
     }
   };
@@ -68,7 +111,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.payload?.email && <p>{errors.payload.email}</p>}
         <label>
           Username
           <input
@@ -78,7 +121,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
+        {errors.payload?.username && <p>{errors.payload.username}</p>}
         <label>
           First Name
           <input
@@ -169,7 +212,9 @@ function SignupFormModal() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit" className={signup.signupSubmit}>Submit</button>
+        <button type="submit" className={signup.signupSubmit}>
+          Submit
+        </button>
       </form>
     </div>
   );

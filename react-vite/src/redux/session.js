@@ -47,7 +47,12 @@ export const login = createAsyncThunk(
       });
       console.log("res:", res);
       const data = await res.json();
-      console.log("data:", data);
+
+      if (!res.ok) {
+        return rejectWithValue(data);
+      }
+
+      console.log("data:", data.user);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Login failed");
