@@ -27,11 +27,13 @@ const PetList = () => {
     }
   }, [status, dispatch, sessionUser]);
 
-  useEffect(() => {
-    if (status === "succeeded") {
-      console.log("Pets fetched successfully");
-    }
-  }, [status]);
+  const isLoading = status === "loading" || status === "idle";
+
+  // useEffect(() => {
+  //   if (status === "succeeded") {
+  //     console.log("Pets fetched successfully");
+  //   }
+  // }, [status]);
 
   const handlePetClick = async (petId) => {
     try {
@@ -56,7 +58,8 @@ const PetList = () => {
           >
             Add Pet
           </button>
-          {status === "loading" && <div>Loading...</div>}
+          {/* {status === "loading" && <div>Loading...</div>} */}
+          {isLoading && <div>Loading...</div>}
           {status === "failed" && <div>{error}</div>}
           {status === "succeeded" && pets.length === 0 && <div>No pets!</div>}
           {status === "succeeded" &&
