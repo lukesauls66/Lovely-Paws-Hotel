@@ -18,7 +18,7 @@ function LandingPage() {
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
-  }
+  };
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -28,39 +28,41 @@ function LandingPage() {
     <div className={lan.landingPageContainer}>
       <div className={lan.bannerContainer}>
         <img className={lan.logo} src="/images/logo-banner.jpg" alt="logo" />
-        {currentUser && (currentUser.position === "Owner" || currentUser.position === "Manager") && (
-          <div className={lan.adminButtonContainer}>
-            <button className={lan.adminButton} onClick={toggleDropdown}>
-              Admin
-            </button>
-            {isDropdownOpen && (
-              <div className={lan.adminMenu}>
-                <button
-                  onClick={() => navigate("/services")}
-                  className={lan.manageServicesBtn}
-                >
-                  Manage Services
-                </button>
-                <button 
-                  onClick={() => navigate("/users")}
-                  className={lan.manageUsersBtn}
-                >
-                  Manage Users
-                </button>
-                <button 
-                  onClick={() => navigate("/bookings")}
-                  className={lan.manageBookingsBtn}
-                >
-                  Manage Bookings
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+        {currentUser &&
+          (currentUser.position === "Owner" ||
+            currentUser.position === "Manager") && (
+            <div className={lan.adminButtonContainer}>
+              <button className={lan.adminButton} onClick={toggleDropdown}>
+                Admin
+              </button>
+              {isDropdownOpen && (
+                <div className={lan.adminMenu}>
+                  <button
+                    onClick={() => navigate("/services")}
+                    className={lan.manageServicesBtn}
+                  >
+                    Manage Services
+                  </button>
+                  <button
+                    onClick={() => navigate("/users")}
+                    className={lan.manageUsersBtn}
+                  >
+                    Manage Users
+                  </button>
+                  <button
+                    onClick={() => navigate("/bookings")}
+                    className={lan.manageBookingsBtn}
+                  >
+                    Manage Bookings
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         <div className={lan.profileButton}>
           <ProfileButton />
         </div>
-      </div>      
+      </div>
       <div className={lan.landingBodyContainer}>
         <div className={lan.messageContainer}>
           <img className={lan.pawLeft} src="/images/paw-left.png" alt="paw" />
@@ -92,29 +94,35 @@ function LandingPage() {
               </p>
             </div>
 
-
             <div className={lan.petOfMonthBox}>
               <h1 className={lan.petOfMonthHeader}>Pet of the Month</h1>
-              <img className={lan.petOfMonthImage} src='/images/king.jpg' alt='king' />
+              <img
+                className={lan.petOfMonthImage}
+                src="/images/king.jpg"
+                alt="king"
+              />
             </div>
-
-
           </div>
           <div className={lan.featuresBox}>
             <button
               className={lan.servicesBtn}
-              onClick={() => navigate('/services')}
+              onClick={() => navigate("/services")}
             >
               Browse Our Services
             </button>
             <img className={lan.catPic} src="/images/cat.png" alt="cat" />
             <img className={lan.dogPic} src="/images/dog.png" alt="dog" />
-            <button className={lan.bookingsBtn}>Book a Reservation</button>
+            <button
+              className={lan.bookingsBtn}
+              onClick={() => navigate("/pets")}
+            >
+              Book a Reservation
+            </button>
             <div className={lan.reviewsContainer}>
               <h1>Top Reviews</h1>
               <button
                 className={lan.reviewsBtn}
-                onClick={() => navigate('/reviews')}
+                onClick={() => navigate("/reviews")}
               >
                 See All Reviews
               </button>
