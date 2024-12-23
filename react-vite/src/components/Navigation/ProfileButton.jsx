@@ -36,9 +36,10 @@ function ProfileButton() {
 
   const closeMenu = () => setShowMenu(false);
 
-  const logout = (e) => {
+  const logout = async (e) => {
     e.preventDefault();
-    dispatch(sessionActions.logout());
+    await dispatch(sessionActions.logout());
+    navigate("/");
     closeMenu();
   };
 
@@ -60,10 +61,17 @@ function ProfileButton() {
               <li>{user.email}</li>
               <br />
               <li>
-                <button onClick={handleManagePets} className={profile.modalButton}>Manage Pets</button>
+                <button
+                  onClick={handleManagePets}
+                  className={profile.modalButton}
+                >
+                  Manage Pets
+                </button>
               </li>
               <li>
-                <button onClick={logout} className={profile.modalButton}>Log Out</button>
+                <button onClick={logout} className={profile.modalButton}>
+                  Log Out
+                </button>
               </li>
             </>
           ) : (
@@ -71,13 +79,13 @@ function ProfileButton() {
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
+                modalComponent={<LoginFormModal navigate={navigate} />}
                 className={profile.modalButton}
               />
               <OpenModalMenuItem
                 itemText="Sign Up"
                 onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
+                modalComponent={<SignupFormModal navigate={navigate} />}
                 className={profile.modalButton}
               />
             </div>
@@ -85,8 +93,6 @@ function ProfileButton() {
         </ul>
       )}
     </div>
-
-
   );
 }
 

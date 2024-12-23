@@ -1,3 +1,57 @@
+.mainPageContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.mainUsersContainer {
+  width: 50rem;
+}
+
+.allClientsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.allEmployeesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.allManagersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .userContainer {
   background-color: white;
+  display: flex;
+  justify-content: space-between;
+  width: 45rem;
+  /* flex-direction: column; */
+  /* gap: 0.2rem; */
+}
+
+.name {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.email {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.phoneNum {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ptags {
+  margin: 0;
 }
