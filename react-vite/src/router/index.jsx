@@ -8,6 +8,7 @@ import PetDetail from "../components/Pets/PetDetail";
 import BookingCreatePage from "../components/BookingCreatePage";
 import AllBookingsPage from "../components/AllBookingsPage";
 import BookingByDatePage from "../components/BookingByDatePage";
+import AllUsersPage from "../components/AllUsersPage";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +44,12 @@ const router = createBrowserRouter([
       },
       {
         path: "bookingsByDate",
-        element: <BookingByDatePage />
-      }
+        element: <BookingByDatePage />,
+      },
+      {
+        path: "users",
+        element: <AllUsersPage />,
+      },
     ],
   },
 ]);
