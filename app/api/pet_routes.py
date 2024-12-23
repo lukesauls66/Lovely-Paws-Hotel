@@ -81,10 +81,10 @@ def update_pet(id):
 
     if not current_user.is_authenticated or (pet.owner_id != current_user.id and not current_user.staff):
         return jsonify({'message': 'Unauthorized'}), 403
-    
+
     form = PetForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    
+
     if form.validate_on_submit():
         pet.name = form.name.data
         pet.type = form.type.data
@@ -98,22 +98,22 @@ def update_pet(id):
         pet.behavior = form.behavior.data
         pet.medication_note = form.medication_note.data
         pet.dietary_note = form.dietary_note.data
-        
-        # Handle preview image
-        if form.preview_image_url.data:
-            pet.preview_image = form.preview_image_url.data
-        
+        pet.preview_image = form.preview_image_url.data
+        pet.owner_id = current_user.id  
+
         data = request.get_json()
         image_urls = data.get('image_urls', [])
-        # additional images
+
+        # Add new images
         for url in image_urls:
-            if url:
+            if url and url not in [img.url for img in pet.pet_images]:
                 pet_image = PetImage(url=url, pet=pet)
                 db.session.add(pet_image)
 
         db.session.commit()
-        return jsonify(pet.to_dict())
+        return jsonify(pet.to_dict()), 200
 
+    print(form.errors)  
     return jsonify(form.errors), 400
 
 # Delete pet
