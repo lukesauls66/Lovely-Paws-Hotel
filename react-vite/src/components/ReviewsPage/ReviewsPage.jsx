@@ -103,9 +103,9 @@ function ReviewsPage() {
                 <IoIosPaw
                   key={paw}
                   size={30}
-                  onClick={() => setPawsRating(paw)} // Set permanent rating on click
-                  onMouseEnter={() => setHoverRating(paw)} // Temporarily highlight on hover
-                  onMouseLeave={() => setHoverRating(0)} // Clear temporary highlight
+                  onClick={() => setPawsRating(paw)} 
+                  onMouseEnter={() => setHoverRating(paw)} 
+                  onMouseLeave={() => setHoverRating(0)} 
                   style={{
                     color: paw <= (hoverRating || pawsRating) ? "#f7a59e" : "gray",
                     cursor: "pointer",
