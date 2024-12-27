@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap");
 
 .modal {
   position: fixed;
@@ -35,7 +35,7 @@ form {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-family: 'Gaegu', cursive;
+  font-family: "Gaegu", cursive;
 }
 
 .petButton {
@@ -44,12 +44,12 @@ form {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
-  font-family: 'Gaegu', cursive;
+  font-family: "Gaegu", cursive;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .petButton[type="submit"] {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 

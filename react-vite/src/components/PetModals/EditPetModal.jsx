@@ -1,12 +1,35 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updatePet, fetchPetDetail } from '../../redux/pets';
-import petStyles from './EditPetModal.module.css'; 
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePet, fetchPetDetail } from "../../redux/pets";
+import { IoMdClose } from "react-icons/io";
+import petStyles from "./EditPetModal.module.css";
 
 const EditPetModal = ({ petId, onClose }) => {
   const dispatch = useDispatch();
-  const pet = useSelector((state) => state.pets.pets.find((p) => p.id === petId));
-  const currentUser = useSelector((state) => state.session.user);
+
+  const [name, setName] = useState("");
+  const [type, setType] = useState("cat");
+  const [breed, setBreed] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("male");
+  const [color, setColor] = useState("");
+  const [weight, setWeight] = useState("");
+  const [dob, setDob] = useState("");
+  const [size, setSize] = useState("a fine boi");
+  const [behavior, setBehavior] = useState("calm");
+  const [ownerId, setOwnerId] = useState("");
+  const [medicationNote, setMedicationNote] = useState("");
+  const [dietaryNote, setDietaryNote] = useState("");
+  const [previewImage, setPreviewImage] = useState(null);
+  const [additionalImages, setAdditionalImages] = useState([
+    null,
+    null,
+    null,
+    null,
+  ]);
+  const [errors, setErrors] = useState({});
+  const pet = useSelector((state) => state.pets.selectedPet);
+  console.log("Pet: ", pet);
 
   useEffect(() => {
     if (!pet) {
@@ -15,197 +38,406 @@ const EditPetModal = ({ petId, onClose }) => {
   }, [dispatch, pet, petId]);
 
   const formatDate = (date) => {
-    if (!date) return '';
+    if (!date) return "";
     const d = new Date(date);
-    const month = `${d.getMonth() + 1}`.padStart(2, '0');
-    const day = `${d.getDate()}`.padStart(2, '0');
+    const month = `${d.getMonth() + 1}`.padStart(2, "0");
+    const day = `${d.getDate()}`.padStart(2, "0");
     const year = d.getFullYear();
     return `${year}-${month}-${day}`;
   };
 
-  const [updatedPet, setUpdatedPet] = useState({
-    name: pet?.name || '',
-    type: pet?.type || '',
-    breed: pet?.breed || '',
-    age: pet?.age || '',
-    gender: pet?.gender || '',
-    color: pet?.color || '',
-    weight: pet?.weight || '',
-    dob: formatDate(pet?.dob) || '',
-    size: pet?.size || '',
-    behavior: pet?.behavior || '',
-    medication_note: pet?.medication_note || '',
-    dietary_note: pet?.dietary_note || '',
-    preview_image: pet?.preview_image || '',
-  });
-  const [imageUrls, setImageUrls] = useState(pet?.pet_images.map((img) => img.url) || []);
-  const [errors, setErrors] = useState({});
-
   useEffect(() => {
     if (pet) {
-      setUpdatedPet({
-        name: pet.name || '',
-        type: pet.type || '',
-        breed: pet.breed || '',
-        age: pet.age || '',
-        gender: pet.gender || '',
-        color: pet.color || '',
-        weight: pet.weight || '',
-        dob: formatDate(pet.dob) || '',
-        size: pet.size || '',
-        behavior: pet.behavior || '',
-        medication_note: pet.medication_note || '',
-        dietary_note: pet.dietary_note || '',
-        preview_image: pet.preview_image || '',
-      });
-      setImageUrls(pet.pet_images.map((img) => img.url) || []);
+      setName(pet.name);
+      setType(pet.type);
+      setBreed(pet.breed);
+      setAge(pet.age);
+      setGender(pet.gender);
+      setColor(pet.color);
+      setWeight(pet.weight);
+      setDob(formatDate(pet.dob));
+      setSize(pet.size);
+      setBehavior(pet.behavior);
+      setOwnerId(pet.owner_id);
+      setMedicationNote(pet.medication_note);
+      setDietaryNote(pet.dietary_note);
+      setPreviewImage(pet.preview_image);
+      setAdditionalImages(pet.pet_images.map((img) => img.url) || []);
+    } else {
+      console.error("No pet was found");
     }
   }, [pet]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUpdatedPet({ ...updatedPet, [name]: value });
-  };
+  console.log("Pet name: ", name);
+  console.log("Pet type: ", type);
+  console.log("Pet breed: ", breed);
+  console.log("Pet age: ", age);
+  console.log("Pet gender: ", gender);
+  console.log("Pet color: ", color);
+  console.log("Pet weight: ", weight);
+  console.log("Pet dob: ", dob);
+  console.log("Pet size: ", size);
+  console.log("Pet behavior: ", behavior);
+  console.log("Pet medicationNote: ", medicationNote);
+  console.log("Pet dietaryNote: ", dietaryNote);
+  console.log("Pet previewImage: ", previewImage);
+  console.log("Pet additionalImages: ", additionalImages);
 
-  const handleImageChange = (index, value) => {
-    const newImageUrls = [...imageUrls];
-    newImageUrls[index] = value;
-    setImageUrls(newImageUrls);
-  };
+  const petUpdateValidationErrors = ({ name, breed, age, color, weight }) => {
+    const validationErrors = {};
 
-  const handleAddImageField = () => {
-    setImageUrls([...imageUrls, '']);
-  };
+    if (name[0] !== name[0].toUpperCase()) {
+      validationErrors.name = "Name must be capitalized";
+    }
 
-  const validatePetData = (data) => {
-    const errors = {};
-    if (!data.name || data.name.trim() === "") {
-      errors.name = "Pet name is required";
+    if (breed[0] !== breed[0].toUpperCase()) {
+      validationErrors.breed = "Breed must be capitalized";
     }
-    if (!data.type) {
-      errors.type = "Type is required";
+
+    if (isNaN(age) || age <= 0) {
+      validationErrors.age = "Age must be a positive number";
     }
-    if (!data.breed || data.breed.trim() === "") {
-      errors.breed = "Breed is required";
+
+    if (color[0] !== color[0].toUpperCase()) {
+      validationErrors.color = "Color must be capitalized";
     }
-    if (!data.age || isNaN(data.age)) {
-      errors.age = "Valid age is required";
+
+    if (isNaN(weight) || weight <= 0) {
+      validationErrors.weight = "Weight must be a positive number";
     }
-    if (!data.gender) {
-      errors.gender = "Gender is required";
-    }
-    if (!data.color || data.color.trim() === "") {
-      errors.color = "Color is required";
-    }
-    if (!data.weight || isNaN(data.weight)) {
-      errors.weight = "Valid weight is required";
-    }
-    if (!data.dob) {
-      errors.dob = "Date of birth is required";
-    }
-    if (!data.size) {
-      errors.size = "Size is required";
-    }
-    if (!data.behavior) {
-      errors.behavior = "Behavior is required";
-    }
-    if (!data.preview_image || data.preview_image.trim() === "") {
-      errors.preview_image = "Preview image URL is required";
-    }
-    return errors;
+
+    return validationErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const petData = {
-      ...updatedPet,
-      dob: formatDate(updatedPet.dob), 
-      image_urls: imageUrls.filter(url => url !== ''), 
-      owner_id: currentUser.id, 
-    };
-    const validationErrors = validatePetData(petData);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return; 
+
+    const petUpdateErrors = petUpdateValidationErrors({
+      name,
+      breed,
+      age,
+      color,
+      weight,
+    });
+
+    if (Object.keys(petUpdateErrors).length > 0) {
+      setErrors(petUpdateErrors);
+      return;
     }
+
+    const formData = new FormData();
+    const formattedDob = new Date(dob).toISOString().split("T")[0];
+
+    formData.append("name", name);
+    formData.append("type", type);
+    formData.append("breed", breed);
+    formData.append("age", String(age));
+    formData.append("gender", gender);
+    formData.append("color", color);
+    formData.append("weight", String(weight));
+    formData.append("size", size);
+    formData.append("behavior", behavior);
+    formData.append("medication_note", medicationNote);
+    formData.append("dietary_note", dietaryNote);
+    formData.append("dob", formattedDob);
+    formData.append("owner_id", String(ownerId));
+
+    if (previewImage instanceof File) {
+      formData.append("preview_image", previewImage);
+    }
+
+    additionalImages.forEach((file, index) => {
+      if (file) {
+        console.log(`additional_image_${index}:`, file);
+        formData.append("additional_images", file);
+      }
+    });
+
     try {
-      await dispatch(updatePet({ petId, petData })).unwrap();
+      await dispatch(updatePet({ petId, formData })).unwrap();
       await dispatch(fetchPetDetail(petId));
+
       onClose();
     } catch (backendErrors) {
       setErrors(backendErrors);
     }
   };
 
-  if (!pet) {
-    return <div>Loading...</div>;
-  }
+  const handlePreviewImageChange = (e) => {
+    setPreviewImage(e.target.files[0]);
+  };
+
+  const handleAdditionalImageChange = async (index, e) => {
+    const newAdditionalImages = [...additionalImages];
+    console.log("File: ", e.target.files[0]);
+    newAdditionalImages[index] = e.target.files[0];
+    setAdditionalImages(newAdditionalImages);
+  };
+
+  const handleImageDelete = async (index) => {
+    await fetch(`/api/pets/${petId}/images/${pet.pet_images[index].id}`, {
+      method: "DELETE",
+    });
+  };
 
   return (
     <div className={petStyles.modal}>
       <div className={petStyles.modalContent}>
         <h2>Edit Pet</h2>
         <form onSubmit={handleSubmit}>
-          {errors.name && <div className={petStyles.error}>{errors.name}</div>}
-          <input className={petStyles.petInput} name="name" value={updatedPet.name} onChange={handleChange} placeholder="Name" required />
-          {errors.type && <div className={petStyles.error}>{errors.type}</div>}
-          <select className={petStyles.petInput} name="type" value={updatedPet.type} onChange={handleChange} required>
+          <input
+            className={petStyles.petInput}
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Name"
+            required
+          />
+          {errors.name && (
+            <>
+              <div className={petStyles.error}>{errors.name}</div>
+              <br />
+            </>
+          )}
+          <select
+            className={petStyles.petInput}
+            name="type"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            required
+          >
             <option value="cat">Cat</option>
             <option value="dog">Dog</option>
           </select>
-          {errors.breed && <div className={petStyles.error}>{errors.breed}</div>}
-          <input className={petStyles.petInput} name="breed" value={updatedPet.breed} onChange={handleChange} placeholder="Breed" required />
-          {errors.age && <div className={petStyles.error}>{errors.age}</div>}
-          <input className={petStyles.petInput} name="age" value={updatedPet.age} onChange={handleChange} placeholder="Age" required />
-          {errors.gender && <div className={petStyles.error}>{errors.gender}</div>}
+          {errors.type && (
+            <>
+              <div className={petStyles.error}>{errors.type}</div>
+              <br />
+            </>
+          )}
+          <input
+            className={petStyles.petInput}
+            name="breed"
+            value={breed}
+            onChange={(e) => setBreed(e.target.value)}
+            placeholder="Breed"
+            required
+          />
+          {errors.breed && (
+            <>
+              <div className={petStyles.error}>{errors.breed}</div>
+              <br />
+            </>
+          )}
+          <input
+            className={petStyles.petInput}
+            name="age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            placeholder="Age"
+            required
+          />
+          {errors.age && (
+            <>
+              <div className={petStyles.error}>{errors.age}</div>
+              <br />
+            </>
+          )}
           <div>
             <label>
-              <input type="radio" name="gender" value="male" checked={updatedPet.gender === 'male'} onChange={handleChange} />
+              <input
+                type="radio"
+                name="gender"
+                value="male"
+                checked={gender === "male"}
+                onChange={(e) => setGender(e.target.value)}
+              />
               Male
             </label>
             <label>
-              <input type="radio" name="gender" value="female" checked={updatedPet.gender === 'female'} onChange={handleChange} />
+              <input
+                type="radio"
+                name="gender"
+                value="female"
+                checked={gender === "female"}
+                onChange={(e) => setGender(e.target.value)}
+              />
               Female
             </label>
           </div>
-          {errors.color && <div className={petStyles.error}>{errors.color}</div>}
-          <input className={petStyles.petInput} name="color" value={updatedPet.color} onChange={handleChange} placeholder="Color" required />
-          {errors.weight && <div className={petStyles.error}>{errors.weight}</div>}
-          <input className={petStyles.petInput} name="weight" value={updatedPet.weight} onChange={handleChange} placeholder="Weight" required />
-          {errors.dob && <div className={petStyles.error}>{errors.dob}</div>}
-          <input className={petStyles.petInput} type="date" name="dob" value={updatedPet.dob} onChange={handleChange} placeholder="Date of Birth" required />
-          {errors.size && <div className={petStyles.error}>{errors.size}</div>}
-          <select className={petStyles.petInput} name="size" value={updatedPet.size} onChange={handleChange} required>
+          {errors.gender && (
+            <>
+              <div className={petStyles.error}>{errors.gender}</div>
+              <br />
+            </>
+          )}
+          <input
+            className={petStyles.petInput}
+            name="color"
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+            placeholder="Color"
+            required
+          />
+          {errors.color && (
+            <>
+              <div className={petStyles.error}>{errors.color}</div>
+              <br />
+            </>
+          )}
+          <input
+            className={petStyles.petInput}
+            name="weight"
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+            placeholder="Weight"
+            required
+          />
+          {errors.weight && (
+            <>
+              <div className={petStyles.error}>{errors.weight}</div>
+              <br />
+            </>
+          )}
+          <input
+            className={petStyles.petInput}
+            type="date"
+            name="dob"
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
+            placeholder="Date of Birth"
+            required
+          />
+          {errors.dob && (
+            <>
+              <div className={petStyles.error}>{errors.dob}</div>
+              <br />
+            </>
+          )}
+          <select
+            className={petStyles.petInput}
+            name="size"
+            value={size}
+            onChange={(e) => setSize(e.target.value)}
+            required
+          >
             <option value="a fine boi">A fine boi (16-26% Body Fat)</option>
             <option value="he chomnk">He chomnk (26-35% Body Fat)</option>
-            <option value="a heckin chonker">A heckin chonker (26-45% Body Fat)</option>
+            <option value="a heckin chonker">
+              A heckin chonker (26-45% Body Fat)
+            </option>
             <option value="heftychonk">Heftychonk (46-55% Body Fat)</option>
             <option value="megachonker">Megachonker (56-65% Body Fat)</option>
-            <option value="oh lawd he comin">Oh lawd he comin (65% Body Fat)</option>
+            <option value="oh lawd he comin">
+              Oh lawd he comin (65% Body Fat)
+            </option>
           </select>
-          {errors.behavior && <div className={petStyles.error}>{errors.behavior}</div>}
-          <select className={petStyles.petInput} name="behavior" value={updatedPet.behavior} onChange={handleChange} required>
+          {errors.size && (
+            <>
+              <div className={petStyles.error}>{errors.size}</div>
+              <br />
+            </>
+          )}
+          <select
+            className={petStyles.petInput}
+            name="behavior"
+            value={behavior}
+            onChange={(e) => setBehavior(e.target.value)}
+            required
+          >
             <option value="calm">Calm</option>
             <option value="playful">Playful</option>
             <option value="aggressive">Aggressive</option>
             <option value="shy">Shy</option>
           </select>
-          <input className={petStyles.petInput} name="medication_note" value={updatedPet.medication_note} onChange={handleChange} placeholder="Medication Note" />
-          <input className={petStyles.petInput} name="dietary_note" value={updatedPet.dietary_note} onChange={handleChange} placeholder="Dietary Note" />
-          {errors.preview_image && <div className={petStyles.error}>{errors.preview_image}</div>}
-          <input className={petStyles.petInput} name="preview_image" value={updatedPet.preview_image} onChange={handleChange} placeholder="Preview Image URL" required />
-          {imageUrls.map((url, index) => (
+          {errors.behavior && (
+            <>
+              <div className={petStyles.error}>{errors.behavior}</div>
+              <br />
+            </>
+          )}
+          <input
+            className={petStyles.petInput}
+            name="medication_note"
+            value={medicationNote}
+            onChange={(e) => setMedicationNote(e.target.value)}
+            placeholder="Medication Note"
+          />
+          <input
+            className={petStyles.petInput}
+            name="dietary_note"
+            value={dietaryNote}
+            onChange={(e) => setDietaryNote(e.target.value)}
+            placeholder="Dietary Note"
+          />
+          <div>
+            <div>
+              {typeof previewImage === "string"
+                ? `${previewImage.split("_").pop()}`
+                : null}
+            </div>
             <input
-              key={index}
               className={petStyles.petInput}
-              value={url}
-              onChange={(e) => handleImageChange(index, e.target.value)}
-              placeholder="Additional Image URL"
+              name="preview_image"
+              type="file"
+              accept="image/*"
+              onChange={(e) => handlePreviewImageChange(e)}
+              placeholder="Preview Image URL"
             />
+          </div>
+          {errors.preview_image && (
+            <>
+              <div className={petStyles.error}>{errors.preview_image}</div>
+              <br />
+            </>
+          )}
+          {[...Array(4)].map((_, index) => (
+            <div key={index}>
+              <div className={petStyles.imageHeader}>
+                {additionalImages[index] &&
+                typeof additionalImages[index] === "string" ? (
+                  <span id={`header-${index}`}>
+                    {additionalImages[index].split("_").pop()}
+                  </span>
+                ) : null}
+              </div>
+              <div>
+                <input
+                  key={index}
+                  className={petStyles.petInput}
+                  name={`additional_image_${index}`}
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleAdditionalImageChange(index, e)}
+                  placeholder="Additional Image URL"
+                />
+                {additionalImages[index] && (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleImageDelete(index);
+                      const header = document.getElementById(`header-${index}`);
+                      if (header) {
+                        header.style.display = "none";
+                      }
+                    }}
+                  >
+                    <IoMdClose />
+                  </button>
+                )}
+              </div>
+            </div>
           ))}
-          <button className={petStyles.petButton} type="button" onClick={handleAddImageField}>Add Image</button>
-          <button className={petStyles.petButton} type="submit">Update Pet</button>
-          <button className={petStyles.petButton} type="button" onClick={onClose}>Cancel</button>
+          <button className={petStyles.petButton} type="submit">
+            Update Pet
+          </button>
+          <button
+            className={petStyles.petButton}
+            type="button"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
         </form>
       </div>
     </div>
