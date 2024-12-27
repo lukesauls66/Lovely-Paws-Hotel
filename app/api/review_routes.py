@@ -11,7 +11,13 @@ review_routes = Blueprint('reviews', __name__)
 @review_routes.route('/')
 def reviews():
     reviews = Review.query.all()
-    return {'reviews': [review.to_dict() for review in reviews]}
+    return {'reviews': [review.to_dict() for review in reviews]}, 200
+
+
+@review_routes.route('/ordered')
+def ordered_reviews():
+    reviews = Review.query.order_by(Review.paws.desc(), Review.created_at.desc()).limit(5)
+    return {'reviews': [review.to_dict() for review in reviews]}, 200
 
 
 @review_routes.route('/', methods=['POST'])
