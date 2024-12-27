@@ -8,32 +8,21 @@ import styles from "./PetList.module.css";
 const PetList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const pets = useSelector((state) => state.pets.pets);
-  const status = useSelector((state) => state.pets.status);
-  const error = useSelector((state) => state.pets.error);
+  const { pets, status, error } = useSelector((state) => state.pets);
   const sessionUser = useSelector((state) => state.session.user);
   const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
-    console.log("useEffect triggered with status:", status);
-    if (status === "idle" && sessionUser) {
-      if (sessionUser.staff) {
-        console.log("Fetching all pets for staff");
-        dispatch(fetchAllPets());
-      } else {
-        console.log("Fetching user pets");
-        dispatch(fetchUserPets());
-      }
+    if (sessionUser.staff) {
+      console.log("Fetching all pets for staff");
+      dispatch(fetchAllPets());
+    } else {
+      console.log("Fetching user pets");
+      dispatch(fetchUserPets());
     }
-  }, [status, dispatch, sessionUser]);
+  }, [dispatch, sessionUser]);
 
-  const isLoading = status === "loading" || status === "idle";
-
-  // useEffect(() => {
-  //   if (status === "succeeded") {
-  //     console.log("Pets fetched successfully");
-  //   }
-  // }, [status]);
+  const isLoading = status === "loading";
 
   const handlePetClick = async (petId) => {
     try {
@@ -58,7 +47,6 @@ const PetList = () => {
           >
             Add Pet
           </button>
-          {/* {status === "loading" && <div>Loading...</div>} */}
           {isLoading && <div>Loading...</div>}
           {status === "failed" && <div>{error}</div>}
           {status === "succeeded" && pets.length === 0 && <div>No pets!</div>}

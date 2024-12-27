@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
   pets: [],
   selectedPet: null,
-  status: "idle",
+  status: "loading",
   error: null,
 };
 
@@ -32,11 +32,10 @@ export const fetchUserPets = createAsyncThunk(
       console.log("fetchUserPets action triggered");
       const response = await fetch("/api/pets/user");
       console.log("fetchUserPets response:", response);
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(`Error fetching pets: ${errorData.message}`);
-      }
       const data = await response.json();
+      if (!response.ok) {
+        return rejectWithValue(data);
+      }
       console.log("fetchUserPets data:", data);
       return data;
     } catch (error) {
@@ -55,7 +54,7 @@ export const fetchPetDetail = createAsyncThunk(
       const data = await response.json();
       console.log("fetchPetDetail data:", data);
       if (!response.ok) {
-        throw new Error(`Error fetching pet details: ${data.message}`);
+        return rejectWithValue(data);
       }
       return data;
     } catch (error) {
@@ -88,18 +87,15 @@ export const addPet = createAsyncThunk(
 
 export const updatePet = createAsyncThunk(
   "pets/updatePet",
-  async ({ petId, petData }, { rejectWithValue }) => {
+  async ({ petId, formData }, { rejectWithValue }) => {
     try {
       const response = await fetch(`/api/pets/${petId}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(petData),
+        body: formData,
       });
       const data = await response.json();
       if (!response.ok) {
-        throw new Error(`Error updating pet: ${data.message}`);
+        return rejectWithValue(data);
       }
       return data;
     } catch (error) {
@@ -179,11 +175,17 @@ const petsSlice = createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
+      .addCase(updatePet.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
       .addCase(updatePet.fulfilled, (state, action) => {
-        const index = state.pets.findIndex(
-          (pet) => pet.id === action.payload.id
-        );
-        state.pets[index] = action.payload;
+        state.status = "succeeded";
+        state.selectedPet = action.payload;
+      })
+      .addCase(updatePet.rejected, (state, action) => {
+        state.status = "succeeded";
+        state.error = action.payload;
       })
       .addCase(deletePet.fulfilled, (state, action) => {
         state.pets = state.pets.filter((pet) => pet.id !== action.payload);

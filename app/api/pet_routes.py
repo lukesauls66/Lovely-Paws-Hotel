@@ -159,7 +159,7 @@ def update_pet(id):
         pet.behavior = form.behavior.data
         pet.medication_note = form.medication_note.data
         pet.dietary_note = form.dietary_note.data
-        pet.preview_image = form.preview_image_url.data
+        # pet.preview_image = form.preview_image_url.data
         pet.owner_id = current_user.id  
 
         if 'preview_image' in request.files:

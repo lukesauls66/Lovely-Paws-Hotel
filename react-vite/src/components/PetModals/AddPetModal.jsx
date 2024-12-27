@@ -4,20 +4,6 @@ import { addPet } from "../../redux/pets";
 import petStyles from "./AddPetModal.module.css";
 
 const AddPetModal = ({ onClose, navigate }) => {
-  // const [pet, setPet] = useState({
-  //   name: "",
-  //   type: "cat",
-  //   breed: "",
-  //   age: "",
-  //   gender: "male",
-  //   color: "",
-  //   weight: "",
-  //   dob: "",
-  //   size: "a fine boi",
-  //   behavior: "calm",
-  //   medication_note: "",
-  //   dietary_note: "",
-  // });
   const [name, setName] = useState("");
   const [type, setType] = useState("cat");
   const [breed, setBreed] = useState("");
@@ -42,43 +28,33 @@ const AddPetModal = ({ onClose, navigate }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.user);
 
-  // const validatePetData = (data) => {
-  //   const errors = {};
-  //   if (!data.name || data.name.trim() === "") {
-  //     errors.name = "Pet name is required";
-  //   }
-  //   if (!data.type) {
-  //     errors.type = "Type is required";
-  //   }
-  //   if (!data.breed || data.breed.trim() === "") {
-  //     errors.breed = "Breed is required";
-  //   }
-  //   if (!data.age || isNaN(data.age)) {
-  //     errors.age = "Valid age is required";
-  //   }
-  //   if (!data.gender) {
-  //     errors.gender = "Gender is required";
-  //   }
-  //   if (!data.color || data.color.trim() === "") {
-  //     errors.color = "Color is required";
-  //   }
-  //   if (!data.weight || isNaN(data.weight)) {
-  //     errors.weight = "Valid weight is required";
-  //   }
-  //   if (!data.dob) {
-  //     errors.dob = "Date of birth is required";
-  //   }
-  //   if (!data.size) {
-  //     errors.size = "Size is required";
-  //   }
-  //   if (!data.behavior) {
-  //     errors.behavior = "Behavior is required";
-  //   }
-  //   if (!data.preview_image || data.preview_image.trim() === "") {
-  //     errors.preview_image = "Preview image URL is required";
-  //   }
-  //   return errors;
-  // };
+  console.log("Errors: ", errors);
+
+  const petCreationValidationErrors = ({ name, breed, age, color, weight }) => {
+    const validationErrors = {};
+
+    if (name[0] !== name[0].toUpperCase()) {
+      validationErrors.name = "Name must be capitalized";
+    }
+
+    if (breed[0] !== breed[0].toUpperCase()) {
+      validationErrors.breed = "Breed must be capitalized";
+    }
+
+    if (isNaN(age) || age <= 0) {
+      validationErrors.age = "Age must be a positive number";
+    }
+
+    if (color[0] !== color[0].toUpperCase()) {
+      validationErrors.color = "Color must be capitalized";
+    }
+
+    if (isNaN(weight) || weight <= 0) {
+      validationErrors.weight = "Weight must be a positive number";
+    }
+
+    return validationErrors;
+  };
 
   const handlePreviewImageChange = (e) => {
     setPreviewImage(e.target.files[0]);
@@ -92,18 +68,24 @@ const AddPetModal = ({ onClose, navigate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({});
+
+    const petCreationErrors = petCreationValidationErrors({
+      name,
+      breed,
+      age,
+      color,
+      weight,
+    });
+
+    if (Object.keys(petCreationErrors).length > 0) {
+      setErrors(petCreationErrors);
+      return;
+    }
 
     const formData = new FormData();
     const formattedDob = new Date(dob).toISOString().split("T")[0];
 
-    console.log("Adding values to FormData:");
-
-    // Object.keys(pet).forEach(([key, value]) => {
-    //   if (key !== "dob") {
-    //     console.log(`${key}:`, value, typeof value);
-    //     formData.append(key, value === null ? "" : String(value));
-    //   }
-    // });
     formData.append("name", name);
     formData.append("type", type);
     formData.append("breed", breed);
@@ -115,21 +97,7 @@ const AddPetModal = ({ onClose, navigate }) => {
     formData.append("behavior", behavior);
     formData.append("medication_note", medicationNote);
     formData.append("dietary_note", dietaryNote);
-    console.log("name", name);
-    console.log("type", type);
-    console.log("breed", breed);
-    console.log("age", age);
-    console.log("gender", gender);
-    console.log("color", color);
-    console.log("weight", weight);
-    console.log("size", size);
-    console.log("behavior", behavior);
-    console.log("medication_note", medicationNote);
-    console.log("dietary_note", dietaryNote);
-
-    console.log("dob:", formattedDob);
     formData.append("dob", formattedDob);
-    console.log("owner_id", currentUser.id);
     formData.append("owner_id", String(currentUser.id));
 
     if (previewImage) {
@@ -143,10 +111,6 @@ const AddPetModal = ({ onClose, navigate }) => {
         formData.append("additional_images", file);
       }
     });
-
-    for (let pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
 
     try {
       const newPet = await dispatch(addPet(formData)).unwrap();
@@ -175,7 +139,6 @@ const AddPetModal = ({ onClose, navigate }) => {
       <div className={petStyles.modalContent} ref={modalRef}>
         <h2>Add Pet</h2>
         <form onSubmit={handleSubmit}>
-          {errors.name && <div className={petStyles.error}>{errors.name}</div>}
           <input
             className={petStyles.petInput}
             name="name"
@@ -184,7 +147,12 @@ const AddPetModal = ({ onClose, navigate }) => {
             placeholder="Name"
             required
           />
-          {errors.type && <div className={petStyles.error}>{errors.type}</div>}
+          {errors.name && (
+            <>
+              <div className={petStyles.error}>{errors.name}</div>
+              <br />
+            </>
+          )}
           <select
             className={petStyles.petInput}
             name="type"
@@ -195,8 +163,11 @@ const AddPetModal = ({ onClose, navigate }) => {
             <option value="cat">Cat</option>
             <option value="dog">Dog</option>
           </select>
-          {errors.breed && (
-            <div className={petStyles.error}>{errors.breed}</div>
+          {errors.type && (
+            <>
+              <div className={petStyles.error}>{errors.type}</div>
+              <br />
+            </>
           )}
           <input
             className={petStyles.petInput}
@@ -206,7 +177,12 @@ const AddPetModal = ({ onClose, navigate }) => {
             placeholder="Breed"
             required
           />
-          {errors.age && <div className={petStyles.error}>{errors.age}</div>}
+          {errors.breed && (
+            <>
+              <div className={petStyles.error}>{errors.breed}</div>
+              <br />
+            </>
+          )}
           <input
             className={petStyles.petInput}
             name="age"
@@ -215,8 +191,11 @@ const AddPetModal = ({ onClose, navigate }) => {
             placeholder="Age"
             required
           />
-          {errors.gender && (
-            <div className={petStyles.error}>{errors.gender}</div>
+          {errors.age && (
+            <>
+              <div className={petStyles.error}>{errors.age}</div>
+              <br />
+            </>
           )}
           <div>
             <label>
@@ -240,8 +219,11 @@ const AddPetModal = ({ onClose, navigate }) => {
               Female
             </label>
           </div>
-          {errors.color && (
-            <div className={petStyles.error}>{errors.color}</div>
+          {errors.gender && (
+            <>
+              <div className={petStyles.error}>{errors.gender}</div>
+              <br />
+            </>
           )}
           <input
             className={petStyles.petInput}
@@ -251,8 +233,11 @@ const AddPetModal = ({ onClose, navigate }) => {
             placeholder="Color"
             required
           />
-          {errors.weight && (
-            <div className={petStyles.error}>{errors.weight}</div>
+          {errors.color && (
+            <>
+              <div className={petStyles.error}>{errors.color}</div>
+              <br />
+            </>
           )}
           <input
             className={petStyles.petInput}
@@ -262,7 +247,12 @@ const AddPetModal = ({ onClose, navigate }) => {
             placeholder="Weight"
             required
           />
-          {errors.dob && <div className={petStyles.error}>{errors.dob}</div>}
+          {errors.weight && (
+            <>
+              <div className={petStyles.error}>{errors.weight}</div>
+              <br />
+            </>
+          )}
           <input
             className={petStyles.petInput}
             type="date"
@@ -272,7 +262,12 @@ const AddPetModal = ({ onClose, navigate }) => {
             placeholder="Date of Birth"
             required
           />
-          {errors.size && <div className={petStyles.error}>{errors.size}</div>}
+          {errors.dob && (
+            <>
+              <div className={petStyles.error}>{errors.dob}</div>
+              <br />
+            </>
+          )}
           <select
             className={petStyles.petInput}
             name="size"
@@ -291,8 +286,11 @@ const AddPetModal = ({ onClose, navigate }) => {
               Oh lawd he comin (65% Body Fat)
             </option>
           </select>
-          {errors.behavior && (
-            <div className={petStyles.error}>{errors.behavior}</div>
+          {errors.size && (
+            <>
+              <div className={petStyles.error}>{errors.size}</div>
+              <br />
+            </>
           )}
           <select
             className={petStyles.petInput}
@@ -306,6 +304,12 @@ const AddPetModal = ({ onClose, navigate }) => {
             <option value="aggressive">Aggressive</option>
             <option value="shy">Shy</option>
           </select>
+          {errors.behavior && (
+            <>
+              <div className={petStyles.error}>{errors.behavior}</div>
+              <br />
+            </>
+          )}
           <input
             className={petStyles.petInput}
             name="medicationNote"
@@ -320,9 +324,6 @@ const AddPetModal = ({ onClose, navigate }) => {
             onChange={(e) => setDietaryNote(e.target.value)}
             placeholder="Dietary Note"
           />
-          {errors.preview_image && (
-            <div className={petStyles.error}>{errors.preview_image}</div>
-          )}
           <input
             className={petStyles.petInput}
             name="preview_image"
@@ -332,6 +333,12 @@ const AddPetModal = ({ onClose, navigate }) => {
             placeholder="Preview Image URL"
             required
           />
+          {errors.preview_image && (
+            <>
+              <div className={petStyles.error}>{errors.preview_image}</div>
+              <br />
+            </>
+          )}
           {[0, 1, 2, 3].map((index) => (
             <input
               key={index}
