@@ -78,7 +78,10 @@ const PetList = () => {
               </div>
             ))}
           {showAddModal && (
-            <AddPetModal onClose={() => setShowAddModal(false)} />
+            <AddPetModal
+              onClose={() => setShowAddModal(false)}
+              navigate={navigate}
+            />
           )}
         </div>
       ) : (
