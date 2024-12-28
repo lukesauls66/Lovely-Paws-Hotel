@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as sessionActions from "../../redux/session";
+import { getOrderedReviews } from "../../redux/review";
 import ProfileButton from "../Navigation/ProfileButton";
 import lan from "./LandingPage.module.css";
+// import { TbPaw } from "react-icons/tb";
+import { IoIosPaw } from "react-icons/io";
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -11,9 +14,12 @@ function LandingPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.session.user);
+  const ordered_reviews = useSelector((state) => state.review.reviews);
+
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(getOrderedReviews());
   }, [dispatch]);
 
   const toggleDropdown = () => {
@@ -23,6 +29,8 @@ function LandingPage() {
   if (!isLoaded) {
     return <div>Loading...</div>;
   }
+
+  const pawRatingIcon = <div className={lan.pawRatingIcon}><IoIosPaw /></div>;
 
   return (
     <div className={lan.landingPageContainer}>
@@ -94,14 +102,6 @@ function LandingPage() {
               </p>
             </div>
 
-            <div className={lan.petOfMonthBox}>
-              <h1 className={lan.petOfMonthHeader}>Pet of the Month</h1>
-              <img
-                className={lan.petOfMonthImage}
-                src="/images/king.jpg"
-                alt="king"
-              />
-            </div>
           </div>
           <div className={lan.featuresBox}>
             <button
@@ -119,14 +119,40 @@ function LandingPage() {
               Book a Reservation
             </button>
             <div className={lan.reviewsContainer}>
-              <h1>Top Reviews</h1>
+              <div className={lan.reviewsBox}>
+                <h1 className={lan.topReviewsTitle}>Top Reviews</h1>
+                {ordered_reviews.map((review) => (
+                  <div key={review.id} className={lan.orderedReview}>
+                    <div className={lan.reviewHead}>
+                      <div className={lan.reviewPaws}>
+                        {pawRatingIcon}
+                        {review.paws}
+                      </div>
+                      <div className={lan.reviewUsername}>{review.client_username}</div>
+                    </div>
+                    <div className={lan.reviewText}>{review.review}</div>
+                  </div>
+                ))}
               <button
                 className={lan.reviewsBtn}
                 onClick={() => navigate("/reviews")}
               >
                 See All Reviews
               </button>
+              </div>
             </div>
+          </div>
+        </div>
+        <img src="/images/cat-10.png" alt="cat" className={lan.catTenPic}/>
+        <div className={lan.petOfMonthBox}>
+          <div className={lan.petInfoSide}>
+            <h1 className={lan.petOfMonthHeader}>Pet of the Month</h1>
+            <hr />
+            <h2>King</h2>
+            <p>*SHORT BIO*</p>
+          </div>
+          <div className={lan.petOfMonthImage}>
+            <img src="/images/king.jpg" alt="king" />
           </div>
         </div>
       </div>

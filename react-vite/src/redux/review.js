@@ -22,6 +22,22 @@ export const getAllReviews = createAsyncThunk(
     }
 );
 
+export const getOrderedReviews = createAsyncThunk(
+    "review/getOrderedReviews",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await fetch("/api/reviews/ordered");
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(`Error getting reviews: ${data.message}`);
+            }
+            return data;
+        } catch (error) {
+            return rejectWithValue(error.message || "Error fetching ordered reviews");
+        }
+    }
+)
+
 export const createNewReview = createAsyncThunk(
     "review/createNewReview",
     async ({ review, paws }, { rejectWithValue }) => {
@@ -97,6 +113,18 @@ const reviewSlice = createSlice({
                 state.errors = action.payload;
             })
             .addCase(getAllReviews.fulfilled, (state, action) => {
+                state.loading = false;
+                state.reviews = action.payload.reviews;
+            })
+            .addCase(getOrderedReviews.pending, (state) => {
+                state.loading = true;
+                state.errors = null;
+            })
+            .addCase(getOrderedReviews.rejected, (state, action) => {
+                state.loading = false;
+                state.errors = action.payload;
+            })
+            .addCase(getOrderedReviews.fulfilled, (state, action) => {
                 state.loading = false;
                 state.reviews = action.payload.reviews;
             })
