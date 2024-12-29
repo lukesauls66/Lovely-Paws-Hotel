@@ -7,6 +7,7 @@ import ProfileButton from "../Navigation/ProfileButton";
 import lan from "./LandingPage.module.css";
 // import { TbPaw } from "react-icons/tb";
 import { IoIosPaw } from "react-icons/io";
+import DemoButton from "../Navigation/DemoButton";
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ function LandingPage() {
                     onClick={() => navigate("/bookings")}
                     className={lan.manageBookingsBtn}
                   >
-                    Manage Bookings
+                        Manage Bookings
                   </button>
                 </div>
               )}
@@ -69,6 +70,9 @@ function LandingPage() {
           )}
         <div className={lan.profileButton}>
           <ProfileButton />
+        </div>
+        <div className={lan.demoButton}>
+          <DemoButton /> {/* Add DemoButton */}
         </div>
       </div>
       <div className={lan.landingBodyContainer}>
