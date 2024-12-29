@@ -1,13 +1,29 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from '../../redux/session';
-import DemoButtonStyles from './DemoButton.module.css';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/session";
+import DemoButtonStyles from "./DemoButton.module.css";
 
 const demoUsers = [
-  { username: 'demo-client', email: 'demo-client@example.com', password: 'password' },
-  { username: 'demo-employee', email: 'demo-employee@example.com', password: 'password' },
-  { username: 'demo-manager', email: 'demo-manager@example.com', password: 'password' },
-  { username: 'demo-owner', email: 'demo-owner@example.com', password: 'password' },
+  {
+    username: "demo-client",
+    email: "demo-client@example.com",
+    password: "password",
+  },
+  {
+    username: "demo-employee",
+    email: "demo-employee@example.com",
+    password: "password",
+  },
+  {
+    username: "demo-manager",
+    email: "demo-manager@example.com",
+    password: "password",
+  },
+  {
+    username: "demo-owner",
+    email: "demo-owner@example.com",
+    password: "password",
+  },
 ];
 
 const DemoButton = () => {
@@ -16,22 +32,33 @@ const DemoButton = () => {
 
   const handleDemoLogin = (email, password) => {
     dispatch(login({ email, password }));
-    setIsDropdownOpen(false); 
+    setIsDropdownOpen(false);
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prevState) => !prevState);
+  // const toggleDropdown = () => {
+  //   setIsDropdownOpen((prevState) => !prevState);
+  // };
+
+  const closeDropDown = () => {
+    setIsDropdownOpen(false);
   };
 
   return (
-    <div className={DemoButtonStyles.demoButton}>
-      <button className={DemoButtonStyles.dropdownButton} onClick={toggleDropdown}>
+    <div className={DemoButtonStyles.demoButton} onMouseLeave={closeDropDown}>
+      <button
+        className={DemoButtonStyles.dropdownButton}
+        // onClick={toggleDropdown}
+        onMouseEnter={() => setIsDropdownOpen(true)}
+      >
         Demo
       </button>
       {isDropdownOpen && (
         <div className={DemoButtonStyles.dropdownContent}>
           {demoUsers.map((user) => (
-            <button key={user.username} onClick={() => handleDemoLogin(user.email, user.password)}>
+            <button
+              key={user.username}
+              onClick={() => handleDemoLogin(user.email, user.password)}
+            >
               {user.username}
             </button>
           ))}
