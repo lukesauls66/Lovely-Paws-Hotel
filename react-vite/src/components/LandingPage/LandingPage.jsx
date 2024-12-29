@@ -17,7 +17,6 @@ function LandingPage() {
   const currentUser = useSelector((state) => state.session.user);
   const ordered_reviews = useSelector((state) => state.review.reviews);
 
-
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     dispatch(getOrderedReviews());
@@ -31,7 +30,11 @@ function LandingPage() {
     return <div>Loading...</div>;
   }
 
-  const pawRatingIcon = <div className={lan.pawRatingIcon}><IoIosPaw /></div>;
+  const pawRatingIcon = (
+    <div className={lan.pawRatingIcon}>
+      <IoIosPaw />
+    </div>
+  );
 
   return (
     <div className={lan.landingPageContainer}>
@@ -62,7 +65,7 @@ function LandingPage() {
                     onClick={() => navigate("/bookings")}
                     className={lan.manageBookingsBtn}
                   >
-                        Manage Bookings
+                    Manage Bookings
                   </button>
                 </div>
               )}
@@ -71,9 +74,11 @@ function LandingPage() {
         <div className={lan.profileButton}>
           <ProfileButton />
         </div>
-        <div className={lan.demoButton}>
-          <DemoButton /> {/* Add DemoButton */}
-        </div>
+        {currentUser ? null : (
+          <div className={lan.demoButton}>
+            <DemoButton /> {/* Add DemoButton */}
+          </div>
+        )}
       </div>
       <div className={lan.landingBodyContainer}>
         <div className={lan.messageContainer}>
@@ -105,7 +110,6 @@ function LandingPage() {
                 everything we do!
               </p>
             </div>
-
           </div>
           <div className={lan.featuresBox}>
             <button
@@ -132,22 +136,24 @@ function LandingPage() {
                         {pawRatingIcon}
                         {review.paws}
                       </div>
-                      <div className={lan.reviewUsername}>{review.client_username}</div>
+                      <div className={lan.reviewUsername}>
+                        {review.client_username}
+                      </div>
                     </div>
                     <div className={lan.reviewText}>{review.review}</div>
                   </div>
                 ))}
-              <button
-                className={lan.reviewsBtn}
-                onClick={() => navigate("/reviews")}
-              >
-                See All Reviews
-              </button>
+                <button
+                  className={lan.reviewsBtn}
+                  onClick={() => navigate("/reviews")}
+                >
+                  See All Reviews
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <img src="/images/cat-10.png" alt="cat" className={lan.catTenPic}/>
+        <img src="/images/cat-10.png" alt="cat" className={lan.catTenPic} />
         <div className={lan.petOfMonthBox}>
           <div className={lan.petInfoSide}>
             <h1 className={lan.petOfMonthHeader}>Pet of the Month</h1>
