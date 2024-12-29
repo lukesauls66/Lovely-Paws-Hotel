@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import * as sessionActions from "../../redux/session";
 import ProfileButton from "../Navigation/ProfileButton";
 import lan from "./LandingPage.module.css";
+import DemoButton from "../Navigation/DemoButton";
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ function LandingPage() {
                     onClick={() => navigate("/bookings")}
                     className={lan.manageBookingsBtn}
                   >
-                    Manage Bookings
+                        Manage Bookings
                   </button>
                 </div>
               )}
@@ -61,6 +62,9 @@ function LandingPage() {
           )}
         <div className={lan.profileButton}>
           <ProfileButton />
+        </div>
+        <div className={lan.demoButton}>
+          <DemoButton /> {/* Add DemoButton */}
         </div>
       </div>
       <div className={lan.landingBodyContainer}>

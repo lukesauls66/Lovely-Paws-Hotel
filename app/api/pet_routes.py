@@ -6,11 +6,15 @@ from flask_login import current_user
 import os
 from werkzeug.utils import secure_filename
 import uuid
+from dotenv import load_dotenv
+
+load_dotenv()
 
 S3_BUCKET = os.environ.get('AWS_BUCKET_NAME')
 S3_REGION = os.environ.get('AWS_BUCKET_REGION')
 S3_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
 S3_SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
 
 s3_client = boto3.client(
     's3',

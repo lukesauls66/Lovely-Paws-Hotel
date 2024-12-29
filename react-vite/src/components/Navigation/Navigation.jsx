@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
+import DemoButton from "./DemoButton";
 import nav from "./Navigation.module.css";
 
 function Navigation() {
@@ -11,9 +12,9 @@ function Navigation() {
         </NavLink>
       </div>
       <div>
+        <DemoButton />
         <ProfileButton />
       </div>
-
     </div>
   );
 }
