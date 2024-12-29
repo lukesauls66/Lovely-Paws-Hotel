@@ -65,6 +65,16 @@ body {
     right: 10px;
     z-index: 1000; 
     margin-right: 30px;
+    display: inline-flex;
+}
+
+.demoButton {
+    position: fixed;
+    top: 10px;
+    right: 150px; 
+    z-index: 1000; 
+    margin-right: 10px;
+    display: inline-flex; 
 }
 
 .landingBodyContainer {
