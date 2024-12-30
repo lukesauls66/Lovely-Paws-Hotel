@@ -49,7 +49,7 @@
     border: 3px solid #333;
     border-radius: 12px;
     padding: 20px 20px 0 20px;
-    margin: 20px;
+    margin: 0 20px 20px 20px;
 }
 
 .reviewContainer {
@@ -58,11 +58,12 @@
     border-radius: 12px;
     padding: 20px 40px 20px 40px;
     margin-bottom: 15px;
+    font-size: 18px;
 }
 
 .username {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .reviewForm {
@@ -110,4 +111,14 @@
 
 .pawIcons svg:hover {
     transform: scale(1.2);
+}
+
+.pawPicOne {
+    position: absolute;
+    left: 20px;
+}
+
+.pawPicTwo {
+    position: absolute;
+    right: 20px;
 }

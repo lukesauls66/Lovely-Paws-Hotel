@@ -74,15 +74,10 @@ function ReviewsPage() {
 
   return (
     <div className={rev.reviewsMainContainer}>
+      <img src="/images/paw-bg-strip.png" alt="" className={rev.pawPicOne}/>
+      <img src="/images/paw-bg-strip.png" alt="" className={rev.pawPicTwo}/>
       <div className={rev.reviewsHeader}>
         <h1 className={rev.h1}>Lovely Paws Reviews</h1>
-        <h3 className={rev.h3}>Tell us about your pet&apos;s stay!</h3>
-        <button 
-          className={rev.addReviewBtn}
-          onClick={() => setIsFormOpen(!isFormOpen)}
-        >
-          {isFormOpen ? "Cancel" : "Add a Review"}
-        </button>
       </div>
       <br />
 
@@ -182,11 +177,20 @@ function ReviewsPage() {
                 </>
               )}
             </div>
+            
           ))
         ) : (
           <div>No reviews available</div>
         )}
       </div>
+      <h3 className={rev.h3}>Tell us about your pet&apos;s stay!</h3>
+        <button 
+          className={rev.addReviewBtn}
+          onClick={() => setIsFormOpen(!isFormOpen)}
+        >
+          {isFormOpen ? "Cancel" : "Add a Review"}
+        </button>
+
     </div>
   );
 }
