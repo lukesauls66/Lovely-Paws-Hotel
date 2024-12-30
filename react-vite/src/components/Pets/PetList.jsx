@@ -55,7 +55,7 @@ const PetList = () => {
           {isLoading && <div>Loading...</div>}
           {status === "failed" && <div>{error}</div>}
           {status === "succeeded" && pets.length === 0 && <div>No pets!</div>}
-          <div>
+          <div className={styles.allPetCardsContainer}>
             {status === "succeeded" &&
               pets.map((pet) => (
                 <div
