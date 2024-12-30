@@ -64,11 +64,11 @@ const PetDetail = () => {
     sessionUser?.staff === true || sessionUser?.id === pet.owner_id;
 
   return (
-    <div>
+    <div className={styles.mainPetDetailsPage}>
       {isValidUser ? (
         <div className={styles.petDetailContainer}>
-          <h1>{pet.name}</h1>
-          <>
+          <h1 className={styles.petName}>{pet.name}</h1>
+          <div className={styles.optionsButtons}>
             <button
               className={styles.updateButton}
               onClick={() => setShowEditModal(true)}
@@ -78,19 +78,33 @@ const PetDetail = () => {
             <button className={styles.deleteButton} onClick={handleDelete}>
               Delete
             </button>
-          </>
+          </div>
           <button
             className={styles.bookServiceButton}
             onClick={bookReservation}
           >
             Book a Reservation
           </button>
-          <div className={styles.petImagesContainer}>
-            <img
-              src={pet.preview_image}
-              alt={pet.name}
-              className={styles.previewImage}
+          <div className={styles.previewImgContainer}>
+            <img 
+              src="/images/paw-trail.png"
+              alt="paw trail"
+              className={styles.pawTrailPic}
             />
+            <div className={styles.previewImgBox}>
+              <img
+                src={pet.preview_image}
+                alt={pet.name}
+                className={styles.previewImage}
+              />
+            </div>
+            <img 
+              src="/images/paw-trail.png"
+              alt="paw trail"
+              className={styles.pawTrailPic}
+            />
+          </div>
+          <div className={styles.petImagesContainer}>
             <div className={styles.additionalImages}>
               {pet.pet_images.map((image) => (
                 <img
@@ -103,18 +117,44 @@ const PetDetail = () => {
             </div>
           </div>
           <div className={styles.petDetails}>
-            {owner && <p>Owner: {owner.fname} {owner.lname}</p>}
-            <p>Type: {pet.type}</p>
-            <p>Breed: {pet.breed}</p>
-            <p>Age: {pet.age}</p>
-            <p>Gender: {pet.gender}</p>
-            <p>Color: {pet.color}</p>
-            <p>Weight: {pet.weight}</p>
-            <p>Date of Birth: {pet.dob}</p>
-            <p>Size: {pet.size}</p>
-            <p>Behavior: {pet.behavior}</p>
-            <p>Medication Note: {pet.medication_note}</p>
-            <p>Dietary Note: {pet.dietary_note}</p>
+            {owner && 
+            <p>
+              <span className={styles.detailTitle}>Owner:</span>{owner.fname} {owner.lname}
+            </p>
+            }
+            <p>
+              <span className={styles.detailTitle}>Type:</span> {pet.type}
+            </p>
+            <p>
+              <span className={styles.detailTitle}>Breed:</span> {pet.breed}
+            </p>
+            <p>
+              <span className={styles.detailTitle}>Age:</span> {pet.age}
+            </p>
+            <p>
+              <span className={styles.detailTitle}>Gender:</span> {pet.gender}
+            </p>
+            <p>
+              <span className={styles.detailTitle}>Color:</span> {pet.color}
+            </p>
+            <p>
+              <span className={styles.detailTitle}>Weight:</span> {pet.weight}
+            </p>
+            <p>
+              <span className={styles.detailTitle}>Birthday:</span> {pet.dob}
+            </p>
+            <p>
+              <span className={styles.detailTitle}>Size:</span> {pet.size}
+            </p>
+            <p>
+              <span className={styles.detailTitle}>Behavior:</span> {pet.behavior}
+            </p>
+            <p>
+              <span className={styles.detailTitle}>Medication Note:</span> {pet.medication_note}
+            </p>
+            <p>
+              <span className={styles.detailTitle}>Dietary Note:</span> {pet.dietary_note}
+            </p>
           </div>
           {showEditModal && (
             <EditPetModal
