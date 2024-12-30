@@ -38,7 +38,10 @@ const PetList = () => {
     sessionUser?.staff === true || sessionUser?.staff === false;
 
   return (
-    <div>
+    <div className={styles.mainPetPage}>
+      <img src="/images/paw-bg-strip.png" alt="" className={styles.pawPicOne}/>
+      <img src="/images/paw-bg-strip.png" alt="" className={styles.pawPicTwo}/>   
+      <h1 className={styles.h1}>Manage Pets</h1>
       {isValidUser ? (
         <div className={styles.petListContainer}>
           <button
@@ -57,11 +60,13 @@ const PetList = () => {
                 onClick={() => handlePetClick(pet.id)}
                 className={styles.petCard}
               >
-                <img
-                  src={pet.preview_image}
-                  alt={pet.name}
-                  className={styles.petImage}
-                />
+                <div className={styles.petImageBox}>
+                  <img
+                    src={pet.preview_image}
+                    alt={pet.name}
+                    className={styles.petImage}
+                  />
+                </div>
                 <div className={styles.petName}>{pet.name}</div>
               </div>
             ))}

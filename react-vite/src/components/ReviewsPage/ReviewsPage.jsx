@@ -79,41 +79,6 @@ function ReviewsPage() {
       <div className={rev.reviewsHeader}>
         <h1 className={rev.h1}>Lovely Paws Reviews</h1>
       </div>
-      <br />
-
-      {isFormOpen && (
-        <form onSubmit={handleCreateReview} className={rev.reviewForm}>
-          <textarea
-            value={reviewText}
-            onChange={(e) => setReviewText(e.target.value)}
-            placeholder="Write your review here..."
-            required
-            rows="5"
-            className={rev.textarea}
-          />
-          <div className={rev.rating}>
-            <label>Paws Rating:</label>
-            <div className={rev.pawIcons}>
-              {[1, 2, 3, 4, 5].map((paw) => (
-                <IoIosPaw
-                  key={paw}
-                  size={30}
-                  onClick={() => setPawsRating(paw)} 
-                  onMouseEnter={() => setHoverRating(paw)} 
-                  onMouseLeave={() => setHoverRating(0)} 
-                  style={{
-                    color: paw <= (hoverRating || pawsRating) ? "#f7a59e" : "gray",
-                    cursor: "pointer",
-                    margin: "0 5px",
-                  }}
-                />
-              ))}
-            </div>
-        </div>
-          <button type="submit" className={rev.submitBtn}>Submit Review</button>
-        </form>
-      )}
-
       <div className={rev.allReviewsContainer}>
         {reviews && reviews.length > 0 ? (
           reviews.map((review) => (
@@ -177,7 +142,6 @@ function ReviewsPage() {
                 </>
               )}
             </div>
-            
           ))
         ) : (
           <div>No reviews available</div>
@@ -190,6 +154,38 @@ function ReviewsPage() {
         >
           {isFormOpen ? "Cancel" : "Add a Review"}
         </button>
+        {isFormOpen && (
+        <form onSubmit={handleCreateReview} className={rev.reviewForm}>
+          <textarea
+            value={reviewText}
+            onChange={(e) => setReviewText(e.target.value)}
+            placeholder="Write your review here..."
+            required
+            rows="5"
+            className={rev.textarea}
+          />
+          <div className={rev.rating}>
+            <label>Paws Rating:</label>
+            <div className={rev.pawIcons}>
+              {[1, 2, 3, 4, 5].map((paw) => (
+                <IoIosPaw
+                  key={paw}
+                  size={30}
+                  onClick={() => setPawsRating(paw)} 
+                  onMouseEnter={() => setHoverRating(paw)} 
+                  onMouseLeave={() => setHoverRating(0)} 
+                  style={{
+                    color: paw <= (hoverRating || pawsRating) ? "#f7a59e" : "gray",
+                    cursor: "pointer",
+                    margin: "0 5px",
+                  }}
+                />
+              ))}
+            </div>
+        </div>
+          <button type="submit" className={rev.submitBtn}>Submit Review</button>
+        </form>
+      )}
 
     </div>
   );
