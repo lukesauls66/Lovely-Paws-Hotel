@@ -55,6 +55,9 @@ const BookingsCreatePage = () => {
   // }, [petId, dispatch]);
 
   useEffect(() => {
+    // setIsReservationStarted(false);
+    // setTotalCost(null);
+
     const fetchDetails = async () => {
       try {
         await dispatch(fetchPetDetail(petId));
@@ -169,7 +172,14 @@ const BookingsCreatePage = () => {
       const serviceIds = services.map((service) => service.id);
       setSelectedServices(serviceIds);
     }
-  }, [petId, dispatch, reload, isUpdateClicked]);
+  }, [
+    petId,
+    dispatch,
+    reload,
+    isUpdateClicked,
+    setIsReservationStarted,
+    setTotalCost,
+  ]);
 
   // useEffect(() => {
   //   if (isUpdateClicked && currentBooking && currentBooking.booking) {
