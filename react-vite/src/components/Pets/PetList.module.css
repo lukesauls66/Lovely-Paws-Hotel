@@ -1,96 +1,293 @@
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap");
 
-.mainPetPage {
-  display: flex;
-  flex-direction: column;
-  justify-self: center;
-  align-items: center;
+@media (min-width: 320px) and (max-width: 599px) {
+  .mainPetPage {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+  }
+
+  .h1 {
+    font-family: "Gaegu", cursive;
+    font-size: 2rem;
+  }
+
+  .petListContainer {
+    background-color: #ebbdb9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 5px;
+    border-radius: 15px;
+    width: 220px;
+    border: 3px solid #333;
+  }
+
+  .addPetButtonContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .addButton {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    background-color: #ffc383;
+    color: white;
+    padding: 10px;
+    border: 3px solid #efe8db;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-family: "Gaegu", cursive;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .petCard {
+    background-color: #f6ead8;
+    border: 3px solid #e7849b;
+    border-radius: 12px;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 154px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .petCard:hover {
+    transform: scale(1.05);
+  }
+
+  .petImage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .petImageBox {
+    border: 3px solid #e7849b;
+    border-radius: 15px;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .petName {
+    font-family: "Gaegu", cursive;
+    color: #1c323a;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .pawPicOne {
+    display: none;
+  }
+
+  .pawPicTwo {
+    display: none;
+  }
 }
 
-.h1 {
-  font-family: 'Gaegu', cursive;
-  font-size: 4rem;
+@media (min-width: 600px) and (max-width: 1439px) {
+  .mainPetPage {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+  }
+
+  .h1 {
+    font-family: "Gaegu", cursive;
+    font-size: 2rem;
+  }
+
+  .petListContainer {
+    background-color: #ebbdb9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 5px;
+    border-radius: 15px;
+    width: 420px;
+    border: 3px solid #333;
+  }
+
+  .addPetButtonContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .addButton {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    background-color: #ffc383;
+    color: white;
+    padding: 10px;
+    border: 3px solid #efe8db;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-family: "Gaegu", cursive;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .petCard {
+    background-color: #f6ead8;
+    border: 3px solid #e7849b;
+    border-radius: 12px;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 154px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .petCard:hover {
+    transform: scale(1.05);
+  }
+
+  .petImage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .petImageBox {
+    border: 3px solid #e7849b;
+    border-radius: 15px;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .petName {
+    font-family: "Gaegu", cursive;
+    color: #1c323a;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .pawPicOne {
+    display: none;
+    position: absolute;
+    left: 20px;
+  }
+
+  .pawPicTwo {
+    display: none;
+    display: none;
+    position: absolute;
+    right: 20px;
+  }
 }
 
-.petListContainer {
-  background-color: #ebbdb9;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px;
-  border-radius: 15px;
-  width: 800px;
-  border: 3px solid #333;
-}
+@media (min-width: 1440px) {
+  .mainPetPage {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+  }
 
-.addButton {
-  position: absolute;
-  top: 350px;
-  right: 315px;
-  background-color: #ffc383;
-  color: white;
-  padding: 10px;
-  border: 3px solid #efe8db;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 1.4rem;
-  font-family: 'Gaegu', cursive;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
+  .h1 {
+    font-family: "Gaegu", cursive;
+    font-size: 4rem;
+  }
 
-.addButton:hover {
-  box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
-  transform: scale(1.05);
-}
+  .petListContainer {
+    background-color: #ebbdb9;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 15px;
+    width: 800px;
+    border: 3px solid #333;
+  }
 
-.petCard {
-  background-color: #f6ead8;
-  border: 3px solid #e7849b;
-  border-radius: 12px;
-  margin: 10px;
-  padding: 20px;
-  text-align: center;
-  width: 200px;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
+  .addButton {
+    position: absolute;
+    top: 350px;
+    right: 315px;
+    background-color: #ffc383;
+    color: white;
+    padding: 10px;
+    border: 3px solid #efe8db;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-family: "Gaegu", cursive;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
 
-.petCard:hover {
-  transform: scale(1.05);
-}
+  .addButton:hover {
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+  }
 
-.petImage {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 12px;
-}
+  .petCard {
+    background-color: #f6ead8;
+    border: 3px solid #e7849b;
+    border-radius: 12px;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
 
-.petImageBox {
-  border: 3px solid #e7849b;
-  border-radius: 12px;
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-}
+  .petCard:hover {
+    transform: scale(1.05);
+  }
 
-.petName {
-  font-family: 'Gaegu', cursive;
-  color: #1c323a;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-top: 10px;
-}
+  .petImage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
 
-.pawPicOne {
-  position: absolute;
-  left: 20px;
-}
+  .petImageBox {
+    border: 3px solid #e7849b;
+    border-radius: 15px;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
 
-.pawPicTwo {
-  position: absolute;
-  right: 20px;
+  .petName {
+    font-family: "Gaegu", cursive;
+    color: #1c323a;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .pawPicOne {
+    position: absolute;
+    left: 20px;
+  }
+
+  .pawPicTwo {
+    position: absolute;
+    right: 20px;
+  }
 }
