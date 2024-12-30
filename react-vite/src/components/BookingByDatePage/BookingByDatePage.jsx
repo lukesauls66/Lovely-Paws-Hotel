@@ -27,29 +27,18 @@ const BookingByDatePage = () => {
   }, [selectedDate, dispatch])
 
   function getFormattedDate(date) {
-    const inputDate = new Date(date); // Convert the input date to a Date object
-  
-    // Ensure valid date input
-    if (isNaN(inputDate)) {
-      return 'Invalid date'; // Return an error message if the date is invalid
-    }
-  
-    // Format the date into yyyy-MM-dd hh:mm:ss
-    const year = inputDate.getFullYear();
-    const month = String(inputDate.getMonth() + 1).padStart(2, '0'); // months are 0-indexed
-    const day = String(inputDate.getDate()).padStart(2, '0');
-    // const hours = String(inputDate.getHours()).padStart(2, '0');
-    // const minutes = String(inputDate.getMinutes()).padStart(2, '0');
-    // const seconds = String(inputDate.getSeconds()).padStart(2, '0');
-  
-    // Combine the date and time parts
-    const formattedDate = `${year}-${month}-${day}`;
-    
-    return formattedDate;
+    date.setHours(0, 0, 0, 0)
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // months are 0-indexed
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    console.log('formatted date > ', `${year}-${month}-${day}`)
+    return `${year}-${month}-${day}`;
   }
 
   const handleDateSelection = (date) => {
+    console.log('date > ', date);
     setSelectedDate(getFormattedDate(date))
+    console.log('selected date > ', selectedDate);
   }
 
   const tileClassName = ({ date, view }) => {
