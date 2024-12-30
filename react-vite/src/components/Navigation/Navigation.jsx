@@ -17,7 +17,7 @@ function Navigation() {
       <div className={nav.buttonContainer}>
         {currentUser ? null : (
           <div className={nav.demoButton}>
-            <DemoButton /> {/* Add DemoButton */}
+            <DemoButton />
           </div>
         )}
         <div className={nav.profileButton}>
