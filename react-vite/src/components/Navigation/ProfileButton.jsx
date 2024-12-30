@@ -50,6 +50,11 @@ function ProfileButton() {
     closeMenu();
   };
 
+  const handleViewDailyBookings = () => {
+    navigate("/bookingsByDate");
+    closeMenu();
+  };
+
   return (
     <div className={profile.profileButton}>
       <button onClick={toggleMenu}>{pawIcon}</button>
@@ -68,6 +73,16 @@ function ProfileButton() {
                   Manage Pets
                 </button>
               </li>
+              {user.staff && (
+                <li>
+                  <button
+                    onClick={handleViewDailyBookings}
+                    className={profile.modalButton}
+                  >
+                    View Daily Bookings
+                  </button>
+                </li>
+              )}
               <li>
                 <button onClick={logout} className={profile.modalButton}>
                   Log Out
