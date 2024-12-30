@@ -39,37 +39,41 @@ const PetList = () => {
 
   return (
     <div className={styles.mainPetPage}>
-      <img src="/images/paw-bg-strip.png" alt="" className={styles.pawPicOne}/>
-      <img src="/images/paw-bg-strip.png" alt="" className={styles.pawPicTwo}/>   
+      <img src="/images/paw-bg-strip.png" alt="" className={styles.pawPicOne} />
+      <img src="/images/paw-bg-strip.png" alt="" className={styles.pawPicTwo} />
       <h1 className={styles.h1}>Manage Pets</h1>
       {isValidUser ? (
         <div className={styles.petListContainer}>
-          <button
-            onClick={() => setShowAddModal(true)}
-            className={styles.addButton}
-          >
-            Add Pet
-          </button>
+          <div className={styles.addPetButtonContainer}>
+            <button
+              onClick={() => setShowAddModal(true)}
+              className={styles.addButton}
+            >
+              Add Pet
+            </button>
+          </div>
           {isLoading && <div>Loading...</div>}
           {status === "failed" && <div>{error}</div>}
           {status === "succeeded" && pets.length === 0 && <div>No pets!</div>}
-          {status === "succeeded" &&
-            pets.map((pet) => (
-              <div
-                key={pet.id}
-                onClick={() => handlePetClick(pet.id)}
-                className={styles.petCard}
-              >
-                <div className={styles.petImageBox}>
-                  <img
-                    src={pet.preview_image}
-                    alt={pet.name}
-                    className={styles.petImage}
-                  />
+          <div className={styles.allPetCardsContainer}>
+            {status === "succeeded" &&
+              pets.map((pet) => (
+                <div
+                  key={pet.id}
+                  onClick={() => handlePetClick(pet.id)}
+                  className={styles.petCard}
+                >
+                  <div className={styles.petImageBox}>
+                    <img
+                      src={pet.preview_image}
+                      alt={pet.name}
+                      className={styles.petImage}
+                    />
+                  </div>
+                  <div className={styles.petName}>{pet.name}</div>
                 </div>
-                <div className={styles.petName}>{pet.name}</div>
-              </div>
-            ))}
+              ))}
+          </div>
           {showAddModal && (
             <AddPetModal
               onClose={() => setShowAddModal(false)}

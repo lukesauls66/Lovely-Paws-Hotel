@@ -41,6 +41,9 @@ const BookingsCreatePage = () => {
   // }, [dispatch])
 
   useEffect(() => {
+    // setIsReservationStarted(false);
+    // setTotalCost(null);
+
     const fetchDetails = async () => {
       try {
         await dispatch(fetchPetDetail(petId));
@@ -131,7 +134,78 @@ const BookingsCreatePage = () => {
       const serviceIds = services.map((service) => service.id);
       setSelectedServices(serviceIds);
     }
-  }, [petId, dispatch, reload, isUpdateClicked, isReservationStarted]);
+  }, [petId, dispatch, reload, isUpdateClicked]);
+
+  // useEffect(() => {
+  //   if (isUpdateClicked && currentBooking && currentBooking.booking) {
+  //     const { booking_type, drop_off_date, pick_up_date, services } =
+  //       currentBooking.booking;
+
+  //     const dropOffDateUtc = new Date(drop_off_date); // This should already be in UTC (ISO string with "Z" at the end)
+  //     const pickUpDateUtc = new Date(pick_up_date); // Similarly for pick-up date
+
+  //     // Format the date
+  //     // const formattedDropOffDate = dropOffDateUtc.toLocaleDateString('en-GB', {
+  //     //   weekday: 'short',
+  //     //   day: '2-digit',
+  //     //   month: 'short',
+  //     //   year: 'numeric',
+  //     //   timeZone: 'UTC'  // Ensure formatting in UTC
+  //     // });
+
+  //     // Format the time
+  //     const formattedDropOffTime = dropOffDateUtc.toLocaleTimeString("en-GB", {
+  //       hour: "2-digit",
+  //       minute: "2-digit",
+  //       second: "2-digit",
+  //       hour12: true, // Use 12-hour time format
+  //       timeZone: "UTC", // Ensure time is formatted in UTC
+  //     });
+
+  //     // Format the timezone (GMT offset) and full timezone name
+  //     // const timeZoneOffset = dropOffDateUtc.getTimezoneOffset();  // Offset in minutes
+  //     // const timezoneOffsetHours = Math.abs(timeZoneOffset / 60);
+  //     // const timezoneOffsetMinutes = Math.abs(timeZoneOffset % 60);
+  //     // const timezonePrefix = timeZoneOffset > 0 ? '-' : '+';
+  //     // const formattedTimeZone = `GMT${timezonePrefix}${String(timezoneOffsetHours).padStart(2, '0')}${String(timezoneOffsetMinutes).padStart(2, '0')}`;
+
+  //     // Format pick-up date and time similarly
+  //     // const formattedPickUpDate = pickUpDateUtc.toLocaleDateString('en-GB', {
+  //     //   weekday: 'short',
+  //     //   day: '2-digit',
+  //     //   month: 'short',
+  //     //   year: 'numeric',
+  //     //   timeZone: 'UTC'
+  //     // });
+
+  //     const formattedPickUpTime = pickUpDateUtc.toLocaleTimeString("en-GB", {
+  //       hour: "2-digit",
+  //       minute: "2-digit",
+  //       second: "2-digit",
+  //       hour12: true,
+  //       timeZone: "UTC",
+  //     });
+
+  //     // Now, combine everything into a final display string (for drop-off)
+  //     // const finalFormattedDropOff = `${formattedDropOffDate} ${formattedDropOffTime} ${formattedTimeZone} ${formattedDropOffTime.split(' ')[1]}`;
+
+  //     // Set both the Date objects and formatted strings in state
+  //     setBookingType(booking_type);
+  //     setDropOffDate(dropOffDateUtc); // Store the Date object (raw date) for later use
+  //     setPickUpDate(pickUpDateUtc); // Store the Date object
+  //     setSelectedDate(dropOffDateUtc); // Store the Date object
+  //     setDropOffTime(formattedDropOffTime); // Store the formatted drop-off time
+  //     setPickUpTime(formattedPickUpTime); // Store the formatted pick-up time
+
+  //     // Store formatted date strings as well for display
+  //     // setFormattedDropOffDate(formattedDropOffDate);
+  //     // setFormattedPickUpDate(formattedPickUpDate);
+  //     // setFormattedSelectedDate(formattedDropOffDate);
+
+  //     const serviceIds = services.map((service) => service.id);
+  //     setSelectedServices(serviceIds);
+  //   }
+  // }, [isUpdateClicked, currentBooking]);
 
   const handleDeleteBooking = async () => {
     await dispatch(bookingActions.deleteBooking(booking.id));
