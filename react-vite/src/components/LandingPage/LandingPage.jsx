@@ -153,7 +153,9 @@ function LandingPage() {
             </div>
           </div>
         </div>
-        <img src="/images/cat-10.png" alt="cat" className={lan.catTenPic} />
+        <div className={lan.catTenContainer}>
+          <img src="/images/cat-10.png" alt="cat" className={lan.catTenPic} />
+        </div>
         <div className={lan.petOfMonthBox}>
           <div className={lan.petInfoSide}>
             <h1 className={lan.petOfMonthHeader}>Pet of the Month</h1>
