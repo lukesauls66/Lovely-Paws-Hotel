@@ -31,12 +31,11 @@
 }
 
 .serviceCard {
-  background-color: white;
+  background-color: #f6ead8;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px 10px 20px;
-  background-color: #f6ead8;
   border: 3px solid #333;
   border-radius: 10px;
 }
