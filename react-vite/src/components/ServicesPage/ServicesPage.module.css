@@ -1,25 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap");
 
-/* .servicesMainContainer {
+.servicesMainContainer {
   font-family: "Parkinsans";
   display: flex;
   flex-direction: column;
   align-items: center;
-} */
+}
 
 .h1 {
-  display: none;
-  /* font-family: 'Gaegu', cursive;
+  font-family: "Gaegu", cursive;
   background-color: #f7cb9d;
   width: 600px;
   text-align: center;
   padding: 10px 5px 10px 5px;
   border: 3px solid #fec07e;
   border-radius: 10px;
-  margin-top: 30px; */
+  margin-top: 30px;
 }
 
-/* .allServicesContainer {
+.allServicesContainer {
   gap: 2rem;
   display: flex;
   flex-direction: column;
@@ -58,16 +57,14 @@
 .createServiceBtn:hover {
   box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
   transform: scale(1.05);
-} */
+}
 
 .pawPicOne {
-  display: none;
-  /* position: absolute;
-  left: 20px; */
+  position: absolute;
+  left: 20px;
 }
 
 .pawPicTwo {
-  display: none;
-  /* position: absolute;
-  right: 20px; */
+  position: absolute;
+  right: 20px;
 }

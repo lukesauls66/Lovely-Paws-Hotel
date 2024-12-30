@@ -13,9 +13,47 @@ button {
   /* margin-top: 20px; */
 }
 
-@media (min-width: 320px) and (max-width: 1439px) {
+@media (min-width: 320px) and (max-width: 767px) {
   .dropdownButton {
     font-size: 12px;
+    color: #1c323a;
+    transition: transform 0.2s ease;
+    border: 2px solid #1c323a;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #a1d6d2;
+  }
+
+  .demoButton {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .dropdownButton {
+    font-size: 15px;
+    color: #1c323a;
+    transition: transform 0.2s ease;
+    border: 2px solid #1c323a;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #a1d6d2;
+  }
+
+  .demoButton {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .dropdownButton {
+    font-size: 18px;
     color: #1c323a;
     transition: transform 0.2s ease;
     border: 2px solid #1c323a;

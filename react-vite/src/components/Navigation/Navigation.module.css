@@ -1,4 +1,4 @@
-@media (min-width: 320px) and (max-width: 1439px) {
+@media (min-width: 320px) and (max-width: 767px) {
   .navbarContainer {
     display: flex;
     justify-content: space-between;
@@ -18,7 +18,6 @@
 
   .buttonContainer {
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     gap: 1rem;
   }
@@ -26,14 +25,64 @@
   .homeBtn:hover {
     transform: scale(1.1);
   }
+}
 
-  /* .demoButton {
-    width: 2rem;
+@media (min-width: 768px) and (max-width: 1023px) {
+  .navbarContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border: 5px solid #f7f0e5;
+    border-radius: 12px;
+    background-color: #ebbdb9;
   }
 
-  .profileButton {
-    width: 2rem;
-  } */
+  .homeBtn {
+    width: 110px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .buttonContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .homeBtn:hover {
+    transform: scale(1.1);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .navbarContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    border: 5px solid #f7f0e5;
+    border-radius: 12px;
+    background-color: #ebbdb9;
+  }
+
+  .homeBtn {
+    width: 110px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .buttonContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .homeBtn:hover {
+    transform: scale(1.1);
+  }
 }
 
 @media (min-width: 1440px) {
@@ -41,7 +90,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 30px 20px 30px;
+    padding: 20px 30px;
     border: 5px solid #f7f0e5;
     border-radius: 12px;
     background-color: #ebbdb9;
