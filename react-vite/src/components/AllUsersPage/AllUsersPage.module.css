@@ -1,17 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap');
+
 .mainPageContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  font-family: "Parkinsans";
+}
+
+.h1 {
+  font-family: 'Gaegu', cursive;
+  font-size: 4rem;
+}
+
+.h2 {
+  font-family: 'Gaegu', cursive;
+  font-size: 2.4rem;
 }
 
 .mainUsersContainer {
-  width: 50rem;
+  width: 45rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #f6ead8;
+  border: 3px solid #333;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px;
 }
 
-.allClientsContainer {
+.allClientsContainer,
+.allEmployeesContainer,
+.allManagersContainer {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
+  background-color: #efaca6;
+  border: 3px solid #333;
+  border-radius: 10px;
+  padding-bottom: 20px;
+  margin: 10px;
 }
 
 .allEmployeesContainer {
@@ -29,29 +58,85 @@
 }
 
 .userContainer {
-  background-color: white;
   display: flex;
   justify-content: space-between;
   width: 45rem;
-  /* flex-direction: column; */
-  /* gap: 0.2rem; */
 }
 
-.name {
+.headerRow {
   display: flex;
-  gap: 0.5rem;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 20px;
+  border-bottom: 1px solid #f6ead8;
+  padding: 5px 20px 5px 20px;
 }
 
-.email {
-  display: flex;
-  gap: 0.5rem;
+.header {
+  text-align: left;
+  padding-left: 10px;
 }
 
-.phoneNum {
+.header.name {
+  flex: 1;
+}
+
+.header.email {
+  flex: 2;
+}
+
+.header.phone {
+  flex: 1;
+}
+
+.userRow {
   display: flex;
-  gap: 0.5rem;
+  padding: 5px 0;
+  gap: 20px;
+}
+
+.userRow > div {
+  text-align: left;
+  padding-left: 10px;
+  font-size: 18px;
+}
+
+.userRow > .name {
+  flex: 1;
+}
+
+.userRow > .email {
+  flex: 2;
+}
+
+.userRow > .phone {
+  flex: 1;
 }
 
 .ptags {
   margin: 0;
+}
+
+.pawPicOne {
+  position: absolute;
+  top: 200px;
+  left: 20px;
+}
+
+.pawPicTwo {
+  position: absolute;
+  top: 200px;
+  right: 20px;
+}
+
+.pawPicThree {
+  position: absolute;
+  top: 1150px;
+  left: 20px;
+}
+
+.pawPicFour {
+  position: absolute;
+  top: 1150px;
+  right: 20px;
 }

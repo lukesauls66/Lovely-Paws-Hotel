@@ -55,7 +55,10 @@ function ServicesPage() {
   if (errors) return <div>Error: {errors}</div>;
 
   return (
-    <div>
+    <div className={serv.servicesMainContainer}>
+      <h1 className={serv.h1}>OUR DEDICATED TEAM MEMBERS OFFER THE VERY BEST FOR YOUR PET</h1>
+      <img src="/images/paw-bg-strip.png" alt="" className={serv.pawPicOne}/>
+      <img src="/images/paw-bg-strip.png" alt="" className={serv.pawPicTwo}/>
       {isOwnerorManager ? (
         <div>
           <div>
@@ -63,14 +66,19 @@ function ServicesPage() {
               <div className={serv.allServicesContainer}>
                 {services.map((service) => {
                   return (
-                    <div key={service.id} className={serv.serviceContainer}>
-                      <div>
-                        {service.service}, {service.price}
+                    <div key={service.id} className={serv.serviceCard}>
+                      <div className={serv.infoBox}>
+                        <div className={serv.serviceName}>
+                          {service.service}
+                        </div>
+                        <div className={serv.servicePrice}>
+                          {service.price}
+                        </div>
                       </div>
-                      <div>
+                      <div className={serv.staffBox}>
                         {service.staff.map((member) => {
                           return (
-                            <div key={member.id}>
+                            <div key={member.id} className={serv.staffMember}>
                               {member.fname} {member.lname}
                             </div>
                           );
@@ -90,7 +98,10 @@ function ServicesPage() {
               <div>No services available</div>
             )}
           </div>
-          <button onClick={() => setIsFormOpen(true)}>Create a Service</button>
+          <button 
+            className={serv.createServiceBtn}
+            onClick={() => setIsFormOpen(true)}>Create a Service
+          </button>
         </div>
       ) : (
         <div>
@@ -99,14 +110,19 @@ function ServicesPage() {
               <div className={serv.allServicesContainer}>
                 {services.map((service) => {
                   return (
-                    <div key={service.id} className={serv.serviceContainer}>
-                      <div>
-                        {service.service}, {service.price}
+                    <div key={service.id} className={serv.serviceCard}>
+                      <div className={serv.infoBox}>
+                        <div className={serv.serviceName}>
+                          {service.service}
+                        </div>
+                        <div className={serv.servicePrice}>
+                          {service.price}
+                        </div>                       
                       </div>
-                      <div>
+                      <div className={serv.staffBox}>
                         {service.staff.map((member) => {
                           return (
-                            <div key={member.id}>
+                            <div key={member.id} className={serv.staffMember}>
                               {member.fname} {member.lname}
                             </div>
                           );
