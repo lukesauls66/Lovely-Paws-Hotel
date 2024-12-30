@@ -60,9 +60,12 @@ button {
   padding: 20px;
   z-index: 1000;
   min-width: 150px;
+  max-width: 300px;
   font-family: "Gaegu", cursive;
   font-size: 30px;
   text-align: center;
+  white-space: normal;
+  overflow: visible; 
 }
 
 .modalButtonContainer {
@@ -71,8 +74,8 @@ button {
   justify-content: space-evenly;
   align-items: center;
   gap: 10px;
-  width: 190px;
-  height: 200px;
+  width: 100%; 
+  height: auto; 
   background-color: #a1d6d2;
 }
 
@@ -80,15 +83,16 @@ button {
   all: unset;
   background-color: #efaca6;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 30px;
   border: 3px solid #f7f0e5;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  width: 100px;
-  height: 40px;
+  width: 100%; 
+  box-sizing: border-box; 
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 10px;
 }
 
 .modalButton:hover {

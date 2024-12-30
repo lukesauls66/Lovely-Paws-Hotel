@@ -76,7 +76,7 @@ function LandingPage() {
         </div>
         {currentUser ? null : (
           <div className={lan.demoButton}>
-            <DemoButton /> {/* Add DemoButton */}
+            <DemoButton /> 
           </div>
         )}
       </div>
