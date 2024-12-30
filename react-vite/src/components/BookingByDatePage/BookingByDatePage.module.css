@@ -111,6 +111,5 @@
 }
 
 .pastDate:hover {
-  background-color: #f4f4f4;
-  color: #aaa;
+  cursor: none;
 }

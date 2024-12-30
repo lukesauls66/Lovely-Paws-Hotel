@@ -40,7 +40,8 @@ export const getBookingByPetId = createAsyncThunk(
     try {
       const res = await fetch(`/api/bookings/pet/${petId}`);
       const data = await res.json();
-      return data;
+      console.log('redux > ', data.booking);
+      return data.booking;
     } catch (error) {
       return rejectWithValue(
         error.message || "Trouble getting Booking by Pet Id"
@@ -166,7 +167,9 @@ export const deleteBooking = createAsyncThunk(
 const bookingSlice = createSlice({
   name: "booking",
   initialState,
-  reducers: {},
+  reducers: {
+    resetBooking: (state) => {state.booking = null}
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllBookings.pending, (state) => {
@@ -268,4 +271,5 @@ const bookingSlice = createSlice({
   },
 });
 
+export const { resetBooking } = bookingSlice.actions
 export default bookingSlice.reducer;
