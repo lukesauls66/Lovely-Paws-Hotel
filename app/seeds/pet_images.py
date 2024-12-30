@@ -7,15 +7,15 @@ def seed_pet_images():
         PetImage(pet_id=1, url='https://i.ibb.co/KL7GStk/king-2.jpg'),
         PetImage(pet_id=1, url='https://i.ibb.co/Db3HzsT/king-3.jpg'),
         
-        PetImage(pet_id=2, url='https://i.ibb.co/Yd1NHXF/Kilo-2.jpg'),
-        PetImage(pet_id=2, url='https://i.ibb.co/8XDm0vD/Kilo-3.jpg'),
-        PetImage(pet_id=2, url='https://i.ibb.co/9Y0XpfT/Kilo-4.jpg'),
-        PetImage(pet_id=2, url='https://i.ibb.co/mhh9jLK/Kilo-5.jpg'),
+        PetImage(pet_id=2, url='https://i.ibb.co/60JFM5b/Kilo-2.png'),
+        PetImage(pet_id=2, url='https://i.ibb.co/kSMJ9rw/Kilo-3.png'),
+        PetImage(pet_id=2, url='https://i.ibb.co/Lxtwjgh/Kilo-4.png'),
+        PetImage(pet_id=2, url='https://i.ibb.co/gw0mZnZ/Kilo-5.jpg'),
         
-        PetImage(pet_id=3, url='https://i.ibb.co/TKB7sSz/Zeus-4.jpg'),
-        PetImage(pet_id=3, url='https://i.ibb.co/xsyrMpy/Zeus-3.jpg'),
-        PetImage(pet_id=3, url='https://i.ibb.co/mcC62Bw/Zeus-2.jpg'),
-        PetImage(pet_id=3, url='https://i.ibb.co/NTCQXRG/Zeus-1.jpg'),
+        PetImage(pet_id=3, url='https://i.ibb.co/nsbqBk0/Zeus-4.png'),
+        PetImage(pet_id=3, url='https://i.ibb.co/4KssNzG/Zeus-3.png'),
+        PetImage(pet_id=3, url='https://i.ibb.co/cQG55dB/Zeus-2.png'),
+        PetImage(pet_id=3, url='https://i.ibb.co/p4h44Cb/Zeus-1.png'),
         
         PetImage(pet_id=4, url='https://i.ibb.co/FhVrF1W/Alex-dog-5.jpg'),
         PetImage(pet_id=4, url='https://i.ibb.co/yp3LktJ/Alex-dog-3.jpg'),
@@ -24,8 +24,8 @@ def seed_pet_images():
         
         PetImage(pet_id=5, url='https://i.ibb.co/4tWrTwH/bella-4.jpg'),
         PetImage(pet_id=5, url='https://i.ibb.co/1dBJ6pQ/bella-3.jpg'),
-        PetImage(pet_id=5, url='https://i.ibb.co/D8z280F/bella-1.jpg'),
-        PetImage(pet_id=5, url='https://i.ibb.co/HTDsCJR/bella-2.jpg'),
+        PetImage(pet_id=5, url='https://i.ibb.co/wSZRbKk/bella-1.png'),
+        PetImage(pet_id=5, url='https://i.ibb.co/KrZh4ks/bella-5.png'),
         
         PetImage(pet_id=6, url='https://i.ibb.co/JpjF8DV/cosmo-2.jpg'),
         PetImage(pet_id=6, url='https://i.ibb.co/xCWP2kb/cosmo-3.jpg'),
