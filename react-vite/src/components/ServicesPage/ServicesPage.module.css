@@ -1,24 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap");
 
-.servicesMainContainer {
+/* .servicesMainContainer {
   font-family: "Parkinsans";
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 
 .h1 {
-  font-family: 'Gaegu', cursive;
+  display: none;
+  /* font-family: 'Gaegu', cursive;
   background-color: #f7cb9d;
   width: 600px;
   text-align: center;
   padding: 10px 5px 10px 5px;
   border: 3px solid #fec07e;
   border-radius: 10px;
-  margin-top: 30px;
+  margin-top: 30px; */
 }
 
-.allServicesContainer {
+/* .allServicesContainer {
   gap: 2rem;
   display: flex;
   flex-direction: column;
@@ -48,7 +49,7 @@
   border: 3px solid #f7f0e5;
   border-radius: 12px;
   font-size: 1.2rem;
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
   background-color: #a1d6d2;
@@ -57,14 +58,16 @@
 .createServiceBtn:hover {
   box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
   transform: scale(1.05);
-}
+} */
 
 .pawPicOne {
-  position: absolute;
-  left: 20px;
+  display: none;
+  /* position: absolute;
+  left: 20px; */
 }
 
 .pawPicTwo {
-  position: absolute;
-  right: 20px;
+  display: none;
+  /* position: absolute;
+  right: 20px; */
 }
