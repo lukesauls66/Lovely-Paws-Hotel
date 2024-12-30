@@ -18,7 +18,7 @@ def seed_pets():
             behavior='calm',
             medication_note='',
             dietary_note='Prefers grain-free food',
-            preview_image='https://i.ibb.co/VWZQHw0/king-4.jpg',
+            preview_image='https://i.ibb.co/KKJRh0s/king-4.png',
             owner_id=5
         ),
         Pet(
@@ -34,7 +34,7 @@ def seed_pets():
             behavior='aggresive',
             medication_note='',
             dietary_note='Prefers wet food',
-            preview_image='https://i.ibb.co/vzk1qs4/Kilo-1.jpg',
+            preview_image='https://i.ibb.co/prDb4np/Kilo-1.png',
             owner_id=6
         ),
         Pet(
@@ -50,7 +50,7 @@ def seed_pets():
             behavior='playful',
             medication_note='Takes daily supplements for joints',
             dietary_note='',
-            preview_image='https://i.ibb.co/mT460k3/Zeus-5.jpg',
+            preview_image='https://i.ibb.co/RhfnWz8/Zeus-5.png',
             owner_id=7
         ),
         Pet(
@@ -82,7 +82,7 @@ def seed_pets():
             behavior='playful',
             medication_note='',
             dietary_note='',
-            preview_image='https://i.ibb.co/0GLHT9W/bella-5.jpg',
+            preview_image='https://i.ibb.co/bXPhRLQ/bella-2.png',
             owner_id=7
         ),
         Pet(
