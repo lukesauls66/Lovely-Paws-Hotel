@@ -14,13 +14,15 @@ function Navigation() {
           <img src="/images/hotel.png" alt="Home" className={nav.homeBtn} />
         </NavLink>
       </div>
-      {currentUser ? null : (
-        <div>
-          <DemoButton /> {/* Add DemoButton */}
+      <div className={nav.buttonContainer}>
+        {currentUser ? null : (
+          <div className={nav.demoButton}>
+            <DemoButton /> {/* Add DemoButton */}
+          </div>
+        )}
+        <div className={nav.profileButton}>
+          <ProfileButton />
         </div>
-      )}
-      <div>
-        <ProfileButton />
       </div>
     </div>
   );
