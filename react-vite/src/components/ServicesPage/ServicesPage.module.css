@@ -1,69 +1,409 @@
 @import url("https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap");
 
-.servicesMainContainer {
-  font-family: "Parkinsans";
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+@media (min-width: 320px) and (max-width: 599px) {
+  .servicesMainContainer {
+    font-family: "Parkinsans";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .h1 {
+    font-family: "Gaegu", cursive;
+    background-color: #f7cb9d;
+    width: 275px;
+    text-align: center;
+    padding: 10px 5px;
+    border: 3px solid #fec07e;
+    border-radius: 10px;
+    margin-top: 30px;
+    font-size: 22px;
+  }
+
+  .allServicesContainer {
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #ebbdb9;
+    border: 3px solid #333;
+    border-radius: 12px;
+    padding: 20px 20px; 
+    margin: 20px;
+    width: 230px; 
+  }
+
+  .serviceCard {
+    background-color: #f6ead8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px; 
+    border: 3px solid #333;
+    border-radius: 10px;
+  }
+
+  .infoBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .serviceName {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: underline;
+  }
+
+  .servicePrice {
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .staffBox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+  }
+
+  .staffMember {
+    background-color: #f6ead8;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .staffMember::before {
+    content: "•"; 
+    position: absolute;
+    left: 5px;
+    color: #333;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .buttonContainer button {
+    padding: 10px 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #a1d6d2;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .buttonContainer button:hover {
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+  }
+
+  .createServiceBtn {
+    display: flex;
+    justify-self: center;
+    padding: 20px;
+    border: 3px solid #f7f0e5;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    background-color: #a1d6d2;
+  }
+
+  .createServiceBtn:hover {
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+  }
+
+  .pawPicOne {
+    display: none;
+  }
+
+  .pawPicTwo {
+    display: none;
+  }
 }
 
-.h1 {
-  font-family: "Gaegu", cursive;
-  background-color: #f7cb9d;
-  width: 600px;
-  text-align: center;
-  padding: 10px 5px 10px 5px;
-  border: 3px solid #fec07e;
-  border-radius: 10px;
-  margin-top: 30px;
+
+@media (min-width: 600px) and (max-width: 1429px) {
+  .servicesMainContainer {
+    font-family: "Parkinsans";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .h1 {
+    font-family: "Gaegu", cursive;
+    background-color: #f7cb9d;
+    width: 520px;
+    text-align: center;
+    padding: 10px 5px;
+    border: 3px solid #fec07e;
+    border-radius: 10px;
+    margin-top: 30px;
+  }
+
+  .allServicesContainer {
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #ebbdb9;
+    border: 3px solid #333;
+    border-radius: 12px;
+    padding: 20px 20px; 
+    margin: 20px;
+    width: 520px; 
+  }
+
+  .serviceCard {
+    background-color: #f6ead8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px; 
+    border: 3px solid #333;
+    border-radius: 10px;
+  }
+
+  .infoBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .serviceName {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: underline;
+  }
+
+  .servicePrice {
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .staffBox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+  }
+
+  .staffMember {
+    background-color: #f6ead8;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .staffMember::before {
+    content: "•"; 
+    position: absolute;
+    left: 5px;
+    color: #333;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+    gap: 14px;
+  }
+
+  .buttonContainer button {
+    padding: 10px 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #a1d6d2;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .buttonContainer button:hover {
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+  }
+
+  .createServiceBtn {
+    display: flex;
+    justify-self: center;
+    padding: 20px;
+    border: 3px solid #f7f0e5;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    background-color: #a1d6d2;
+  }
+
+  .createServiceBtn:hover {
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+  }
+
+  .pawPicOne {
+    display: none;
+    position: absolute;
+    left: 20px;
+  }
+
+  .pawPicTwo {
+    display: none;
+    position: absolute;
+    right: 20px;
+  }
 }
 
-.allServicesContainer {
-  gap: 2rem;
-  display: flex;
-  flex-direction: column;
-  background-color: #ebbdb9;
-  border: 3px solid #333;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 20px;
-  width: 800px;
-}
 
-.serviceCard {
-  background-color: #f6ead8;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px 10px 20px;
-  border: 3px solid #333;
-  border-radius: 10px;
-}
+@media (min-width: 1430px) {
+  .servicesMainContainer {
+    font-family: "Parkinsans";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('/images/paw-bg-strip.png'), url('/images/paw-bg-strip.png');
+    background-repeat: repeat-y;
+    background-position: left 20px, right 20px;
+    background-size: auto;
+  }
 
-.createServiceBtn {
-  display: flex;
-  justify-self: center;
-  padding: 20px;
-  border: 3px solid #f7f0e5;
-  border-radius: 12px;
-  font-size: 1.2rem;
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
-  background-color: #a1d6d2;
-}
+  .h1 {
+    font-family: "Gaegu", cursive;
+    background-color: #f7cb9d;
+    width: 600px; 
+    text-align: center;
+    padding: 10px 5px;
+    border: 3px solid #fec07e;
+    border-radius: 10px;
+    margin-top: 30px;
+  }
 
-.createServiceBtn:hover {
-  box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
-  transform: scale(1.05);
-}
+  .allServicesContainer {
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #ebbdb9;
+    border: 3px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px;
+    width: 800px;
+  }
 
-.pawPicOne {
-  position: absolute;
-  left: 20px;
-}
+  .serviceCard {
+    background-color: #f6ead8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 40px; 
+    border: 3px solid #333;
+    border-radius: 10px;
+  }
 
-.pawPicTwo {
-  position: absolute;
-  right: 20px;
+  .infoBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .serviceName {
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: underline;
+  }
+
+  .servicePrice {
+    font-size: 1.2rem;
+    color: #333;
+    padding-top: 10px;
+  }
+
+  .staffBox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    padding-bottom: 10px;
+  }
+
+  .staffMember {
+    background-color: #f6ead8;
+    border:none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    position: relative;
+    padding-left: 20px;
+    font-size: 1.2rem;
+  }
+
+  .staffMember::before {
+    content: "•"; 
+    position: absolute;
+    left: 5px;
+    color: #333;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    width: 100%;
+    gap: 25px;
+    padding-bottom: 20px;
+  }
+
+  .buttonContainer button {
+    padding: 10px 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #a1d6d2;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .buttonContainer button:hover {
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+  }
+
+  .createServiceBtn {
+    display: flex;
+    justify-self: center;
+    padding: 20px;
+    border: 3px solid #f7f0e5;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    background-color: #a1d6d2;
+  }
+
+  .createServiceBtn:hover {
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+  }
+
+  .pawPicOne {
+  display: none;
+  }
+
+  .pawPicTwo {
+   display: none;
+  }
 }
