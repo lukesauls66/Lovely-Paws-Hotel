@@ -56,6 +56,8 @@ const BookingByDatePage = () => {
   return (
     <div className={bdt.mainContainer}>
       <h1 className={bdt.h1}>Services by Date</h1>
+      {/* <img src="/images/paw-bg-strip.png" alt="" className={bdt.pawPicOne} />
+      <img src="/images/paw-bg-strip.png" alt="" className={bdt.pawPicTwo} /> */}
       <h2 className={bdt.title}>Choose a date to list the services</h2>
       <h2 className={bdt.title}>Selected Date: {selectedDate}</h2>
 
@@ -78,22 +80,30 @@ const BookingByDatePage = () => {
               const petName = pets[book.pet_id - 1]?.name;
               return (
                 <div key={book.id}>
-                  <p className={bdt.serviceByDateDetail}>Pet Name: {petName}</p>
+                  <div className={bdt.petName}>
+                    <p className={bdt.serviceByDateDetail}>
+                      Pet Name: {petName}
+                    </p>
+                  </div>
                   <p className={bdt.serviceByDateDetail}>
-                    Booking Type: {book.booking_type}
+                    Booking Type: <br /> {book.booking_type}
                   </p>
                   <p className={bdt.serviceByDateDetail}>
-                    Drop Off Date and Time: {book.drop_off_date}
+                    Drop Off Date and Time: <br /> {book.drop_off_date}
                   </p>
                   <p className={bdt.serviceByDateDetail}>
-                    Pick Up Date and Time: {book.pick_up_date}
+                    Pick Up Date and Time: <br /> {book.pick_up_date}
                   </p>
                   <p>List of Services:</p>
-                  {book.services.map((serve) => (
-                    <p key={serve.id}>
-                      <p className={bdt.serviceByDateDetail}>{serve.service}</p>
-                    </p>
-                  ))}
+                  <div className={bdt.servicesList}>
+                    {book.services.map((serve) => (
+                      <p key={serve.id}>
+                        <p className={bdt.serviceByDateDetail}>
+                          {serve.service}
+                        </p>
+                      </p>
+                    ))}
+                  </div>
                 </div>
               );
             })}
