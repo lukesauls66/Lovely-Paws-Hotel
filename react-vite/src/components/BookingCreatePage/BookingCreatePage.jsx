@@ -36,7 +36,6 @@ const BookingsCreatePage = () => {
     return date;
   }, []);
 
-
   // Effect to fetch pet details
   useEffect(() => {
     const fetchDetails = async () => {
@@ -110,7 +109,7 @@ const BookingsCreatePage = () => {
       const { booking_type, drop_off_date, pick_up_date, services } = booking;
 
       const timeZoneOffsetInMinutes = new Date().getTimezoneOffset();
-      const timeZoneOffsetInHours = timeZoneOffsetInMinutes / 60
+      const timeZoneOffsetInHours = timeZoneOffsetInMinutes / 60;
 
       const newDateDropOff = new Date(drop_off_date);
       newDateDropOff.setMinutes(0);
@@ -120,7 +119,9 @@ const BookingsCreatePage = () => {
         hour12: false, // Use 12-hour time format
         timeZone: "UTC", // Ensure time is formatted in UTC
       });
-      newDateDropOff.setHours(newDateDropOff.getHours() + timeZoneOffsetInHours);
+      newDateDropOff.setHours(
+        newDateDropOff.getHours() + timeZoneOffsetInHours
+      );
 
       const newDatePickUp = new Date(pick_up_date);
       newDatePickUp.setMinutes(0);
@@ -143,7 +144,6 @@ const BookingsCreatePage = () => {
       setSelectedServices(serviceIds);
     }
   }, [isUpdateClicked, booking]); // Run when either isUpdateClicked or booking changes
-
 
   const handleDeleteBooking = async () => {
     await dispatch(bookingActions.deleteBooking(booking.id));
@@ -211,7 +211,6 @@ const BookingsCreatePage = () => {
 
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
-
       if (date < today) {
         return bcp.pastDate; // Past dates
       }
@@ -231,7 +230,7 @@ const BookingsCreatePage = () => {
         // Highlight dates within the range including drop-off and pick-up dates
         if (date >= startDate && date <= endDate) {
           if (date.getDay() === 0 || date.getDay() === 6) {
-            return bcp.weekendInRange
+            return bcp.weekendInRange;
           }
           return bcp.dateRange; // Highlight the entire range between drop-off and pick-up
         }
@@ -267,7 +266,9 @@ const BookingsCreatePage = () => {
         setIsFirstDate(true);
       } else {
         if (date <= dropOffDate) {
-          alert('Pick-Up Date must be after Drop-Off Date or click the Boarding Care again');
+          alert(
+            "Pick-Up Date must be after Drop-Off Date or click the Boarding Care again"
+          );
           setPickUpDate(null);
         } else {
           setPickUpDate(date);
@@ -339,220 +340,251 @@ const BookingsCreatePage = () => {
 
   return (
     <>
-    {loadingPetDetails ? (
-      <div className={bcp.loading}>Loading...</div>
-    ) : (
-      <div className={bcp.mainContainer}>
-        <h1 className={bcp.h1}>Book Reservation</h1>
-        <h2 className={bcp.petName}>Name: {pet.name}</h2>
-        {!isUpdateClicked && booking ? (
-          <div className={bcp.currBookContainer}>
-            <h2 className={bcp.currBookTitle}>Current Reservation Information</h2>
-            <p className={bcp.currBookType}>Type: {booking.booking_type}</p>
-            <p className={bcp.currBookDates}>
-              Date(s):{" "}
-              {booking.date_off_date ||
-                `${formatDateTime(booking.drop_off_date)} - ${formatDateTime(
-                  booking.pick_up_date
-                )}`}
-            </p>
-            <p className={bcp.currBookDates}>Number of Days: {totalDays}</p>
-            <div className={bcp.currServicesContainer}>
-              <p className={bcp.currServicesDetail}>
-                Daily Cost: ${booking.daily_price}
+      {loadingPetDetails ? (
+        <div className={bcp.loading}>Loading...</div>
+      ) : (
+        <div className={bcp.mainContainer}>
+          <h1 className={bcp.h1}>Book Reservation</h1>
+          <h2 className={bcp.petName}>Name: {pet.name}</h2>
+          {!isUpdateClicked && booking ? (
+            <div className={bcp.currBookContainer}>
+              <h2 className={bcp.currBookTitle}>
+                Current Reservation Information
+              </h2>
+              <p className={bcp.currBookType}>Type: {booking.booking_type}</p>
+              <p className={bcp.currBookDates}>
+                Date(s):{" "}
+                {booking.date_off_date ||
+                  `${formatDateTime(booking.drop_off_date)} - ${formatDateTime(
+                    booking.pick_up_date
+                  )}`}
               </p>
-              {booking?.services?.map((service) => (
-                <div key={service.id}>
-                  <p className={bcp.currServicesDetail}>
-                    {service.service}: ${service.price}
-                  </p>
-                </div>
-              ))}
-              <h3 className={bcp.currServiceDetail}>Total Cost: ${totalCost}</h3>
-            </div>
-            {isReservationStarted && (
-              <h3 className={bcp.reserveStartedMsg}>
-                Reservation has started, cannot Update & Delete
-              </h3>
-            )}
-            <button
-              className={bcp.currBookBtnUpdate}
-              onClick={handleUpdateBooking}
-              disabled={isReservationStarted}
-            >
-              Update
-            </button>
-            <button
-              className={bcp.currBookBtnDelete}
-              onClick={handleDeleteBooking}
-              disabled={isReservationStarted}
-            >
-              Delete
-            </button>
-          </div>
-        ) : (
-          <>
-            <div className={bcp.bookTypeBtnContainer}>
+              <p className={bcp.currBookDates}>Number of Days: {totalDays}</p>
+              <div className={bcp.currServicesContainer}>
+                <p className={bcp.currServicesDetail}>
+                  Daily Cost: ${booking.daily_price}
+                </p>
+                {booking?.services?.map((service) => (
+                  <div key={service.id}>
+                    <p className={bcp.currServicesDetail}>
+                      {service.service}: ${service.price}
+                    </p>
+                  </div>
+                ))}
+                <h3 className={bcp.currServiceDetail}>
+                  Total Cost: ${totalCost}
+                </h3>
+              </div>
+              {isReservationStarted && (
+                <h3 className={bcp.reserveStartedMsg}>
+                  Reservation has started, cannot Update & Delete
+                </h3>
+              )}
               <button
-                className={bcp.bookDayCareBtn}
-                onClick={() => handleBookingTypeSelection("day_care")}
+                className={bcp.currBookBtnUpdate}
+                onClick={handleUpdateBooking}
+                disabled={isReservationStarted}
               >
-                Day Care
+                Update
               </button>
               <button
-                className={bcp.bookBrdCareBtn}
-                onClick={() => handleBookingTypeSelection("boarding_care")}
+                className={bcp.currBookBtnDelete}
+                onClick={handleDeleteBooking}
+                disabled={isReservationStarted}
               >
-                Boarding Care
+                Delete
               </button>
             </div>
+          ) : (
+            <>
+              <div className={bcp.bookTypeBtnContainer}>
+                <button
+                  className={bcp.bookBtn}
+                  onClick={() => handleBookingTypeSelection("day_care")}
+                >
+                  Day Care
+                </button>
+                <button
+                  className={bcp.bookBtn}
+                  onClick={() => handleBookingTypeSelection("boarding_care")}
+                >
+                  Boarding Care
+                </button>
+              </div>
 
-            <div className={bcp.bookReservationWrapper}>
-              {/* Conditional Date Selection Based on Booking Type */}
-              {bookingType && (
-                <div className={bcp.calendarContainer}>
-                  <h3 className={bcp.calendarMainTitle}>Select Dates</h3>
-
-                  {/* Only show one calendar for day_care */}
-                  {bookingType === "day_care" && (
-                    <div className={bcp.calendarWrapperDayCare}>
-                      <Calendar
-                        onChange={handleDateSelection}
-                        value={selectedDate}
-                        className={bcp.calendarDropDate}
-                        locale="en-US"
-                        showNeighboringMonth={false}
-                        minDate={today}
-                        tileClassName={tileClassName}
-                      />
+              <div className={bcp.bookReservationWrapper}>
+                {/* Conditional Date Selection Based on Booking Type */}
+                {bookingType && (
+                  <div className={bcp.calendarContainer}>
+                    <div className={bcp.h3Div}>
+                      <h3 className={bcp.calendarMainTitle}>Select Dates</h3>
                     </div>
-                  )}
 
-                  {bookingType === "boarding_care" && (
-                    <div className={bcp.calendarContainerBoardingCare}>
-                      <h3>Drop-Off and Pick-Up Date</h3>
-
-                      {/* First calendar for current month */}
-                      <div className={bcp.calendarWrapperBoardingCare}>
+                    {/* Only show one calendar for day_care */}
+                    {bookingType === "day_care" && (
+                      <div className={bcp.calendarWrapperDayCare}>
                         <Calendar
                           onChange={handleDateSelection}
-                          value={dropOffDate || pickUpDate} // Either drop-off or pick-up can be selected
-                          className={bcp.calendarDropOff}
+                          value={selectedDate}
+                          className={bcp.calendarDropDate}
                           locale="en-US"
                           showNeighboringMonth={false}
                           minDate={today}
-                          tileClassName={tileClassName} // Apply custom tile classes for past dates and selected date
+                          tileClassName={tileClassName}
                         />
+                      </div>
+                    )}
+
+                    {bookingType === "boarding_care" && (
+                      <div className={bcp.calendarContainerBoardingCare}>
+                        <div className={bcp.h3Div}>
+                          <h3>Drop-Off and Pick-Up Date</h3>
+                        </div>
+
+                        {/* First calendar for current month */}
+                        <div className={bcp.calendarWrapperBoardingCare}>
+                          <Calendar
+                            onChange={handleDateSelection}
+                            value={dropOffDate || pickUpDate} // Either drop-off or pick-up can be selected
+                            className={bcp.calendarDropOff}
+                            locale="en-US"
+                            showNeighboringMonth={false}
+                            minDate={today}
+                            tileClassName={tileClassName} // Apply custom tile classes for past dates and selected date
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Show selected dates */}
+                    <div className={bcp.dateCofirmation}>
+                      <p className={bcp.selectionDate}>
+                        {bookingType === "day_care" ? (
+                          `Selected Date: ${
+                            selectedDate
+                              ? selectedDate.toLocaleDateString()
+                              : "None"
+                          }`
+                        ) : (
+                          <>
+                            {`Drop-Off Date: ${
+                              dropOffDate
+                                ? dropOffDate.toLocaleDateString()
+                                : "None"
+                            }`}
+                            <br />
+                            <br />
+                            {`Pick-Up Date: ${
+                              pickUpDate
+                                ? pickUpDate.toLocaleDateString()
+                                : "None"
+                            }`}
+                          </>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {(selectedDate || (dropOffDate && pickUpDate)) && (
+                  <div className={bcp.selectTimesContainer}>
+                    <div className={bcp.h3Div}>
+                      <h3 className={bcp.selectTimesTitle}>Select Times</h3>
+                    </div>
+                    <div className={bcp.timeOptions}>
+                      {/* Drop-Off Time Selection */}
+                      <div className={bcp.dropOffContainer}>
+                        <label className={bcp.dropOffTitle}>
+                          Drop-Off Time:
+                        </label>
+                        <select
+                          className={bcp.dropOffInput}
+                          value={dropOffTime || ""}
+                          onChange={(e) => setDropOffTime(e.target.value)}
+                        >
+                          <option value="" disabled>
+                            Select a time
+                          </option>
+                          {Array.from({ length: 13 }, (_, i) => 6 + i).map(
+                            (hour) => (
+                              <option
+                                key={hour}
+                                value={`${hour.toString().padStart(2, "0")}:00`}
+                              >
+                                {`${hour.toString().padStart(2, "0")}:00`}
+                              </option>
+                            )
+                          )}
+                        </select>
+                      </div>
+
+                      {/* Pick-Up Time Selection */}
+                      <div className={bcp.pickUpContainer}>
+                        <label className={bcp.pickUpTitle}>Pick-Up Time:</label>
+                        <select
+                          className={bcp.pickUpInput}
+                          value={pickUpTime || ""}
+                          onChange={(e) => setPickUpTime(e.target.value)}
+                        >
+                          <option value="" disabled>
+                            Select a time
+                          </option>
+                          {Array.from({ length: 12 }, (_, i) => 7 + i).map(
+                            (hour) => (
+                              <option
+                                key={hour}
+                                value={`${hour.toString().padStart(2, "0")}:00`}
+                              >
+                                {`${hour.toString().padStart(2, "0")}:00`}
+                              </option>
+                            )
+                          )}
+                        </select>
                       </div>
                     </div>
-                  )}
-
-                  {/* Show selected dates */}
-                  <p className={bcp.selectionDate}>
-                    {bookingType === "day_care" ? (
-                      `Selected Date: ${
-                        selectedDate ? selectedDate.toLocaleDateString() : "None"
-                      }`
-                    ) : (
-                      <>
-                        {`Drop-Off Date: ${
-                          dropOffDate ? dropOffDate.toLocaleDateString() : "None"
-                        }`}
-                        <br />
-                        {`Pick-Up Date: ${
-                          pickUpDate ? pickUpDate.toLocaleDateString() : "None"
-                        }`}
-                      </>
-                    )}
-                  </p>
-                </div>
-              )}
-
-              {(selectedDate || (dropOffDate && pickUpDate)) && (
-                <div className={bcp.selectTimesContainer}>
-                  <h3 className={bcp.selectTimesTitle}>Select Times</h3>
-
-                  {/* Drop-Off Time Selection */}
-                  <div className={bcp.dropOffContainer}>
-                    <label className={bcp.dropOffTitle}>Drop-Off Time:</label>
-                    <select
-                      className={bcp.dropOffInput}
-                      value={dropOffTime || ""}
-                      onChange={(e) => setDropOffTime(e.target.value)}
-                    >
-                      <option value="" disabled>
-                        Select a time
-                      </option>
-                      {Array.from({ length: 13 }, (_, i) => 6 + i).map((hour) => (
-                        <option
-                          key={hour}
-                          value={`${hour.toString().padStart(2, "0")}:00`}
-                        >
-                          {`${hour.toString().padStart(2, "0")}:00`}
-                        </option>
-                      ))}
-                    </select>
                   </div>
+                )}
 
-                  {/* Pick-Up Time Selection */}
-                  <div className={bcp.pickUpContainer}>
-                    <label className={bcp.pickUpTitle}>Pick-Up Time:</label>
-                    <select
-                      className={bcp.pickUpInput}
-                      value={pickUpTime || ""}
-                      onChange={(e) => setPickUpTime(e.target.value)}
-                    >
-                      <option value="" disabled>
-                        Select a time
-                      </option>
-                      {Array.from({ length: 12 }, (_, i) => 7 + i).map((hour) => (
-                        <option
-                          key={hour}
-                          value={`${hour.toString().padStart(2, "0")}:00`}
-                        >
-                          {`${hour.toString().padStart(2, "0")}:00`}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              )}
-
-              {dropOffTime && pickUpTime && (
-                <div className={bcp.serviceListContainer}>
-                  <h3 className={bcp.serviceListTitle}>Select Services</h3>
-                  <p>Need to choose at least of the services</p>
-                  <div>
-                    {servicesArr.map((service) => (
-                      <div key={service.id}>
-                        <input
-                          type="checkbox"
-                          id={`service-${service.id}`}
-                          name="service"
-                          value={service.id}
-                          checked={selectedServices.includes(service.id)}
-                          onChange={handleServiceChange}
-                        />
-                        <label htmlFor={`service-${service.id}`}>
-                          {service.service}
-                        </label>
+                {dropOffTime && pickUpTime && (
+                  <div className={bcp.serviceListContainer}>
+                    <div className={bcp.h3Div}>
+                      <h3 className={bcp.serviceListTitle}>Select Services</h3>
+                    </div>
+                    <div className={bcp.innerServiceListContainer}>
+                      <div className={bcp.servicesOptions}>
+                        <p>Need to choose at least one of the services</p>
+                        <div className={bcp.checkboxList}>
+                          {servicesArr.map((service) => (
+                            <label key={service.id}>
+                              <input
+                                type="checkbox"
+                                id={`service-${service.id}`}
+                                name="service"
+                                value={service.id}
+                                checked={selectedServices.includes(service.id)}
+                                onChange={handleServiceChange}
+                              />
+                              <span></span>
+                              {service.service}
+                            </label>
+                          ))}
+                        </div>
                       </div>
-                    ))}
+                      <button
+                        className={bcp.submitButton}
+                        onClick={() => handleSubmit()}
+                        disabled={isFirstDate || selectedServices.length === 0}
+                      >
+                        Submit Booking
+                      </button>
+                    </div>
                   </div>
-                  <button
-                    className={bcp.submitButton}
-                    onClick={() => handleSubmit()}
-                    disabled={isFirstDate || selectedServices.length === 0}
-                  >
-                    Submit Booking
-                  </button>
-                </div>
-              )}
-            </div>
-          </>
-        )}
-      </div>
-    )}
+                )}
+              </div>
+            </>
+          )}
+        </div>
+      )}
     </>
   );
 };
