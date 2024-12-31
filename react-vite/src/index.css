@@ -54,7 +54,7 @@
   align-items: center;
   min-width: 44px;
   background: none;
-  font-size: x-large;
+  font-size: large;
 }
 
 .react-calendar__navigation button:disabled {
