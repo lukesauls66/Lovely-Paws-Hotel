@@ -79,30 +79,41 @@ const BookingByDatePage = () => {
             {bookings.map((book) => {
               const petName = pets[book.pet_id - 1]?.name;
               return (
-                <div key={book.id}>
-                  <div className={bdt.petName}>
-                    <p className={bdt.serviceByDateDetail}>
-                      Pet Name: {petName}
-                    </p>
-                  </div>
-                  <p className={bdt.serviceByDateDetail}>
-                    Booking Type: <br /> {book.booking_type}
-                  </p>
-                  <p className={bdt.serviceByDateDetail}>
-                    Drop Off Date and Time: <br /> {book.drop_off_date}
-                  </p>
-                  <p className={bdt.serviceByDateDetail}>
-                    Pick Up Date and Time: <br /> {book.pick_up_date}
-                  </p>
-                  <p>List of Services:</p>
-                  <div className={bdt.servicesList}>
-                    {book.services.map((serve) => (
-                      <p key={serve.id}>
-                        <p className={bdt.serviceByDateDetail}>
-                          {serve.service}
-                        </p>
+                <div key={book.id} className={bdt.petContainer}>
+                  <div>
+                    <div className={bdt.petName}>
+                      <p className={bdt.serviceByDateDetail}>
+                        Pet Name: {petName}
                       </p>
-                    ))}
+                    </div>
+                    <div className={bdt.pTagDiv}>
+                      <p className={bdt.serviceByDateDetail}>Booking Type:</p>
+                      <p>{book.booking_type}</p>
+                    </div>
+                    <div className={bdt.pTagDiv}>
+                      <p className={bdt.serviceByDateDetail}>
+                        Drop Off Date and Time:
+                      </p>
+                      <p> {book.drop_off_date}</p>
+                    </div>
+                    <div className={bdt.pTagDivBottom}>
+                      <p className={bdt.serviceByDateDetail}>
+                        Pick Up Date and Time:
+                      </p>
+                      <p>{book.pick_up_date}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className={bdt.serviceP}>List of Services:</p>
+                    <div className={bdt.servicesList}>
+                      {book.services.map((serve) => (
+                        <p key={serve.id}>
+                          <p className={bdt.serviceByDateDetail}>
+                            {serve.service}
+                          </p>
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               );
