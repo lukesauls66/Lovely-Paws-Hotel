@@ -85,21 +85,17 @@ function CreateServiceForm({ isOpen, onClose, onSubmit, staffList, service }) {
           <div className={servform.formLabelContainer}>
             <label>Staff</label>
             <div className={servform.staffCheckboxes}>
-              {staffList?.map((staff) => {
-                return (
-                  <div key={staff.id}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        value={staff.id}
-                        checked={selectedStaff.includes(staff.id)}
-                        onChange={() => handleCheckbox(staff.id)}
-                      />
-                      {staff.fname} {staff.lname}
-                    </label>
-                  </div>
-                );
-              })}
+              {staffList?.map((staff) => (
+                <label key={staff.id}>
+                  <input
+                    type="checkbox"
+                    checked={selectedStaff.includes(staff.id)}
+                    onChange={() => handleCheckbox(staff.id)}
+                  />
+                  <span></span>
+                  {staff.fname} {staff.lname}
+                </label>
+              ))}
             </div>
           </div>
           <button className={servform.createServiceButton} type="submit">

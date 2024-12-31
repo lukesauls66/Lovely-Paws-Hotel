@@ -56,8 +56,6 @@ const BookingByDatePage = () => {
   return (
     <div className={bdt.mainContainer}>
       <h1 className={bdt.h1}>Services by Date</h1>
-      {/* <img src="/images/paw-bg-strip.png" alt="" className={bdt.pawPicOne} />
-      <img src="/images/paw-bg-strip.png" alt="" className={bdt.pawPicTwo} /> */}
       <h2 className={bdt.title}>Choose a date to list the services</h2>
       <h2 className={bdt.title}>Selected Date: {selectedDate}</h2>
 
@@ -79,7 +77,7 @@ const BookingByDatePage = () => {
             {bookings.map((book) => {
               const petName = pets[book.pet_id - 1]?.name;
               return (
-                <div key={book.id} className={bdt.petContainer}>
+                <div key={book.id}>
                   <div>
                     <div className={bdt.petName}>
                       <p className={bdt.serviceByDateDetail}>
@@ -107,11 +105,11 @@ const BookingByDatePage = () => {
                     <p className={bdt.serviceP}>List of Services:</p>
                     <div className={bdt.servicesList}>
                       {book.services.map((serve) => (
-                        <p key={serve.id}>
+                        <div key={serve.id}>
                           <p className={bdt.serviceByDateDetail}>
                             {serve.service}
                           </p>
-                        </p>
+                        </div>
                       ))}
                     </div>
                   </div>

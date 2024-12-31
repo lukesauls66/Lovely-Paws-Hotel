@@ -113,6 +113,7 @@ const BookingsCreatePage = () => {
       const timeZoneOffsetInHours = timeZoneOffsetInMinutes / 60
 
       const newDateDropOff = new Date(drop_off_date);
+      newDateDropOff.setMinutes(0);
       const formattedDropOffTime = newDateDropOff.toLocaleTimeString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
@@ -122,6 +123,7 @@ const BookingsCreatePage = () => {
       newDateDropOff.setHours(newDateDropOff.getHours() + timeZoneOffsetInHours);
 
       const newDatePickUp = new Date(pick_up_date);
+      newDatePickUp.setMinutes(0);
       const formattedPickUpTime = newDatePickUp.toLocaleTimeString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
@@ -209,25 +211,34 @@ const BookingsCreatePage = () => {
 
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
+
       if (date < today) {
         return bcp.pastDate; // Past dates
       }
       if (dropOffDate && date.toDateString() === dropOffDate.toDateString()) {
-        return bcp.selectedDate; // Highlight drop-off date
+        return bcp.selectDate; // Highlight drop-off date
       }
       if (pickUpDate && date.toDateString() === pickUpDate.toDateString()) {
-        return bcp.selectedDate; // Highlight pick-up date
+        return bcp.selectDate; // Highlight pick-up date
       }
-      if (
-        dropOffDate &&
-        pickUpDate &&
-        date >= dropOffDate &&
-        date <= pickUpDate
-      ) {
-        return bcp.dateRange; // Highlight range between drop-off and pick-up dates
+
+      // Highlight range between drop-off and pick-up dates, including the dates themselves
+      if (dropOffDate && pickUpDate) {
+        // Ensure that dropOffDate is before pickUpDate
+        const startDate = dropOffDate < pickUpDate ? dropOffDate : pickUpDate;
+        const endDate = dropOffDate < pickUpDate ? pickUpDate : dropOffDate;
+
+        // Highlight dates within the range including drop-off and pick-up dates
+        if (date >= startDate && date <= endDate) {
+          if (date.getDay() === 0 || date.getDay() === 6) {
+            return bcp.weekendInRange
+          }
+          return bcp.dateRange; // Highlight the entire range between drop-off and pick-up
+        }
       }
+
       if (date.toDateString() === selectedDate?.toDateString()) {
-        return bcp.selectedDate; // Highlight selected date (day_care)
+        return bcp.selectDate; // Highlight selected date (day_care)
       }
     }
     return null; // Default case
@@ -255,8 +266,13 @@ const BookingsCreatePage = () => {
         setPickUpDate(null);
         setIsFirstDate(true);
       } else {
-        setPickUpDate(date);
-        setIsFirstDate(false);
+        if (date <= dropOffDate) {
+          alert('Pick-Up Date must be after Drop-Off Date or click the Boarding Care again');
+          setPickUpDate(null);
+        } else {
+          setPickUpDate(date);
+          setIsFirstDate(false);
+        }
       }
     }
   };
@@ -414,7 +430,7 @@ const BookingsCreatePage = () => {
 
                   {bookingType === "boarding_care" && (
                     <div className={bcp.calendarContainerBoardingCare}>
-                      <h4>Drop-Off and Pick-Up Date</h4>
+                      <h3>Drop-Off and Pick-Up Date</h3>
 
                       {/* First calendar for current month */}
                       <div className={bcp.calendarWrapperBoardingCare}>
@@ -432,19 +448,22 @@ const BookingsCreatePage = () => {
                   )}
 
                   {/* Show selected dates */}
-                  <p className={bcp.selectDate}>
-                    {bookingType === "day_care"
-                      ? `Selected Date: ${
-                          selectedDate
-                            ? selectedDate.toLocaleDateString()
-                            : "None"
-                        }`
-                      : `Drop-Off Date: ${
+                  <p className={bcp.selectionDate}>
+                    {bookingType === "day_care" ? (
+                      `Selected Date: ${
+                        selectedDate ? selectedDate.toLocaleDateString() : "None"
+                      }`
+                    ) : (
+                      <>
+                        {`Drop-Off Date: ${
                           dropOffDate ? dropOffDate.toLocaleDateString() : "None"
-                        } 
-                    | Pick-Up Date: ${
-                      pickUpDate ? pickUpDate.toLocaleDateString() : "None"
-                    }`}
+                        }`}
+                        <br />
+                        {`Pick-Up Date: ${
+                          pickUpDate ? pickUpDate.toLocaleDateString() : "None"
+                        }`}
+                      </>
+                    )}
                   </p>
                 </div>
               )}
