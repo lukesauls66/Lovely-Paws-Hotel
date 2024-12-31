@@ -2,15 +2,17 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Calendar from 'react-calendar';
 import * as bookingActions from "../../redux/booking";
-import { getAllServices } from "../../redux/service";
+import { fetchAllPets } from '../../redux/pets';
 import 'react-calendar/dist/Calendar.css';
 import bdt from './BookingByDatePage.module.css'
 
 const BookingByDatePage = () => {
   const dispatch = useDispatch();
-  const todayBookings = useSelector((state) => state.booking.bookings)
-  const servicesStaff = useSelector((state) => state.service.services.services)
+  const bookings = useSelector((state) => state.booking.bookings)
+  const pets = useSelector((state) => state.pets.pets)
   const [selectedDate, setSelectedDate] = useState(null)
+  const [calendarDate, setCalendarDate] = useState(null)
+  console.log('pets > ', pets)
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -22,23 +24,21 @@ const BookingByDatePage = () => {
   useEffect(() => {
     if (selectedDate) {
       dispatch(bookingActions.getBookingsByDate(selectedDate))
-      dispatch(getAllServices());
+      dispatch(fetchAllPets())
     }
   }, [selectedDate, dispatch])
 
   function getFormattedDate(date) {
     date.setHours(0, 0, 0, 0)
-    const year = date.getUTCFullYear();
-    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // months are 0-indexed
-    const day = String(date.getUTCDate()).padStart(2, '0');
-    console.log('formatted date > ', `${year}-${month}-${day}`)
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // months are 0-indexed
+    const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
 
   const handleDateSelection = (date) => {
-    console.log('date > ', date);
+    setCalendarDate(date);
     setSelectedDate(getFormattedDate(date))
-    console.log('selected date > ', selectedDate);
   }
 
   const tileClassName = ({ date, view }) => {
@@ -49,10 +49,9 @@ const BookingByDatePage = () => {
     }
   }
 
-  // if (!todayBookings || !todayBookings.bookings) {
+  // if (!bookings || !bookings.bookings) {
   //   return <div>Loading...</div>
   // }
-  
   
   return (
     <div className={bdt.mainContainer}>
@@ -63,7 +62,7 @@ const BookingByDatePage = () => {
       <div className={bdt.calendarWrapper}>
         <Calendar
           onChange={handleDateSelection}
-          value={selectedDate}
+          value={calendarDate}
           className={bdt.chosenDate}
           locale="en-US"
           showNeighboringMonth={false}
@@ -72,47 +71,36 @@ const BookingByDatePage = () => {
         />
       </div>
 
-      {todayBookings && todayBookings.length > 0 && (
+      {bookings && bookings.length > 0 && (
         <div className={bdt.serviceByDateContainer}>
 
           <div className={bdt.listOfPets}>
-            {todayBookings.map((book) => (
-              <div key={book.id}>
-                <p className={bdt.serviceByDateDetail}>
-                  Pet Name: {book.pet_id}
-                </p>
-                <p className={bdt.serviceByDateDetail}>
-                  Booking Type: {book.booking_type}
-                </p>
-                <p className={bdt.serviceByDateDetail}>
-                  Drop Off Date and Time: {book.drop_off_date}
-                </p>
-                <p className={bdt.serviceByDateDetail}>
-                  Pick Up Date and Time: {book.pick_up_date}
-                </p>
-                <p>List of Services:</p>
-                  {book.services.map((serve) => (
-                    <p key={serve.id}>
-                      <p className={bdt.serviceByDateDetail}>{serve.service}</p>
-                    </p>
-                  ))}
-              </div>       
-            ))}
-          </div>
-
-          <div className={bdt.listOfStaffContainer}>
-            {servicesStaff && servicesStaff.length > 0 && (
-              <div className={bdt.staffList}>
-                {servicesStaff.map((staff) => (
-                  <div key={staff.id}>
-                    <p>{staff.service}</p>
-                    {staff.staff.map((fullName) => (
-                      <p key={fullName.id}>{fullName.fname} {fullName.lname}</p>
+            {bookings.map((book) => {
+              const petName = pets[book.pet_id - 1]?.name
+              return (
+                <div key={book.id}>
+                  <p className={bdt.serviceByDateDetail}>
+                    Pet Name: {petName}
+                  </p>
+                  <p className={bdt.serviceByDateDetail}>
+                    Booking Type: {book.booking_type}
+                  </p>
+                  <p className={bdt.serviceByDateDetail}>
+                    Drop Off Date and Time: {book.drop_off_date}
+                  </p>
+                  <p className={bdt.serviceByDateDetail}>
+                    Pick Up Date and Time: {book.pick_up_date}
+                  </p>
+                  <p>List of Services:</p>
+                    {book.services.map((serve) => (
+                      <p key={serve.id}>
+                        <p className={bdt.serviceByDateDetail}>{serve.service}</p>
+                      </p>
                     ))}
-                  </div>
-                ))}
-              </div>
-            )}
+                </div>       
+              )
+
+            })}
           </div>
 
         </div>
