@@ -1,135 +1,681 @@
 @import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap');
 
-.mainPetDetailsPage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.petDetailContainer {
-  background-color: #ebbdb9;
-  padding: 20px;
-  width: 1200px;
-  border: 3px solid #333;
-  border-radius: 15px;
-  margin: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.petName {
-  font-family: 'Gaegu', cursive;
-  font-size: 6rem;
-  color: #1c323a;
-}
-
-.optionsButtons {
-  display: flex;
-}
-
-.updateButton, .deleteButton, .bookServiceButton {
-  font-family: 'Parkinsans';
-  font-size: 1.8rem;
-  padding: 10px 20px 10px 20px;
-  margin: 10px;
-  padding: 20px;
-  border: 3px solid #f7f0e5;
-  border-radius: 12px;
-  font-size: 2rem;
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
-}
-
-.updateButton:hover,
-.deleteButton:hover,
-.bookServiceButton:hover {
-    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
-    transform: scale(1.05);
-}
-
-.updateButton {
-  background-color: #e7849b;
-  color: #333;
-}
-
-.deleteButton {
-  background-color: #ffc383;
-  color: #333;
-}
-
-.bookServiceButton {
-  background-color: #a1d6d2;
-  color: #333;
-  margin-bottom: 30px;
-}
-
-.previewImgContainer {
-  display: flex;
-}
-
-.previewImgBox {
-  background-color: #e7849b;
-  border: 10px solid #e7849b;
-  border-radius: 12px;
-  margin-top: 20px;
-  padding: 10px;
-}
-
-.pawTrailPic {
-  height: 700px;
-  margin: 5px;
-  opacity: 0.5;
-}
+@media (min-width: 320px) and (max-width: 424px) {
+  .mainPetDetailsPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   
-.previewImage {
-  width: 100%;
-  max-width: 500px;
-  border-radius: 12px;
-  border: 5px solid #333;
+  .petDetailContainer {
+    background-color: #ebbdb9;
+    padding: 10px;
+    width: 280px;
+    border: 3px solid #333;
+    border-radius: 15px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .petName {
+    font-family: 'Gaegu', cursive;
+    font-size: 4rem;
+    color: #1c323a;
+  }
+  
+  .optionsButtons {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .updateButton, .deleteButton, .bookServiceButton {
+    font-family: 'Parkinsans';
+    font-size: 18px;
+    padding: 10px 20px 10px 20px;
+    margin: 5px;
+    border: 3px solid #f7f0e5;
+    border-radius: 12px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-align: center;
+    width: 180px;
+  }
+  
+  .updateButton:hover,
+  .deleteButton:hover,
+  .bookServiceButton:hover {
+      box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+  }
+  
+  .updateButton {
+    background-color: #e7849b;
+    color: #333;
+  }
+  
+  .deleteButton {
+    background-color: #ffc383;
+    color: #333;
+  }
+  
+  .bookServiceButton {
+    background-color: #a1d6d2;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .previewImgContainer {
+    display: flex;
+  }
+  
+  .previewImgBox {
+    background-color: #e7849b;
+    border: 6px solid #e7849b;
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pawTrailPic {
+    display: none;
+  }
+    
+  .previewImage {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    border: 5px solid #333;
+  }
+    
+  .additionalImages {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    background-color: #e7849b;
+    padding: 2px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+    
+  .petImage {
+    width: 240px;
+    height: auto;
+    margin: 10px;
+    border: 3px solid #333;
+    border-radius: 12px;
+  }
+    
+  .petDetails {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-family: 'Parkinsans';
+    font-size: 18px;
+    color: #1c323a;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6ead8;
+    padding: 10px 20px 10px 20px;
+    border: 3px solid #333;
+    border-radius: 12px;
+    width: 220px;
+  }
+  
+  .detailTitle {
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 8px;
+  }
 }
 
-.petImagesContainer {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
+
+
+@media (min-width: 425px) and (max-width: 689px) {
+  .mainPetDetailsPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   
-.additionalImages {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: #e7849b;
-  padding: 10px;
-  border-radius: 10px;
-}
+  .petDetailContainer {
+    background-color: #ebbdb9;
+    padding: 20px;
+    width: 360px;
+    border: 3px solid #333;
+    border-radius: 15px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
   
-.petImage {
-  width: 240px;
-  height: auto;
-  margin: 10px;
-  border: 3px solid #333;
-  border-radius: 12px;
-}
+  .petName {
+    font-family: 'Gaegu', cursive;
+    font-size: 3.4rem;
+    color: #1c323a;
+  }
   
-.petDetails {
-  margin-top: 40px;
-  margin-bottom: 30px;
-  font-family: 'Parkinsans';
-  font-size: 22px;
-  color: #1c323a;
-  display: flex;
-  flex-direction: column;
-  background-color: #f6ead8;
-  padding: 10px 20px 10px 20px;
-  border: 3px solid #333;
-  border-radius: 12px;
-  width: 800px;
+  .optionsButtons {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .updateButton, .deleteButton, .bookServiceButton {
+    font-family: 'Parkinsans';
+    text-align: center;
+    font-size: 22px;
+    padding: 10px 20px 10px 20px;
+    margin: 5px;
+    border: 3px solid #f7f0e5;
+    border-radius: 12px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    width: 300px;
+  }
+  
+  .updateButton:hover,
+  .deleteButton:hover,
+  .bookServiceButton:hover {
+      box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+  }
+  
+  .updateButton {
+    background-color: #e7849b;
+    color: #333;
+  }
+  
+  .deleteButton {
+    background-color: #ffc383;
+    color: #333;
+  }
+  
+  .bookServiceButton {
+    background-color: #a1d6d2;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .previewImgContainer {
+    display: flex;
+  }
+  
+  .previewImgBox {
+    background-color: #e7849b;
+    border: 6px solid #e7849b;
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pawTrailPic {
+    display: none;
+  }
+    
+  .previewImage {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    border: 5px solid #333;
+  }
+    
+  .additionalImages {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    background-color: #e7849b;
+    padding: 2px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+    
+  .petImage {
+    width: 320px;
+    height: auto;
+    margin: 10px;
+    border: 3px solid #333;
+    border-radius: 12px;
+  }
+    
+  .petDetails {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-family: 'Parkinsans';
+    font-size: 18px;
+    color: #1c323a;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6ead8;
+    padding: 10px 20px 10px 20px;
+    border: 3px solid #333;
+    border-radius: 12px;
+    width: 310px;
+  }
+  
+  .detailTitle {
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 8px;
+  }
 }
 
-.detailTitle {
-  font-weight: bold;
-  font-size: 24px;
-  margin-right: 8px;
+
+@media (min-width: 690px) and (max-width: 874px) {
+  .mainPetDetailsPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .petDetailContainer {
+    background-color: #ebbdb9;
+    padding: 20px;
+    width: 600px;
+    border: 3px solid #333;
+    border-radius: 15px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .petName {
+    font-family: 'Gaegu', cursive;
+    font-size: 6rem;
+    color: #1c323a;
+  }
+  
+  .optionsButtons {
+    display: flex;
+  }
+  
+  .updateButton, .deleteButton, .bookServiceButton {
+    font-family: 'Parkinsans';
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 10px 20px 10px 20px;
+    margin: 10px;
+    padding: 20px;
+    border: 3px solid #f7f0e5;
+    border-radius: 12px;
+    font-size: 2rem;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  
+  .updateButton:hover,
+  .deleteButton:hover,
+  .bookServiceButton:hover {
+      box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+  }
+  
+  .updateButton {
+    background-color: #e7849b;
+    color: #333;
+  }
+  
+  .deleteButton {
+    background-color: #ffc383;
+    color: #333;
+  }
+  
+  .bookServiceButton {
+    background-color: #a1d6d2;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .previewImgContainer {
+    display: flex;
+  }
+  
+  .previewImgBox {
+    background-color: #e7849b;
+    border: 10px solid #e7849b;
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 10px;
+  }
+
+  .pawTrailPic {
+    display: none;
+  }
+    
+  .previewImage {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    border: 5px solid #333;
+  }
+    
+  .additionalImages {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: #e7849b;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+    
+  .petImage {
+    width: 240px;
+    height: auto;
+    margin: 10px;
+    border: 3px solid #333;
+    border-radius: 12px;
+  }
+    
+  .petDetails {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-family: 'Parkinsans';
+    font-size: 22px;
+    color: #1c323a;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6ead8;
+    padding: 10px 20px 10px 20px;
+    border: 3px solid #333;
+    border-radius: 12px;
+    width: 550px;
+  }
+  
+  .detailTitle {
+    font-weight: bold;
+    font-size: 24px;
+    margin-right: 8px;
+  }
+}
+
+
+
+
+@media (min-width: 875px) and (max-width: 1234px) {
+  .mainPetDetailsPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .petDetailContainer {
+    background-color: #ebbdb9;
+    padding: 20px;
+    width: 1200px;
+    border: 3px solid #333;
+    border-radius: 15px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .petName {
+    font-family: 'Gaegu', cursive;
+    font-size: 6rem;
+    color: #1c323a;
+  }
+  
+  .optionsButtons {
+    display: flex;
+  }
+  
+  .updateButton, .deleteButton, .bookServiceButton {
+    font-family: 'Parkinsans';
+    font-size: 1.8rem;
+    padding: 10px 20px 10px 20px;
+    margin: 10px;
+    padding: 20px;
+    border: 3px solid #f7f0e5;
+    border-radius: 12px;
+    font-size: 2rem;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  
+  .updateButton:hover,
+  .deleteButton:hover,
+  .bookServiceButton:hover {
+      box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+  }
+  
+  .updateButton {
+    background-color: #e7849b;
+    color: #333;
+  }
+  
+  .deleteButton {
+    background-color: #ffc383;
+    color: #333;
+  }
+  
+  .bookServiceButton {
+    background-color: #a1d6d2;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .previewImgContainer {
+    display: flex;
+  }
+  
+  .previewImgBox {
+    background-color: #e7849b;
+    border: 10px solid #e7849b;
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 10px;
+  }
+  
+  .pawTrailPic {
+    height: 500px;
+    margin: 5px;
+    opacity: 0.5;
+  }
+    
+  .previewImage {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 12px;
+    border: 5px solid #333;
+  }
+  
+  .petImagesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+    
+  .additionalImages {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #e7849b;
+    padding: 10px;
+    border-radius: 10px;
+  }
+    
+  .petImage {
+    width: 160px;
+    height: auto;
+    margin: 10px;
+    border: 3px solid #333;
+    border-radius: 12px;
+  }
+    
+  .petDetails {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-family: 'Parkinsans';
+    font-size: 22px;
+    color: #1c323a;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6ead8;
+    padding: 10px 20px 10px 20px;
+    border: 3px solid #333;
+    border-radius: 12px;
+    width: 700px;
+  }
+  
+  .detailTitle {
+    font-weight: bold;
+    font-size: 24px;
+    margin-right: 8px;
+  }
+}
+
+
+
+
+
+@media (min-width: 1235px) {
+  .mainPetDetailsPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .petDetailContainer {
+    background-color: #ebbdb9;
+    padding: 20px;
+    width: 1200px;
+    border: 3px solid #333;
+    border-radius: 15px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .petName {
+    font-family: 'Gaegu', cursive;
+    font-size: 6rem;
+    color: #1c323a;
+  }
+  
+  .optionsButtons {
+    display: flex;
+  }
+  
+  .updateButton, .deleteButton, .bookServiceButton {
+    font-family: 'Parkinsans';
+    font-size: 1.8rem;
+    padding: 10px 20px 10px 20px;
+    margin: 10px;
+    padding: 20px;
+    border: 3px solid #f7f0e5;
+    border-radius: 12px;
+    font-size: 2rem;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  
+  .updateButton:hover,
+  .deleteButton:hover,
+  .bookServiceButton:hover {
+      box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+  }
+  
+  .updateButton {
+    background-color: #e7849b;
+    color: #333;
+  }
+  
+  .deleteButton {
+    background-color: #ffc383;
+    color: #333;
+  }
+  
+  .bookServiceButton {
+    background-color: #a1d6d2;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .previewImgContainer {
+    display: flex;
+  }
+  
+  .previewImgBox {
+    background-color: #e7849b;
+    border: 10px solid #e7849b;
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 10px;
+  }
+  
+  .pawTrailPic {
+    height: 700px;
+    margin: 5px;
+    opacity: 0.5;
+  }
+    
+  .previewImage {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    border: 5px solid #333;
+  }
+  
+  .petImagesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+    
+  .additionalImages {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #e7849b;
+    padding: 10px;
+    border-radius: 10px;
+  }
+    
+  .petImage {
+    width: 240px;
+    height: auto;
+    margin: 10px;
+    border: 3px solid #333;
+    border-radius: 12px;
+  }
+    
+  .petDetails {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-family: 'Parkinsans';
+    font-size: 22px;
+    color: #1c323a;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6ead8;
+    padding: 10px 20px 10px 20px;
+    border: 3px solid #333;
+    border-radius: 12px;
+    width: 800px;
+  }
+  
+  .detailTitle {
+    font-weight: bold;
+    font-size: 24px;
+    margin-right: 8px;
+  }
 }
