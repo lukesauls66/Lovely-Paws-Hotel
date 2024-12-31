@@ -1,87 +1,271 @@
-/* Main container */
-.mainContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+@media (min-width: 320px) and (max-width: 1119px) {
+  .mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+
+  .h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+
+  .calendarWrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 30px;
+  }
+
+  .chosenDate {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  .serviceByDateContainer {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .listOfPets {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .listOfPets > div {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ebbdb9;
+  }
+
+  .petName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .serviceByDateDetail {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #555;
+  }
+
+  .serviceByDateDetail:first-child {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .listOfPets p {
+    margin: 10px 0;
+  }
+
+  .pastDate {
+    background-color: #f4f4f4;
+    color: #aaa;
+  }
+
+  .pastDate:hover {
+    cursor: none;
+  }
+}
+@media (min-width: 1120px) and (max-width: 1319px) {
+  .mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-image: url("/images/paw-bg-strip.png"),
+      url("/images/paw-bg-strip.png");
+    background-repeat: repeat-y, repeat-y;
+    background-position: left top, right top;
+    background-size: 150px, 150px;
+  }
+
+  .h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+
+  .calendarWrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 30px;
+  }
+
+  .chosenDate {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  .serviceByDateContainer {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .listOfPets {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .listOfPets > div {
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ebbdb9;
+  }
+
+  .serviceByDateDetail {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #555;
+  }
+
+  .serviceByDateDetail:first-child {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .listOfPets p {
+    margin: 10px 0;
+  }
+
+  .pastDate {
+    background-color: #f4f4f4;
+    color: #aaa;
+  }
+
+  .pastDate:hover {
+    cursor: none;
+  }
 }
 
-/* Title and Subtitle */
-.h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
+@media (min-width: 1320px) {
+  .mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-image: url("/images/paw-bg-strip.png"),
+      url("/images/paw-bg-strip.png");
+    background-repeat: repeat-y;
+    background-position: left 20px, right 20px;
+    background-size: auto;
+  }
 
-.title {
-  text-align: center;
-  font-size: 1.25rem;
-  margin-bottom: 20px;
-}
+  .h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
 
-/* Calendar Wrapper */
-.calendarWrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 500px;
-  margin-bottom: 30px;
-}
+  .title {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
 
-.chosenDate {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-}
+  .calendarWrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 30px;
+  }
 
-/* Service by Date Container */
-.serviceByDateContainer {
-  width: 100%;
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
+  .chosenDate {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
 
-/* Pets List Container */
-.listOfPets {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+  .serviceByDateContainer {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
 
-.listOfPets > div {
-  padding: 15px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-}
+  .listOfPets {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 
-.serviceByDateDetail {
-  font-size: 1rem;
-  margin: 5px 0;
-  color: #555;
-}
+  .listOfPets > div {
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ebbdb9;
+  }
 
-.serviceByDateDetail:first-child {
-  font-weight: bold;
-  color: #333;
-}
+  .serviceByDateDetail {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #555;
+  }
 
-.listOfPets p {
-  margin: 10px 0;
-}
+  .serviceByDateDetail:first-child {
+    font-weight: bold;
+    color: #333;
+  }
 
-/* Additional Styles */
-.pastDate {
-  background-color: #f4f4f4;
-  color: #aaa;
-}
+  .listOfPets p {
+    margin: 10px 0;
+  }
 
-.pastDate:hover {
-  cursor: none;
+  .pastDate {
+    background-color: #f4f4f4;
+    color: #aaa;
+  }
+
+  .pastDate:hover {
+    cursor: none;
+  }
 }
