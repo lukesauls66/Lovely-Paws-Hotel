@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchPetDetail, deletePet } from "../../redux/pets";
@@ -13,7 +13,7 @@ const PetDetail = () => {
   const status = useSelector((state) => state.pets.status);
   const sessionUser = useSelector((state) => state.session.user);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [owner, setOwner] = useState(null); 
+  const [owner, setOwner] = useState(null);
 
   useEffect(() => {
     dispatch(fetchPetDetail(petId));
@@ -21,7 +21,7 @@ const PetDetail = () => {
 
   useEffect(() => {
     if (pet) {
-      fetchOwner(pet.owner_id); 
+      fetchOwner(pet.owner_id);
     }
   }, [pet]);
 
@@ -86,7 +86,7 @@ const PetDetail = () => {
             Book a Reservation
           </button>
           <div className={styles.previewImgContainer}>
-            <img 
+            <img
               src="/images/paw-trail.png"
               alt="paw trail"
               className={styles.pawTrailPic}
@@ -98,7 +98,7 @@ const PetDetail = () => {
                 className={styles.previewImage}
               />
             </div>
-            <img 
+            <img
               src="/images/paw-trail.png"
               alt="paw trail"
               className={styles.pawTrailPic}
@@ -117,11 +117,12 @@ const PetDetail = () => {
             </div>
           </div>
           <div className={styles.petDetails}>
-            {owner && 
-            <p>
-              <span className={styles.detailTitle}>Owner:</span>{owner.fname} {owner.lname}
-            </p>
-            }
+            {owner && (
+              <p>
+                <span className={styles.detailTitle}>Owner:</span>
+                {owner.fname} {owner.lname}
+              </p>
+            )}
             <p>
               <span className={styles.detailTitle}>Type:</span> {pet.type}
             </p>
@@ -139,6 +140,7 @@ const PetDetail = () => {
             </p>
             <p>
               <span className={styles.detailTitle}>Weight:</span> {pet.weight}
+              lbs
             </p>
             <p>
               <span className={styles.detailTitle}>Birthday:</span> {pet.dob}
@@ -147,13 +149,16 @@ const PetDetail = () => {
               <span className={styles.detailTitle}>Size:</span> {pet.size}
             </p>
             <p>
-              <span className={styles.detailTitle}>Behavior:</span> {pet.behavior}
+              <span className={styles.detailTitle}>Behavior:</span>{" "}
+              {pet.behavior}
             </p>
             <p>
-              <span className={styles.detailTitle}>Medication Note:</span> {pet.medication_note}
+              <span className={styles.detailTitle}>Medication Note:</span>{" "}
+              {pet.medication_note}
             </p>
             <p>
-              <span className={styles.detailTitle}>Dietary Note:</span> {pet.dietary_note}
+              <span className={styles.detailTitle}>Dietary Note:</span>{" "}
+              {pet.dietary_note}
             </p>
           </div>
           {showEditModal && (

@@ -119,6 +119,24 @@
     border: 3px solid #333;
   }
 
+  .singlePet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px 20px;
+    border-radius: 15px;
+    width: 400px;
+  }
+
+  .doublePet {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 20px 20px;
+    border-radius: 15px;
+    width: 400px;
+  }
+
   .allPetCardsContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -213,15 +231,34 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px 5px;
+    padding: 15px 5px;
     border-radius: 15px;
     width: 440px;
     border: 3px solid #333;
   }
 
+  .singlePet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px 20px;
+    border-radius: 15px;
+    width: 400px;
+  }
+
+  .doublePet {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 20px 20px;
+    border-radius: 15px;
+    width: 400px;
+  }
+
   .allPetCardsContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    padding: 10px 0 0;
   }
 
   .addPetButtonContainer {
@@ -313,29 +350,48 @@
   .petListContainer {
     background-color: #ebbdb9;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
-    padding: 20px;
+    align-items: center;
+    padding: 40px 20px;
     border-radius: 15px;
     width: 800px;
     border: 3px solid #333;
   }
 
-  .allPetCardsContainer {
+  .singlePet {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    padding: 60px 20px 20px;
+    padding: 40px 20px 20px;
+    border-radius: 15px;
+    width: 600px;
+  }
+
+  .doublePet {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 20px 20px;
+    border-radius: 15px;
+    width: 600px;
+  }
+
+  .allPetCardsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    padding: 40px 20px 20px;
     border-radius: 15px;
     width: 600px;
   }
 
   .addButton {
-    position: absolute;
-    top: 350px;
-    right: 315px;
+    display: flex;
+    justify-content: center;
     background-color: #ffc383;
     color: white;
+    width: 13rem;
     padding: 10px;
     border: 3px solid #efe8db;
     border-radius: 12px;
