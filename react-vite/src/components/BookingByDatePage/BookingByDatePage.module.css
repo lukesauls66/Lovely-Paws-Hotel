@@ -42,37 +42,6 @@
   gap: 30px;
 }
 
-/* Staff List Container */
-.listOfStaffContainer {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.staffList {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.staffList > div {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.staffList p {
-  margin: 5px 0;
-  font-size: 1rem;
-  color: #333;
-}
-
-.staffList p:first-child {
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
 /* Pets List Container */
 .listOfPets {
   padding: 20px;
