@@ -157,25 +157,35 @@
   justify-content: center;
 }
 
-.calendarWrapper__navigation__arrow:disabled {
+.calendarWrapperDayCare__navigation__arrow:disabled,
+.calendarWrapperBoardingCare__navigation__arrow:disabled {
   background-color: transparent !important;
   border: none !important;
   padding: 5px !important;
   cursor: pointer !important;
 }
 
-.calendarWrapper__navigation__arrow::after {
+.calendarWrapperDayCare__navigation__arrow::after,
+.calendarWrapperBoardingCare__navigation__arrow::after {
   font-size: 32px; /* Adjust arrow size */
   color: #007bff;
 }
 
-.calendarWrapper__navigation__arrow:hover {
+.calendarWrapperDayCare__navigation__arrow:hover,
+.calendarWrapperBoardingCare__navigation__arrow:hover {
   font-size: 32px; /* Adjust arrow size */
 }
 
 /* Optional Active State for Arrows */
-.calendarWrapper__navigation__arrow:active {
+.calendarWrapperDayCare__navigation__arrow:active,
+.calendarWrapperBoardingCare__navigation__arrow:active {
   background-color: #e0e0e0; /* Darker background on active state */
+}
+
+.calendarWrapperDayCare__month-view__weekdays__weekday,
+.calendarWrapperBoardingCare__month-view__weekdays__weekday {
+  padding: 0.5em;
+  text-decoration: none;
 }
 
 /* Styling for the next month calendar */
@@ -214,23 +224,24 @@
   margin-top: 20px;
 }
 
-.selectDate {
-  font-size: 16px;
-  color: #555;
+.selectionDate {
+  font-size: 15px;
+  color: #333;
+  /* font-weight: bold; */
 }
 
-.selectedDate {
-  background-color: #007bff;
+.selectDate {
+  background-color: blue;
   border: none;
-  color: white;
+  color: blue;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
 }
-
-.selectedDate:hover {
+/* 
+.selectDate:hover {
   background-color: #0056b3;
-}
+} */
 
 .pastDate {
   background-color: #970808; /* Light gray background for past dates */
@@ -239,18 +250,19 @@
   cursor: not-allowed; /* Show 'not-allowed' cursor for past dates */
 }
 
-/* Highlight the selected date with a different color */
-.selectedDate {
-  background-color: #007bff; /* Blue background for selected date */
-  color: white; /* White text for the selected date */
-  font-weight: bold; /* Bold text for the selected date */
+.weekendInRange {
+  background-color: blue;
+  color: blue;
+  font-weight: 900;
+  font-size: 1rem;
 }
 
 /* Highlight the date range between drop-off and pick-up */
 .dateRange {
   background-color: blue;
-  color: white;
-  font-weight: bold;
+  color: blue;
+  font-weight: 900;
+  font-size: 1rem;
 }
 
 /* Times Selection */
