@@ -12,7 +12,7 @@ const BookingsCreatePage = () => {
   const { petId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const booking = useSelector((state) => state.booking.booking);
+  const { booking } = useSelector((state) => state.booking);
   const servicesArr = useSelector((state) => state.service.services.services);
   const pet = useSelector((state) => state.pets.selectedPet);
   const [reload, setReload] = useState(false);
@@ -29,6 +29,9 @@ const BookingsCreatePage = () => {
   const [totalDays, setTotalDays] = useState(null);
   const [isUpdateClicked, setIsUpdateClicked] = useState(false);
   const [loadingPetDetails, setLoadingPetDetails] = useState(true);
+  console.log("booking: ", booking);
+  console.log("Reservation: ", isReservationStarted);
+  console.log("Total cost: ", totalCost);
 
   const today = useMemo(() => {
     const date = new Date();
@@ -63,45 +66,43 @@ const BookingsCreatePage = () => {
     // fetchBooking();
 
     dispatch(bookingActions.getBookingByPetId(petId));
-    console.log('petId', petId);
-    console.log('booking', booking);
+    // console.log("petId", petId);
+    // console.log("booking", booking);
 
-    if (booking) {
-      const dropOffDate = new Date(booking.drop_off_date);
-      const pickUpDate = new Date(booking.pick_up_date);
-      const differenceInMs = pickUpDate - dropOffDate;
-      let days;
-      if (booking.booking_type === "day_care") {
-        days = 1;
-      } else {
-        days = 1 + Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
-      }
-      setTotalDays(days);
-
-      if (dropOffDate <= new Date()) {
-        setIsReservationStarted(true);
-      } else {
-        setIsReservationStarted(false);
-      }
-      const sum = booking?.services?.reduce(
-        (acc, el) => acc + Number(el.price),
-        0
-      );
-      const cost = parseFloat(
-        (
-          Number(sum) +
-          days * Number(booking.daily_price)
-        ).toFixed(2)
-      );
-      setTotalCost(cost);
+    // if (booking) {
+    const dropOffDate = new Date(booking?.drop_off_date);
+    console.log("Drop off: ", dropOffDate);
+    const pickUpDate = new Date(booking?.pick_up_date);
+    console.log("Pick up: ", pickUpDate);
+    const differenceInMs = pickUpDate - dropOffDate;
+    let days;
+    if (booking?.booking_type === "day_care") {
+      days = 1;
+    } else {
+      days = 1 + Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
     }
-    if (!booking || !booking) {
+    setTotalDays(days);
+
+    if (dropOffDate <= new Date()) {
+      setIsReservationStarted(true);
+    } else {
+      setIsReservationStarted(false);
+    }
+    const sum = booking?.services.reduce(
+      (acc, el) => acc + Number(el.price),
+      0
+    );
+    const cost = parseFloat(
+      (Number(sum) + days * Number(booking?.daily_price)).toFixed(2)
+    );
+    setTotalCost(cost);
+    // }
+    if (!booking) {
       dispatch(getAllServices());
     }
 
     if (isUpdateClicked && booking) {
-      const { booking_type, drop_off_date, pick_up_date, services } =
-        booking;
+      const { booking_type, drop_off_date, pick_up_date, services } = booking;
 
       const dropOffDateUtc = new Date(drop_off_date); // This should already be in UTC (ISO string with "Z" at the end)
       const pickUpDateUtc = new Date(pick_up_date); // Similarly for pick-up date
@@ -396,15 +397,13 @@ const BookingsCreatePage = () => {
       {!isUpdateClicked && booking ? (
         <div className={bcp.currBookContainer}>
           <h2 className={bcp.currBookTitle}>Current Reservation Information</h2>
-          <p className={bcp.currBookType}>
-            Type: {booking.booking_type}
-          </p>
+          <p className={bcp.currBookType}>Type: {booking.booking_type}</p>
           <p className={bcp.currBookDates}>
             Date(s):{" "}
             {booking.date_off_date ||
-              `${formatDateTime(
-                booking.drop_off_date
-              )} - ${formatDateTime(booking.pick_up_date)}`}
+              `${formatDateTime(booking.drop_off_date)} - ${formatDateTime(
+                booking.pick_up_date
+              )}`}
           </p>
           <p className={bcp.currBookDates}>Number of Days: {totalDays}</p>
           <div className={bcp.currServicesContainer}>
