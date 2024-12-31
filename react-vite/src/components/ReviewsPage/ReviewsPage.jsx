@@ -2,7 +2,7 @@ import rev from "./ReviewsPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import * as reviewActions from "../../redux/review";
-import { TbPaw } from "react-icons/tb";
+// import { TbPaw } from "react-icons/tb";
 import { IoIosPaw } from "react-icons/io";
 
 function ReviewsPage() {
@@ -70,12 +70,17 @@ function ReviewsPage() {
   if (loading) return <div>Loading...</div>;
   if (errors) return <div>Error: {errors}</div>;
 
-  const pawRatingIcon = <div className={rev.pawRatingIcon}><TbPaw /></div>;
+  // const pawRatingIcon = <div className={rev.pawRatingIcon}><TbPaw /></div>;
+  const pawRatingIcon = (
+    <div className={rev.pawRatingIcon}>
+      <IoIosPaw />
+    </div>
+  );
 
   return (
     <div className={rev.reviewsMainContainer}>
-      <img src="/images/paw-bg-strip.png" alt="" className={rev.pawPicOne}/>
-      <img src="/images/paw-bg-strip.png" alt="" className={rev.pawPicTwo}/>
+      {/* <img src="/images/paw-bg-strip.png" alt="" className={rev.pawPicOne}/>
+      <img src="/images/paw-bg-strip.png" alt="" className={rev.pawPicTwo}/> */}
       <div className={rev.reviewsHeader}>
         <h1 className={rev.h1}>Lovely Paws Reviews</h1>
       </div>
@@ -116,13 +121,15 @@ function ReviewsPage() {
                   </button>
                 </form>
               ) : (
-                <>
-                  <div className={rev.username}>{review.client_username}</div>
-                  <div className={rev.review}>{review.review}</div>
-                  <div className={rev.paws}>
-                    {pawRatingIcon}
-                    {review.paws}
+                <div className={rev.reviewCard}>
+                  <div className={rev.reviewHeading}>
+                    <div className={rev.paws}>
+                      {pawRatingIcon}
+                      {review.paws}
+                    </div>
+                    <div className={rev.username}>{review.client_username}</div>
                   </div>
+                  <div className={rev.review}>{review.review}</div>
                   {currentUser?.id === review.client_id && (
                     <button
                       className={rev.editBtn}
@@ -139,7 +146,7 @@ function ReviewsPage() {
                       Delete
                     </button>
                   )}
-                </>
+                </div>
               )}
             </div>
           ))
