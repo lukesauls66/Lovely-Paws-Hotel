@@ -84,12 +84,14 @@ function ServicesPage() {
                           );
                         })}
                       </div>
-                      <button onClick={() => handleUpdate(service)}>
-                        Update
-                      </button>
-                      <button onClick={() => handleDeleteService(service.id)}>
-                        Delete
-                      </button>
+                      <div className={serv.buttonContainer}>
+                        <button onClick={() => handleUpdate(service)}>
+                          Update
+                        </button>
+                        <button onClick={() => handleDeleteService(service.id)}>
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   );
                 })}
