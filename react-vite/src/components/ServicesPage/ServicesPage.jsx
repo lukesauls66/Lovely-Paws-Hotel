@@ -24,7 +24,6 @@ function ServicesPage() {
     }
     fetchStaff();
   }, [dispatch]);
-  console.log("staff: ", staffList);
 
   const handleCreateService = async (newService) => {
     await dispatch(serviceActions.createNewService(newService));
@@ -56,9 +55,11 @@ function ServicesPage() {
 
   return (
     <div className={serv.servicesMainContainer}>
-      <h1 className={serv.h1}>OUR DEDICATED TEAM MEMBERS OFFER THE VERY BEST FOR YOUR PET</h1>
-      <img src="/images/paw-bg-strip.png" alt="" className={serv.pawPicOne}/>
-      <img src="/images/paw-bg-strip.png" alt="" className={serv.pawPicTwo}/>
+      <h1 className={serv.h1}>
+        OUR DEDICATED TEAM MEMBERS OFFER THE VERY BEST FOR YOUR PET
+      </h1>
+      <img src="/images/paw-bg-strip.png" alt="" className={serv.pawPicOne} />
+      <img src="/images/paw-bg-strip.png" alt="" className={serv.pawPicTwo} />
       {isOwnerorManager ? (
         <div>
           <div>
@@ -71,9 +72,7 @@ function ServicesPage() {
                         <div className={serv.serviceName}>
                           {service.service}
                         </div>
-                        <div className={serv.servicePrice}>
-                          {service.price}
-                        </div>
+                        <div className={serv.servicePrice}>{service.price}</div>
                       </div>
                       <div className={serv.staffBox}>
                         {service.staff.map((member) => {
@@ -100,9 +99,11 @@ function ServicesPage() {
               <div>No services available</div>
             )}
           </div>
-          <button 
+          <button
             className={serv.createServiceBtn}
-            onClick={() => setIsFormOpen(true)}>Create a Service
+            onClick={() => setIsFormOpen(true)}
+          >
+            Create a Service
           </button>
         </div>
       ) : (
@@ -117,9 +118,7 @@ function ServicesPage() {
                         <div className={serv.serviceName}>
                           {service.service}
                         </div>
-                        <div className={serv.servicePrice}>
-                          {service.price}
-                        </div>                       
+                        <div className={serv.servicePrice}>{service.price}</div>
                       </div>
                       <div className={serv.staffBox}>
                         {service.staff.map((member) => {

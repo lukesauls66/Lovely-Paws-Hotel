@@ -35,10 +35,6 @@ const DemoButton = () => {
     setIsDropdownOpen(false);
   };
 
-  // const toggleDropdown = () => {
-  //   setIsDropdownOpen((prevState) => !prevState);
-  // };
-
   const closeDropDown = () => {
     setIsDropdownOpen(false);
   };
@@ -47,7 +43,6 @@ const DemoButton = () => {
     <div className={DemoButtonStyles.demoButton} onMouseLeave={closeDropDown}>
       <button
         className={DemoButtonStyles.dropdownButton}
-        // onClick={toggleDropdown}
         onMouseEnter={() => setIsDropdownOpen(true)}
       >
         Demo

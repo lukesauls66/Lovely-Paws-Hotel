@@ -10,7 +10,6 @@ class Pet(db.Model):
     if environment == 'production':
         __table_args__ = {'schema': SCHEMA}
 
-#pets table columns 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     type = db.Column(db.String(50), nullable=False)  
@@ -27,12 +26,11 @@ class Pet(db.Model):
     preview_image = db.Column(db.String(255), nullable=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id' if environment == "production" else 'users.id'), nullable=False)
 
-# relationships
     pet_images = db.relationship('PetImage', back_populates='pet', cascade="all, delete-orphan", primaryjoin="Pet.id == PetImage.pet_id")
 
 
     def to_dict(self):
-        return {                #do we want microchip id and vaccination status?
+        return {               
             'id': self.id,
             'name': self.name,
             'type': self.type,    

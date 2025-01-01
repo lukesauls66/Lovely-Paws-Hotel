@@ -101,6 +101,54 @@ def seed_pets():
             preview_image='https://i.ibb.co/sv0b55q/cosmo-1.jpg',
             owner_id=6
         ),
+        Pet(
+            name='Wilson',
+            type='dog',
+            breed='Miniature Australian Shepherd',
+            age=6,
+            gender='Male',
+            color='White, brown and black',
+            weight=17.0,
+            dob=date(2018, 4, 11),
+            size='a fine boi',
+            behavior='playful',
+            medication_note='',
+            dietary_note='',
+            preview_image='https://i.ibb.co/bKbqRTx/Wilson-3.jpg',
+            owner_id=6
+        ),
+        Pet(
+            name='Kira',
+            type='dog',
+            breed='Husky Mix',
+            age=5,
+            gender='Female',
+            color='Black and white',
+            weight=53.0,
+            dob=date(2019, 12, 31),
+            size='megachonker',
+            behavior='calm',
+            medication_note='',
+            dietary_note='',
+            preview_image='https://i.ibb.co/hWCpzLX/Kira-4.jpg',
+            owner_id=6
+        ),
+        Pet(
+            name='Roxy',
+            type='dog',
+            breed='Australian Shepherd',
+            age=4,
+            gender='Female',
+            color='Brown and white',
+            weight=45.0,
+            dob=date(2020, 9, 7),
+            size='heftychonker',
+            behavior='aggresive',
+            medication_note='',
+            dietary_note='',
+            preview_image='https://i.ibb.co/cQ5FjPN/Roxy-5.jpg',
+            owner_id=6
+        ),
     ]
 
     for pet in pets:
@@ -109,7 +157,6 @@ def seed_pets():
     db.session.commit()
 
 def undo_pets():
-    # db.session.execute('TRUNCATE pets RESTART IDENTITY CASCADE;')
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.services RESTART IDENTITY CASCADE;")
     else:

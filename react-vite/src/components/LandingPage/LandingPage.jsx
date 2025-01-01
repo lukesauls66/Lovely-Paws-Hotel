@@ -5,7 +5,6 @@ import * as sessionActions from "../../redux/session";
 import { getOrderedReviews } from "../../redux/review";
 import ProfileButton from "../Navigation/ProfileButton";
 import lan from "./LandingPage.module.css";
-// import { TbPaw } from "react-icons/tb";
 import { IoIosPaw } from "react-icons/io";
 import DemoButton from "../Navigation/DemoButton";
 

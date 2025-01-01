@@ -19,7 +19,6 @@ function SignupFormModal({ navigate }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
-  console.log("Errors: ", errors);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,7 +90,6 @@ function SignupFormModal({ navigate }) {
         zip,
       })
     );
-    console.log("Server res: ", serverResponse);
 
     if (serverResponse.type === "session/signup/rejected") {
       setErrors(serverResponse);

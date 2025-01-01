@@ -12,14 +12,12 @@ export const restoreUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await fetch("/api/auth/");
-      console.log("RES: ", res);
       const data = await res.json();
 
       if (!res.ok) {
         return rejectWithValue(data);
       }
 
-      console.log("DATA: ", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Trouble getting current user");
@@ -33,7 +31,6 @@ export const getUserById = createAsyncThunk(
     try {
       const res = await fetch(`/api/users/${id}`);
       const data = await res.json();
-      console.log("user data:", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "User couldn't be found");
@@ -50,14 +47,12 @@ export const login = createAsyncThunk(
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      console.log("res:", res);
       const data = await res.json();
 
       if (!res.ok) {
         return rejectWithValue(data);
       }
 
-      console.log("data:", data.user);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Login failed");
@@ -99,14 +94,12 @@ export const signup = createAsyncThunk(
           zip,
         }),
       });
-      console.log("res:", res);
       const data = await res.json();
 
       if (!res.ok) {
         return rejectWithValue(data);
       }
 
-      console.log("data:", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Signup failed");

@@ -13,8 +13,6 @@ export const getAllUsers = createAsyncThunk(
     try {
       const res = await fetch("api/users/real");
       const data = await res.json();
-      console.log("Res: ", res);
-      console.log("Data: ", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Could not get all users");

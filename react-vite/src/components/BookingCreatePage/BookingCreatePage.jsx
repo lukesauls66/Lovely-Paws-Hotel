@@ -36,7 +36,6 @@ const BookingsCreatePage = () => {
     return date;
   }, []);
 
-  // Effect to fetch pet details
   useEffect(() => {
     const fetchDetails = async () => {
       try {
@@ -51,7 +50,6 @@ const BookingsCreatePage = () => {
     fetchDetails();
   }, [petId, dispatch]);
 
-  // Effect to fetch booking details
   useEffect(() => {
     const fetchBooking = async () => {
       try {
@@ -64,9 +62,8 @@ const BookingsCreatePage = () => {
       }
     };
     fetchBooking();
-  }, [petId, dispatch]); // Only run when petId changes
+  }, [petId, dispatch]);
 
-  // Effect for handling booking once fetched
   useEffect(() => {
     if (booking) {
       const dropOffDate = new Date(booking?.drop_off_date);
@@ -94,16 +91,14 @@ const BookingsCreatePage = () => {
       );
       setTotalCost(cost);
     }
-  }, [booking]); // Only run when booking state is updated
+  }, [booking]);
 
-  // Effect to fetch services if booking is not available
   useEffect(() => {
     if (!booking) {
       dispatch(getAllServices());
     }
-  }, [booking, dispatch]); // Only fetch services if booking is not set
+  }, [booking, dispatch]);
 
-  // Effect for handling updates
   useEffect(() => {
     if (isUpdateClicked && booking) {
       const { booking_type, drop_off_date, pick_up_date, services } = booking;
@@ -116,8 +111,8 @@ const BookingsCreatePage = () => {
       const formattedDropOffTime = newDateDropOff.toLocaleTimeString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
-        hour12: false, // Use 12-hour time format
-        timeZone: "UTC", // Ensure time is formatted in UTC
+        hour12: false,
+        timeZone: "UTC",
       });
       newDateDropOff.setHours(
         newDateDropOff.getHours() + timeZoneOffsetInHours
@@ -134,16 +129,16 @@ const BookingsCreatePage = () => {
       newDatePickUp.setHours(newDatePickUp.getHours() + timeZoneOffsetInHours);
 
       setBookingType(booking_type);
-      setDropOffDate(newDateDropOff); // Store the Date object (raw date) for later use
-      setPickUpDate(newDatePickUp); // Store the Date object
-      setSelectedDate(newDateDropOff); // Store the Date object
-      setDropOffTime(formattedDropOffTime); // Store the formatted drop-off time
-      setPickUpTime(formattedPickUpTime); // Store the formatted pick-up time
+      setDropOffDate(newDateDropOff);
+      setPickUpDate(newDatePickUp);
+      setSelectedDate(newDateDropOff);
+      setDropOffTime(formattedDropOffTime);
+      setPickUpTime(formattedPickUpTime);
 
       const serviceIds = services.map((service) => service.id);
       setSelectedServices(serviceIds);
     }
-  }, [isUpdateClicked, booking]); // Run when either isUpdateClicked or booking changes
+  }, [isUpdateClicked, booking]);
 
   const handleDeleteBooking = async () => {
     await dispatch(bookingActions.deleteBooking(booking.id));
@@ -188,59 +183,52 @@ const BookingsCreatePage = () => {
   };
 
   const combineDateAndTime = (date, time) => {
-    // Split the time into hours and minutes
     const [hours, minutes] = time.split(":");
 
-    // Set the time to the provided date
     date.setHours(hours);
     date.setMinutes(minutes);
     date.setSeconds(0);
     date.setMilliseconds(0);
 
-    // Format the date and time in the desired format "YYYY-MM-DD HH:mm:ss"
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Month is zero-based
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
     const formattedHours = String(date.getHours()).padStart(2, "0");
     const formattedMinutes = String(date.getMinutes()).padStart(2, "0");
     const formattedSeconds = String(date.getSeconds()).padStart(2, "0");
 
-    // Combine and return the formatted string
     return `${year}-${month}-${day} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
   };
 
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
       if (date < today) {
-        return bcp.pastDate; // Past dates
+        return bcp.pastDate;
       }
       if (dropOffDate && date.toDateString() === dropOffDate.toDateString()) {
-        return bcp.selectDate; // Highlight drop-off date
+        return bcp.selectDate;
       }
       if (pickUpDate && date.toDateString() === pickUpDate.toDateString()) {
-        return bcp.selectDate; // Highlight pick-up date
+        return bcp.selectDate;
       }
 
-      // Highlight range between drop-off and pick-up dates, including the dates themselves
       if (dropOffDate && pickUpDate) {
-        // Ensure that dropOffDate is before pickUpDate
         const startDate = dropOffDate < pickUpDate ? dropOffDate : pickUpDate;
         const endDate = dropOffDate < pickUpDate ? pickUpDate : dropOffDate;
 
-        // Highlight dates within the range including drop-off and pick-up dates
         if (date >= startDate && date <= endDate) {
           if (date.getDay() === 0 || date.getDay() === 6) {
             return bcp.weekendInRange;
           }
-          return bcp.dateRange; // Highlight the entire range between drop-off and pick-up
+          return bcp.dateRange;
         }
       }
 
       if (date.toDateString() === selectedDate?.toDateString()) {
-        return bcp.selectDate; // Highlight selected date (day_care)
+        return bcp.selectDate;
       }
     }
-    return null; // Default case
+    return null;
   };
 
   const handleBookingTypeSelection = (type) => {
@@ -413,14 +401,12 @@ const BookingsCreatePage = () => {
               </div>
 
               <div className={bcp.bookReservationWrapper}>
-                {/* Conditional Date Selection Based on Booking Type */}
                 {bookingType && (
                   <div className={bcp.calendarContainer}>
                     <div className={bcp.h3Div}>
                       <h3 className={bcp.calendarMainTitle}>Select Dates</h3>
                     </div>
 
-                    {/* Only show one calendar for day_care */}
                     {bookingType === "day_care" && (
                       <div className={bcp.calendarWrapperDayCare}>
                         <Calendar
@@ -441,22 +427,20 @@ const BookingsCreatePage = () => {
                           <h3>Drop-Off and Pick-Up Date</h3>
                         </div>
 
-                        {/* First calendar for current month */}
                         <div className={bcp.calendarWrapperBoardingCare}>
                           <Calendar
                             onChange={handleDateSelection}
-                            value={dropOffDate || pickUpDate} // Either drop-off or pick-up can be selected
+                            value={dropOffDate || pickUpDate}
                             className={bcp.calendarDropOff}
                             locale="en-US"
                             showNeighboringMonth={false}
                             minDate={today}
-                            tileClassName={tileClassName} // Apply custom tile classes for past dates and selected date
+                            tileClassName={tileClassName}
                           />
                         </div>
                       </div>
                     )}
 
-                    {/* Show selected dates */}
                     <div className={bcp.dateCofirmation}>
                       <p className={bcp.selectionDate}>
                         {bookingType === "day_care" ? (
@@ -492,7 +476,6 @@ const BookingsCreatePage = () => {
                       <h3 className={bcp.selectTimesTitle}>Select Times</h3>
                     </div>
                     <div className={bcp.timeOptions}>
-                      {/* Drop-Off Time Selection */}
                       <div className={bcp.dropOffContainer}>
                         <label className={bcp.dropOffTitle}>
                           Drop-Off Time:
@@ -518,7 +501,6 @@ const BookingsCreatePage = () => {
                         </select>
                       </div>
 
-                      {/* Pick-Up Time Selection */}
                       <div className={bcp.pickUpContainer}>
                         <label className={bcp.pickUpTitle}>Pick-Up Time:</label>
                         <select
