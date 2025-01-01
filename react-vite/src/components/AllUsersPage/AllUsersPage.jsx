@@ -7,7 +7,6 @@ function AllUsersPage() {
   const dispatch = useDispatch();
   const { users, loading } = useSelector((state) => state.user.users);
   const currentUser = useSelector((state) => state.session.user);
-  console.log("CurrUser: ", currentUser);
 
   useEffect(() => {
     dispatch(userActions.getAllUsers());
@@ -24,10 +23,10 @@ function AllUsersPage() {
 
   return (
     <div className={use.mainPageContainer}>
-      <img src="/images/paw-bg-strip.png" alt="" className={use.pawPicOne}/>
-      <img src="/images/paw-bg-strip.png" alt="" className={use.pawPicTwo}/>  
-      <img src="/images/paw-bg-strip.png" alt="" className={use.pawPicThree}/>
-      <img src="/images/paw-bg-strip.png" alt="" className={use.pawPicFour}/>
+      <img src="/images/paw-bg-strip.png" alt="" className={use.pawPicOne} />
+      <img src="/images/paw-bg-strip.png" alt="" className={use.pawPicTwo} />
+      <img src="/images/paw-bg-strip.png" alt="" className={use.pawPicThree} />
+      <img src="/images/paw-bg-strip.png" alt="" className={use.pawPicFour} />
       <h1 className={use.h1}>Active Users</h1>
       {isOwnerOrManager ? (
         users?.length > 0 ? (
@@ -37,13 +36,15 @@ function AllUsersPage() {
               {clients.length > 0 ? (
                 <div>
                   <div className={use.headerRow}>
-                    <div className={use.header}>Name</div>
-                    <div className={use.header}>Email</div>
-                    <div className={use.header}>Phone</div>
+                    <div className={use.headerName}>Name</div>
+                    <div className={use.headerEmail}>Email</div>
+                    <div className={use.headerPhone}>Phone</div>
                   </div>
                   {clients.map((user) => (
                     <div className={use.userRow} key={user.id}>
-                      <div className={use.name}>{user.fname} {user.lname}</div>
+                      <div className={use.name}>
+                        {user.fname} {user.lname}
+                      </div>
                       <div className={use.email}>{user.email}</div>
                       <div className={use.phoneNum}>{user.phone_num}</div>
                     </div>
@@ -58,13 +59,15 @@ function AllUsersPage() {
               {employees.length > 0 ? (
                 <div>
                   <div className={use.headerRow}>
-                    <div className={use.header}>Name</div>
-                    <div className={use.header}>Email</div>
-                    <div className={use.header}>Phone</div>
+                    <div className={use.headerName}>Name</div>
+                    <div className={use.headerEmail}>Email</div>
+                    <div className={use.headerPhone}>Phone</div>
                   </div>
                   {employees.map((user) => (
                     <div className={use.userRow} key={user.id}>
-                      <div className={use.name}>{user.fname} {user.lname}</div>
+                      <div className={use.name}>
+                        {user.fname} {user.lname}
+                      </div>
                       <div className={use.email}>{user.email}</div>
                       <div className={use.phoneNum}>{user.phone_num}</div>
                     </div>
@@ -74,28 +77,30 @@ function AllUsersPage() {
                 <p>No employees available</p>
               )}
             </div>
-          <div className={use.allManagersContainer}>
-          <h2 className={use.h2}>Managers</h2>
-          {managers.length > 0 ? (
-            <div>
-              <div className={use.headerRow}>
-                <div className={use.header}>Name</div>
-                <div className={use.header}>Email</div>
-                <div className={use.header}>Phone</div>
-              </div>
-              {managers.map((user) => (
-                <div className={use.userRow} key={user.id}>
-                  <div className={use.name}>{user.fname} {user.lname}</div>
-                  <div className={use.email}>{user.email}</div>
-                  <div className={use.phoneNum}>{user.phone_num}</div>
+            <div className={use.allManagersContainer}>
+              <h2 className={use.h2}>Managers</h2>
+              {managers.length > 0 ? (
+                <div>
+                  <div className={use.headerRow}>
+                    <div className={use.headerName}>Name</div>
+                    <div className={use.headerEmail}>Email</div>
+                    <div className={use.headerPhone}>Phone</div>
+                  </div>
+                  {managers.map((user) => (
+                    <div className={use.userRow} key={user.id}>
+                      <div className={use.name}>
+                        {user.fname} {user.lname}
+                      </div>
+                      <div className={use.email}>{user.email}</div>
+                      <div className={use.phoneNum}>{user.phone_num}</div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              ) : (
+                <p>No managers available</p>
+              )}
             </div>
-          ) : (
-            <p>No managers available</p>
-          )}
-        </div>
-      </div>
+          </div>
         ) : (
           <div>No users available</div>
         )

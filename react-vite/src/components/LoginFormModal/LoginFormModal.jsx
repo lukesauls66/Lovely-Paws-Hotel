@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../redux/session";
 import login from "./LoginForm.module.css";
 
 function LoginFormModal({ navigate }) {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});

@@ -12,7 +12,6 @@ const BookingByDatePage = () => {
   const pets = useSelector((state) => state.pets.pets);
   const [selectedDate, setSelectedDate] = useState(null);
   const [calendarDate, setCalendarDate] = useState(null);
-  console.log("pets > ", pets);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -44,14 +43,10 @@ const BookingByDatePage = () => {
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
       if (date < today) {
-        return bdt.pastDate; // disabling past dates
+        return bdt.pastDate;
       }
     }
   };
-
-  // if (!bookings || !bookings.bookings) {
-  //   return <div>Loading...</div>
-  // }
 
   return (
     <div className={bdt.mainContainer}>

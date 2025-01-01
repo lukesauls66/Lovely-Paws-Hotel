@@ -1,23 +1,280 @@
-.mainContainer {
-  display: flex;
-  justify-content: center;
+@import url("https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap");
+
+@media (min-width: 320px) and (max-width: 499px) {
+  p {
+    margin: 0;
+  }
+
+  .mainContainer {
+    font-family: "Parkinsans";
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  .innerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 14rem;
+    gap: 1rem;
+    background-color: #ebbdb9;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .individualBookingContainer {
+    background-color: #f6ead8;
+    width: 13rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 0.8rem;
+  }
+
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .infoTitle {
+    font-weight: 600;
+  }
+
+  .petsInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .updateAndDeleteButtons {
+    padding: 10px 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #a1d6d2;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
 }
 
-.innerContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+@media (min-width: 500px) and (max-width: 767px) {
+  p {
+    margin: 0;
+  }
+
+  .mainContainer {
+    font-family: "Parkinsans";
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    background-image: url("/images/paw-bg-strip.png"),
+      url("/images/paw-bg-strip.png");
+    background-repeat: repeat-y, repeat-y;
+    background-position: left 20px, right 20px;
+    background-size: clamp(6.5rem, 24%, 14rem), clamp(6.5rem, 24%, 14rem);
+  }
+
+  .innerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 14rem;
+    gap: 1rem;
+    background-color: #ebbdb9;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .individualBookingContainer {
+    background-color: #f6ead8;
+    width: 13rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 0.8rem;
+  }
+
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .infoTitle {
+    font-weight: 600;
+  }
+
+  .petsInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .updateAndDeleteButtons {
+    padding: 10px 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #a1d6d2;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
 }
 
-.individualBookingContainer {
-  background-color: white;
-  width: 20rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0rem;
+@media (min-width: 768px) and (max-width: 1439px) {
+  p {
+    margin: 0;
+  }
+
+  .mainContainer {
+    font-family: "Parkinsans";
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    background-image: url("/images/paw-bg-strip.png"),
+      url("/images/paw-bg-strip.png");
+    background-repeat: repeat-y, repeat-y;
+    background-position: left 20px, right 20px;
+    background-size: clamp(8rem, 24%, 19rem), clamp(8rem, 24%, 19rem);
+  }
+
+  .innerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 28rem;
+    gap: 1rem;
+    background-color: #ebbdb9;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 30px;
+  }
+
+  .individualBookingContainer {
+    background-color: #f6ead8;
+    width: 26rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 0.8rem;
+  }
+
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .infoTitle {
+    font-weight: 600;
+  }
+
+  .petsInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .updateAndDeleteButtons {
+    padding: 10px 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #a1d6d2;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
 }
 
-.infoContainer {
-  display: flex;
-  justify-content: space-between;
+@media (min-width: 1440px) {
+  p {
+    margin: 0;
+  }
+
+  .mainContainer {
+    font-family: "Parkinsans";
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    background-image: url("/images/paw-bg-strip.png"),
+      url("/images/paw-bg-strip.png");
+    background-repeat: repeat-y, repeat-y;
+    background-position: left 20px, right 20px;
+    background-size: clamp(8rem, 24%, 32rem), clamp(8rem, 24%, 32rem);
+  }
+
+  .innerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48rem;
+    gap: 1rem;
+    background-color: #ebbdb9;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 30px;
+  }
+
+  .individualBookingContainer {
+    background-color: #f6ead8;
+    width: 44rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 0.8rem;
+  }
+
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .infoTitle {
+    font-weight: 600;
+  }
+
+  .petsInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .updateAndDeleteButtons {
+    padding: 10px 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #a1d6d2;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
 }

@@ -67,16 +67,13 @@ def get_booking_user():
 @booking_routes.route('/date/<date>', methods=['GET'])
 def get_booking_by_date(date):
   try:
-    # Parse the input date string into a datetime object
     target_date = datetime.strptime(date, '%Y-%m-%d').date()
 
-    # Query bookings where the target date falls between drop_off_date and pick_up_date
     bookings = Booking.query.filter(
       func.date(Booking.drop_off_date) <= target_date,
       func.date(Booking.pick_up_date) >= target_date
     ).all()
 
-    # Convert the result to a list of dictionaries
     booking_list = [booking.to_dict() for booking in bookings]
 
     return jsonify(booking_list), 200
@@ -164,9 +161,9 @@ def update_booking(id):
 @booking_routes.route('/<int:id>', methods=['DELETE'])
 def delete_booking(id):
   try:
-    csrf_token = request.cookies.get('csrf_token')  # Get CSRF token from cookies
+    csrf_token = request.cookies.get('csrf_token')  
     try:
-        validate_csrf(csrf_token)  # Validate the CSRF token
+        validate_csrf(csrf_token)
     except Exception as e:
         return jsonify({"error": "CSRF token is invalid or missing"}), 400
     

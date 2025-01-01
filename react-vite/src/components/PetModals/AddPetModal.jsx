@@ -28,8 +28,6 @@ const AddPetModal = ({ onClose, navigate }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.user);
 
-  console.log("Errors: ", errors);
-
   const petCreationValidationErrors = ({ name, breed, age, color, weight }) => {
     const validationErrors = {};
 
@@ -101,13 +99,11 @@ const AddPetModal = ({ onClose, navigate }) => {
     formData.append("owner_id", String(currentUser.id));
 
     if (previewImage) {
-      console.log("preview_image:", previewImage);
       formData.append("preview_image", previewImage);
     }
 
-    additionalImages.forEach((file, index) => {
+    additionalImages.forEach((file) => {
       if (file) {
-        console.log(`additional_image_${index}:`, file);
         formData.append("additional_images", file);
       }
     });

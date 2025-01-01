@@ -39,7 +39,6 @@ function AllBookingsPage() {
       setPets(petsMap);
     };
 
-    console.log("updated bookings:", bookings);
     if (bookings?.length) {
       fetchClientsAndPets();
     }
@@ -64,11 +63,11 @@ function AllBookingsPage() {
             return (
               <div className={book.individualBookingContainer} key={booking.id}>
                 <div className={book.infoContainer}>
-                  <p>Daycare or Boarding Care:</p>
+                  <p className={book.infoTitle}>Daycare or Boarding Care:</p>
                   <p>{booking.booking_type}</p>
                 </div>
                 <div className={book.infoContainer}>
-                  <p>Owner:</p>
+                  <p className={book.infoTitle}>Owner:</p>
                   {client ? (
                     <p>
                       {client.fname} {client.lname}
@@ -78,30 +77,30 @@ function AllBookingsPage() {
                   )}
                 </div>
                 {pet ? (
-                  <div>
+                  <div className={book.petsInfo}>
                     <div className={book.infoContainer}>
-                      <p>Pet Name:</p>
+                      <p className={book.infoTitle}>Pet Name:</p>
                       <p>{pet.name}</p>
                     </div>
                     {pet.dietary_note ? (
                       <div className={book.infoContainer}>
-                        <p>Dietary Notes:</p>
+                        <p className={book.infoTitle}>Dietary Notes:</p>
                         <p>{pet.dietary_note}</p>
                       </div>
                     ) : (
                       <div className={book.infoContainer}>
-                        <p>Dietary Notes:</p>
+                        <p className={book.infoTitle}>Dietary Notes:</p>
                         <p>N/A</p>
                       </div>
                     )}
                     {pet.medication_note ? (
                       <div className={book.infoContainer}>
-                        <p>Medication Notes:</p>
+                        <p className={book.infoTitle}>Medication Notes:</p>
                         <p>{pet.medication_note}</p>
                       </div>
                     ) : (
                       <div className={book.infoContainer}>
-                        <p>Medication Notes:</p>
+                        <p className={book.infoTitle}>Medication Notes:</p>
                         <p>N/A</p>
                       </div>
                     )}
@@ -110,25 +109,25 @@ function AllBookingsPage() {
                   <p>Loading Pet...</p>
                 )}
                 <div className={book.infoContainer}>
-                  <p>Drop Off:</p>
+                  <p className={book.infoTitle}>Drop Off:</p>
                   <p>{booking.drop_off_date}</p>
                 </div>
                 <div className={book.infoContainer}>
-                  <p>Pick Up:</p>
+                  <p className={book.infoTitle}>Pick Up:</p>
                   <p>{booking.pick_up_date}</p>
                 </div>
-                <div className={book.infoContainer}>
-                  <p>Daily Pic:</p>
-                  <p>{booking.daily_pic}</p>
-                </div>
-                <div className={book.infoContainer}>
+                <div className={book.buttonContainer}>
                   <button
+                    className={book.updateAndDeleteButtons}
                     onClick={() => navigate(`/bookings/pet/${booking.pet_id}`)}
                   >
-                    Update Booking
+                    Update
                   </button>
-                  <button onClick={() => handleDeleteBooking(booking.id)}>
-                    Cancel Booking
+                  <button
+                    className={book.updateAndDeleteButtons}
+                    onClick={() => handleDeleteBooking(booking.id)}
+                  >
+                    Delete
                   </button>
                 </div>
               </div>
