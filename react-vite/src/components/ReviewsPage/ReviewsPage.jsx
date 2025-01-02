@@ -70,7 +70,6 @@ function ReviewsPage() {
   if (loading) return <div>Loading...</div>;
   if (errors) return <div>Error: {errors}</div>;
 
-  // const pawRatingIcon = <div className={rev.pawRatingIcon}><TbPaw /></div>;
   const pawRatingIcon = (
     <div className={rev.pawRatingIcon}>
       <IoIosPaw />
@@ -79,8 +78,6 @@ function ReviewsPage() {
 
   return (
     <div className={rev.reviewsMainContainer}>
-      {/* <img src="/images/paw-bg-strip.png" alt="" className={rev.pawPicOne}/>
-      <img src="/images/paw-bg-strip.png" alt="" className={rev.pawPicTwo}/> */}
       <div className={rev.reviewsHeader}>
         <h1 className={rev.h1}>Lovely Paws Reviews</h1>
       </div>
@@ -130,22 +127,24 @@ function ReviewsPage() {
                     <div className={rev.username}>{review.client_username}</div>
                   </div>
                   <div className={rev.review}>{review.review}</div>
-                  {currentUser?.id === review.client_id && (
-                    <button
-                      className={rev.editBtn}
-                      onClick={() => handleEditReview(review)}
-                    >
-                      Edit
-                    </button>
-                  )}
-                  {currentUser?.id === review.client_id && (
-                    <button
-                      className={rev.deleteBtn}
-                      onClick={() => handleDeleteReview(review.id)}
-                    >
-                      Delete
-                    </button>
-                  )}
+                  <div className={rev.reviewBtnContainer}>
+                    {currentUser?.id === review.client_id && (
+                      <button
+                        className={rev.editBtn}
+                        onClick={() => handleEditReview(review)}
+                      >
+                        Edit
+                      </button>
+                    )}
+                    {(currentUser?.id === review.client_id || ['Owner', 'Manager'].includes(currentUser?.position)) && (
+                      <button
+                        className={rev.deleteBtn}
+                        onClick={() => handleDeleteReview(review.id)}
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
                 </div>
               )}
             </div>

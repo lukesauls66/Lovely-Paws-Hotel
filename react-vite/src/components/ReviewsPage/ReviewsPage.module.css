@@ -118,6 +118,42 @@
         background-color: #ffc383;
         margin: 30px;
     }
+
+    .reviewBtnContainer {
+        display: flex;
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    .editBtn {
+        font-family: "Parkinsans";
+        padding: 5px 10px;
+        background-color: #a1d6d2;
+        color: #333;
+        border: 2px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .deleteBtn {
+        font-family: "Parkinsans";
+        font-size: 16px;
+        padding: 5px 10px;
+        background-color: #ffc383;
+        color: #333;
+        border: 2px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .editBtn:hover, .deleteBtn:hover {
+        transform: scale(1.1);
+        box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+    }
       
     .pawIcons svg {
         transition: color 0.3s, transform 0.2s;
@@ -258,6 +294,42 @@
         background-color: #ffc383;
         margin: 30px;
     }
+
+    .reviewBtnContainer {
+        display: flex;
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    .editBtn {
+        font-family: "Parkinsans";
+        padding: 5px 10px;
+        background-color: #a1d6d2;
+        color: #333;
+        border: 2px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .deleteBtn {
+        font-family: "Parkinsans";
+        font-size: 20px;
+        padding: 5px 10px;
+        background-color: #ffc383;
+        color: #333;
+        border: 2px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .editBtn:hover, .deleteBtn:hover {
+        transform: scale(1.1);
+        box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+    }
       
     .pawIcons svg {
         transition: color 0.3s, transform 0.2s;
@@ -396,6 +468,42 @@
     .submitBtn {
         background-color: #ffc383;
         margin: 30px;
+    }
+
+    .reviewBtnContainer {
+        display: flex;
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    .editBtn {
+        font-family: "Parkinsans";
+        padding: 5px 10px;
+        background-color: #a1d6d2;
+        color: #333;
+        border: 2px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .deleteBtn {
+        font-family: "Parkinsans";
+        font-size: 20px;
+        padding: 5px 10px;
+        background-color: #ffc383;
+        color: #333;
+        border: 2px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .editBtn:hover, .deleteBtn:hover {
+        transform: scale(1.1);
+        box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
     }
       
     .pawIcons svg {
@@ -539,6 +647,43 @@
         background-color: #ffc383;
         margin: 30px;
     }
+
+    .reviewBtnContainer {
+        display: flex;
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    .editBtn {
+        font-family: "Parkinsans";
+        padding: 5px 10px;
+        background-color: #a1d6d2;
+        color: #333;
+        border: 2px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .deleteBtn {
+        font-family: "Parkinsans";
+        font-size: 20px;
+        padding: 5px 10px;
+        background-color: #ffc383;
+        color: #333;
+        border: 2px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .editBtn:hover, .deleteBtn:hover {
+        transform: scale(1.1);
+        box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+    }
+
       
     .pawIcons svg {
         transition: color 0.3s, transform 0.2s;
@@ -679,6 +824,42 @@
         background-color: #ffc383;
         margin: 30px;
     }
+
+    .reviewBtnContainer {
+        display: flex;
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    .editBtn {
+        font-family: "Parkinsans";
+        padding: 5px 10px;
+        background-color: #a1d6d2;
+        color: #333;
+        border: 2px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .deleteBtn {
+        font-family: "Parkinsans";
+        padding: 5px 10px;
+        background-color: #ffc383;
+        color: #333;
+        border: 2px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .editBtn:hover, .deleteBtn:hover {
+        transform: scale(1.1);
+        box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+    }
+
       
     .pawIcons svg {
         transition: color 0.3s, transform 0.2s;
