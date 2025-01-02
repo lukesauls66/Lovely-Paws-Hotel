@@ -6,6 +6,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin: 10px 10px 20px 10px;
     }
     
     .h1 {
@@ -15,6 +16,7 @@
     
     .h1, .h3 {
         text-align: center;
+        margin: 20px 0;
     }
     
     .reviewsHeader {
@@ -40,7 +42,10 @@
     }
 
     
-    .addReviewBtn:hover, .submitBtn:hover {
+    .addReviewBtn:hover,
+    .submitBtn:hover, 
+    .editSaveBtn:hover,
+    .cancelEditBtn:hover {
         transform: scale(1.1);
         box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
     }
@@ -73,11 +78,13 @@
     .pawRatingIcon {
         font-size: 30px;
         margin-right: 5px;
+        color: #333;
     }
     
     .username {
         font-weight: bold;
         font-size: 20px;
+        color: #333;
     }
     
     .reviewForm {
@@ -123,6 +130,57 @@
         display: flex;
         gap: 20px;
         margin-top: 10px;
+    }
+
+    .editForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .editForm textarea {
+        background-color: #f6ead8;
+        border-radius: 10px;
+        width: 220px;
+        height: 70px;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .editForm label {
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .editSaveBtns {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .editSaveBtn, .cancelEditBtn {
+        font-family: "Parkinsans";
+        font-size: 1.2rem;
+        padding: 5px 10px;
+        color: #333;
+        border: 3px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .editSaveBtn {
+        background-color: #a1d6d2;
+    }
+
+    .cancelEditBtn {
+        background-color: #ffc383;
     }
 
     .editBtn {
@@ -176,7 +234,7 @@
         background-repeat: repeat-y, repeat-y;
         background-position: left top, right top;
         background-size: 120px, 120px;
-        margin: 10px;
+        margin: 10px 10px 30px 10px;
     }
     
     .h1 {
@@ -192,6 +250,7 @@
 
     .h3 {
         font-size: 24px;
+        margin: 30px;
     }
     
     .reviewsHeader {
@@ -215,7 +274,10 @@
         transition: transform 0.2s, box-shadow 0.2s;
     }
     
-    .addReviewBtn:hover, .submitBtn:hover {
+    .addReviewBtn:hover,
+    .submitBtn:hover, 
+    .editSaveBtn:hover,
+    .cancelEditBtn:hover {
         transform: scale(1.1);
         box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
     }
@@ -249,11 +311,13 @@
     .pawRatingIcon {
         font-size: 30px;
         margin-right: 5px;
+        color: #333;
     }
     
     .username {
         font-weight: bold;
         font-size: 26px;
+        color: #333;
     }
     
     .reviewForm {
@@ -299,6 +363,57 @@
         display: flex;
         gap: 20px;
         margin-top: 10px;
+    }
+
+    .editForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .editForm textarea {
+        background-color: #f6ead8;
+        border-radius: 10px;
+        width: 300px;
+        height: 70px;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .editForm label {
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .editSaveBtns {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .editSaveBtn, .cancelEditBtn {
+        font-family: "Parkinsans";
+        font-size: 1.6rem;
+        padding: 5px 10px;
+        color: #333;
+        border: 3px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .editSaveBtn {
+        background-color: #a1d6d2;
+    }
+
+    .cancelEditBtn {
+        background-color: #ffc383;
     }
 
     .editBtn {
@@ -351,7 +466,7 @@
         background-repeat: repeat-y, repeat-y;
         background-position: left top, right top;
         background-size: 140px, 140px;
-        margin: 10px;
+        margin: 10px 10px 30px 10px;
     }
     
     .h1 {
@@ -367,6 +482,7 @@
 
     .h3 {
         font-size: 26px;
+        margin: 30px;
     }
     
     .reviewsHeader {
@@ -390,7 +506,10 @@
         transition: transform 0.2s, box-shadow 0.2s;
     }
     
-    .addReviewBtn:hover, .submitBtn:hover {
+    .addReviewBtn:hover,
+    .submitBtn:hover, 
+    .editSaveBtn:hover,
+    .cancelEditBtn:hover {
         transform: scale(1.1);
         box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
     }
@@ -424,11 +543,13 @@
     .pawRatingIcon {
         font-size: 30px;
         margin-right: 5px;
+        color: #333;
     }
     
     .username {
         font-weight: bold;
         font-size: 26px;
+        color: #333;
     }
     
     .reviewForm {
@@ -474,6 +595,57 @@
         display: flex;
         gap: 20px;
         margin-top: 10px;
+    }
+
+    .editForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .editForm textarea {
+        background-color: #f6ead8;
+        border-radius: 10px;
+        width: 300px;
+        height: 70px;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .editForm label {
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .editSaveBtns {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .editSaveBtn, .cancelEditBtn {
+        font-family: "Parkinsans";
+        font-size: 1.6rem;
+        padding: 5px 10px;
+        color: #333;
+        border: 3px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .editSaveBtn {
+        background-color: #a1d6d2;
+    }
+
+    .cancelEditBtn {
+        background-color: #ffc383;
     }
 
     .editBtn {
@@ -526,7 +698,7 @@
         background-repeat: repeat-y, repeat-y;
         background-position: left top, right top;
         background-size: 180px, 180px;
-        margin: 10px;
+        margin: 10px 10px 30px 10px;
     }
     
     .h1 {
@@ -542,7 +714,7 @@
 
     .h3 {
         font-size: 28px;
-        color: #333;
+        margin: 30px;
     }
     
     .reviewsHeader {
@@ -567,7 +739,10 @@
         transition: transform 0.2s, box-shadow 0.2s;
     }
     
-    .addReviewBtn:hover, .submitBtn:hover {
+    .addReviewBtn:hover,
+    .submitBtn:hover, 
+    .editSaveBtn:hover,
+    .cancelEditBtn:hover {
         transform: scale(1.1);
         box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
     }
@@ -601,6 +776,7 @@
     .pawRatingIcon {
         font-size: 30px;
         margin-right: 5px;
+        color: #333;
     }
     
     .username {
@@ -652,6 +828,57 @@
         display: flex;
         gap: 20px;
         margin-top: 10px;
+    }
+
+    .editForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .editForm textarea {
+        background-color: #f6ead8;
+        border-radius: 10px;
+        width: 300px;
+        height: 70px;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .editForm label {
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .editSaveBtns {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .editSaveBtn, .cancelEditBtn {
+        font-family: "Parkinsans";
+        font-size: 1.6rem;
+        padding: 5px 10px;
+        color: #333;
+        border: 3px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .editSaveBtn {
+        background-color: #a1d6d2;
+    }
+
+    .cancelEditBtn {
+        background-color: #ffc383;
     }
 
     .editBtn {
@@ -707,7 +934,7 @@
         background-repeat: repeat-y, repeat-y;
         background-position: left top, right top;
         background-size: 240px, 240px;
-        margin: 10px;
+        margin: 10px 10px 30px 10px;
     }
 
     
@@ -718,10 +945,12 @@
     
     .h1, .h3 {
         text-align: center;
+        color: #333
     }
 
     .h3 {
         font-size: 30px;
+        margin: 30px;
     }
     
     .reviewsHeader {
@@ -745,7 +974,10 @@
         transition: transform 0.2s, box-shadow 0.2s;
     }
     
-    .addReviewBtn:hover, .submitBtn:hover {
+    .addReviewBtn:hover,
+    .submitBtn:hover, 
+    .editSaveBtn:hover,
+    .cancelEditBtn:hover {
         transform: scale(1.1);
         box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
     }
@@ -779,11 +1011,13 @@
     .pawRatingIcon {
         font-size: 30px;
         margin-right: 5px;
+        color: #333;
     }
     
     .username {
         font-weight: bold;
         font-size: 26px;
+        color: #333;
     }
     
     .reviewForm {
@@ -831,6 +1065,59 @@
         margin-top: 10px;
     }
 
+    .editForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .editForm textarea {
+        background-color: #f6ead8;
+        border-radius: 10px;
+        width: 300px;
+        height: 70px;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .editForm label {
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .editSaveBtns {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .editSaveBtn, .cancelEditBtn {
+        font-family: "Parkinsans";
+        font-size: 1.6rem;
+        padding: 5px 10px;
+        color: #333;
+        border: 3px solid #f7f0e5;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .editSaveBtn {
+        background-color: #a1d6d2;
+    }
+
+    .cancelEditBtn {
+        background-color: #ffc383;
+    }
+
+
+
     .editBtn {
         font-family: "Parkinsans";
         padding: 5px 10px;
@@ -860,7 +1147,6 @@
         box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
     }
 
-      
     .pawIcons svg {
         transition: color 0.3s, transform 0.2s;
     }
