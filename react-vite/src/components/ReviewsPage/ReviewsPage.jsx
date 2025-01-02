@@ -14,7 +14,11 @@ function ReviewsPage() {
   const [editingReviewId, setEditingReviewId] = useState(null);
   const [editText, setEditText] = useState("");
   const [editPaws, setEditPaws] = useState(0);
-  const { reviews = [], loading, errors } = useSelector((state) => state.review || {});
+  const {
+    reviews = [],
+    loading,
+    errors,
+  } = useSelector((state) => state.review || {});
   const currentUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
@@ -56,16 +60,18 @@ function ReviewsPage() {
       paws: editPaws,
     };
 
-    await dispatch(reviewActions.updateReview({ id: editingReviewId, review: updatedReview }));
+    await dispatch(
+      reviewActions.updateReview({ id: editingReviewId, review: updatedReview })
+    );
     dispatch(reviewActions.getAllReviews());
     setEditingReviewId(null);
   };
 
   const handleDeleteReview = (reviewId) => {
-    if (window.confirm('Are you sure you want to delete this review?')) {
+    if (window.confirm("Are you sure you want to delete this review?")) {
       dispatch(reviewActions.deleteReview(reviewId));
     }
-  }
+  };
 
   if (loading) return <div>Loading...</div>;
   if (errors) return <div>Error: {errors}</div>;
@@ -108,7 +114,9 @@ function ReviewsPage() {
                       <option value={5}>5 Paws</option>
                     </select>
                   </div>
-                  <button type="submit" className={rev.submitBtn}>Save</button>
+                  <button type="submit" className={rev.submitBtn}>
+                    Save
+                  </button>
                   <button
                     type="button"
                     className={rev.cancelBtn}
@@ -154,13 +162,13 @@ function ReviewsPage() {
         )}
       </div>
       <h3 className={rev.h3}>Tell us about your pet&apos;s stay!</h3>
-        <button 
-          className={rev.addReviewBtn}
-          onClick={() => setIsFormOpen(!isFormOpen)}
-        >
-          {isFormOpen ? "Cancel" : "Add a Review"}
-        </button>
-        {isFormOpen && (
+      <button
+        className={rev.addReviewBtn}
+        onClick={() => setIsFormOpen(!isFormOpen)}
+      >
+        {isFormOpen ? "Cancel" : "Add a Review"}
+      </button>
+      {isFormOpen && (
         <form onSubmit={handleCreateReview} className={rev.reviewForm}>
           <textarea
             value={reviewText}
@@ -177,25 +185,26 @@ function ReviewsPage() {
                 <IoIosPaw
                   key={paw}
                   size={30}
-                  onClick={() => setPawsRating(paw)} 
-                  onMouseEnter={() => setHoverRating(paw)} 
-                  onMouseLeave={() => setHoverRating(0)} 
+                  onClick={() => setPawsRating(paw)}
+                  onMouseEnter={() => setHoverRating(paw)}
+                  onMouseLeave={() => setHoverRating(0)}
                   style={{
-                    color: paw <= (hoverRating || pawsRating) ? "#f7a59e" : "gray",
+                    color:
+                      paw <= (hoverRating || pawsRating) ? "#f7a59e" : "gray",
                     cursor: "pointer",
                     margin: "0 5px",
                   }}
                 />
               ))}
             </div>
-        </div>
-          <button type="submit" className={rev.submitBtn}>Submit Review</button>
+          </div>
+          <button type="submit" className={rev.submitBtn}>
+            Submit Review
+          </button>
         </form>
       )}
-
     </div>
   );
 }
 
 export default ReviewsPage;
-

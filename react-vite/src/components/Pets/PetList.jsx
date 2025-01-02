@@ -14,10 +14,8 @@ const PetList = () => {
 
   useEffect(() => {
     if (sessionUser.staff) {
-      console.log("Fetching all pets for staff");
       dispatch(fetchAllPets());
     } else {
-      console.log("Fetching user pets");
       dispatch(fetchUserPets());
     }
   }, [dispatch, sessionUser]);
@@ -26,7 +24,6 @@ const PetList = () => {
 
   const handlePetClick = async (petId) => {
     try {
-      console.log("Fetching pet details for petId:", petId);
       await dispatch(fetchPetDetail(petId));
       navigate(`/pets/${petId}`);
     } catch (error) {

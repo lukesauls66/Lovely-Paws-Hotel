@@ -2,7 +2,6 @@
 .react-calendar {
   width: 350px;
   max-width: 100%;
-  /* border-radius: 20px; */
   background-color: #f0d0ce;
   border: 1px solid #a0a096;
   font-family: "Parkinsans";
@@ -54,7 +53,7 @@
   align-items: center;
   min-width: 44px;
   background: none;
-  font-size: x-large;
+  font-size: large;
 }
 
 .react-calendar__navigation button:disabled {
@@ -94,7 +93,6 @@
   text-transform: lowercase;
   font: inherit;
   font-size: 0.95em;
-  /* font-weight: bold; */
   text-decoration: none;
 }
 
@@ -113,7 +111,6 @@
 }
 
 .react-calendar__month-view__days__day--weekend {
-  /* color: #d10000; */
   color: black;
 }
 
@@ -173,16 +170,6 @@
   background: #a9d4ff;
 }
 
-/* .react-calendar__tile--active,
-.react-calendar__tile--range,
-.react-calendar__tile--rangeStart,
-.react-calendar__tile--rangeEnd,
-.react-calendar__tile--rangeBothEnds {
-  background: #5fbcf6;
-  color: blue;
-  font-weight: bolder;
-} */
-
 .react-calendar__tile--active {
   background-color: #5fbcf6;
   color: blue;
@@ -197,10 +184,6 @@
 .react-calendar--selectRange {
   background-color: blue;
 }
-
-/* .react-calendar--selectRange .react-calendar__tile--hover {
-  background-color: #e6e6e6;
-} */
 
 .react-calendar__tile--hover {
   background-color: #e6e6e6;

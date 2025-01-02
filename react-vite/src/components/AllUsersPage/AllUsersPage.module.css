@@ -1,142 +1,563 @@
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap");
 
-.mainPageContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: "Parkinsans";
+@media (min-width: 320px) and (max-width: 767px) {
+  .mainPageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Parkinsans";
+  }
+
+  .h1 {
+    font-family: "Gaegu", cursive;
+    font-size: 2rem;
+  }
+
+  .h2 {
+    font-family: "Gaegu", cursive;
+    font-size: 1.5rem;
+  }
+
+  .mainUsersContainer {
+    width: 16rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6ead8;
+    border: 3px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .allClientsContainer,
+  .allEmployeesContainer,
+  .allManagersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    background-color: #efaca6;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 0 8px 20px;
+    margin: 10px;
+  }
+
+  .allEmployeesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .allManagersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .headerRow {
+    display: flex;
+    gap: 4.2rem;
+    font-weight: 500;
+    font-size: 20px;
+    border-bottom: 1px solid #f6ead8;
+    padding: 2px;
+  }
+
+  .headerName {
+    text-align: left;
+  }
+
+  .headerEmail {
+    display: none;
+  }
+
+  .headerPhone {
+    text-align: left;
+  }
+
+  .userRow {
+    display: flex;
+    padding: 5px 0;
+    gap: 20px;
+  }
+
+  .userRow > div {
+    font-size: 8px;
+  }
+
+  .userRow > .name {
+    flex: 1;
+    display: flex;
+  }
+
+  .userRow > .email {
+    display: none;
+  }
+
+  .userRow > .phone {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ptags {
+    margin: 0;
+  }
+
+  .pawPicOne {
+    display: none;
+    position: absolute;
+    top: 200px;
+    left: 20px;
+  }
+
+  .pawPicTwo {
+    display: none;
+    position: absolute;
+    top: 200px;
+    right: 20px;
+  }
+
+  .pawPicThree {
+    display: none;
+    position: absolute;
+    top: 1150px;
+    left: 20px;
+  }
+
+  .pawPicFour {
+    display: none;
+    position: absolute;
+    top: 1150px;
+    right: 20px;
+  }
 }
 
-.h1 {
-  font-family: 'Gaegu', cursive;
-  font-size: 4rem;
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mainPageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Parkinsans";
+  }
+
+  .h1 {
+    font-family: "Gaegu", cursive;
+    font-size: 2.8rem;
+  }
+
+  .h2 {
+    font-family: "Gaegu", cursive;
+    font-size: 2.3rem;
+  }
+
+  .mainUsersContainer {
+    width: 34rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6ead8;
+    border: 3px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .allClientsContainer,
+  .allEmployeesContainer,
+  .allManagersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    background-color: #efaca6;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 0 8px 20px;
+    margin: 10px;
+  }
+
+  .allEmployeesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .allManagersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .headerRow {
+    display: flex;
+    gap: 8rem;
+    font-weight: 500;
+    font-size: 20px;
+    border-bottom: 1px solid #f6ead8;
+    padding: 2px;
+  }
+
+  .headerName {
+    text-align: left;
+  }
+
+  .headerEmail {
+    text-align: left;
+  }
+
+  .headerPhone {
+    text-align: left;
+  }
+
+  .userRow {
+    display: flex;
+    padding: 5px 0;
+    justify-content: space-between;
+  }
+
+  .userRow > div {
+    font-size: 12px;
+  }
+
+  .userRow > .name {
+    flex: 1;
+    display: flex;
+  }
+
+  .userRow > .email {
+    flex: 2;
+    display: flex;
+    padding-left: 2rem;
+  }
+
+  .userRow > .phone {
+    flex: 1;
+    display: flex;
+  }
+
+  .ptags {
+    margin: 0;
+  }
+
+  .pawPicOne {
+    display: none;
+    position: absolute;
+    top: 200px;
+    left: 20px;
+  }
+
+  .pawPicTwo {
+    display: none;
+    position: absolute;
+    top: 200px;
+    right: 20px;
+  }
+
+  .pawPicThree {
+    display: none;
+    position: absolute;
+    top: 1150px;
+    left: 20px;
+  }
+
+  .pawPicFour {
+    display: none;
+    position: absolute;
+    top: 1150px;
+    right: 20px;
+  }
 }
 
-.h2 {
-  font-family: 'Gaegu', cursive;
-  font-size: 2.4rem;
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .mainPageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Parkinsans";
+  }
+
+  .h1 {
+    font-family: "Gaegu", cursive;
+    font-size: 2.8rem;
+  }
+
+  .h2 {
+    font-family: "Gaegu", cursive;
+    font-size: 2.3rem;
+  }
+
+  .mainUsersContainer {
+    width: 34rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6ead8;
+    border: 3px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .allClientsContainer,
+  .allEmployeesContainer,
+  .allManagersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    background-color: #efaca6;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 0 8px 20px;
+    margin: 10px;
+  }
+
+  .allEmployeesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .allManagersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .headerRow {
+    display: flex;
+    gap: 8rem;
+    font-weight: 500;
+    font-size: 20px;
+    border-bottom: 1px solid #f6ead8;
+    padding: 2px;
+  }
+
+  .headerName {
+    text-align: left;
+  }
+
+  .headerEmail {
+    text-align: left;
+  }
+
+  .headerPhone {
+    text-align: left;
+  }
+
+  .userRow {
+    display: flex;
+    padding: 5px 0;
+    justify-content: space-between;
+    /* gap: 20px; */
+  }
+
+  .userRow > div {
+    font-size: 12px;
+  }
+
+  .userRow > .name {
+    flex: 1;
+    display: flex;
+  }
+
+  .userRow > .email {
+    flex: 2;
+    display: flex;
+    padding-left: 2rem;
+  }
+
+  .userRow > .phone {
+    flex: 1;
+    display: flex;
+  }
+
+  .ptags {
+    margin: 0;
+  }
+
+  .pawPicOne {
+    position: absolute;
+    width: 12rem;
+    top: 120px;
+    left: 20px;
+  }
+
+  .pawPicTwo {
+    position: absolute;
+    width: 12rem;
+    top: 120px;
+    right: 20px;
+  }
+
+  .pawPicThree {
+    position: absolute;
+    width: 12rem;
+    top: 800px;
+    left: 20px;
+  }
+
+  .pawPicFour {
+    position: absolute;
+    width: 12rem;
+    top: 800px;
+    right: 20px;
+  }
 }
 
-.mainUsersContainer {
-  width: 45rem;
-  display: flex;
-  flex-direction: column;
-  background-color: #f6ead8;
-  border: 3px solid #333;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 20px;
-}
+@media (min-width: 1440px) {
+  .mainPageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Parkinsans";
+  }
 
-.allClientsContainer,
-.allEmployeesContainer,
-.allManagersContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-  background-color: #efaca6;
-  border: 3px solid #333;
-  border-radius: 10px;
-  padding-bottom: 20px;
-  margin: 10px;
-}
+  .h1 {
+    font-family: "Gaegu", cursive;
+    font-size: 4rem;
+  }
 
-.allEmployeesContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-}
+  .h2 {
+    font-family: "Gaegu", cursive;
+    font-size: 2.4rem;
+  }
 
-.allManagersContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-}
+  .mainUsersContainer {
+    width: 45rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6ead8;
+    border: 3px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px;
+  }
 
-.userContainer {
-  display: flex;
-  justify-content: space-between;
-  width: 45rem;
-}
+  .allClientsContainer,
+  .allEmployeesContainer,
+  .allManagersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    background-color: #efaca6;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding-bottom: 20px;
+    margin: 10px;
+  }
 
-.headerRow {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-  font-size: 20px;
-  border-bottom: 1px solid #f6ead8;
-  padding: 5px 20px 5px 20px;
-}
+  .allEmployeesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
 
-.header {
-  text-align: left;
-  padding-left: 10px;
-}
+  .allManagersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
 
-.header.name {
-  flex: 1;
-}
+  .headerRow {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom: 1px solid #f6ead8;
+    padding: 5px 20px 5px 20px;
+  }
 
-.header.email {
-  flex: 2;
-}
+  .headerName {
+    text-align: left;
+    padding-left: 10px;
+  }
 
-.header.phone {
-  flex: 1;
-}
+  .headerEmail {
+    text-align: left;
+    padding-left: 10px;
+  }
 
-.userRow {
-  display: flex;
-  padding: 5px 0;
-  gap: 20px;
-}
+  .headerPhone {
+    text-align: left;
+    padding-left: 10px;
+  }
 
-.userRow > div {
-  text-align: left;
-  padding-left: 10px;
-  font-size: 18px;
-}
+  .header.name {
+    flex: 1;
+  }
 
-.userRow > .name {
-  flex: 1;
-}
+  .header.email {
+    flex: 2;
+  }
 
-.userRow > .email {
-  flex: 2;
-}
+  .header.phone {
+    flex: 1;
+  }
 
-.userRow > .phone {
-  flex: 1;
-}
+  .userRow {
+    display: flex;
+    padding: 5px 0;
+    gap: 20px;
+  }
 
-.ptags {
-  margin: 0;
-}
+  .userRow > div {
+    text-align: left;
+    padding-left: 10px;
+    font-size: 18px;
+  }
 
-.pawPicOne {
-  position: absolute;
-  top: 200px;
-  left: 20px;
-}
+  .userRow > .name {
+    flex: 1;
+  }
 
-.pawPicTwo {
-  position: absolute;
-  top: 200px;
-  right: 20px;
-}
+  .userRow > .email {
+    flex: 2;
+  }
 
-.pawPicThree {
-  position: absolute;
-  top: 1150px;
-  left: 20px;
-}
+  .userRow > .phone {
+    flex: 1;
+  }
 
-.pawPicFour {
-  position: absolute;
-  top: 1150px;
-  right: 20px;
+  .ptags {
+    margin: 0;
+  }
+
+  .pawPicOne {
+    position: absolute;
+    top: 200px;
+    left: 20px;
+  }
+
+  .pawPicTwo {
+    position: absolute;
+    top: 200px;
+    right: 20px;
+  }
+
+  .pawPicThree {
+    position: absolute;
+    top: 1150px;
+    left: 20px;
+  }
+
+  .pawPicFour {
+    position: absolute;
+    top: 1150px;
+    right: 20px;
+  }
 }

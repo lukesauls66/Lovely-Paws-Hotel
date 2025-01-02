@@ -31,6 +31,21 @@ def seed_pet_images():
         PetImage(pet_id=6, url='https://i.ibb.co/xCWP2kb/cosmo-3.jpg'),
         PetImage(pet_id=6, url='https://i.ibb.co/vPgtmBN/cosmo-4.jpg'),
         PetImage(pet_id=6, url='https://i.ibb.co/tZST4C5/cosmo-5.jpg'),
+        
+        PetImage(pet_id=7, url='https://i.ibb.co/WsH02wS/Wilson-5.jpg'),
+        PetImage(pet_id=7, url='https://i.ibb.co/nL5YZp7/Wilson-4.jpg'),
+        PetImage(pet_id=7, url='https://i.ibb.co/71f6F6V/Wilson-2.jpg'),
+        PetImage(pet_id=7, url='https://i.ibb.co/frw3XsH/Wilson-1.jpg'),
+        
+        PetImage(pet_id=8, url='https://i.ibb.co/LzxYL3B/Kira-5.jpg'),
+        PetImage(pet_id=8, url='https://i.ibb.co/R4w2ryb/Kira-3.jpg'),
+        PetImage(pet_id=8, url='https://i.ibb.co/JFKPdPm/Kira-2.jpg'),
+        PetImage(pet_id=8, url='https://i.ibb.co/T1k6SMt/Kira-1.jpg'),
+        
+        PetImage(pet_id=9, url='https://i.ibb.co/F3JFBgh/Roxy-4.jpg'),
+        PetImage(pet_id=9, url='https://i.ibb.co/Q8Rcbky/Roxy-3.jpg'),
+        PetImage(pet_id=9, url='https://i.ibb.co/18876T6/Roxy-2.jpg'),
+        PetImage(pet_id=9, url='https://i.ibb.co/5G19NhD/Roxy-1.jpg'),
     ]
 
     for pet_image in pet_images:

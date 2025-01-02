@@ -13,7 +13,6 @@ export const getAllServices = createAsyncThunk(
     try {
       const res = await fetch("/api/services/");
       const data = await res.json();
-      console.log("Data: ", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Issue getting all services");
@@ -34,14 +33,12 @@ export const createNewService = createAsyncThunk(
           staff,
         }),
       });
-      console.log("res:", res);
       const data = await res.json();
 
       if (!res.ok) {
         return rejectWithValue(data);
       }
 
-      console.log("data:", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Could not create new service");
@@ -63,9 +60,7 @@ export const updateService = createAsyncThunk(
           staff,
         }),
       });
-      console.log("Res: ");
       const data = await res.json();
-      console.log("");
 
       if (!res.ok) {
         return rejectWithValue(data);

@@ -69,10 +69,10 @@ def update_service(id):
 
 @service_routes.route('/<int:id>', methods=['DELETE'])
 def delete_service(id):
-    csrf_token = request.cookies.get('csrf_token')  # Get CSRF token from cookies
+    csrf_token = request.cookies.get('csrf_token') 
 
     try:
-        validate_csrf(csrf_token)  # Validate the CSRF token
+        validate_csrf(csrf_token)  
     except Exception as e:
         return jsonify({"error": "CSRF token is invalid or missing"}), 400
     

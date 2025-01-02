@@ -1,343 +1,1029 @@
-/* Global Styles */
-.mainContainer {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+@media (min-width: 320px) and (max-width: 799px) {
+  .mainContainer {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(213, 200, 181);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .h1 {
+    text-align: center;
+    margin: 20px;
+    color: #333;
+  }
+
+  h2 {
+    color: #333;
+  }
+
+  h3 {
+    color: #333;
+    margin: 0;
+  }
+
+  .h3Div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dateCofirmation {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .checkboxList {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .checkboxList input {
+    display: none;
+  }
+
+  .checkboxList input + span {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 2px solid #333;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+
+  .checkboxList input:checked + span {
+    background: url("/images/paw-right.png") no-repeat center center;
+    background-size: contain;
+    border: none;
+  }
+
+  .currBookContainer {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+  }
+
+  .currBookTitle {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2d2d2d;
+  }
+
+  .currBookType,
+  .currBookDates {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #555;
+  }
+
+  .currBookType {
+    font-weight: 600;
+  }
+
+  .currServicesContainer {
+    margin-top: 20px;
+  }
+
+  .currServicesDetail {
+    font-size: 14px;
+    color: #666;
+    padding: 5px 0;
+  }
+
+  .currBookBtnUpdate,
+  .currBookBtnDelete {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .currBookBtnUpdate:hover,
+  .currBookBtnDelete:hover {
+    background-color: #0056b3;
+  }
+
+  .currBookBtnUpdate:disabled,
+  .currBookBtnDelete:disabled {
+    background-color: #d6d6d6;
+    color: #a0a0a0;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+  }
+
+  .bookReservationWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .calendarContainer,
+  .selectTimesContainer,
+  .serviceListContainer {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .calendarContainerBoardingCare {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .calendarContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 264px;
+    background-color: #f7c38c;
+  }
+
+  .selectTimesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 350px;
+    background-color: #f7c38c;
+  }
+
+  .timeOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .serviceListContainer {
+    max-width: 400px;
+  }
+
+  .bookTypeBtnContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .bookBtn {
+    background-color: #a1d6d2;
+    border: none;
+    color: #333;
+    padding: 12px 24px;
+    border-radius: 5px;
+    border: 1mm solid #f7f0e5;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    width: 5rem;
+  }
+
+  .bookBtn:hover {
+    background-color: #a1d6d2;
+  }
+
+  .calendarMainTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .calendar {
+    margin-top: 20px;
+  }
+
+  .selectionDate {
+    font-size: 15px;
+    color: #333;
+  }
+
+  .selectDate {
+    background-color: blue;
+    border: none;
+    color: blue;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .pastDate {
+    background-color: #970808;
+    color: #b0b0b0;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  .weekendInRange {
+    background-color: blue;
+    color: blue;
+    font-weight: 900;
+    font-size: 1rem;
+  }
+
+  .dateRange {
+    background-color: blue;
+    color: blue;
+    font-weight: 900;
+    font-size: 1rem;
+  }
+
+  .selectTimesTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .dropOffContainer,
+  .pickUpContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .dropOffTitle,
+  .pickUpTitle {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+
+  .dropOffInput,
+  .pickUpInput {
+    font-size: 16px;
+    padding: 8px;
+    width: 150px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .dropOffInput:focus,
+  .pickUpInput:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+
+  .serviceListContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.7rem;
+    background-color: #f7c38c;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .serviceListContainer p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .innerServiceListContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 7rem;
+  }
+
+  .serviceListTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .servicesOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .submitButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a1d6d2;
+    border: 1mm solid #f7f0e5;
+    color: #333;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .submitButton:hover {
+    background-color: #a1d6d2;
+  }
+
+  .submitButton:disabled {
+    background-color: #d6d6d6;
+    color: #a0a0a0;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+  }
 }
 
-/* Header */
-.h1 {
-  text-align: center;
-  margin: 20px;
-  color: #333;
+@media (min-width: 800px) and (max-width: 1199px) {
+  .mainContainer {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(213, 200, 181);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .h1 {
+    text-align: center;
+    margin: 20px;
+    color: #333;
+  }
+
+  h2 {
+    color: #333;
+  }
+
+  h3 {
+    color: #333;
+    margin: 0;
+  }
+
+  .h3Div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dateCofirmation {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .checkboxList {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .checkboxList input {
+    display: none;
+  }
+
+  .checkboxList input + span {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 2px solid #333;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+
+  .checkboxList input:checked + span {
+    background: url("/images/paw-right.png") no-repeat center center;
+    background-size: contain;
+    border: none;
+  }
+
+  .currBookContainer {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+  }
+
+  .currBookTitle {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2d2d2d;
+  }
+
+  .currBookType,
+  .currBookDates {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #555;
+  }
+
+  .currBookType {
+    font-weight: 600;
+  }
+
+  .currServicesContainer {
+    margin-top: 20px;
+  }
+
+  .currServicesDetail {
+    font-size: 14px;
+    color: #666;
+    padding: 5px 0;
+  }
+
+  .currBookBtnUpdate,
+  .currBookBtnDelete {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .currBookBtnUpdate:hover,
+  .currBookBtnDelete:hover {
+    background-color: #0056b3;
+  }
+
+  .currBookBtnUpdate:disabled,
+  .currBookBtnDelete:disabled {
+    background-color: #d6d6d6;
+    color: #a0a0a0;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+  }
+
+  .bookReservationWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .calendarContainer,
+  .selectTimesContainer,
+  .serviceListContainer {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .calendarWrapperBoardingCare {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .calendarContainerBoardingCare {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .calendarContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 550px;
+    background-color: #f7c38c;
+  }
+
+  .selectTimesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 550px;
+    background-color: #f7c38c;
+  }
+
+  .timeOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .serviceListContainer {
+    width: 550px;
+  }
+
+  .bookTypeBtnContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .bookBtn {
+    background-color: #a1d6d2;
+    border: none;
+    color: #333;
+    padding: 12px 24px;
+    border-radius: 5px;
+    border: 1mm solid #f7f0e5;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    width: 7rem;
+  }
+
+  .bookBtn:hover {
+    background-color: #a1d6d2;
+  }
+
+  .calendarMainTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .calendar {
+    margin-top: 20px;
+  }
+
+  .selectionDate {
+    font-size: 15px;
+    color: #333;
+  }
+
+  .selectDate {
+    background-color: blue;
+    border: none;
+    color: blue;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .pastDate {
+    background-color: #970808;
+    color: #b0b0b0;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  .weekendInRange {
+    background-color: blue;
+    color: blue;
+    font-weight: 900;
+    font-size: 1rem;
+  }
+
+  .dateRange {
+    background-color: blue;
+    color: blue;
+    font-weight: 900;
+    font-size: 1rem;
+  }
+
+  .selectTimesTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .dropOffContainer,
+  .pickUpContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .dropOffTitle,
+  .pickUpTitle {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+
+  .dropOffInput,
+  .pickUpInput {
+    font-size: 16px;
+    padding: 8px;
+    width: 150px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .dropOffInput:focus,
+  .pickUpInput:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+
+  .serviceListContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.7rem;
+    background-color: #f7c38c;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .serviceListContainer p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .innerServiceListContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 7rem;
+  }
+
+  .serviceListTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .servicesOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .submitButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a1d6d2;
+    border: 1mm solid #f7f0e5;
+    color: #333;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .submitButton:hover {
+    background-color: #a1d6d2;
+  }
+
+  .submitButton:disabled {
+    background-color: #d6d6d6;
+    color: #a0a0a0;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+  }
 }
 
-/* Container for Current Booking Info */
-.currBookContainer {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
-  padding: 20px;
-  max-width: 600px;
-}
+@media (min-width: 1200px) {
+  .mainContainer {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(213, 200, 181);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.currBookTitle {
-  font-size: 24px;
-  font-weight: bold;
-  color: #2d2d2d;
-}
+  .h1 {
+    text-align: center;
+    margin: 20px;
+    color: #333;
+  }
 
-.currBookType, .currBookDates {
-  font-size: 16px;
-  margin: 10px 0;
-  color: #555;
-}
+  h2 {
+    color: #333;
+  }
 
-.currBookType {
-  font-weight: 600;
-}
+  h3 {
+    color: #333;
+    margin: 0;
+  }
 
-.currServicesContainer {
-  margin-top: 20px;
-}
+  .h3Div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.currServicesDetail {
-  font-size: 14px;
-  color: #666;
-  padding: 5px 0;
-}
+  .dateCofirmation {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    justify-content: center;
+    align-items: center;
+  }
 
-/* Buttons */
-.currBookBtnUpdate, .currBookBtnDelete {
-  background-color: #007BFF;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  margin: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
+  .checkboxList {
+    display: flex;
+    flex-direction: column;
+  }
 
-.currBookBtnUpdate:hover, .currBookBtnDelete:hover {
-  background-color: #0056b3;
-}
+  .checkboxList input {
+    display: none;
+  }
 
-/* Styles for disabled state */
-.currBookBtnUpdate:disabled, .currBookBtnDelete:disabled {
-  background-color: #d6d6d6;  /* Light gray background */
-  color: #a0a0a0;  /* Gray text */
-  cursor: not-allowed;  /* Change cursor to indicate not clickable */
-  border: 1px solid #ccc;  /* Gray border */
-}
+  .checkboxList input + span {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 2px solid #333;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
 
-/* Flexbox layout for calendar, select times, and services */
-.bookReservationWrapper {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 1200px;
-}
+  .checkboxList input:checked + span {
+    background: url("/images/paw-right.png") no-repeat center center;
+    background-size: contain;
+    border: none;
+  }
 
-/* Each section */
-.calendarContainer, .selectTimesContainer, .serviceListContainer {
-  flex: 1;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+  .currBookContainer {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+  }
 
-/* Calendar styles (same as previous) */
-.calendarContainer {
-  max-width: 350px;
-}
+  .currBookTitle {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2d2d2d;
+  }
 
-/* Times selection section styles */
-.selectTimesContainer {
-  max-width: 350px;
-}
+  .currBookType,
+  .currBookDates {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #555;
+  }
 
-/* Services section styles */
-.serviceListContainer {
-  max-width: 400px;
-}
+  .currBookType {
+    font-weight: 600;
+  }
 
-.bookTypeBtnContainer {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
+  .currServicesContainer {
+    margin-top: 20px;
+  }
 
-.bookDayCareBtn, .bookBrdCareBtn {
-  background-color: #28a745;
-  border: none;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  text-align: center;
-}
+  .currServicesDetail {
+    font-size: 14px;
+    color: #666;
+    padding: 5px 0;
+  }
 
-.bookDayCareBtn:hover, .bookBrdCareBtn:hover {
-  background-color: #218838;
-}
+  .currBookBtnUpdate,
+  .currBookBtnDelete {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-/* Global Calendar Container */
-.calendarContainer {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 350px;
-  margin: 20px auto;
-}
+  .currBookBtnUpdate:hover,
+  .currBookBtnDelete:hover {
+    background-color: #0056b3;
+  }
 
-/* Style for the calendar drop date */
-.calendarContainer .react-calendar__navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-}
+  .currBookBtnUpdate:disabled,
+  .currBookBtnDelete:disabled {
+    background-color: #d6d6d6;
+    color: #a0a0a0;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+  }
 
-.react-calendar__navigation__label {
-  font-weight: bold;
-  font-size: 16px;
-  align-items: center;
-  justify-content: center;
-}
+  .bookReservationWrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 1200px;
+  }
 
-.calendarWrapperDayCare__navigation__arrow:disabled,
-.calendarWrapperBoardingCare__navigation__arrow:disabled {
-  background-color: transparent !important;
-  border: none !important;
-  padding: 5px !important;
-  cursor: pointer !important;
-}
+  .calendarContainer,
+  .selectTimesContainer,
+  .serviceListContainer {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
 
-.calendarWrapperDayCare__navigation__arrow::after,
-.calendarWrapperBoardingCare__navigation__arrow::after {
-  font-size: 32px; /* Adjust arrow size */
-  color: #007bff;
-}
+  .calendarContainerBoardingCare {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-.calendarWrapperDayCare__navigation__arrow:hover,
-.calendarWrapperBoardingCare__navigation__arrow:hover {
-  font-size: 32px; /* Adjust arrow size */
-}
+  .calendarContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 350px;
+    background-color: #f7c38c;
+  }
 
-/* Optional Active State for Arrows */
-.calendarWrapperDayCare__navigation__arrow:active,
-.calendarWrapperBoardingCare__navigation__arrow:active {
-  background-color: #e0e0e0; /* Darker background on active state */
-}
+  .selectTimesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 350px;
+    background-color: #f7c38c;
+  }
 
-.calendarWrapperDayCare__month-view__weekdays__weekday,
-.calendarWrapperBoardingCare__month-view__weekdays__weekday {
-  padding: 0.5em;
-  text-decoration: none;
-}
+  .timeOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
 
-/* Styling for the next month calendar */
-.calendarNextMonth .react-calendar__navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .serviceListContainer {
+    max-width: 400px;
+  }
 
-.calendarNextMonth .react-calendar__navigation__label {
-  font-weight: bold;
-}
+  .bookTypeBtnContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
 
-.calendarNextMonth .react-calendar__navigation__prev-button,
-.calendarNextMonth .react-calendar__navigation__next-button {
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  .bookBtn {
+    background-color: #a1d6d2;
+    border: none;
+    color: #333;
+    padding: 12px 24px;
+    border-radius: 5px;
+    border: 1mm solid #f7f0e5;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    width: 7rem;
+  }
 
-.calendarNextMonth .react-calendar__navigation__prev-button::after,
-.calendarNextMonth .react-calendar__navigation__next-button::after {
-  font-size: 32px;
-}
+  .bookBtn:hover {
+    background-color: #a1d6d2;
+  }
 
-.calendarMainTitle {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-}
+  .calendarMainTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
 
-.calendar {
-  margin-top: 20px;
-}
+  .calendar {
+    margin-top: 20px;
+  }
 
-.selectionDate {
-  font-size: 15px;
-  color: #333;
-  /* font-weight: bold; */
-}
+  .selectionDate {
+    font-size: 15px;
+    color: #333;
+  }
 
-.selectDate {
-  background-color: blue;
-  border: none;
-  color: blue;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-/* 
-.selectDate:hover {
-  background-color: #0056b3;
-} */
+  .selectDate {
+    background-color: blue;
+    border: none;
+    color: blue;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-.pastDate {
-  background-color: #970808; /* Light gray background for past dates */
-  color: #b0b0b0; /* Dimmed text color */
-  pointer-events: none; /* Prevent clicking */
-  cursor: not-allowed; /* Show 'not-allowed' cursor for past dates */
-}
+  .pastDate {
+    background-color: #970808;
+    color: #b0b0b0;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
 
-.weekendInRange {
-  background-color: blue;
-  color: blue;
-  font-weight: 900;
-  font-size: 1rem;
-}
+  .weekendInRange {
+    background-color: blue;
+    color: blue;
+    font-weight: 900;
+    font-size: 1rem;
+  }
 
-/* Highlight the date range between drop-off and pick-up */
-.dateRange {
-  background-color: blue;
-  color: blue;
-  font-weight: 900;
-  font-size: 1rem;
-}
+  .dateRange {
+    background-color: blue;
+    color: blue;
+    font-weight: 900;
+    font-size: 1rem;
+  }
 
-/* Times Selection */
-.selectTimesContainer {
-  margin-top: 30px;
-}
+  .selectTimesTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
 
-.selectTimesTitle {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-}
+  .dropOffContainer,
+  .pickUpContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
 
-.dropOffContainer, .pickUpContainer {
-  margin-bottom: 20px;
-}
+  .dropOffTitle,
+  .pickUpTitle {
+    font-size: 16px;
+    margin-right: 10px;
+  }
 
-.dropOffTitle, .pickUpTitle {
-  font-size: 16px;
-  margin-right: 10px;
-}
+  .dropOffInput,
+  .pickUpInput {
+    font-size: 16px;
+    padding: 8px;
+    width: 150px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
 
-.dropOffInput, .pickUpInput {
-  font-size: 16px;
-  padding: 8px;
-  width: 150px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
+  .dropOffInput:focus,
+  .pickUpInput:focus {
+    outline: none;
+    border-color: #007bff;
+  }
 
-.dropOffInput:focus, .pickUpInput:focus {
-  outline: none;
-  border-color: #007bff;
-}
+  .serviceListContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.7rem;
+    background-color: #f7c38c;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    padding: 20px;
+    overflow-y: auto;
+  }
 
-/* Services List */
-.serviceListContainer {
-  margin-top: 30px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-}
+  .serviceListContainer p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
 
-.serviceListTitle {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-}
+  .innerServiceListContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 7rem;
+  }
 
-.serviceListContainer p {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 10px;
-}
+  .serviceListTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
 
-.submitButton {
-  background-color: #28a745;
-  border: none;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 5px;
-  cursor: pointer;
-}
+  .servicesOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
 
-.submitButton:hover {
-  background-color: #218838;
-}
+  .submitButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a1d6d2;
+    border: 1mm solid #f7f0e5;
+    color: #333;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-.submitButton:disabled {
-  background-color: #d6d6d6;  /* Light gray background */
-  color: #a0a0a0;  /* Gray text */
-  cursor: not-allowed;  /* Change cursor to indicate not clickable */
-  border: 1px solid #ccc;  /* Gray border */
+  .submitButton:hover {
+    background-color: #a1d6d2;
+  }
+
+  .submitButton:disabled {
+    background-color: #d6d6d6;
+    color: #a0a0a0;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+  }
 }

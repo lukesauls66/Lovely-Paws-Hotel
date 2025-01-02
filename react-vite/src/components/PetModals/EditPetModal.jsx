@@ -29,7 +29,6 @@ const EditPetModal = ({ petId, onClose }) => {
   ]);
   const [errors, setErrors] = useState({});
   const pet = useSelector((state) => state.pets.selectedPet);
-  console.log("Pet: ", pet);
 
   useEffect(() => {
     if (!pet) {
@@ -67,21 +66,6 @@ const EditPetModal = ({ petId, onClose }) => {
       console.error("No pet was found");
     }
   }, [pet]);
-
-  console.log("Pet name: ", name);
-  console.log("Pet type: ", type);
-  console.log("Pet breed: ", breed);
-  console.log("Pet age: ", age);
-  console.log("Pet gender: ", gender);
-  console.log("Pet color: ", color);
-  console.log("Pet weight: ", weight);
-  console.log("Pet dob: ", dob);
-  console.log("Pet size: ", size);
-  console.log("Pet behavior: ", behavior);
-  console.log("Pet medicationNote: ", medicationNote);
-  console.log("Pet dietaryNote: ", dietaryNote);
-  console.log("Pet previewImage: ", previewImage);
-  console.log("Pet additionalImages: ", additionalImages);
 
   const petUpdateValidationErrors = ({ name, breed, age, color, weight }) => {
     const validationErrors = {};
@@ -146,9 +130,8 @@ const EditPetModal = ({ petId, onClose }) => {
       formData.append("preview_image", previewImage);
     }
 
-    additionalImages.forEach((file, index) => {
+    additionalImages.forEach((file) => {
       if (file) {
-        console.log(`additional_image_${index}:`, file);
         formData.append("additional_images", file);
       }
     });
@@ -169,7 +152,6 @@ const EditPetModal = ({ petId, onClose }) => {
 
   const handleAdditionalImageChange = async (index, e) => {
     const newAdditionalImages = [...additionalImages];
-    console.log("File: ", e.target.files[0]);
     newAdditionalImages[index] = e.target.files[0];
     setAdditionalImages(newAdditionalImages);
   };

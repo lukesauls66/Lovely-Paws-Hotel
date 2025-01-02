@@ -13,7 +13,6 @@ export const fetchAllPets = createAsyncThunk(
     try {
       const response = await fetch("/api/pets/");
       const data = await response.json();
-      console.log("fetchAllPets data:", data);
       if (!response.ok) {
         throw new Error(`Error fetching pets: ${data.message}`);
       }
@@ -29,14 +28,11 @@ export const fetchUserPets = createAsyncThunk(
   "pets/fetchUserPets",
   async (_, { rejectWithValue }) => {
     try {
-      console.log("fetchUserPets action triggered");
       const response = await fetch("/api/pets/user");
-      console.log("fetchUserPets response:", response);
       const data = await response.json();
       if (!response.ok) {
         return rejectWithValue(data);
       }
-      console.log("fetchUserPets data:", data);
       return data;
     } catch (error) {
       console.error("fetchUserPets error:", error);
@@ -50,9 +46,7 @@ export const fetchPetDetail = createAsyncThunk(
   async (petId, { rejectWithValue }) => {
     try {
       const response = await fetch(`/api/pets/${petId}`);
-      console.log("fetchPetDetail response:", response);
       const data = await response.json();
-      console.log("fetchPetDetail data:", data);
       if (!response.ok) {
         return rejectWithValue(data);
       }
@@ -72,12 +66,10 @@ export const addPet = createAsyncThunk(
         method: "POST",
         body: formData,
       });
-      console.log("Res: ", response);
       const data = await response.json();
       if (!response.ok) {
         return rejectWithValue(data);
       }
-      console.log("Data: ", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Issue adding pet");
@@ -140,12 +132,10 @@ const petsSlice = createSlice({
         console.error("fetchAllPets rejected with error:", action.payload);
       })
       .addCase(fetchUserPets.pending, (state) => {
-        console.log("fetchUserPets pending");
         state.status = "loading";
         state.error = null;
       })
       .addCase(fetchUserPets.fulfilled, (state, action) => {
-        console.log("fetchUserPets fulfilled with payload:", action.payload);
         state.status = "succeeded";
         state.pets = action.payload.Pets;
       })

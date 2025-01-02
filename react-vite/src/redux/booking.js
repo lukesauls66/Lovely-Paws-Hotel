@@ -13,7 +13,6 @@ export const getAllBookings = createAsyncThunk(
     try {
       const res = await fetch("/api/bookings/");
       const data = await res.json();
-      console.log("bookings after delete:", data.bookings);
       return data.bookings;
     } catch (error) {
       return rejectWithValue(error.message || "Trouble getting All Bookings");
@@ -40,7 +39,6 @@ export const getBookingByPetId = createAsyncThunk(
     try {
       const res = await fetch(`/api/bookings/pet/${petId}`);
       const data = await res.json();
-      console.log('redux > ', data.booking);
       return data.booking;
     } catch (error) {
       return rejectWithValue(
@@ -99,9 +97,7 @@ export const createBooking = createAsyncThunk(
           services,
         }),
       });
-      console.log("res > ", res);
       const data = await res.json();
-      console.log("data > ", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || "Create Booking Failed");
@@ -152,11 +148,6 @@ export const deleteBooking = createAsyncThunk(
       await fetch(`/api/bookings/${booking_id}`, {
         method: "DELETE",
       });
-
-      // if (!res.ok) {
-      //   throw new Error("Failed to delete booking");
-      // }
-
       return;
     } catch (error) {
       return rejectWithValue(error.message || "Delete booking Failed");
@@ -168,7 +159,9 @@ const bookingSlice = createSlice({
   name: "booking",
   initialState,
   reducers: {
-    resetBooking: (state) => {state.booking = null}
+    resetBooking: (state) => {
+      state.booking = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -271,5 +264,5 @@ const bookingSlice = createSlice({
   },
 });
 
-export const { resetBooking } = bookingSlice.actions
+export const { resetBooking } = bookingSlice.actions;
 export default bookingSlice.reducer;

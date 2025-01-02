@@ -24,22 +24,9 @@ s3_client = boto3.client(
 )
 
 def upload_to_s3(file, bucket_name, folder='images'):
-    print(f"S3_BUCKET: {S3_BUCKET}")
-    print(f"S3_REGION: {S3_REGION}")
-    print(f"S3_ACCESS_KEY exists: {'yes' if S3_ACCESS_KEY else 'no'}")
-    print("Starting upload")
-    print(f"File: {file}")
-    print(f"Bucket: {bucket_name}")
-    print(f"S3 region: {S3_REGION}")
-
     try:
-        print(f"File content type: {file.content_type}")
-        print(f"File filename: {file.filename}")
-
         filename = secure_filename(file.filename)
         unique_filename = f"{folder}/{uuid.uuid4().hex}_{filename}"
-
-        print(f"unique filename: {unique_filename}")
 
         try:
             s3_client.upload_fileobj(
@@ -48,13 +35,11 @@ def upload_to_s3(file, bucket_name, folder='images'):
                 unique_filename,
                 ExtraArgs={'ContentType': file.content_type}
             )
-            print("Upload to S3 successful")
         except Exception as s3_error:
             print(f"S3 upload error: {str(s3_error)}")
             raise
 
         file_url = f"https://{bucket_name}.s3.{S3_REGION}.amazonaws.com/{unique_filename}"
-        print(f"Generated URL: {file_url}")
         return file_url
     except Exception as e:
         raise ValueError(f"Issue uploading file: {e}")
@@ -109,10 +94,7 @@ def create_pet():
         )
 
         if 'preview_image' in request.files:
-            print("found preview_image")
             file = request.files['preview_image']
-            print(f"File object: {file}")
-            print(f"Filename {file.filename}")
             if file and file.filename:
                 try:
                     preview_image_url = upload_to_s3(file, S3_BUCKET)
@@ -134,7 +116,6 @@ def create_pet():
         db.session.commit()
         return jsonify(new_pet.to_dict()), 201
     
-    print(form.errors)  
     return jsonify(form.errors), 400
 
 # Update pet
@@ -163,7 +144,6 @@ def update_pet(id):
         pet.behavior = form.behavior.data
         pet.medication_note = form.medication_note.data
         pet.dietary_note = form.dietary_note.data
-        # pet.preview_image = form.preview_image_url.data
         pet.owner_id = current_user.id  
 
         if 'preview_image' in request.files:
@@ -189,7 +169,6 @@ def update_pet(id):
         db.session.commit()
         return jsonify(pet.to_dict()), 200
 
-    print(form.errors)  
     return jsonify(form.errors), 400
 
 # Delete pet

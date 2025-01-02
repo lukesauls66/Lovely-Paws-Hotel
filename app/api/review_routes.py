@@ -77,10 +77,10 @@ def update_review(review_id):
 
 @review_routes.route('/<int:review_id>', methods=['DELETE'])
 def remove_review(review_id):
-    csrf_token = request.cookies.get('csrf_token')  # Get CSRF token from cookies
+    csrf_token = request.cookies.get('csrf_token') 
 
     try:
-        validate_csrf(csrf_token)  # Validate the CSRF token
+        validate_csrf(csrf_token) 
     except Exception as e:
         return jsonify({"error": "CSRF token is invalid or missing"}), 400
     review = Review.query.get(review_id)

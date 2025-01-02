@@ -5,7 +5,6 @@ import * as sessionActions from "../../redux/session";
 import { getOrderedReviews } from "../../redux/review";
 import ProfileButton from "../Navigation/ProfileButton";
 import lan from "./LandingPage.module.css";
-// import { TbPaw } from "react-icons/tb";
 import { IoIosPaw } from "react-icons/io";
 import DemoButton from "../Navigation/DemoButton";
 
@@ -76,7 +75,7 @@ function LandingPage() {
         </div>
         {currentUser ? null : (
           <div className={lan.demoButton}>
-            <DemoButton /> 
+            <DemoButton />
           </div>
         )}
       </div>
@@ -91,7 +90,7 @@ function LandingPage() {
         <div className={lan.infoContainer}>
           <div className={lan.aboutContainer}>
             <div className={lan.aboutBox}>
-              <h1>Welcome to Paradise!</h1>
+              <h1 className={lan.aboutH1}>Welcome to Paradise!</h1>
               <p className={lan.aboutParagraph}>
                 At Lovely Paws Hotel, we&apos;re dedicated to making every stay
                 a paws-itively delightful experience for your furry family
@@ -112,20 +111,22 @@ function LandingPage() {
             </div>
           </div>
           <div className={lan.featuresBox}>
-            <button
-              className={lan.servicesBtn}
-              onClick={() => navigate("/services")}
-            >
-              Browse Our Services
-            </button>
-            <img className={lan.catPic} src="/images/cat.png" alt="cat" />
-            <img className={lan.dogPic} src="/images/dog.png" alt="dog" />
-            <button
-              className={lan.bookingsBtn}
-              onClick={() => navigate("/pets")}
-            >
-              Book a Reservation
-            </button>
+            <div className={lan.serveAndBookButtonsContainer}>
+              <button
+                className={lan.servicesBtn}
+                onClick={() => navigate("/services")}
+              >
+                Browse Our Services
+              </button>
+              <img className={lan.catPic} src="/images/cat.png" alt="cat" />
+              <img className={lan.dogPic} src="/images/dog.png" alt="dog" />
+              <button
+                className={lan.bookingsBtn}
+                onClick={() => navigate("/pets")}
+              >
+                Book a Reservation
+              </button>
+            </div>
             <div className={lan.reviewsContainer}>
               <div className={lan.reviewsBox}>
                 <h1 className={lan.topReviewsTitle}>Top Reviews</h1>
@@ -158,10 +159,15 @@ function LandingPage() {
         </div>
         <div className={lan.petOfMonthBox}>
           <div className={lan.petInfoSide}>
-            <h1 className={lan.petOfMonthHeader}>Pet of the Month</h1>
+            <div className={lan.petInfoH1}>
+              <h1 className={lan.petOfMonthHeader}>Pet of the Month</h1>
+            </div>
             <hr />
             <h2>King</h2>
-            <p>*SHORT BIO*</p>
+            <p>
+              King was the best cat we have had the chance to take care of!
+              Alexi give us 100%!!
+            </p>
           </div>
           <div className={lan.petOfMonthImage}>
             <img src="/images/king.jpg" alt="king" />
