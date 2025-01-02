@@ -116,10 +116,10 @@ Add the following keys and values in the Render GUI form:
 - FLASK_ENV production
 - FLASK_APP app
 - SCHEMA=«custom_schema_name_here»
-- BUCKET_NAME=«aws_bucket_name_here»
-- BUCKET_REGION=«aws_bucket_region_here»
-- ACCESS_KEY=«aws_access_key_here»
-- SECRET_ACCESS_KEY=«aws_secret_access_key_here»
+- AWS_BUCKET_NAME=«aws_bucket_name_here»
+- AWS_BUCKET_REGION=«aws_bucket_region_here»
+- AWS_ACCESS_KEY_ID=«aws_access_key_here»
+- AWS_SECRET_ACCESS_KEY=«aws_secret_access_key_here»
 
 In a new tab, navigate to your dashboard and click on your Postgres database
 instance.
