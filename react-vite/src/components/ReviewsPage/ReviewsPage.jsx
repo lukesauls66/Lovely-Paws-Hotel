@@ -135,22 +135,24 @@ function ReviewsPage() {
                     <div className={rev.username}>{review.client_username}</div>
                   </div>
                   <div className={rev.review}>{review.review}</div>
-                  {currentUser?.id === review.client_id && (
-                    <button
-                      className={rev.editBtn}
-                      onClick={() => handleEditReview(review)}
-                    >
-                      Edit
-                    </button>
-                  )}
-                  {currentUser?.id === review.client_id && (
-                    <button
-                      className={rev.deleteBtn}
-                      onClick={() => handleDeleteReview(review.id)}
-                    >
-                      Delete
-                    </button>
-                  )}
+                  <div className={rev.reviewBtnContainer}>
+                    {currentUser?.id === review.client_id && (
+                      <button
+                        className={rev.editBtn}
+                        onClick={() => handleEditReview(review)}
+                      >
+                        Edit
+                      </button>
+                    )}
+                    {(currentUser?.id === review.client_id || ['Owner', 'Manager'].includes(currentUser?.position)) && (
+                      <button
+                        className={rev.deleteBtn}
+                        onClick={() => handleDeleteReview(review.id)}
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
