@@ -13,6 +13,12 @@ const PetList = () => {
   const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
+    if (!sessionUser) {
+      navigate("/");
+    }
+  }, [sessionUser, navigate]);
+
+  useEffect(() => {
     if (sessionUser.staff) {
       dispatch(fetchAllPets());
     } else {

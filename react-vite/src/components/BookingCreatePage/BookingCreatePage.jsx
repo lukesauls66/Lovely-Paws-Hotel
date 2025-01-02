@@ -368,20 +368,22 @@ const BookingsCreatePage = () => {
                   Reservation has started, cannot Update & Delete
                 </h3>
               )}
-              <button
-                className={bcp.currBookBtnUpdate}
-                onClick={handleUpdateBooking}
-                disabled={isReservationStarted}
-              >
-                Update
-              </button>
-              <button
-                className={bcp.currBookBtnDelete}
-                onClick={handleDeleteBooking}
-                disabled={isReservationStarted}
-              >
-                Delete
-              </button>
+              <div className={bcp.currBookButtonContainer}>
+                <button
+                  className={bcp.currBookBtnUpdate}
+                  onClick={handleUpdateBooking}
+                  disabled={isReservationStarted}
+                >
+                  Update
+                </button>
+                <button
+                  className={bcp.currBookBtnDelete}
+                  onClick={handleDeleteBooking}
+                  disabled={isReservationStarted}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ) : (
             <>
