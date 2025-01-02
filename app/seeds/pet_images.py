@@ -46,6 +46,11 @@ def seed_pet_images():
         PetImage(pet_id=9, url='https://i.ibb.co/Q8Rcbky/Roxy-3.jpg'),
         PetImage(pet_id=9, url='https://i.ibb.co/18876T6/Roxy-2.jpg'),
         PetImage(pet_id=9, url='https://i.ibb.co/5G19NhD/Roxy-1.jpg'),
+    
+        PetImage(pet_id=10, url='https://i.ibb.co/82tRbQM/harris2.jpg'),
+        PetImage(pet_id=10, url='https://i.ibb.co/cvPf7j3/harris3.jpg'),
+        PetImage(pet_id=10, url='https://i.ibb.co/b6rr1bW/harris4.jpg'),
+        PetImage(pet_id=10, url='https://i.ibb.co/4TRbB82/harris5.jpg'),
     ]
 
     for pet_image in pet_images:

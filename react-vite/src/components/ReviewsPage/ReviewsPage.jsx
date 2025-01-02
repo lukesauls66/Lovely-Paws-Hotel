@@ -102,30 +102,37 @@ function ReviewsPage() {
                     className={rev.textarea}
                   />
                   <div className={rev.rating}>
-                    <label>Paws Rating:</label>
-                    <select
-                      value={editPaws}
-                      onChange={(e) => setEditPaws(Number(e.target.value))}
-                      className={rev.select}
-                    >
-                      <option value={0}>Select rating</option>
-                      <option value={1}>1 Paw</option>
-                      <option value={2}>2 Paws</option>
-                      <option value={3}>3 Paws</option>
-                      <option value={4}>4 Paws</option>
-                      <option value={5}>5 Paws</option>
-                    </select>
+                    <label className={rev.editLabel}>Paws Rating:</label>
+                    <div className={rev.editPawIcons}>
+                      {[1, 2, 3, 4, 5].map((paw) => (
+                        <IoIosPaw
+                          key={paw}
+                          size={35}
+                          onClick={() => setEditPaws(paw)} 
+                          onMouseEnter={() => setHoverRating(paw)} 
+                          onMouseLeave={() => setHoverRating(0)}
+                          style={{
+                            color:
+                              paw <= (hoverRating || editPaws) ? "#fa8d83" : "gray", 
+                            cursor: "pointer",
+                            margin: "0 5px",
+                          }}
+                        />
+                      ))}
+                    </div>
                   </div>
-                  <button type="submit" className={rev.submitBtn}>
-                    Save
-                  </button>
-                  <button
-                    type="button"
-                    className={rev.cancelBtn}
-                    onClick={() => setEditingReviewId(null)}
-                  >
-                    Cancel
-                  </button>
+                  <div className={rev.editSaveBtns}>
+                    <button type="submit" className={rev.editSaveBtn}>
+                      Save
+                    </button>
+                    <button
+                      type="button"
+                      className={rev.cancelEditBtn}
+                      onClick={() => setEditingReviewId(null)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </form>
               ) : (
                 <div className={rev.reviewCard}>

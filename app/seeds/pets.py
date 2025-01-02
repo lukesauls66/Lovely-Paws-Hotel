@@ -149,6 +149,22 @@ def seed_pets():
             preview_image='https://i.ibb.co/cQ5FjPN/Roxy-5.jpg',
             owner_id=6
         ),
+        Pet(
+            name='Harris',
+            type='cat',
+            breed='Domestic Longhair',
+            age=9,
+            gender='Male',
+            color='White and Striped',
+            weight=18.0,
+            dob=date(2015, 7, 10),
+            size='heftychonker',
+            behavior='timid',
+            medication_note='',
+            dietary_note='',
+            preview_image='https://i.ibb.co/LJ58tKD/harris1.jpg',
+            owner_id=6
+        ),
     ]
 
     for pet in pets:
