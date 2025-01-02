@@ -981,11 +981,13 @@ body {
   }
 
   .dogPic {
+    position: relative;
+    top: 10px;
     width: 20rem;
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1440px) and (max-width: 1760px) {
   .logo {
     width: 100%;
     border-radius: 25px;
@@ -1281,6 +1283,319 @@ body {
   }
 
   .dogPic {
+    position: relative;
+    top: 10px;
     width: 23rem;
+  }
+}
+
+@media (min-width: 1760px) {
+  .logo {
+    width: 100%;
+    border-radius: 25px;
+  }
+
+  .adminButtonContainer {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    margin-left: 30px;
+  }
+
+  .adminButton {
+    background-color: #ffc383;
+    font-family: "Gaegu", cursive;
+    font-size: 2rem;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border: 3px solid #efe8db;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .adminMenu {
+    background-color: #f6ead8;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .adminMenu button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: 3px solid #efe8db;
+    border-radius: 10px;
+    background-color: #a1d6d2;
+    color: #333;
+    cursor: pointer;
+    text-align: center;
+    font-family: "Gaegu", cursive;
+    font-size: 1.6rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .profileButton {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    margin-right: 30px;
+    display: inline-flex;
+  }
+
+  .demoButton {
+    position: fixed;
+    top: 10px;
+    right: 150px;
+    z-index: 1000;
+    margin-right: 10px;
+    display: inline-flex;
+  }
+
+  .landingBodyContainer {
+    background-color: #dfbdb0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+  }
+
+  .pawLeft {
+    width: 100px;
+  }
+
+  .pawRight {
+    width: 100px;
+  }
+
+  .messageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 95%;
+  }
+
+  .messageBox {
+    background-color: #efaca6;
+    text-align: center;
+    margin: 10px 20px 10px 20px;
+    border: 5px solid #efe8db;
+    border-radius: 20px;
+    font-family: "Gaegu", cursive;
+    color: #1c323a;
+    font-size: 60px;
+    padding: 10px 20px 10px 20px;
+  }
+
+  .infoContainer {
+    background-color: #dfbdb0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    margin: 30px;
+    width: 90%;
+    gap: 100px;
+  }
+
+  .aboutContainer,
+  .featuresBox {
+    flex: 1;
+    max-width: 50%;
+    text-align: center;
+    border-radius: 10px;
+    font-family: "Parkinsans";
+    color: #1c323a;
+    box-sizing: border-box;
+  }
+
+  .aboutBox {
+    background-color: #f6ead8;
+    border: 3px solid #333;
+    border-radius: 12px;
+    padding: 20px 40px 20px 40px;
+  }
+
+  .aboutParagraph {
+    font-size: 25px;
+  }
+
+  .petOfMonthBox {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-family: "Gaegu", cursive;
+    font-size: 30px;
+    background-color: #a1d6d2;
+    padding: 20px 60px 20px 60px;
+    border: 8px solid #f7f0e5;
+    border-radius: 12px;
+    gap: 60px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .petOfMonthBox hr {
+    border: 2px solid #333;
+    width: 80%;
+  }
+
+  .petInfoSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    margin: 0;
+  }
+
+  .petOfMonthImage img {
+    width: 450px;
+    height: auto;
+    border-radius: 15px;
+    border: 3px solid #333;
+    object-fit: contain;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .featuresBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .servicesBtn,
+  .bookingsBtn,
+  .reviewsBtn {
+    padding: 20px;
+    border: 3px solid #f7f0e5;
+    border-radius: 12px;
+    font-size: 2rem;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .servicesBtn {
+    background-color: #a1d6d2;
+    color: #333333;
+    position: relative;
+    top: -70px;
+  }
+
+  .servicesBtn:hover,
+  .bookingsBtn:hover,
+  .reviewsBtn:hover,
+  .adminButton:hover,
+  .adminMenu button:hover {
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+  }
+
+  .bookingsBtn {
+    background-color: #ffc383;
+    color: #333333;
+    position: relative;
+    top: -40px;
+  }
+
+  .topReviewsTitle {
+    font-family: "Gaegu", cursive;
+    font-size: 2.5rem;
+  }
+
+  .reviewsBox {
+    background-color: #f6ead8;
+    border: 3px solid #333;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 20px;
+  }
+
+  .orderedReview {
+    background-color: #efaca6;
+    border: 3px solid #333;
+    border-radius: 12px;
+    padding: 20px 40px 20px 40px;
+    margin-bottom: 15px;
+    width: 75%;
+    text-align: left;
+    font-size: 18px;
+  }
+
+  .reviewHead {
+    display: flex;
+    gap: 12px;
+    font-size: 24px;
+  }
+
+  .reviewPaws {
+    display: flex;
+    gap: 5px;
+    font-size: 26px;
+  }
+
+  .reviewUsername {
+    font-weight: bold;
+  }
+
+  .reviewsBtn {
+    background-color: #ffc383;
+    width: 75%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .catTenContainer {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 75%;
+    z-index: 2;
+  }
+
+  .catTenPic {
+    position: absolute;
+    top: -510px;
+    left: 0;
+    z-index: 3;
+    width: auto;
+    height: auto;
+  }
+
+  .catPic {
+    width: 23rem;
+  }
+
+  .dogPic {
+    position: relative;
+    top: 34px;
+    width: 23rem;
+  }
+
+  .serveAndBookButtonsContainer {
+    border: 1mm solid #333;
+    border-radius: 10px;
+    margin-bottom: 50px;
   }
 }

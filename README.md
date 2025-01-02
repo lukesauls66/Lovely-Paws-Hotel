@@ -1,5 +1,20 @@
 # Lovely Paws Hotel
 
+## Full Stack React, Redux-Toolkit, Python, PostgreSQL, AWS S3 App
+
+## Introduction
+
+This is a full-stack built with React, Redux-Toolkit, Python, PostgreSQL and AWS S3. The application features user authentication, which allows users to login, sign-up, logout, and use a demo user login for easy access. This application also includes 4 major CRUD features:
+
+1. Pets (and Pet's Image)
+2. Reviews
+3. Services
+4. Booking (or Reservation)
+
+The User is partially with Create and Read.
+
+The frontend was built with React, Redux-Toolkit (with normalized data), and CSS. The backend was built with Python, PostgreSQL and the AWS S3 buckets for image upload.
+
 ## Getting started
 
 1. Clone this repository (only this branch).
@@ -100,7 +115,11 @@ Add the following keys and values in the Render GUI form:
 - SECRET_KEY (click "Generate" to generate a secure secret for production)
 - FLASK_ENV production
 - FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
+- SCHEMA=«custom_schema_name_here»
+- BUCKET_NAME=«aws_bucket_name_here»
+- BUCKET_REGION=«aws_bucket_region_here»
+- ACCESS_KEY=«aws_access_key_here»
+- SECRET_ACCESS_KEY=«aws_secret_access_key_here»
 
 In a new tab, navigate to your dashboard and click on your Postgres database
 instance.
@@ -108,6 +127,12 @@ instance.
 Add the following keys and values:
 
 - DATABASE_URL (copy value from the **External Database URL** field)
+
+Assign PORT to 8000, choose a custom schema in snake case, and generate a strong JWT secret.
+
+- Recommendation to generate a strong secret: create a random string using openssl (a library that should already be installed in your Ubuntu/MacOS shell). Run openssl rand -base64 to generate a random JWT secret.
+
+For the AWS required variables, you can access those directly from the AWS bucket you set up.
 
 **Note:** Add any other keys and values that may be present in your local
 **.env** file. As you work to further develop your project, you may need to add
@@ -134,7 +159,7 @@ main, always keeping it up to date.
 
 ## Database Schema Design
 
-`<insert db schema design here>`
+![alt text](image.png)
 
 ## API Documentation
 

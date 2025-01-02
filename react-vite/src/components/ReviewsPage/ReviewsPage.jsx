@@ -82,6 +82,8 @@ function ReviewsPage() {
     </div>
   );
 
+  const isNotStaff = currentUser?.staff === false;
+
   return (
     <div className={rev.reviewsMainContainer}>
       <div className={rev.reviewsHeader}>
@@ -151,7 +153,8 @@ function ReviewsPage() {
                         Edit
                       </button>
                     )}
-                    {(currentUser?.id === review.client_id || ['Owner', 'Manager'].includes(currentUser?.position)) && (
+                    {(currentUser?.id === review.client_id ||
+                      ["Owner", "Manager"].includes(currentUser?.position)) && (
                       <button
                         className={rev.deleteBtn}
                         onClick={() => handleDeleteReview(review.id)}
@@ -168,47 +171,53 @@ function ReviewsPage() {
           <div>No reviews available</div>
         )}
       </div>
-      <h3 className={rev.h3}>Tell us about your pet&apos;s stay!</h3>
-      <button
-        className={rev.addReviewBtn}
-        onClick={() => setIsFormOpen(!isFormOpen)}
-      >
-        {isFormOpen ? "Cancel" : "Add a Review"}
-      </button>
-      {isFormOpen && (
-        <form onSubmit={handleCreateReview} className={rev.reviewForm}>
-          <textarea
-            value={reviewText}
-            onChange={(e) => setReviewText(e.target.value)}
-            placeholder="Write your review here..."
-            required
-            rows="5"
-            className={rev.textarea}
-          />
-          <div className={rev.rating}>
-            <label>Paws Rating:</label>
-            <div className={rev.pawIcons}>
-              {[1, 2, 3, 4, 5].map((paw) => (
-                <IoIosPaw
-                  key={paw}
-                  size={30}
-                  onClick={() => setPawsRating(paw)}
-                  onMouseEnter={() => setHoverRating(paw)}
-                  onMouseLeave={() => setHoverRating(0)}
-                  style={{
-                    color:
-                      paw <= (hoverRating || pawsRating) ? "#f7a59e" : "gray",
-                    cursor: "pointer",
-                    margin: "0 5px",
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-          <button type="submit" className={rev.submitBtn}>
-            Submit Review
+      {currentUser && isNotStaff && (
+        <>
+          <h3 className={rev.h3}>Tell us about your pet&apos;s stay!</h3>
+          <button
+            className={rev.addReviewBtn}
+            onClick={() => setIsFormOpen(!isFormOpen)}
+          >
+            {isFormOpen ? "Cancel" : "Add a Review"}
           </button>
-        </form>
+          {isFormOpen && (
+            <form onSubmit={handleCreateReview} className={rev.reviewForm}>
+              <textarea
+                value={reviewText}
+                onChange={(e) => setReviewText(e.target.value)}
+                placeholder="Write your review here..."
+                required
+                rows="5"
+                className={rev.textarea}
+              />
+              <div className={rev.rating}>
+                <label>Paws Rating:</label>
+                <div className={rev.pawIcons}>
+                  {[1, 2, 3, 4, 5].map((paw) => (
+                    <IoIosPaw
+                      key={paw}
+                      size={30}
+                      onClick={() => setPawsRating(paw)}
+                      onMouseEnter={() => setHoverRating(paw)}
+                      onMouseLeave={() => setHoverRating(0)}
+                      style={{
+                        color:
+                          paw <= (hoverRating || pawsRating)
+                            ? "#f7a59e"
+                            : "gray",
+                        cursor: "pointer",
+                        margin: "0 5px",
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+              <button type="submit" className={rev.submitBtn}>
+                Submit Review
+              </button>
+            </form>
+          )}
+        </>
       )}
     </div>
   );

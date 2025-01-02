@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Gaegu&family=Parkinsans:wght@300..800&display=swap");
+
 @media (min-width: 320px) and (max-width: 799px) {
   .mainContainer {
-    font-family: Arial, sans-serif;
+    font-family: "Parkinsans";
     margin: 0;
     padding: 0;
     background-color: rgb(213, 200, 181);
@@ -17,6 +19,7 @@
 
   h2 {
     color: #333;
+    margin: 0;
   }
 
   h3 {
@@ -63,7 +66,12 @@
   }
 
   .currBookContainer {
-    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: #f7c38c;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
@@ -71,13 +79,38 @@
     max-width: 600px;
   }
 
-  .currBookTitle {
-    font-size: 24px;
-    font-weight: bold;
-    color: #2d2d2d;
+  .currBookButtonContainer {
+    display: flex;
   }
 
-  .currBookType,
+  .currBookContainer > p {
+    margin: 0;
+  }
+
+  .currServicesContainer {
+    background-color: #ebbdb9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    border: 0.5mm solid #333;
+    border-radius: 10px;
+    padding: 0.8rem;
+  }
+
+  .currBookTitle {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .currBookType {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #333;
+  }
+
   .currBookDates {
     font-size: 16px;
     margin: 10px 0;
@@ -88,30 +121,40 @@
     font-weight: 600;
   }
 
-  .currServicesContainer {
-    margin-top: 20px;
-  }
-
   .currServicesDetail {
     font-size: 14px;
     color: #666;
     padding: 5px 0;
   }
 
-  .currBookBtnUpdate,
-  .currBookBtnDelete {
-    background-color: #007bff;
-    border: none;
-    color: white;
+  .currBookBtnUpdate {
+    background-color: #a1d6d2;
+    border: 0.7mm solid #f7f0e5;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    color: #333;
     padding: 10px 20px;
     margin: 10px;
     border-radius: 5px;
     cursor: pointer;
   }
 
-  .currBookBtnUpdate:hover,
+  .currBookBtnDelete {
+    background-color: #e7849b;
+    border: 0.7mm solid #f7f0e5;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    color: #333;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .currBookBtnUpdate:hover {
+    background-color: #94e4dd;
+  }
+
   .currBookBtnDelete:hover {
-    background-color: #0056b3;
+    background-color: #f37d99;
   }
 
   .currBookBtnUpdate:disabled,
@@ -342,13 +385,18 @@
 
 @media (min-width: 800px) and (max-width: 1199px) {
   .mainContainer {
-    font-family: Arial, sans-serif;
+    font-family: "Parkinsans";
     margin: 0;
     padding: 0;
     background-color: rgb(213, 200, 181);
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url("/images/paw-bg-strip.png"),
+      url("/images/paw-bg-strip.png");
+    background-repeat: repeat-y, repeat-y;
+    background-position: left 20px, right 20px;
+    background-size: auto, auto;
   }
 
   .h1 {
@@ -405,7 +453,12 @@
   }
 
   .currBookContainer {
-    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: #f7c38c;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
@@ -413,13 +466,38 @@
     max-width: 600px;
   }
 
-  .currBookTitle {
-    font-size: 24px;
-    font-weight: bold;
-    color: #2d2d2d;
+  .currBookButtonContainer {
+    display: flex;
   }
 
-  .currBookType,
+  .currBookContainer > p {
+    margin: 0;
+  }
+
+  .currServicesContainer {
+    background-color: #ebbdb9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    border: 0.5mm solid #333;
+    border-radius: 10px;
+    padding: 0.8rem;
+  }
+
+  .currBookTitle {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .currBookType {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #333;
+  }
+
   .currBookDates {
     font-size: 16px;
     margin: 10px 0;
@@ -430,30 +508,40 @@
     font-weight: 600;
   }
 
-  .currServicesContainer {
-    margin-top: 20px;
-  }
-
   .currServicesDetail {
     font-size: 14px;
     color: #666;
     padding: 5px 0;
   }
 
-  .currBookBtnUpdate,
-  .currBookBtnDelete {
-    background-color: #007bff;
-    border: none;
-    color: white;
+  .currBookBtnUpdate {
+    background-color: #a1d6d2;
+    border: 0.7mm solid #f7f0e5;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    color: #333;
     padding: 10px 20px;
     margin: 10px;
     border-radius: 5px;
     cursor: pointer;
   }
 
-  .currBookBtnUpdate:hover,
+  .currBookBtnDelete {
+    background-color: #e7849b;
+    border: 0.7mm solid #f7f0e5;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    color: #333;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .currBookBtnUpdate:hover {
+    background-color: #94e4dd;
+  }
+
   .currBookBtnDelete:hover {
-    background-color: #0056b3;
+    background-color: #f37d99;
   }
 
   .currBookBtnUpdate:disabled,
@@ -697,6 +785,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url("/images/paw-bg-strip.png"),
+      url("/images/paw-bg-strip.png");
+    background-repeat: repeat-y, repeat-y;
+    background-position: left 20px, right 20px;
+    background-size: auto, auto;
   }
 
   .h1 {
@@ -753,21 +846,51 @@
   }
 
   .currBookContainer {
-    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: #f7c38c;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
     padding: 20px;
-    max-width: 600px;
+    width: 650px;
+  }
+
+  .currBookButtonContainer {
+    display: flex;
+  }
+
+  .currBookContainer > p {
+    margin: 0;
+  }
+
+  .currServicesContainer {
+    background-color: #ebbdb9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    border: 0.5mm solid #333;
+    border-radius: 10px;
+    padding: 0.8rem;
   }
 
   .currBookTitle {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: bold;
-    color: #2d2d2d;
+    color: #333;
   }
 
-  .currBookType,
+  .currBookType {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #333;
+  }
+
   .currBookDates {
     font-size: 16px;
     margin: 10px 0;
@@ -778,30 +901,40 @@
     font-weight: 600;
   }
 
-  .currServicesContainer {
-    margin-top: 20px;
-  }
-
   .currServicesDetail {
     font-size: 14px;
     color: #666;
     padding: 5px 0;
   }
 
-  .currBookBtnUpdate,
-  .currBookBtnDelete {
-    background-color: #007bff;
-    border: none;
-    color: white;
+  .currBookBtnUpdate {
+    background-color: #a1d6d2;
+    border: 0.7mm solid #f7f0e5;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    color: #333;
     padding: 10px 20px;
     margin: 10px;
     border-radius: 5px;
     cursor: pointer;
   }
 
-  .currBookBtnUpdate:hover,
+  .currBookBtnDelete {
+    background-color: #e7849b;
+    border: 0.7mm solid #f7f0e5;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    color: #333;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .currBookBtnUpdate:hover {
+    background-color: #94e4dd;
+  }
+
   .currBookBtnDelete:hover {
-    background-color: #0056b3;
+    background-color: #f37d99;
   }
 
   .currBookBtnUpdate:disabled,
